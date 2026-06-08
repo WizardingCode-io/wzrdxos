@@ -1,0 +1,32 @@
+{
+  "name": "@wzrdx/core",
+  "version": "0.1.0",
+  "description": "WZRDX core — registry, routing, conductor and the wzrdx CLI.",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "wzrdx": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "gray-matter": "^4.0.3",
+    "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.0"
+  }
+}
