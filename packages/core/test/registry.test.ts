@@ -27,4 +27,14 @@ describe("registry baseline", () => {
     expect(wf).toBeDefined();
     expect(wf?.phases).toBe(2);
   });
+
+  it("loads the CEO phase-1 skills", () => {
+    const reg = loadRegistry(root);
+    const ids = reg.skills.map((s) => s.name);
+    expect(ids).toContain("ceo:balanced-decision");
+    expect(ids).toContain("ceo:initiative-eval");
+    const bd = reg.skills.find((s) => s.name === "ceo:balanced-decision");
+    expect(bd?.type).toBe("process");
+    expect(reg.departments).toContain("ceo");
+  });
 });
