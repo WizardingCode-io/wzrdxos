@@ -1,4 +1,4 @@
-# WZRDX artifact formats
+# wzrdxOS artifact formats
 
 The registry (`@wzrdx/core`) loads three artifact types from `artifacts/`. This
 document is the contract. Keep it in sync with `packages/core/src/registry/`.
@@ -65,6 +65,6 @@ judge panels, loop-until-dry, multi-modal sweep, completeness critic. See
 
 ## Flow policy (non-negotiable, by inversion)
 
-WZRDX never ships **blocking enforcement hooks**. The flow is opt-in: a workflow
+wzrdxOS never ships **blocking enforcement hooks**. The flow is opt-in: a workflow
 the user chooses, not a gate that stalls work. This is the explicit anti-pattern
 inherited from ArkaOS.

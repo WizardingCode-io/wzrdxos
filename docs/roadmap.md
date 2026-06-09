@@ -1,4 +1,4 @@
-# WZRDX roadmap
+# wzrdxOS roadmap
 
 A clean-slate successor to ArkaOS. Phased, with dedicated design sessions for the
 two biggest pain points (Knowledge Base and the Org / Teams roster).
@@ -39,4 +39,4 @@ two biggest pain points (Knowledge Base and the Org / Teams roster).
 - **M3 — Org:** final department set (strawman: Engineering, Product,
   Growth, Brand & Content, Knowledge, Operations + a thin leadership/quality
   layer), agent roster, personas, routing model.
-- **Naming / brand:** WZRDX tagline and positioning before public launch.
+- **Naming / brand:** wzrdxOS tagline and positioning before public launch.

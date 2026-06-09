@@ -1,7 +1,7 @@
 {
   "name": "@wzrdx/core",
   "version": "0.1.0",
-  "description": "WZRDX core — registry, routing, conductor and the wzrdx CLI.",
+  "description": "wzrdxOS core — registry, routing, conductor and the wzrdx CLI.",
   "type": "module",
   "license": "MIT",
   "bin": {

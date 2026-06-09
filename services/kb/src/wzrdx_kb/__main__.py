@@ -1,4 +1,4 @@
-"""Entry point for the WZRDX KB worker.
+"""Entry point for the wzrdxOS KB worker.
 
 Usage:
     wzrdx-kb --help
@@ -53,7 +53,7 @@ def _serve() -> int:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="wzrdx-kb",
-        description="WZRDX Knowledge Base worker (M1 stub).",
+        description="wzrdxOS Knowledge Base worker (M1 stub).",
     )
     parser.add_argument("--version", action="version", version=f"wzrdx-kb {__version__}")
     sub = parser.add_subparsers(dest="command")

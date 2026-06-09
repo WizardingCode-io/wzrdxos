@@ -10,12 +10,12 @@ const program = new Command();
 
 program
   .name("wzrdx")
-  .description("WZRDX — operating system for AI agent teams")
+  .description("wzrdxOS — operating system for AI agent teams")
   .version("0.1.0");
 
 program
   .command("init")
-  .description("initialize a WZRDX workspace in the current directory")
+  .description("initialize a wzrdxOS workspace in the current directory")
   .option("-f, --force", "overwrite an existing config")
   .action((opts) => initCommand({ force: opts.force }));
 

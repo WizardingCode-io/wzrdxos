@@ -3,7 +3,7 @@ import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 
 /**
- * Resolve the WZRDX repository root by walking up from a starting directory
+ * Resolve the wzrdxOS repository root by walking up from a starting directory
  * until a marker (pnpm-workspace.yaml + artifacts/) is found. Falls back to cwd.
  */
 export function findRepoRoot(start: string = process.cwd()): string {

@@ -10,7 +10,7 @@ interface InitOptions {
 }
 
 /**
- * Initialize a WZRDX workspace in the target directory by writing a minimal
+ * Initialize a wzrdxOS workspace in the target directory by writing a minimal
  * `.wzrdx/config.json`. Idempotent unless --force is given.
  */
 export function initCommand(opts: InitOptions = {}): void {
@@ -18,7 +18,7 @@ export function initCommand(opts: InitOptions = {}): void {
   const dir = join(cwd, ".wzrdx");
   const configPath = join(dir, "config.json");
 
-  ui.title("WZRDX — init");
+  ui.title("wzrdxOS — init");
 
   if (existsSync(configPath) && !opts.force) {
     ui.warn(`already initialized at ${ui.dim(configPath)} (use --force to overwrite)`);
@@ -39,7 +39,7 @@ export function initCommand(opts: InitOptions = {}): void {
       mcp: "wzrdx-kb",
     },
     flow: {
-      // WZRDX policy: opt-in, never blocking enforcement.
+      // wzrdxOS policy: opt-in, never blocking enforcement.
       mode: "opt-in",
     },
   };

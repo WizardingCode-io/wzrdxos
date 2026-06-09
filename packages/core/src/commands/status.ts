@@ -6,7 +6,7 @@ export function statusCommand(): void {
   const root = findRepoRoot();
   const reg = loadRegistry(root);
 
-  ui.title("WZRDX — status");
+  ui.title("wzrdxOS — status");
   ui.item(ui.dim(root));
 
   ui.section(`Departments (${ui.count(reg.departments.length)})`);

@@ -1,8 +1,8 @@
-# WZRDX
+# wzrdxOS
 
 > The open-source operating system for AI agent teams.
 
-WZRDX is a lightweight, native-first framework for running a company of AI agents
+wzrdxOS is a lightweight, native-first framework for running a company of AI agents
 on top of [Claude Code](https://claude.com/claude-code) primitives — skills,
 workflows, subagents and memory — without the weight of a bespoke orchestration
 engine.
@@ -10,17 +10,17 @@ engine.
 It is a clean-slate successor to ArkaOS, built around three target inspirations:
 
 - **Native Claude Code primitives** — the Skill tool, the Workflow tool, native
-  subagents and plan mode do the orchestration. WZRDX resolves *who* does the work
+  subagents and plan mode do the orchestration. wzrdxOS resolves *who* does the work
   and *with which workflow*; it does not reinvent orchestration.
 - **Modular skills** (superpowers-style) — small, composable, disciplined skills
   instead of monolithic flows.
 - **Quality workflows** — fan-out + adversarial verification + cited synthesis,
   judge panels, loop-until-dry.
 
-## Why WZRDX
+## Why wzrdxOS
 
 ArkaOS grew into a heavy Python engine with a non-negotiable 13-phase flow,
-blocking enforcement hooks, 270+ skills and 65 agents. WZRDX keeps the **company
+blocking enforcement hooks, 270+ skills and 65 agents. wzrdxOS keeps the **company
 with departments** metaphor but makes it lean:
 
 - **Opt-in flow, no blocking enforcement.** Quality comes from workflow patterns,
@@ -35,7 +35,7 @@ with departments** metaphor but makes it lean:
 A hybrid monorepo with a clean runtime boundary:
 
 ```
-WZRDX
+wzrdxOS
 ├─ packages/core   (TypeScript)  registry · routing · conductor · CLI · artifact generator
 ├─ services/kb     (Python)      ingestion · embeddings · vector index · RAG → MCP server
 └─ artifacts/                    Claude Code artifacts (curated + generated)

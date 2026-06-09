@@ -1,5 +1,5 @@
 /**
- * WZRDX registry types — the contract for every artifact the engine knows about.
+ * wzrdxOS registry types — the contract for every artifact the engine knows about.
  *
  * Artifacts live as files under `artifacts/` and are loaded into this in-memory
  * registry. The format for each is documented in `docs/formats.md`.

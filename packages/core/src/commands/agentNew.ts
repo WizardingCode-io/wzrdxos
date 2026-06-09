@@ -22,7 +22,7 @@ export function agentNewCommand(name: string, opts: AgentNewOptions = {}): void 
   const dir = join(paths.agents, name);
   const file = join(dir, "agent.md");
 
-  ui.title("WZRDX — agent new");
+  ui.title("wzrdxOS — agent new");
 
   if (existsSync(file)) {
     ui.fail(`agent already exists at ${ui.dim(file)}`);
@@ -51,7 +51,7 @@ The agent's approach, standards and non-negotiables.
 
 ## System prompt
 
-You are ${name}, ${role} in the ${department} department of WZRDX.
+You are ${name}, ${role} in the ${department} department of wzrdxOS.
 `;
 
   mkdirSync(dir, { recursive: true });

@@ -19,9 +19,9 @@ function checkNodeMajor(min: number): { ok: boolean; version: string } {
   return { ok: major >= min, version };
 }
 
-/** Validate the local environment for running WZRDX. Exit code 1 if any hard check fails. */
+/** Validate the local environment for running wzrdxOS. Exit code 1 if any hard check fails. */
 export function doctorCommand(): void {
-  ui.title("WZRDX — doctor");
+  ui.title("wzrdxOS — doctor");
   let hardFail = false;
 
   const node = checkNodeMajor(22);
@@ -42,7 +42,7 @@ export function doctorCommand(): void {
   const paths = wzrdxPaths(root);
   existsSync(paths.artifacts)
     ? ui.ok(`artifacts/ found at ${ui.dim(root)}`)
-    : (ui.fail("artifacts/ not found — are you inside a WZRDX repo?"), (hardFail = true));
+    : (ui.fail("artifacts/ not found — are you inside a wzrdxOS repo?"), (hardFail = true));
 
   const claude = claudePaths();
   existsSync(claude.home)

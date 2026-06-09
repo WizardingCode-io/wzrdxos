@@ -1,8 +1,8 @@
 {
-  "name": "wzrdx",
+  "name": "wzrdxos",
   "version": "0.1.0",
   "private": true,
-  "description": "WZRDX — open-source operating system for AI agent teams. Native-first orchestration over Claude Code primitives.",
+  "description": "wzrdxOS — open-source operating system for AI agent teams. Native-first orchestration over Claude Code primitives.",
   "type": "module",
   "license": "MIT",
   "packageManager": "pnpm@10.27.0",

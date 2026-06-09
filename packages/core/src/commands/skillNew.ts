@@ -16,7 +16,7 @@ export function skillNewCommand(name: string, opts: SkillNewOptions = {}): void 
   const dir = join(paths.skills, department, name);
   const file = join(dir, "SKILL.md");
 
-  ui.title("WZRDX — skill new");
+  ui.title("wzrdxOS — skill new");
 
   if (existsSync(file)) {
     ui.fail(`skill already exists at ${ui.dim(file)}`);

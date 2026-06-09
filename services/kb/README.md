@@ -1,6 +1,6 @@
 # @wzrdx/kb
 
-The WZRDX Knowledge Base worker — ingestion, embeddings, a vector index and RAG,
+The wzrdxOS Knowledge Base worker — ingestion, embeddings, a vector index and RAG,
 exposed to Claude Code as the `wzrdx-kb` MCP server.
 
 **Status: M1 stub.** This package currently ships a placeholder MCP server with a

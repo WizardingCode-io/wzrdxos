@@ -1,10 +1,10 @@
-# Contributing to WZRDX
+# Contributing to wzrdxOS
 
-Thanks for your interest. WZRDX is open-source (MIT) and built in the open.
+Thanks for your interest. wzrdxOS is open-source (MIT) and built in the open.
 
 ## Principles
 
-WZRDX has a strong opinion about *how* it is built. Before contributing, read
+wzrdxOS has a strong opinion about *how* it is built. Before contributing, read
 [`docs/roadmap.md`](docs/roadmap.md) and the design principles in the README. The
 short version:
 
