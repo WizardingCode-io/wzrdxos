@@ -291,6 +291,92 @@ the external accountant; author a `fiscal-pt` skill once the KB has vetted conte
 
 ---
 
+## 5 — Recursos Humanos (CHRO) ✅ defined
+
+**Purpose:** people, culture and the founder's transition from doer to leader. Owns
+the full talent lifecycle. Immediate mission: **make the first autonomous hire work**
+(after 5 failed attempts) — D61-D90 hire + 60-day onboarding, autonomous by D180
+(24-Oct-2026 per the Diagnostico roadmap).
+
+**Head:** CHRO (double-hats from CEO/Administração).
+
+**Responsibilities:**
+- Recruitment: hiring criteria ("contrate por atitude, treine habilidades"), job
+  descriptions, structured selection (8+ candidates, case study, Interview-to-Learn).
+- Onboarding 60-90 days: observe → do together → supervised → autonomous, with
+  weekly checkpoints (executes with COO).
+- Culture: mission/vision/values (none documented today — Cultura 25/100), rituals,
+  team health (Lencioni), internal NPS ≥ 8.
+- Leadership development: structured 1:1s, feedback (praise public / correct private),
+  progressive delegation, intermediate leadership.
+- Compensation & careers: salary bands, talent levels, results participation,
+  growth plans; PT market benchmarking via research.
+- Founder unblocking: perfectionism, fear of losing control, indispensability —
+  mentoring/coaching cadence (the Diagnostico's root constraint).
+
+**Does NOT:** legal/labour contracts and RGPD compliance (external lawyer — wzrdxOS
+prepares, never files), operational task assignment (COO), firing decisions alone
+(CEO gate).
+
+### CHRO (head) — toolbox
+
+**Skills**
+- `xlsx` — compensation models, headcount plans, KPI tracking (high)
+- `docx` — policies, handbooks, job descriptions, offer letters (high)
+- `pptx` — people decks for the board (medium-high)
+- `deep-research` — PT salary benchmarking, best-practice research (medium-high)
+- `schedule` — recurring people reports, 1:1/review cadence (medium-high)
+- adapt (🔄): `hiring-plan`, `onboarding-design`, `compensation-plan`,
+  `culture-define`, `culture-audit`, `performance-review`, `feedback-give`,
+  `team-assess`, `team-health`, `disc-assess`, `leadership`, `conflict-resolve`,
+  `org-design`, `delegation-matrix` (shared with COO)
+- new (🆕 — mined from the Obsidian KB):
+  - `hiring-pipeline` — Interview-to-Learn (David FilterBuy) + First-Week Leadership
+    Diagnostic (Hormozi) + Sams 5 Rules (hire slow, fire fast); includes postmortem of
+    the 5 failed hires (Diagnostico D21)
+  - `onboarding-60d` — shared with COO: shadowing → pair → supervised → autonomous,
+    three-repetition rule, interrupt-correct-repeat coaching loop
+  - `delegation-coach` — Buyback Rate formula, No-How-To Delegation,
+    Standards-Not-Presence, Teach-Don't-Do identity shift (Dan Martell)
+  - `culture-foundation` — mission/vision/values workshop + Five Dysfunctions
+    (Lencioni), Netflix talent density, Collect People Doctrine (Sabri Suby)
+  - `comp-ladder` — Talent Levels Ladder ($50K→$1M tiers), talent-debt concept,
+    decision-budget ladder ($50 Fix-It Rule)
+  - `founder-transition` — psychological blockers protocol + "80% by others > 100%
+    alone" + Leader vs Manager Insecurity Test
+
+**Plugins / MCPs**
+- `wzrdx-kb` (KB-first, mandatory) · company profile (`wzrdx company`)
+- **Human Resources** (Anthropic, knowledge-work-plugins) — the anchor:
+  `/hr:onboarding`, `/hr:draft-offer`, `/hr:performance-review`, `/hr:comp-analysis`,
+  `/hr:people-report`; connectors Gmail/Slack/Calendar/Notion/DocuSign
+- **data** (Anthropic) — shared: people analytics (turnover, headcount)
+- **claude-skills** (alirezarezvani, MIT, 338 skills) — cherry-pick the C-level
+  advisory (66 skills incl. CHRO), org design, compliance subsets.
+  Install: `/plugin marketplace add alirezarezvani/claude-skills`
+- **hr-skills** (tuanductran, MIT) — dedicated HR/TA skills incl. technical
+  recruiting per role (backend, frontend, AI, ...); small but active — vet and adopt
+  selectively
+- Rejected: **JobPilot** (suxrobGM) — candidate-side job-application automation, not
+  a recruiter tool; does not fit CHRO.
+
+**KB sources (vault `~/Documents/Personal`):**
+WizardingCode/Strategy/Diagnostico-2026-05 (Cultura 25/100, 5 failed hires, founder
+blockers, D1-D180 roadmap); Topics — Hiring & Talent Acquisition, Team Building &
+Management, Team Culture & Office Rituals, Investing in People; Frameworks —
+Interview-to-Learn, First-Week Leadership Diagnostic, Buyback Rate, No-How-To
+Delegation, Standards-Not-Presence, Sams 5 Rules, Collect People Doctrine, Talent
+Levels Ladder, Millionaires Build Systems / Billionaires Build People; ArkaOS KB Area
+07 (Lencioni, Hastings, Skelton/Pais, Dalio, Horowitz); Personas — Dan Martell
+(people-builder blueprint), Alex Hormozi, Sabri Suby, David FilterBuy, Simon Squibb.
+
+**Known gaps:** PT labour-law/contracts/equity-vesting and RGPD-in-hiring (external
+lawyer; no KB content), PT salary benchmarks (use deep-research per hire), DISC/
+personality instruments (no KB coverage — adapt the generic arka skill), succession
+planning (post-D180 concern).
+
+---
+
 ## 6 — Comunicação & Marketing (CMO) ✅ defined
 
 **Purpose:** the voice and the demand engine. Owns brand, positioning, content,
