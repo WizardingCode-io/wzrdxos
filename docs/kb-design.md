@@ -56,10 +56,17 @@ Sources (all via Graphify's own ingestion + an embedding pass into LanceDB):
 - Articles / URLs (`graphify add <url>`), local files/docs, code/repos, video/audio
   (Whisper transcription inside Graphify).
 
-**Extraction backend (open):** Graphify's semantic extraction uses Gemini when
-`GEMINI_API_KEY` / `GOOGLE_API_KEY` is set (best for headless/automated ingestion), and
-otherwise falls back to Claude Code subagents (works only inside a session). Default
-plan: support both — auto-use Gemini when a key is present; otherwise subagents.
+**Extraction backend (decided):** `wzrdx setup` asks the user to pick the ingestion mode:
+
+- **Manual / interactive** — semantic extraction runs via Claude Code subagents. No key,
+  no extra cost; only works while the user is inside a Claude Code session.
+- **Automatic / unattended** — for background/scheduled ingestion (watchers, cron). The
+  setup **prompts for `GEMINI_API_KEY`** and stores it; Graphify then extracts headlessly
+  via Gemini.
+
+The choice is persisted in `.wzrdx/config.json` (`kb.mode = "manual" | "automatic"`).
+Runtime rule stays graceful: if mode is automatic and a key is present, use Gemini;
+otherwise fall back to subagents.
 
 **Embeddings:** local by default (fastembed / sentence-transformers — private, free,
 offline, cross-platform), optional cloud API for max quality.
@@ -81,7 +88,6 @@ Bootstrap `uv` if absent (astral install script on Mac/Linux; PowerShell on Wind
 is present and repairs/reinstalls what is missing.
 
 ## Open items
-- Extraction backend default (Gemini key vs Claude subagents) — confirm.
 - How tightly to wrap graphify: proxy its `graphify-mcp` under `wzrdx-kb`, or call the
   `graphify` CLI/library from `services/kb`. Leaning: `services/kb` drives graphify as a
   subprocess/library and adds the LanceDB layer, exposing one unified `wzrdx-kb` MCP.
