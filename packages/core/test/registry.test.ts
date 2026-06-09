@@ -20,4 +20,11 @@ describe("registry baseline", () => {
     expect(ceo?.tier).toBe(0);
     expect(ceo?.model).toBe("opus");
   });
+
+  it("loads the balanced-deliberation workflow with 2 phases", () => {
+    const reg = loadRegistry(root);
+    const wf = reg.workflows.find((w) => w.name === "balanced-deliberation");
+    expect(wf).toBeDefined();
+    expect(wf?.phases).toBe(2);
+  });
 });
