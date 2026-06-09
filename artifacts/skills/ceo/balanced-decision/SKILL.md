@@ -18,9 +18,10 @@ verdict. Never skip a lens; never decide on one perspective.
    the OS already knows.
 2. **Frame the decision.** One sentence: what is being decided, by when, and what
    "go" would commit us to. Capture relevant context (numbers, constraints).
-3. **Run the deliberation.** Preferred: run the `balanced-deliberation` workflow
-   (`artifacts/workflows/balanced-deliberation/workflow.mjs`) via the Workflow tool
-   with `args: { decision, context }`. Fallback (no Workflow tool): produce the
+3. **Run the deliberation.** Preferred: invoke the `balanced-deliberation` workflow
+   via the Workflow tool with `args: { decision, context }` (in-repo path:
+   `artifacts/workflows/balanced-deliberation/workflow.mjs`; post-install:
+   `~/.claude/workflows/balanced-deliberation.mjs`). Fallback (no Workflow tool): produce the
    three lens analyses inline — Optimist (potential), Pessimist/conservative
    (risks, pros & cons, weighs everything), Dynamic/risk-taker (bold opportunity) —
    each with position, key arguments, risks, opportunities and a 0-10 score.

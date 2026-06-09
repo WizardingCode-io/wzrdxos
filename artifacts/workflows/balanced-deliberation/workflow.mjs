@@ -19,7 +19,7 @@ const LENS_SCHEMA = {
     keyArguments: { type: "array", items: { type: "string" } },
     risks: { type: "array", items: { type: "string" } },
     opportunities: { type: "array", items: { type: "string" } },
-    score: { type: "number", description: "0-10 support for proceeding" },
+    score: { type: "number", minimum: 0, maximum: 10, description: "0-10 support for proceeding" },
   },
   required: ["position", "keyArguments", "risks", "opportunities", "score"],
 };
@@ -36,7 +36,10 @@ const DECISION_SCHEMA = {
 };
 
 const decision = typeof args === "string" ? args : (args?.decision ?? "");
-const context = typeof args === "object" && args?.context ? `\nContext: ${args.context}` : "";
+const context =
+  typeof args === "object" && args !== null && args.context
+    ? `\nContext: ${args.context}`
+    : "";
 if (!decision) throw new Error("balanced-deliberation requires args.decision");
 
 const LENSES = [
@@ -69,6 +72,7 @@ const lenses = await parallel(
 
 phase("Equilibrium");
 const valid = lenses.filter(Boolean);
+if (valid.length === 0) throw new Error("balanced-deliberation: all lens agents failed; cannot synthesize");
 const synthesis = await agent(
   `You are the EQUILIBRIUM synthesizer of the wzrdxOS CEO deliberation. Three lenses analysed this decision:\n\n${JSON.stringify(valid, null, 2)}\n\nDecision: ${decision}${context}\n\nWeigh the lenses against each other, name the dissent explicitly, and issue the verdict (go / no-go / revise with conditions). The conservative lens's risks must be either accepted with rationale or converted into conditions.`,
   { label: "equilibrium", phase: "Equilibrium", schema: DECISION_SCHEMA },

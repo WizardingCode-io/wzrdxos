@@ -35,6 +35,8 @@ describe("registry baseline", () => {
     expect(ids).toContain("ceo:initiative-eval");
     const bd = reg.skills.find((s) => s.name === "ceo:balanced-decision");
     expect(bd?.type).toBe("process");
+    const ie = reg.skills.find((s) => s.name === "ceo:initiative-eval");
+    expect(ie?.type).toBe("capability");
     expect(reg.departments).toContain("ceo");
   });
 });
