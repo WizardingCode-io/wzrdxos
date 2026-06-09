@@ -10,12 +10,16 @@ import {
   writeConfig,
   writeSecret,
 } from "../installer.js";
+import { detectedRuntimes } from "../runtimes.js";
+import { installRuntimes } from "../runtime-install.js";
 import { ui } from "../ui.js";
 
 interface SetupOptions {
   yes?: boolean;
   mode?: string;
   geminiKey?: string;
+  /** "all" | "none" | comma-separated ids */
+  runtimes?: string;
 }
 
 async function ask(question: string): Promise<string> {
@@ -70,11 +74,12 @@ export async function setupCommand(opts: SetupOptions = {}): Promise<void> {
     }
   }
 
+  let geminiKey = "";
   if (mode === "automatic") {
-    let key = opts.geminiKey ?? process.env.GEMINI_API_KEY ?? process.env.GOOGLE_API_KEY ?? "";
-    if (!key && interactive) key = await ask("Paste your GEMINI_API_KEY: ");
-    if (key) {
-      writeSecret(root, "GEMINI_API_KEY", key);
+    geminiKey = opts.geminiKey ?? process.env.GEMINI_API_KEY ?? process.env.GOOGLE_API_KEY ?? "";
+    if (!geminiKey && interactive) geminiKey = await ask("Paste your GEMINI_API_KEY: ");
+    if (geminiKey) {
+      writeSecret(root, "GEMINI_API_KEY", geminiKey);
       ui.ok("stored GEMINI_API_KEY in .wzrdx/.env (gitignored)");
     } else {
       ui.warn("automatic mode chosen but no Gemini key provided — falling back to manual at runtime");
@@ -82,12 +87,43 @@ export async function setupCommand(opts: SetupOptions = {}): Promise<void> {
   }
   ui.ok(`ingestion mode: ${mode}`);
 
-  // 5. config + 6. MCP registration
+  // 5. config + 6. project MCP registration
   writeConfig(root, { mode, mcp: "wzrdx-kb", enabled: true });
   const mcpPath = registerMcp(root, kbDir);
   ui.ok(`registered wzrdx-kb MCP in ${ui.dim(mcpPath)}`);
 
+  // 7. multi-runtime install — scan, let the user choose, install per standard
+  ui.section("Runtimes");
+  const detected = detectedRuntimes();
+  if (!detected.length) {
+    ui.warn("no supported runtimes detected — skipping runtime install.");
+  } else {
+    ui.item(`detected: ${detected.map((r) => r.displayName).join(", ")}`);
+    let targets = detected.map((r) => r.id);
+    if (opts.runtimes && opts.runtimes !== "all") {
+      targets = opts.runtimes === "none" ? [] : opts.runtimes.split(",").map((s) => s.trim());
+    } else if (interactive && !opts.runtimes) {
+      const answer = await ask(
+        "Install wzrdxOS into which runtimes? [all] / none / comma-separated ids: ",
+      );
+      if (answer && answer !== "all") {
+        targets = answer === "none" ? [] : answer.split(",").map((s) => s.trim());
+      }
+    }
+    if (targets.length) {
+      const reports = installRuntimes(targets, kbDir, { geminiKey: geminiKey || undefined });
+      for (const r of reports) {
+        const mcp = r.mcp === "written" ? "MCP ✓" : ui.dim("MCP deferred");
+        ui.ok(`${r.displayName.padEnd(16)} instructions ✓  ${mcp}`);
+      }
+      const deferred = reports.filter((r) => r.mcp === "deferred").map((r) => r.id);
+      if (deferred.length) ui.warn(`MCP deferred (format pending): ${deferred.join(", ")}`);
+    } else {
+      ui.item(ui.dim("no runtimes selected."));
+    }
+  }
+
   console.log("");
-  ui.ok("setup complete. Run `wzrdx doctor` to verify, then restart Claude Code to load the MCP.");
+  ui.ok("setup complete. Run `wzrdx doctor` to verify, then restart your runtime(s) to load the MCP.");
   console.log("");
 }

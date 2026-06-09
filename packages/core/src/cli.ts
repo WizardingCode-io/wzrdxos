@@ -7,7 +7,7 @@ import { skillNewCommand } from "./commands/skillNew.js";
 import { agentNewCommand } from "./commands/agentNew.js";
 import { setupCommand } from "./commands/setup.js";
 import { updateCommand } from "./commands/update.js";
-import { runtimesCommand } from "./commands/runtimes.js";
+import { runtimesCommand, runtimesInstallCommand } from "./commands/runtimes.js";
 
 const program = new Command();
 
@@ -32,10 +32,19 @@ program
   .description("validate the local environment")
   .action(() => doctorCommand());
 
-program
+const runtimes = program
   .command("runtimes")
-  .description("scan the machine for supported AI agent runtimes (install targets)")
+  .description("scan / install supported AI agent runtimes (install targets)");
+runtimes
+  .command("scan", { isDefault: true })
+  .description("scan the machine for supported runtimes")
   .action(() => runtimesCommand());
+runtimes
+  .command("install")
+  .description("install wzrdxOS into detected runtimes (or --only id1,id2)")
+  .option("--only <ids>", "comma-separated runtime ids")
+  .option("--gemini-key <key>", "Gemini API key to inject into the MCP env")
+  .action((opts) => runtimesInstallCommand({ only: opts.only, geminiKey: opts.geminiKey }));
 
 program
   .command("setup")
@@ -43,7 +52,10 @@ program
   .option("-y, --yes", "non-interactive (use defaults / flags)")
   .option("-m, --mode <mode>", "ingestion mode: manual | automatic")
   .option("--gemini-key <key>", "Gemini API key (automatic mode)")
-  .action((opts) => setupCommand({ yes: opts.yes, mode: opts.mode, geminiKey: opts.geminiKey }));
+  .option("--runtimes <ids>", "runtimes to install into: all | none | comma-separated ids")
+  .action((opts) =>
+    setupCommand({ yes: opts.yes, mode: opts.mode, geminiKey: opts.geminiKey, runtimes: opts.runtimes }),
+  );
 
 program
   .command("update")
