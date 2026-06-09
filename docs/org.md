@@ -73,6 +73,82 @@ to reach equilibrium before approval.
 
 ---
 
+## 3 — Engenharia / Tecnologia (CTO) ✅ defined
+
+**Purpose:** technical direction and execution quality. Owns every line of code, every
+architecture decision, and the engineering cost structure of running an agentic OS.
+
+**Head:** CTO (double-hats from CEO/Administração).
+
+**Responsibilities:**
+- Final technical authority: architecture, stack choices, build-vs-buy, ADRs/decision
+  records (kept in the repo `docs/` — the technical source of truth).
+- Code quality standards, code review gates, tech debt management.
+- Technical security (OWASP, AI security — prompt injection, tool abuse, agent
+  permissions) and technical compliance.
+- DevOps/CI/CD, infrastructure, observability, and **cost management** — cloud + tokens
+  (model selection matrix, caching, fallbacks, model-agnostic routing).
+- Agentic engineering — the wzrdxOS core: agent architecture, MCP strategy,
+  multi-runtime support.
+- Spec-driven: no code without an approved spec (Constitution: document-first).
+
+**Does NOT:** set product priorities alone (CEO + Operações), strategic go/no-go (CEO
+deliberation gate).
+
+### CTO (head) — toolbox
+
+**Skills**
+- `security-review` — security review of changes on the current branch (very high)
+- `review` / `code-review` — PR review with confidence-filtered findings (very high)
+- `init` — generate/maintain CLAUDE.md codebase docs — onboarding & context (high)
+- `deep-research` — technology/vendor evaluation, build-vs-buy, verified benchmarking (high)
+- `pptx` / `docx` — tech strategy decks for the board, formal RFCs/specs (high)
+- `schedule` — recurring automation (e.g. weekly security/quality report) (medium)
+- adapt (🔄): `architecture-design`, `api-design`, `clean-code-review`,
+  `adversarial-review`, `security-audit`, `ai-security`, `tech-debt`, `ci-cd-pipeline`,
+  `db-design`, `observability`, `stack-check`, `mcp-builder`, `agent-design`,
+  `agent-workflow`, `rag-architect`, `tdd-cycle`, `dependency-audit`,
+  `performance-audit`, `cto-advisor`
+- new (🆕 — mined from the Obsidian KB, authored via skill-creator):
+  - `ai-agent-architecture` — orchestration patterns (sequential / hierarchical /
+    graph / swarm), Claude Managed Agents, context engineering
+  - `mcp-integrator` — "MCP as USB-C" framework (DDias Matt), 20-30 connector patterns
+  - `tech-stack-eval` — Vue 3.6 / Nuxt 4 / Laravel 13 (2026), model-agnostic routing
+    (Codex vs Claude), vendor risk
+  - `aios-operating-model` — Liam Ottley 5-Layer Framework, `/new-employee` pattern
+  - `spec-driven-development` — SDD + multi-agent memory layers (reinforces doctrine)
+  - `token-cost-optimization` — synthesis of Harness Pattern + Tokens-as-Currency KB
+    fragments
+
+**Plugins / MCPs**
+- `wzrdx-kb` (KB-first, mandatory) · company profile (`wzrdx company`)
+- **Engineering** (Anthropic, knowledge-work-plugins) — standups, ADR drafting,
+  incident post-mortems, technical docs
+- **Code Review** (Anthropic) — multi-agent PR review, confidence-based filtering
+- **Security Guidance** (Anthropic) — pre-tool hook warning on unsafe code patterns
+  (command injection, XSS, eval, pickle)
+- **Context7** — live version-specific library docs (already in use)
+- **Superpowers** — TDD, debugging, planning discipline (already installed)
+- GitHub MCP — repo/PR operations
+- Optional: **Qodo Skills** (3rd-party — requires Qodo platform) — repo-specific coding
+  rules + PR issue resolver; adopt if/when a Qodo account exists
+- Note: **Productivity** (Anthropic) stays mapped to Operações (per CEO section);
+  Engenharia consumes its task/memory layer via Ops.
+
+**KB sources (vault `~/Documents/Personal`):** Topics — Agentic Development, AI
+Operating Systems, Claude Code Mastery, MCP, Custom Software & Vertical AI, Vue &
+Laravel Ecosystem 2026, Anti-Vibe-Coding, Codex; Frameworks — MCP USB Universal,
+Claude Managed Agents Architecture, Harness Pattern Token Optimization (+8 with
+"Implications para ArkaOS" — AIOX competitive intel); Personas — Liam Ottley, DDias
+Matt, Alani Nicolas (competitor), David FilterBuy, Marty Cagan.
+
+**Known gaps:** the vault has no internal wzrdxOS architecture specs (repo `docs/` is
+the source of truth — CTO owns keeping ADRs there) and no KB coverage of CI/CD for
+agents, security/observability of agentic systems, or technical hiring — author those
+skills only once vetted content exists.
+
+---
+
 ## 4 — Financeiro (CFO) ✅ defined
 
 **Purpose:** financial discipline and intelligence. Knows where every euro comes from
