@@ -1,15 +1,19 @@
 [project]
 name = "wzrdx-kb"
 version = "0.1.0"
-description = "WZRDX Knowledge Base worker — ingestion, embeddings, vector index and RAG, exposed to Claude Code over MCP."
+description = "wzrdxOS Knowledge Base worker — Graphify graph + LanceDB vectors, exposed to Claude Code over MCP."
 readme = "README.md"
 requires-python = ">=3.12"
 license = { text = "MIT" }
 authors = [{ name = "WizardingCode" }]
 dependencies = [
-    # M1 keeps runtime deps minimal; the MCP server is a stub.
-    # The real ingestion/RAG stack (embeddings, vector store) is chosen in M2.
     "mcp>=1.2.0",
+    # Vector layer (local-first, cross-platform wheels: macOS/Linux/Windows).
+    "lancedb>=0.15",
+    "fastembed>=0.4",
+    "pyarrow>=17",
+    # Graphify (the knowledge-graph engine) is installed separately as a `uv tool`
+    # (`uv tool install graphifyy`) and invoked via the `graphify` CLI — see kb-design.md.
 ]
 
 [project.scripts]

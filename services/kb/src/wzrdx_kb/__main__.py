@@ -1,17 +1,20 @@
-"""Entry point for the wzrdxOS KB worker.
+"""Entry point / CLI for the wzrdxOS KB worker.
 
-Usage:
-    wzrdx-kb --help
-    wzrdx-kb info
-    wzrdx-kb serve        # start the (stub) MCP server over stdio
+    wzrdx-kb info                      # stdlib-only worker info
+    wzrdx-kb status                    # scope, chunk counts, graphify availability
+    wzrdx-kb ingest <path> [--project] [--graph]
+    wzrdx-kb search "<query>" [-k N]
+    wzrdx-kb query "<question>"        # graphify graph traversal
+    wzrdx-kb serve                     # start the unified wzrdx-kb MCP over stdio
 
-`info` and `--help` rely only on the standard library, so they work before the
-optional `mcp` dependency is installed. `serve` lazily imports `mcp`.
+`info` relies only on the standard library; the data commands lazily import the
+vector/graph stack.
 """
 
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 
 from . import __version__
@@ -19,52 +22,87 @@ from . import __version__
 
 def _info() -> int:
     print(f"wzrdx-kb {__version__}")
-    print("status: stub (M1). Real ingestion/RAG lands in M2.")
+    print("KB: Graphify (graph) + LanceDB (vectors) + Obsidian (fallback)")
     print("mcp server name: wzrdx-kb")
     return 0
 
 
-def _serve() -> int:
-    """Start the placeholder MCP server.
+def _status() -> int:
+    from .service import KB
 
-    The stub exposes a single `kb_status` tool so Claude Code can connect and
-    confirm the wiring end-to-end. Real search/ingest tools arrive in M2.
-    """
-    try:
-        from mcp.server.fastmcp import FastMCP
-    except ImportError:
-        print(
-            "error: the 'mcp' package is not installed. Run `uv sync` first.",
-            file=sys.stderr,
-        )
-        return 1
-
-    server = FastMCP("wzrdx-kb")
-
-    @server.tool()
-    def kb_status() -> str:
-        """Return the KB worker status (stub)."""
-        return f"wzrdx-kb {__version__} — stub. Ingestion/RAG arrives in M2."
-
-    server.run()
+    print(json.dumps(KB().status(), indent=2))
     return 0
 
 
+def _ingest(path: str, project: bool, build_graph: bool) -> int:
+    from .service import KB
+
+    result = KB().ingest_path(path, target="project" if project else "global", build_graph=build_graph)
+    print(json.dumps(result, indent=2))
+    return 0
+
+
+def _search(query: str, k: int) -> int:
+    from .service import KB
+
+    hits = KB().search(query, k)
+    for h in hits:
+        print(f"[{h.score:.4f}] {h.source}\n  {h.text[:200].strip()}\n")
+    if not hits:
+        print("(no results)")
+    return 0
+
+
+def _query(question: str) -> int:
+    from .service import KB
+
+    res = KB().graph_query(question)
+    print(res["output"] or ("ok" if res["ok"] else "no graph available"))
+    return 0 if res["ok"] else 1
+
+
+def _serve() -> int:
+    try:
+        from .server import run
+    except ImportError as exc:
+        print(f"error: missing dependency ({exc}). Run `uv sync`.", file=sys.stderr)
+        return 1
+    return run()
+
+
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(
-        prog="wzrdx-kb",
-        description="wzrdxOS Knowledge Base worker (M1 stub).",
-    )
+    parser = argparse.ArgumentParser(prog="wzrdx-kb", description="wzrdxOS Knowledge Base worker.")
     parser.add_argument("--version", action="version", version=f"wzrdx-kb {__version__}")
     sub = parser.add_subparsers(dest="command")
-    sub.add_parser("info", help="print worker info")
-    sub.add_parser("serve", help="start the stub MCP server over stdio")
+
+    sub.add_parser("info", help="print worker info (stdlib only)")
+    sub.add_parser("status", help="scope, chunk counts, graphify availability")
+    sub.add_parser("serve", help="start the unified wzrdx-kb MCP over stdio")
+
+    p_ingest = sub.add_parser("ingest", help="ingest a file or directory")
+    p_ingest.add_argument("path")
+    p_ingest.add_argument("--project", action="store_true", help="ingest into the project overlay")
+    p_ingest.add_argument("--graph", action="store_true", help="also build the graphify graph")
+
+    p_search = sub.add_parser("search", help="semantic vector search")
+    p_search.add_argument("query")
+    p_search.add_argument("-k", type=int, default=8)
+
+    p_query = sub.add_parser("query", help="graphify graph traversal query")
+    p_query.add_argument("question")
 
     args = parser.parse_args(argv)
 
     if args.command == "serve":
         return _serve()
-    # default and `info` both print info
+    if args.command == "status":
+        return _status()
+    if args.command == "ingest":
+        return _ingest(args.path, args.project, args.graph)
+    if args.command == "search":
+        return _search(args.query, args.k)
+    if args.command == "query":
+        return _query(args.question)
     return _info()
 
 
