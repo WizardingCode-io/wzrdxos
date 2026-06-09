@@ -1,0 +1,27 @@
+{
+  "department": "ceo",
+  "plugins": [
+    {
+      "name": "wzrdx-kb",
+      "kind": "mcp",
+      "status": "required",
+      "source": "services/kb",
+      "install": "wzrdx setup",
+      "notes": "KB-first doctrine. Installed and registered by `wzrdx setup`."
+    },
+    {
+      "name": "company-profile",
+      "kind": "command",
+      "status": "planned",
+      "source": "wzrdx company",
+      "notes": "Company base context (name, market, customers, niche, objectives). Ships with the `wzrdx company` command."
+    },
+    {
+      "name": "bright-data",
+      "kind": "mcp",
+      "status": "deferred",
+      "source": "https://github.com/brightdata/brightdata-mcp",
+      "notes": "Web scraping / search for market evaluation. Needs API key; adopt when market-eval volume justifies it."
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import { wzrdxPaths, type WzrdxPaths } from "../paths.js";
 import type {
   AgentDefinition,
+  PluginDefinition,
   Registry,
   SkillDefinition,
   WorkflowDefinition,
@@ -103,17 +104,64 @@ function loadWorkflows(paths: WzrdxPaths): WorkflowDefinition[] {
   return out;
 }
 
+const PLUGIN_KINDS = ["mcp", "plugin", "command", "skill-pack"] as const;
+const PLUGIN_STATUSES = [
+  "required",
+  "adopt",
+  "optional",
+  "planned",
+  "deferred",
+  "rejected",
+] as const;
+
+/** Load plugin manifests from artifacts/plugins/<department>/plugins.json. */
+function loadPlugins(paths: WzrdxPaths): PluginDefinition[] {
+  const out: PluginDefinition[] = [];
+  for (const department of dirs(paths.plugins)) {
+    const file = join(paths.plugins, department, "plugins.json");
+    if (!existsSync(file)) continue;
+    let parsed: { plugins?: unknown };
+    try {
+      parsed = JSON.parse(readFileSync(file, "utf8"));
+    } catch {
+      continue; // malformed manifest: skip, doctor reports separately
+    }
+    if (!Array.isArray(parsed.plugins)) continue;
+    for (const raw of parsed.plugins as Record<string, unknown>[]) {
+      const name = str(raw.name);
+      if (!name) continue;
+      const kind = PLUGIN_KINDS.includes(raw.kind as never) ? raw.kind : "plugin";
+      const status = PLUGIN_STATUSES.includes(raw.status as never)
+        ? raw.status
+        : "optional";
+      out.push({
+        name,
+        kind: kind as PluginDefinition["kind"],
+        status: status as PluginDefinition["status"],
+        department,
+        source: str(raw.source) || undefined,
+        install: str(raw.install) || undefined,
+        notes: str(raw.notes) || undefined,
+        path: file,
+      });
+    }
+  }
+  return out;
+}
+
 /** Load the full registry from the artifacts directory. */
 export function loadRegistry(root?: string): Registry {
   const paths = wzrdxPaths(root);
   const skills = loadSkills(paths);
   const agents = loadAgents(paths);
   const workflows = loadWorkflows(paths);
+  const plugins = loadPlugins(paths);
   const departments = [
     ...new Set([
       ...skills.map((s) => s.department),
       ...agents.map((a) => a.department),
+      ...plugins.map((p) => p.department),
     ]),
   ].sort();
-  return { skills, agents, workflows, departments };
+  return { skills, agents, workflows, plugins, departments };
 }
