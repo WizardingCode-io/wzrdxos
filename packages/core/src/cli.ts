@@ -5,6 +5,8 @@ import { doctorCommand } from "./commands/doctor.js";
 import { initCommand } from "./commands/init.js";
 import { skillNewCommand } from "./commands/skillNew.js";
 import { agentNewCommand } from "./commands/agentNew.js";
+import { setupCommand } from "./commands/setup.js";
+import { updateCommand } from "./commands/update.js";
 
 const program = new Command();
 
@@ -28,6 +30,19 @@ program
   .command("doctor")
   .description("validate the local environment")
   .action(() => doctorCommand());
+
+program
+  .command("setup")
+  .description("auto-install the KB stack (uv, graphify, worker) and register the MCP")
+  .option("-y, --yes", "non-interactive (use defaults / flags)")
+  .option("-m, --mode <mode>", "ingestion mode: manual | automatic")
+  .option("--gemini-key <key>", "Gemini API key (automatic mode)")
+  .action((opts) => setupCommand({ yes: opts.yes, mode: opts.mode, geminiKey: opts.geminiKey }));
+
+program
+  .command("update")
+  .description("keep the KB stack in sync (upgrade graphify, re-sync worker, refresh MCP)")
+  .action(() => updateCommand());
 
 const skill = program.command("skill").description("manage skills");
 skill

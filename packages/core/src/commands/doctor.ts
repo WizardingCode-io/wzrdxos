@@ -1,6 +1,8 @@
 import { execFileSync } from "node:child_process";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 import { claudePaths, findRepoRoot, wzrdxPaths } from "../paths.js";
+import { has, run } from "../installer.js";
 import { ui } from "../ui.js";
 
 function tryVersion(cmd: string, args: string[]): string | null {
@@ -19,6 +21,15 @@ function checkNodeMajor(min: number): { ok: boolean; version: string } {
   return { ok: major >= min, version };
 }
 
+function readJson(path: string): Record<string, unknown> | null {
+  if (!existsSync(path)) return null;
+  try {
+    return JSON.parse(readFileSync(path, "utf8"));
+  } catch {
+    return null;
+  }
+}
+
 /** Validate the local environment for running wzrdxOS. Exit code 1 if any hard check fails. */
 export function doctorCommand(): void {
   ui.title("wzrdxOS — doctor");
@@ -32,12 +43,6 @@ export function doctorCommand(): void {
   const pnpm = tryVersion("pnpm", ["--version"]);
   pnpm ? ui.ok(`pnpm ${pnpm}`) : ui.warn("pnpm not found (needed for development)");
 
-  const python = tryVersion("python3", ["--version"]);
-  python ? ui.ok(python) : ui.warn("python3 not found (needed for services/kb)");
-
-  const uv = tryVersion("uv", ["--version"]);
-  uv ? ui.ok(uv) : ui.warn("uv not found (recommended for services/kb)");
-
   const root = findRepoRoot();
   const paths = wzrdxPaths(root);
   existsSync(paths.artifacts)
@@ -48,6 +53,35 @@ export function doctorCommand(): void {
   existsSync(claude.home)
     ? ui.ok(`Claude Code home found (${ui.dim(claude.home)})`)
     : ui.warn(`Claude Code home not found at ${claude.home}`);
+
+  // --- Knowledge Base stack -------------------------------------------------
+  ui.section("Knowledge Base");
+  const fix = "run `wzrdx setup`";
+
+  const uv = tryVersion("uv", ["--version"]);
+  uv ? ui.ok(uv) : ui.warn(`uv not found — ${fix}`);
+
+  has("graphify")
+    ? ui.ok("graphify installed")
+    : ui.warn(`graphify not found — ${fix}`);
+
+  const kbDir = join(root, "services", "kb");
+  const kbInfo = run("uv", ["run", "--project", kbDir, "wzrdx-kb", "info"]);
+  kbInfo.ok
+    ? ui.ok("KB worker runnable (wzrdx-kb)")
+    : ui.warn(`KB worker not runnable — ${fix}`);
+
+  const mcp = readJson(join(root, ".mcp.json"));
+  const mcpServers = (mcp?.mcpServers ?? {}) as Record<string, unknown>;
+  mcpServers["wzrdx-kb"]
+    ? ui.ok("wzrdx-kb MCP registered (.mcp.json)")
+    : ui.warn(`wzrdx-kb MCP not registered — ${fix}`);
+
+  const cfg = readJson(join(root, ".wzrdx", "config.json"));
+  const kbCfg = (cfg?.kb ?? {}) as Record<string, unknown>;
+  kbCfg.mode
+    ? ui.ok(`ingestion mode: ${String(kbCfg.mode)}`)
+    : ui.warn(`ingestion mode not configured — ${fix}`);
 
   console.log("");
   if (hardFail) {

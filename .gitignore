@@ -31,3 +31,6 @@ __pycache__/
 .wzrdx/
 data/
 *.log
+
+# Generated, machine-specific MCP registration (absolute paths / secrets)
+.mcp.json
