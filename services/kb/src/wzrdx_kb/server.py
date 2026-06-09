@@ -39,6 +39,11 @@ def build_server():  # type: ignore[no-untyped-def]
         """Relational graph query (Graphify traversal) over the built knowledge graph."""
         return kb.graph_query(question)
 
+    @server.tool()
+    def kb_ask(question: str, k: int = 6) -> dict:
+        """GraphRAG: fuse dense vector recall (chunks) with Graphify graph traversal (graph)."""
+        return kb.ask(question, k)
+
     return server
 
 

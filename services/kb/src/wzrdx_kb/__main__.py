@@ -61,6 +61,14 @@ def _query(question: str) -> int:
     return 0 if res["ok"] else 1
 
 
+def _ask(question: str, k: int) -> int:
+    from .service import KB
+
+    res = KB().ask(question, k)
+    print(json.dumps(res, indent=2))
+    return 0
+
+
 def _serve() -> int:
     try:
         from .server import run
@@ -91,6 +99,10 @@ def main(argv: list[str] | None = None) -> int:
     p_query = sub.add_parser("query", help="graphify graph traversal query")
     p_query.add_argument("question")
 
+    p_ask = sub.add_parser("ask", help="GraphRAG: fuse vector recall + graph traversal")
+    p_ask.add_argument("question")
+    p_ask.add_argument("-k", type=int, default=6)
+
     args = parser.parse_args(argv)
 
     if args.command == "serve":
@@ -103,6 +115,8 @@ def main(argv: list[str] | None = None) -> int:
         return _search(args.query, args.k)
     if args.command == "query":
         return _query(args.question)
+    if args.command == "ask":
+        return _ask(args.question, args.k)
     return _info()
 
 

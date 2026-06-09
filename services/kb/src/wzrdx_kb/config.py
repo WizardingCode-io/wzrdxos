@@ -56,3 +56,27 @@ class KBScope:
 def resolve_scope(start: Path | None = None) -> KBScope:
     """Resolve global + (optional) project overlay for the current location."""
     return KBScope(global_dir=global_kb_dir(), project_dir=project_kb_dir(start))
+
+
+def load_env() -> None:
+    """Load keys (e.g. GEMINI_API_KEY) from `.wzrdx/.env` into the environment.
+
+    Looks at the project overlay's `.wzrdx/.env` first, then the global one. Never
+    overrides a variable already present in the environment.
+    """
+    candidates: list[Path] = []
+    proj = project_kb_dir()
+    if proj:
+        candidates.append(proj.parent / ".env")  # <project>/.wzrdx/.env
+    candidates.append(Path(os.environ.get("WZRDX_HOME", Path.home() / ".wzrdx")) / ".env")
+    for env_file in candidates:
+        if not env_file.exists():
+            continue
+        for line in env_file.read_text(encoding="utf-8").splitlines():
+            stripped = line.strip()
+            if not stripped or stripped.startswith("#") or "=" not in stripped:
+                continue
+            key, _, value = stripped.partition("=")
+            key, value = key.strip(), value.strip()
+            if key and key not in os.environ:
+                os.environ[key] = value
