@@ -11,4 +11,13 @@ describe("registry baseline", () => {
     expect(reg.skills.length).toBeGreaterThan(0);
     expect(reg.workflows.map((w) => w.name)).toContain("adversarial-review");
   });
+
+  it("loads the CEO agent with leadership tier and opus model", () => {
+    const reg = loadRegistry(root);
+    const ceo = reg.agents.find((a) => a.name === "ceo");
+    expect(ceo).toBeDefined();
+    expect(ceo?.department).toBe("ceo");
+    expect(ceo?.tier).toBe(0);
+    expect(ceo?.model).toBe("opus");
+  });
 });
