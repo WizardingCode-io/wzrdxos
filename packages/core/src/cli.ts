@@ -7,6 +7,7 @@ import { skillNewCommand } from "./commands/skillNew.js";
 import { agentNewCommand } from "./commands/agentNew.js";
 import { setupCommand } from "./commands/setup.js";
 import { updateCommand } from "./commands/update.js";
+import { runtimesCommand } from "./commands/runtimes.js";
 
 const program = new Command();
 
@@ -30,6 +31,11 @@ program
   .command("doctor")
   .description("validate the local environment")
   .action(() => doctorCommand());
+
+program
+  .command("runtimes")
+  .description("scan the machine for supported AI agent runtimes (install targets)")
+  .action(() => runtimesCommand());
 
 program
   .command("setup")
