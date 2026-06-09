@@ -9,15 +9,17 @@ two biggest pain points (Knowledge Base and the Org / Teams roster).
 2. Opt-in flow, no blocking enforcement.
 3. Curated skills, not accumulated.
 4. Few, strong agents.
-5. KB as a first-class citizen.
+5. KB as a first-class citizen — Graphify (graph) + LanceDB (vectors) + Obsidian (fallback).
 6. Open-source from day one (MIT).
+7. Mandatory cross-platform auto-install — `setup`/`update` install the full KB stack
+   (graphify, LanceDB, services/kb, embeddings) with zero manual steps on Mac/Linux/Windows.
 
 ## Milestones
 
 | Milestone | Goal | Design session |
 | --- | --- | --- |
 | **M1** | Foundations & repo skeleton (formats, registry, CLI, KB stub, CI) | — |
-| **M2** | KB deep-dive — design + ingestion/RAG prototype | ✅ dedicated |
+| **M2** | KB deep-dive — Graphify + LanceDB + Obsidian; auto-install (see `docs/kb-design.md`) | ✅ dedicated |
 | **M3** | Org / Teams — departments, agent roster, personas | ✅ dedicated |
 | **M4** | Skill taxonomy + first skills (process + capability) | — |
 | **M5** | Workflow library — quality patterns | — |
@@ -34,8 +36,9 @@ two biggest pain points (Knowledge Base and the Org / Teams roster).
 
 ## Open design sessions
 
-- **M2 — KB:** vector engine (sqlite-vec / LanceDB / Qdrant), chunking,
-  embedding model, metadata/persona schema, async ingestion pipeline.
+- **M2 — KB:** stack locked (Graphify primary · LanceDB vectors · Obsidian fallback) in
+  `docs/kb-design.md`. Open: extraction backend default (Gemini vs Claude subagents),
+  graphify wrapping approach, KB scope (global vs per-project).
 - **M3 — Org:** final department set (strawman: Engineering, Product,
   Growth, Brand & Content, Knowledge, Operations + a thin leadership/quality
   layer), agent roster, personas, routing model.
