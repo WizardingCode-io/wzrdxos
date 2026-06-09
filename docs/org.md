@@ -73,6 +73,81 @@ to reach equilibrium before approval.
 
 ---
 
+## 2 — Operações (COO) ✅ defined
+
+**Purpose:** the execution engine. Receives the CEO's go and orchestrates the product
+lifecycle flow; turns the founder's tacit knowledge into systems, processes, and
+metrics. Includes Planeamento (PM/PO).
+
+**Head:** COO (double-hats from CEO/Administração).
+
+**Responsibilities:**
+- Orchestrate the **product lifecycle flow** after the CEO go/no-go — decides flows and
+  department responsibilities for each initiative.
+- Product management / ownership: continuous discovery, backlog, prioritisation,
+  sprint cadence.
+- **SOPs/POPs**: process documentation, delegation matrix, systems — the direct
+  antidote to the "extreme centralisation" pattern (Diagnostico-2026-05, score 28.4/100).
+- Workflow automation (n8n, Zapier, AI agents) and internal tooling.
+- Client onboarding and operational client management; CRM hygiene.
+- Operational KPIs (the 25 from the Diagnostico — 5 per area), weekly dashboard and
+  rituals (Friday 17h review); feeds the CEO scorecard alongside the CFO.
+- Capacity planning and team onboarding (60-day plan, with CHRO).
+
+**Does NOT:** strategy/go-no-go (CEO), technical implementation (Engenharia), selling
+(Growth), people policy (CHRO).
+
+### COO (head) — toolbox
+
+**Skills**
+- `xlsx` — operational dashboards, KPIs, capacity, planning (very high)
+- `schedule` — routine automation: daily ops briefing, weekly report (very high — the
+  operating leverage tool)
+- `pptx` — operational reviews (QBR), board presentations (high)
+- `docx` — SOPs, runbooks, policies, memos (high)
+- `deep-research` — vendor evaluation, process benchmarking, market research (high)
+- `pdf` — read/extract vendor contracts and documents (medium-high)
+- adapt (🔄): `sop-create`, `workflow-automate`, `n8n-flow`, `zapier-flow`, `agile-po`,
+  `sprint-plan`, `backlog-groom`, `kanban-setup`, `okr-cadence`, `meeting-optimize`,
+  `onboarding-design`, `customer-journey`, `delegation-matrix`, `discovery-plan`,
+  `roadmap-build`, `metrics-track`
+- new (🆕 — mined from the Obsidian KB; strongest coverage of any department, anchored
+  on a real case study):
+  - `ops-roadmap-diagnose` — 5-area diagnostic + custom 90-day roadmap
+    (Documentar → Medir → Delegar), from the real Diagnostico WizardingCode 2026-05
+  - `pop-builder` — process inventory + POP generation; 3 ready templates in the vault
+    (lead intake, client onboarding D14, monthly close)
+  - `kpi-system` — the 25 KPIs with baselines, alerts, weekly rituals
+  - `delegation-audit` — Estratégico×Delegável matrix, hiring-failure pattern analysis,
+    first-hire profile (Dan Martell — 92% rule, director-not-doer)
+  - `onboarding-60d` — observe → do together → supervised → autonomous
+  - `automation-discovery` — map workflows to n8n/Zapier/AI agents with ROI estimate
+  - `discovery-cadence` — Teresa Torres Continuous Discovery Habits (PM/PO side)
+
+**Plugins / MCPs**
+- `wzrdx-kb` (KB-first, mandatory) · company profile (`wzrdx company`)
+- **Productivity** (Anthropic, knowledge-work-plugins) — the anchor: persistent tasks,
+  workplace memory, dashboard, `/start` / `/update`
+- **data** (Anthropic, knowledge-work-plugins) — analytics/KPI dashboards over
+  operational data
+- **Small Business** (Anthropic) — shared with Financeiro: COO uses the ops subset
+  (`/monday-brief`, CRM hygiene, customer follow-ups); CFO owns the money subset
+- Cross-references: Human Resources → CHRO · Finance → CFO · Marketing → CMO (each
+  defined in its own section)
+
+**KB sources (vault `~/Documents/Personal`):**
+WizardingCode/Strategy/Diagnostico-2026-05 (6 docs — diagnostic, 90-day roadmap, POP
+templates, 25 KPIs); Projects/ArkaOS/KB Areas — Area 10 Operações & Automação, Area 07
+Organização & Equipas, Area 09 Project Management; Personas — Dan Martell (the modern
+AI-COO blueprint), Alex Hormozi (90% autonomous ops), Teresa Torres + Marty Cagan
+(product side), Patrick Lencioni (org health).
+
+**Known gaps:** operational recruitment/hiring playbook (belongs to CHRO), CRM
+(HubSpot) implementation guide, capacity planning for scaling 1 → 5-10 people — author
+when vetted content exists.
+
+---
+
 ## 3 — Engenharia / Tecnologia (CTO) ✅ defined
 
 **Purpose:** technical direction and execution quality. Owns every line of code, every
