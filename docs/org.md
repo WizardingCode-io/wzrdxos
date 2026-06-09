@@ -288,3 +288,82 @@ threshold €83K/mês.
 
 **Known gap:** PT statutory accounting/tax (IVA, SNC) has no KB coverage — handled via
 the external accountant; author a `fiscal-pt` skill once the KB has vetted content.
+
+---
+
+## 6 — Comunicação & Marketing (CMO) ✅ defined
+
+**Purpose:** the voice and the demand engine. Owns brand, positioning, content,
+campaigns and marketing performance. Includes **Brand & Design**.
+
+**Head:** CMO (double-hats from CEO/Administração).
+
+**Responsibilities:**
+- Brand strategy and identity: positioning, naming, archetypes, verbal + visual
+  identity. Immediate mission: **execute Rebranding-2026-06** (9 docs in the vault,
+  decisions D1-D7 pending).
+- Content engine: pillars, editorial calendar, YouTube/short-form, newsletter,
+  repurposing (pillar → derivatives).
+- Copywriting and offers: landing pages, e-mail sequences, offer architecture.
+- SEO **and GEO/AEO** (2026): traditional search as floor, AI-engine citation as
+  ceiling (Two-Boards doctrine); Citation-as-KPI reporting.
+- Campaign planning and paid media (when active); marketing performance reporting —
+  raise the Marketing area from 25/100 (Diagnostico) with real KPIs (MQLs, CAC,
+  engagement).
+- Competitive/positioning intel in coordination with CEO (AIOX watch).
+
+**Does NOT:** close deals (Growth/Vendas), set product priorities (CEO + Operações),
+implement web/code (Engenharia — CMO specifies, Eng builds).
+
+### CMO (head) — toolbox
+
+**Skills**
+- `pptx` / `docx` — board/campaign decks, positioning docs, briefs (high)
+- `deep-research` — cited market research, competitor briefs (high)
+- `schedule` — recurring performance reports, content cadence (medium-high)
+- `xlsx` — marketing KPI dashboard, campaign budgets (medium)
+- adapt (🔄): `brand`, `marketing`, `content`, `copy-framework`, `headline-write`,
+  `hook-write`, `email-sequence`, `seo-audit`, `calendar-plan`, `social-strategy`,
+  `paid-campaign`, `landing-gen`, `funnel-design`, `persona-build`,
+  `awareness-diagnose`, `archetype-finder`, `primal-audit`, `voice-guide`,
+  `positioning-statement`, `naming-evaluate`, `gtm-strategy`, `launch-sequence`,
+  `repurpose-plan`, `youtube-strategy`, `short-form`, `newsletter-write`,
+  `analytics-report`, `competitor-analysis`
+- new (🆕 — mined from the Obsidian KB; 58+ marketing/brand frameworks available):
+  - `rebranding-execution` — drive the Rebranding-2026-06 roadmap (naming D1-D7,
+    brand architecture Casa Única, verbal identity PT/EN, 4 visual directions)
+  - `geo-content` — Neil Patel GEO: Definitive/Structured/Quotable content,
+    Citation-as-KPI, Two-Boards (Google floor + AI engines ceiling)
+  - `offer-architecture` — Hormozi Grand Slam Offer + Sabri 17-step sales message
+  - `hook-viral-system` — 7 hook types + STEPPS virality checklist (Berger)
+  - `status-engineering` — "sell status, not stuff" premium positioning (Sabri Suby)
+
+**Plugins / MCPs**
+- `wzrdx-kb` (KB-first, mandatory) · company profile (`wzrdx company`)
+- **Marketing** (Anthropic, knowledge-work-plugins) — the anchor: `/draft-content`,
+  `/campaign-plan`, `/brand-review` (enforces brand voice), `/competitive-brief`,
+  `/performance-report`, `/seo-audit`, `/email-sequence`
+- **data** (Anthropic) — shared with Operações: campaign/funnel analytics
+- **Marketing Skills Library** (Corey Haines, MIT, ~50 skills) — adopt: CRO,
+  copywriting, ads, programmatic-seo, marketing-psychology, pricing, launch.
+  Install: `npx skills add coreyhaines31/marketingskills`
+- Curated third-party (from composio.dev/content/best-marketing-skills — vet each repo
+  before install, doctrine: no unreviewed third-party prompts):
+  - GEO/AEO skills (Zubair Trabzada / Aaron He Zhu) — complements `geo-content`
+  - Humanizer (jpeggdev) — de-AI-ify output before publishing
+  - Email Marketing Bible (CosmoBlk) — lifecycle flows when e-mail channel activates
+  - Claude Ads Audit (AgriciDaniel, 250+ checks) — defer until paid ads run
+  - Context-Link marketplace (~80 marketing skills) — browse-only source, cherry-pick
+
+**KB sources (vault `~/Documents/Personal`):**
+WizardingCode/Strategy/Rebranding-2026-06 (9 docs — audit, naming, positioning v2,
+brand architecture, verbal identity, channels, 90-day roadmap, visual directions);
+Projects/ArkaOS/KB Areas — 01 Branding, 02 Design, 05 Marketing & Growth, 06 GTM,
+14 Landing Pages, 16 Conteúdo & Viralização; Frameworks — Primal Branding, StoryBrand
+SB7, 12 Archetypes, NUEPH, STEPPS, Hook Architecture, GEO/Citation-as-KPI, Grand Slam
+Offer; Personas — Alex Hormozi (169 fontes), Sabri Suby, Russell Brunson, Neil Patel.
+
+**Known gaps:** WizardingCode ICPs/customer personas (none documented), editorial
+calendar and content ops (zero), tested copy/headlines for wzrdx, marketing KPI
+dashboard (area at 25/100), and no Brand & Design specialist persona in the KB —
+author these as operational docs first, skills after.
