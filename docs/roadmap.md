@@ -6,7 +6,10 @@ two biggest pain points (Knowledge Base and the Org / Teams roster).
 ## Principles
 
 1. Native first, custom only where it pays.
-2. Opt-in flow, no blocking enforcement.
+2. Mandatory flow, low-friction enforcement — every request follows the doctrine
+   (task-breakdown, KB-first, document-first, enrichment, evolutive agents; see
+   `docs/constitution.md`), enforced natively/intelligently, NOT via brittle blocking
+   marker-hooks (the ArkaOS pain).
 3. Curated skills, not accumulated.
 4. Few, strong agents.
 5. KB as a first-class citizen — Graphify (graph) + LanceDB (vectors) + Obsidian (fallback).
