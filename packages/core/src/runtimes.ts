@@ -8,12 +8,18 @@ import { delimiter, join } from "node:path";
  * points live. See docs/runtimes.md.
  */
 
-/** How a runtime registers MCP servers. */
+/** How a runtime registers MCP servers (grounded in each runtime's docs). */
 export interface McpTarget {
-  /** "mcpServers-json": `{ mcpServers: { name: {command,args,env} } }` in a JSON file. */
-  style: "mcpServers-json";
+  /**
+   * - "mcpServers-json": `{ mcpServers: { name: {command,args,env} } }` JSON file.
+   * - "opencode-json": `{ mcp: { name: {type:"local",command:[...],enabled,environment} } }`.
+   * - "codex-toml": `[mcp_servers.name]` table with command + args in config.toml.
+   */
+  style: "mcpServers-json" | "opencode-json" | "codex-toml";
   /** Config file relative to home. */
   file: string;
+  /** mcpServers-json only: also emit `type:"local"` + `tools:["*"]` (Copilot CLI). */
+  typed?: boolean;
 }
 
 export interface RuntimeSpec {
@@ -33,19 +39,19 @@ export interface RuntimeSpec {
   graphifyPlatform?: string;
 }
 
-const MCP_JSON = (file: string): McpTarget => ({ style: "mcpServers-json", file });
+const MCP_JSON = (file: string, typed = false): McpTarget => ({ style: "mcpServers-json", file, typed });
 
 export const RUNTIMES: RuntimeSpec[] = [
   { id: "claude", displayName: "Claude Code", bins: ["claude"], dirs: [".claude"], configDir: ".claude", instructions: "CLAUDE.md", mcp: MCP_JSON(".claude.json"), graphifyPlatform: "claude" },
-  { id: "codex", displayName: "OpenAI Codex", bins: ["codex"], dirs: [".codex"], configDir: ".codex", instructions: "AGENTS.md", graphifyPlatform: "codex" },
+  { id: "codex", displayName: "OpenAI Codex", bins: ["codex"], dirs: [".codex"], configDir: ".codex", instructions: "AGENTS.md", mcp: { style: "codex-toml", file: ".codex/config.toml" }, graphifyPlatform: "codex" },
   { id: "gemini", displayName: "Gemini CLI", bins: ["gemini"], dirs: [".gemini"], configDir: ".gemini", instructions: "GEMINI.md", mcp: MCP_JSON(".gemini/settings.json"), graphifyPlatform: "gemini" },
   { id: "qwen", displayName: "Qwen Code", bins: ["qwen"], dirs: [".qwen"], configDir: ".qwen", instructions: "QWEN.md", mcp: MCP_JSON(".qwen/settings.json") },
   { id: "cursor", displayName: "Cursor", bins: ["cursor"], dirs: [".cursor"], configDir: ".cursor", instructions: "AGENTS.md", mcp: MCP_JSON(".cursor/mcp.json"), graphifyPlatform: "cursor" },
-  { id: "antigravity", displayName: "Antigravity", bins: ["antigravity"], dirs: [".antigravity"], configDir: ".antigravity", instructions: "AGENTS.md", graphifyPlatform: "antigravity" },
-  { id: "opencode", displayName: "OpenCode", bins: ["opencode"], dirs: [".config/opencode", ".local/share/opencode"], configDir: ".config/opencode", instructions: "AGENTS.md", graphifyPlatform: "opencode" },
+  { id: "antigravity", displayName: "Antigravity", bins: ["antigravity"], dirs: [".antigravity"], configDir: ".antigravity", instructions: "AGENTS.md", mcp: MCP_JSON(".gemini/config/mcp_config.json"), graphifyPlatform: "antigravity" },
+  { id: "opencode", displayName: "OpenCode", bins: ["opencode"], dirs: [".config/opencode", ".local/share/opencode"], configDir: ".config/opencode", instructions: "AGENTS.md", mcp: { style: "opencode-json", file: ".config/opencode/opencode.json" }, graphifyPlatform: "opencode" },
   { id: "hermes", displayName: "Hermes Agent", bins: ["hermes"], dirs: [".hermes"], configDir: ".hermes", instructions: "AGENTS.md", graphifyPlatform: "hermes" },
-  { id: "copilot", displayName: "Copilot CLI", bins: ["copilot", "gh-copilot"], dirs: [".config/github-copilot", ".copilot"], configDir: ".copilot", instructions: "AGENTS.md" },
-  { id: "openclaw", displayName: "OpenClaw", bins: ["claw", "openclaw"], dirs: [".claw", ".openclaw"], configDir: ".openclaw", instructions: "AGENTS.md", graphifyPlatform: "claw" },
+  { id: "copilot", displayName: "Copilot CLI", bins: ["copilot", "gh-copilot"], dirs: [".config/github-copilot", ".copilot"], configDir: ".copilot", instructions: "AGENTS.md", mcp: MCP_JSON(".copilot/mcp-config.json", true) },
+  { id: "openclaw", displayName: "OpenClaw", bins: ["claw", "openclaw"], dirs: [".claw", ".openclaw"], configDir: ".openclaw", instructions: "AGENTS.md", mcp: MCP_JSON(".openclaw/openclaw.json"), graphifyPlatform: "claw" },
 ];
 
 export interface RuntimeStatus {

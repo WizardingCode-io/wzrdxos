@@ -1,4 +1,5 @@
 import { createInterface } from "node:readline/promises";
+import { homedir } from "node:os";
 import { join } from "node:path";
 import { findRepoRoot } from "../paths.js";
 import {
@@ -80,6 +81,9 @@ export async function setupCommand(opts: SetupOptions = {}): Promise<void> {
     if (!geminiKey && interactive) geminiKey = await ask("Paste your GEMINI_API_KEY: ");
     if (geminiKey) {
       writeSecret(root, "GEMINI_API_KEY", geminiKey);
+      // Also store globally so the KB worker finds it regardless of which runtime
+      // launches it (e.g. Codex, whose TOML MCP entry carries no env).
+      writeSecret(homedir(), "GEMINI_API_KEY", geminiKey);
       ui.ok("stored GEMINI_API_KEY in .wzrdx/.env (gitignored)");
     } else {
       ui.warn("automatic mode chosen but no Gemini key provided — falling back to manual at runtime");

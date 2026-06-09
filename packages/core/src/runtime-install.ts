@@ -31,19 +31,18 @@ This runtime is augmented by **wzrdxOS**. A unified Knowledge Base is available 
 ${END}`;
 }
 
-export interface McpServerEntry {
-  command: string;
-  args: string[];
-  env?: Record<string, string>;
+/** Args (after the `uv` command) that launch the wzrdx-kb worker. */
+function kbArgs(kbDir: string): string[] {
+  return ["run", "--project", kbDir, "wzrdx-kb", "serve"];
 }
 
-/** The wzrdx-kb MCP server entry that launches the Python worker via uv. */
-export function wzrdxKbServer(kbDir: string, geminiKey?: string): McpServerEntry {
-  return {
-    command: "uv",
-    args: ["run", "--project", kbDir, "wzrdx-kb", "serve"],
-    ...(geminiKey ? { env: { GEMINI_API_KEY: geminiKey } } : {}),
-  };
+function readJson(file: string): Record<string, any> {
+  if (!existsSync(file)) return {};
+  try {
+    return JSON.parse(readFileSync(file, "utf8") || "{}");
+  } catch {
+    return {};
+  }
 }
 
 function upsertBlock(filePath: string, block: string): void {
@@ -66,18 +65,56 @@ export function installInstructions(rt: RuntimeSpec, home: string): string {
   return file;
 }
 
-/** Register the wzrdx-kb MCP in the runtime's config. Returns "written" | "deferred". */
-export function installMcp(rt: RuntimeSpec, home: string, server: McpServerEntry): "written" | "deferred" {
+/**
+ * Register the wzrdx-kb MCP in the runtime's config, following its native format.
+ * Returns "written" | "deferred". Never writes a guessed format.
+ */
+export function installMcp(
+  rt: RuntimeSpec,
+  home: string,
+  kbDir: string,
+  geminiKey?: string,
+): "written" | "deferred" {
   if (!rt.mcp) return "deferred";
+  const file = join(home, rt.mcp.file);
+  mkdirSync(dirname(file), { recursive: true });
+  const args = kbArgs(kbDir);
+
   if (rt.mcp.style === "mcpServers-json") {
-    const file = join(home, rt.mcp.file);
-    mkdirSync(dirname(file), { recursive: true });
-    const config = existsSync(file) ? JSON.parse(readFileSync(file, "utf8") || "{}") : {};
+    const config = readJson(file);
     config.mcpServers = config.mcpServers ?? {};
-    config.mcpServers["wzrdx-kb"] = server;
+    const entry: Record<string, unknown> = { command: "uv", args };
+    if (rt.mcp.typed) {
+      entry.type = "local";
+      entry.tools = ["*"];
+    }
+    if (geminiKey) entry.env = { GEMINI_API_KEY: geminiKey };
+    config.mcpServers["wzrdx-kb"] = entry;
     writeFileSync(file, JSON.stringify(config, null, 2) + "\n", "utf8");
     return "written";
   }
+
+  if (rt.mcp.style === "opencode-json") {
+    const config = readJson(file);
+    config.mcp = config.mcp ?? {};
+    const entry: Record<string, unknown> = { type: "local", command: ["uv", ...args], enabled: true };
+    if (geminiKey) entry.environment = { GEMINI_API_KEY: geminiKey };
+    config.mcp["wzrdx-kb"] = entry;
+    writeFileSync(file, JSON.stringify(config, null, 2) + "\n", "utf8");
+    return "written";
+  }
+
+  if (rt.mcp.style === "codex-toml") {
+    let text = existsSync(file) ? readFileSync(file, "utf8") : "";
+    if (!text.includes("[mcp_servers.wzrdx-kb]")) {
+      const argsToml = args.map((a) => JSON.stringify(a)).join(", ");
+      const block = `[mcp_servers.wzrdx-kb]\ncommand = "uv"\nargs = [${argsToml}]\n`;
+      text = text.trimEnd() ? `${text.trimEnd()}\n\n${block}` : block;
+      writeFileSync(file, text, "utf8");
+    }
+    return "written";
+  }
+
   return "deferred";
 }
 
@@ -97,7 +134,7 @@ export function installRuntime(
 ): RuntimeInstallReport {
   const home = opts.home ?? homedir();
   const instructionsFile = installInstructions(rt, home);
-  const mcp = installMcp(rt, home, wzrdxKbServer(kbDir, opts.geminiKey));
+  const mcp = installMcp(rt, home, kbDir, opts.geminiKey);
   return {
     id: rt.id,
     displayName: rt.displayName,

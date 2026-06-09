@@ -69,10 +69,33 @@ Detection = binary on PATH and/or config dir. Install targets per runtime (✔ k
 > runtime — wzrdxOS detects presence safely regardless; deep install adapters are built
 > and verified runtime-by-runtime, prioritised by what the user's scan finds.
 
+## MCP formats (confirmed, grounded in each runtime's docs)
+
+| Runtime | MCP file | Shape |
+| --- | --- | --- |
+| Claude Code | `~/.claude.json` | `mcpServers.<n>` = {command, args, env} |
+| Gemini CLI | `~/.gemini/settings.json` | `mcpServers.<n>` = {command, args, env} |
+| Qwen Code | `~/.qwen/settings.json` | `mcpServers.<n>` (Gemini-compatible) |
+| Cursor | `~/.cursor/mcp.json` | `mcpServers.<n>` = {command, args, env} |
+| Antigravity | `~/.gemini/config/mcp_config.json` | `mcpServers.<n>` (shared w/ Gemini) |
+| OpenCode | `~/.config/opencode/opencode.json` | `mcp.<n>` = {type:"local", command:[…], enabled, environment} |
+| OpenAI Codex | `~/.codex/config.toml` | `[mcp_servers.<n>]` table: command, args |
+| Copilot CLI | `~/.copilot/mcp-config.json` | `mcpServers.<n>` = {type:"local", command, args, env, tools:["*"]} |
+| OpenClaw | `~/.openclaw/openclaw.json` | `mcpServers.<n>` = {command, args} |
+| Hermes Agent | `config.yaml` | `mcp_servers` (YAML) — **deferred** (not installed; YAML merge unverified) |
+
+Sources: [OpenCode MCP](https://opencode.ai/docs/mcp-servers/) ·
+[Codex MCP](https://developers.openai.com/codex/mcp) ·
+[Copilot CLI MCP](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-mcp-servers) ·
+[Antigravity MCP](https://antigravity.google/docs/mcp) ·
+[OpenClaw MCP](https://docs.openclaw.ai/cli/mcp) ·
+[Hermes MCP](https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp)
+
 ## Status
 
-- **Step 1 — scanner** (`wzrdx runtimes` / used by setup): detect installed runtimes. ⬅ first.
-- **Step 2 — adapters**: implement installMcp/installInstructions per runtime, starting
-  with the ones detected on the user's machine.
-- **Step 3 — setup integration**: multi-select targets, install per standard; `update`
-  re-applies; `doctor` reports per-runtime status.
+- **Scanner** (`wzrdx runtimes`): ✅ detects installed runtimes (9/10 on dev machine).
+- **Install adapters**: ✅ instructions (universal) + MCP for 9 runtimes (all but Hermes,
+  which is deferred). Never writes an unverified format.
+- **Setup integration**: ✅ scan → user chooses targets → install per standard; `update`
+  re-applies. Remaining: per-runtime status in `doctor`, native skills install (delegate
+  to `graphify install --platform`), Hermes YAML adapter.
