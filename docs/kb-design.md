@@ -1,6 +1,12 @@
 # wzrdxOS Knowledge Base — design (M2)
 
-> Status: design session in progress. Decisions below are locked unless marked **open**.
+> Status: **implemented** (M2 slices 1–3). All decisions below are locked.
+>
+> Real graphify commands used by the worker: `graphify update <path>` (structural,
+> headless, no LLM — manual mode) / `graphify extract <path>` (full AST + semantic LLM —
+> automatic mode, Gemini), `graphify query` (traversal), `graphify merge-graphs` (fold a
+> source graph into the KB graph). graphify writes `graphify-out/` next to the source; the
+> worker folds it into the KB location's graph.
 
 The KB is wzrdxOS's biggest differentiator and was the #1 pain point in ArkaOS. It is a
 three-layer stack unified behind a single MCP server.
@@ -87,9 +93,17 @@ Bootstrap `uv` if absent (astral install script on Mac/Linux; PowerShell on Wind
 **Never assume bash in the installed-product path.** `wzrdx doctor` verifies every piece
 is present and repairs/reinstalls what is missing.
 
-## Open items
-- How tightly to wrap graphify: proxy its `graphify-mcp` under `wzrdx-kb`, or call the
-  `graphify` CLI/library from `services/kb`. Leaning: `services/kb` drives graphify as a
-  subprocess/library and adds the LanceDB layer, exposing one unified `wzrdx-kb` MCP.
-- KB scope: shared across all projects vs per-project graphs (or both, with a global +
-  per-project overlay).
+## Decided (was open)
+- **Graphify wrapping:** `services/kb` drives `graphify` as a subprocess/library and adds
+  the LanceDB layer, exposing **one unified `wzrdx-kb` MCP**. The raw `graphify-mcp` is
+  not exposed separately.
+- **KB scope:** **global graph (shared across all projects) + optional per-project
+  overlay.** Search fuses the global graph with the current project's local graph when
+  one exists.
+
+## Scope resolution
+
+- Global KB lives at `~/.wzrdx/kb/` (LanceDB table + graphify graph).
+- A project may have a local overlay at `<project>/.wzrdx/kb/`.
+- `kb_search` / `kb_query` query the global store, and the project overlay too when the
+  caller is inside a project that has one; results are merged.

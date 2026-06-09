@@ -36,9 +36,11 @@ two biggest pain points (Knowledge Base and the Org / Teams roster).
 
 ## Open design sessions
 
-- **M2 — KB:** stack locked (Graphify primary · LanceDB vectors · Obsidian fallback) in
-  `docs/kb-design.md`. Open: extraction backend default (Gemini vs Claude subagents),
-  graphify wrapping approach, KB scope (global vs per-project).
+- **M2 — KB:** ✅ implemented (slices 1–3). Vector layer (LanceDB + local embeddings),
+  cross-platform auto-install (`setup`/`update`/`doctor`), graph build wired to ingestion
+  (`graphify update`/`extract`) and GraphRAG fusion (`kb_ask`). All design questions
+  resolved in `docs/kb-design.md`. Remaining polish: Obsidian fallback, graphify global
+  graph integration, async/watch ingestion.
 - **M3 — Org:** final department set (strawman: Engineering, Product,
   Growth, Brand & Content, Knowledge, Operations + a thin leadership/quality
   layer), agent roster, personas, routing model.
