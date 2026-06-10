@@ -1,6 +1,6 @@
 # wzrdxOS artifact formats
 
-The registry (`@wzrdx/core`) loads three artifact types from `artifacts/`. This
+The registry (`@wzrdx/core`) loads four artifact types from `artifacts/`. This
 document is the contract. Keep it in sync with `packages/core/src/registry/`.
 
 ## Conventions
