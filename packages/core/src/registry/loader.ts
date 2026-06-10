@@ -126,7 +126,7 @@ function loadPlugins(paths: WzrdxPaths): PluginDefinition[] {
     } catch {
       continue; // malformed manifest: skip, doctor reports separately
     }
-    if (!Array.isArray(parsed.plugins)) continue;
+    if (!Array.isArray(parsed?.plugins)) continue;
     for (const raw of parsed.plugins as Record<string, unknown>[]) {
       const name = str(raw.name);
       if (!name) continue;
