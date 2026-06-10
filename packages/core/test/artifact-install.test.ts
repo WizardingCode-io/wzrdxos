@@ -25,6 +25,8 @@ describe("installClaudeArtifacts", () => {
       home, ".claude", "skills", "wzrdx-ceo-balanced-decision", "SKILL.md",
     );
     expect(existsSync(skillFile)).toBe(true);
+    const skill = readFileSync(skillFile, "utf8");
+    expect(skill).toContain("name: wzrdx-ceo-balanced-decision");
 
     const wfFile = join(home, ".claude", "workflows", "balanced-deliberation.mjs");
     expect(existsSync(wfFile)).toBe(true);
@@ -32,5 +34,11 @@ describe("installClaudeArtifacts", () => {
     expect(report.agents).toBeGreaterThanOrEqual(1);
     expect(report.skills).toBeGreaterThanOrEqual(2);
     expect(report.workflows).toBeGreaterThanOrEqual(1);
+
+    // Idempotency: re-running must not throw and must return the same counts.
+    const report2 = installClaudeArtifacts(root, home);
+    expect(report2.agents).toBe(report.agents);
+    expect(report2.skills).toBe(report.skills);
+    expect(report2.workflows).toBe(report.workflows);
   });
 });

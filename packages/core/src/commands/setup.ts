@@ -130,8 +130,12 @@ export async function setupCommand(opts: SetupOptions = {}): Promise<void> {
 
   // 8. deploy artifacts into Claude Code (native-first runtime)
   ui.section("Artifacts");
-  const art = installClaudeArtifacts(root);
-  ui.ok(`deployed ${art.agents} agents · ${art.skills} skills · ${art.workflows} workflows → ~/.claude`);
+  try {
+    const art = installClaudeArtifacts(root);
+    ui.ok(`deployed ${art.agents} agents · ${art.skills} skills · ${art.workflows} workflows → ~/.claude`);
+  } catch (err) {
+    ui.fail(`artifact deploy failed: ${err instanceof Error ? err.message : String(err)} — run \`wzrdx install claude\` manually.`);
+  }
 
   console.log("");
   ui.ok("setup complete. Run `wzrdx doctor` to verify, then restart your runtime(s) to load the MCP.");
