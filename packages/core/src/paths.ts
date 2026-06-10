@@ -28,6 +28,7 @@ export interface WzrdxPaths {
   skills: string;
   agents: string;
   workflows: string;
+  plugins: string;
 }
 
 export function wzrdxPaths(root: string = findRepoRoot()): WzrdxPaths {
@@ -38,6 +39,7 @@ export function wzrdxPaths(root: string = findRepoRoot()): WzrdxPaths {
     skills: join(artifacts, "skills"),
     agents: join(artifacts, "agents"),
     workflows: join(artifacts, "workflows"),
+    plugins: join(artifacts, "plugins"),
   };
 }
 

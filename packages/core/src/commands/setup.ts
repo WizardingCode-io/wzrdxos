@@ -14,6 +14,7 @@ import {
 import { detectedRuntimes } from "../runtimes.js";
 import { installRuntimes } from "../runtime-install.js";
 import { ui } from "../ui.js";
+import { installClaudeArtifacts } from "../artifact-install.js";
 
 interface SetupOptions {
   yes?: boolean;
@@ -125,6 +126,15 @@ export async function setupCommand(opts: SetupOptions = {}): Promise<void> {
     } else {
       ui.item(ui.dim("no runtimes selected."));
     }
+  }
+
+  // 8. deploy artifacts into Claude Code (native-first runtime)
+  ui.section("Artifacts");
+  try {
+    const art = installClaudeArtifacts(root);
+    ui.ok(`deployed ${art.agents} agents · ${art.skills} skills · ${art.workflows} workflows → ~/.claude`);
+  } catch (err) {
+    ui.fail(`artifact deploy failed: ${err instanceof Error ? err.message : String(err)} — run \`wzrdx install claude\` manually.`);
   }
 
   console.log("");

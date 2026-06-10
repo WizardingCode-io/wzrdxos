@@ -54,11 +54,32 @@ export interface WorkflowDefinition {
   path: string;
 }
 
+/** A plugin/MCP/skill-pack a department depends on. Declared, not auto-installed. */
+export interface PluginDefinition {
+  /** Unique name within the department, e.g. "wzrdx-kb". */
+  name: string;
+  /** What kind of integration this is. */
+  kind: "mcp" | "plugin" | "command" | "skill-pack";
+  /** Adoption status — drives doctor/status reporting, never blocks. */
+  status: "required" | "adopt" | "optional" | "planned" | "deferred" | "rejected";
+  /** Owning department slug. */
+  department: string;
+  /** Where it comes from (repo URL, marketplace id, internal path). */
+  source?: string;
+  /** How to install it (command or pointer). */
+  install?: string;
+  /** Free-form rationale/notes. */
+  notes?: string;
+  /** Absolute path to the manifest that declared it. */
+  path: string;
+}
+
 /** The fully loaded registry. */
 export interface Registry {
   skills: SkillDefinition[];
   agents: AgentDefinition[];
   workflows: WorkflowDefinition[];
-  /** Distinct department slugs discovered across skills and agents. */
+  plugins: PluginDefinition[];
+  /** Distinct department slugs discovered across skills, agents and plugins. */
   departments: string[];
 }
