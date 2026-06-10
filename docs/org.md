@@ -22,7 +22,7 @@ functional department.
 
 ---
 
-## 1 — CEO / Administração ✅ defined
+## 1 — CEO / Administração ✅ defined · 🚀 implemented (pilot)
 
 **Purpose:** the strategic brain of the company. Everything depends on its analysis,
 research, knowledge, strategy, and coordination.

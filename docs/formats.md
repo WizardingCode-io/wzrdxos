@@ -63,6 +63,34 @@ Workflows encode reusable quality patterns: fan-out + adversarial verification,
 judge panels, loop-until-dry, multi-modal sweep, completeness critic. See
 `artifacts/workflows/adversarial-review/` for the canonical example.
 
+## Plugins — `artifacts/plugins/<department>/plugins.json`
+
+A JSON manifest declaring the plugins/MCPs/skill-packs a department depends on.
+Declared, **never auto-installed** — `wzrdx plugins` lists them; doctor reports
+status; adoption is a human decision.
+
+| Field | Required | Notes |
+| --- | --- | --- |
+| `name` | yes | Unique within the department. |
+| `kind` | yes | `mcp` \| `plugin` \| `command` \| `skill-pack`. |
+| `status` | yes | `required` \| `adopt` \| `optional` \| `planned` \| `deferred` \| `rejected`. |
+| `source` | no | Repo URL, marketplace id, or internal path. |
+| `install` | no | Install command or pointer. |
+| `notes` | no | Rationale. Third-party packs are vetted before adoption. |
+
+The file shape is `{ "department": "<slug>", "plugins": [ … ] }`.
+
+## Deployment — `wzrdx install claude`
+
+Registry artifacts deploy into Claude Code's native locations, always prefixed
+`wzrdx-` (user files are never touched): agents → `~/.claude/agents/wzrdx-<name>.md`
+(subagent format), skills → `~/.claude/skills/wzrdx-<dept>-<dirname>/SKILL.md`
+(frontmatter `name` rewritten to the slug), workflows → `~/.claude/workflows/<name>.mjs`.
+`wzrdx setup` runs this as its final step. Known limitation: renamed/removed
+artifacts leave stale deployed copies (no pruning yet). Other runtimes receive the
+instructions-block + MCP wiring (see `docs/runtimes.md`); artifact deployment for
+them is future work.
+
 ## Flow policy (non-negotiable, by inversion)
 
 wzrdxOS never ships **blocking enforcement hooks**. The flow is opt-in: a workflow

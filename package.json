@@ -14,7 +14,7 @@
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r test",
     "lint": "pnpm -r lint",
-    "wzrdx": "pnpm --filter @wzrdx/core exec wzrdx"
+    "wzrdx": "node packages/core/dist/cli.js"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",
