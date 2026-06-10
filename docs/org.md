@@ -377,7 +377,7 @@ planning (post-D180 concern).
 
 ---
 
-## 6 — Comunicação & Marketing (CMO) ✅ defined
+## 6 — Comunicação & Marketing (CMO) ✅ defined · 🚀 implemented (phase 1)
 
 **Purpose:** the voice and the demand engine. Owns brand, positioning, content,
 campaigns and marketing performance. Includes **Brand & Design**.
