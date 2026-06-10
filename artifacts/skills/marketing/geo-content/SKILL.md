@@ -1,5 +1,5 @@
 ---
-name: "marketing:geo-content"
+name: marketing:geo-content
 description: Create and optimise content for AI-engine citation (GEO/AEO) and
   traditional SEO — Three Qualities check (Definitive, Structured, Quotable),
   Two-Boards doctrine (Google floor + AI-engine ceiling), Citation-as-KPI reporting,

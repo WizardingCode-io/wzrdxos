@@ -1,5 +1,5 @@
 ---
-name: "marketing:rebranding-execution"
+name: marketing:rebranding-execution
 description: Drive the Rebranding-2026-06 roadmap — KB-first from the vault (9 docs,
   decisions D1-D7), framework-guided decisions (Hormozi, StoryBrand, Primal Branding,
   Status Engineering), CEO balanced-decision gate for significant calls, and KB ingest

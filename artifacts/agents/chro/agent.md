@@ -1,6 +1,6 @@
 ---
 name: chro
-role: "CHRO — Chief Human Resources Officer"
+role: CHRO — Chief Human Resources Officer
 department: rh
 tier: 0
 model: opus

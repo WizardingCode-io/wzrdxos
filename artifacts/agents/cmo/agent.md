@@ -1,6 +1,6 @@
 ---
 name: cmo
-role: "CMO — Chief Marketing Officer"
+role: CMO — Chief Marketing Officer
 department: marketing
 tier: 0
 model: opus
