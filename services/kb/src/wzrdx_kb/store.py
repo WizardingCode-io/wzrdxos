@@ -10,6 +10,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 TABLE = "chunks"
+ISO_EPOCH = "1970-01-01T00:00:00+00:00"
 
 
 @dataclass
@@ -36,24 +37,32 @@ class VectorStore:
         import pyarrow as pa
 
         if TABLE in db.table_names():
-            return db.open_table(TABLE)
+            tbl = db.open_table(TABLE)
+            # idempotent migration: add added_at column if absent
+            if "added_at" not in tbl.schema.names:
+                tbl.add_columns({"added_at": f"'{ISO_EPOCH}'"})
+            return tbl
         schema = pa.schema(
             [
                 pa.field("id", pa.string()),
                 pa.field("text", pa.string()),
                 pa.field("source", pa.string()),
                 pa.field("vector", pa.list_(pa.float32(), self.dim)),
+                pa.field("added_at", pa.string()),
             ]
         )
         return db.create_table(TABLE, schema=schema)
 
     def add(self, rows: list[dict]) -> int:
-        """Insert rows: each dict needs id, text, source, vector."""
+        """Upsert rows (keyed on id): each dict needs id, text, source, vector, added_at.
+
+        Returns the number of NEWLY inserted rows (0 when all are duplicates).
+        """
         if not rows:
             return 0
         db = self._db()
-        self._table(db).add(rows)
-        return len(rows)
+        res = self._table(db).merge_insert("id").when_not_matched_insert_all().execute(rows)
+        return res.num_inserted_rows
 
     def search(self, vector: list[float], k: int = 8) -> list[SearchHit]:
         db = self._db()
@@ -77,3 +86,37 @@ class VectorStore:
         if TABLE not in db.table_names():
             return 0
         return self._table(db).count_rows()
+
+    def new_since(self, since: str, cap: int = 200) -> list[dict]:
+        """Rows with added_at > since (ISO string compare): oldest-first, capped.
+
+        Returns list of dicts with keys: id, text, source, added_at.
+        """
+        db = self._db()
+        if TABLE not in db.table_names():
+            return []
+        tbl = self._table(db)
+        rows = (
+            tbl.search()
+            .where(f"added_at > '{since}'")
+            .limit(cap)
+            .select(["id", "text", "source", "added_at"])
+            .to_list()
+        )
+        # sort oldest-first by added_at string (ISO format is lexicographically sortable)
+        rows.sort(key=lambda r: r.get("added_at", ""))
+        return rows
+
+    def vectors(self, cap: int = 2000) -> list[dict]:
+        """Capped scan returning [{id, source, vector}] for similarity analysis."""
+        db = self._db()
+        if TABLE not in db.table_names():
+            return []
+        tbl = self._table(db)
+        rows = (
+            tbl.search()
+            .limit(cap)
+            .select(["id", "source", "vector"])
+            .to_list()
+        )
+        return rows

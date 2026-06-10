@@ -7,12 +7,17 @@ vector side, which is fully offline and independent of the extraction backend.
 from __future__ import annotations
 
 import hashlib
+from datetime import datetime, timezone
 from pathlib import Path
 
 from .embed import Embedder
 from .store import VectorStore
 
 TEXT_SUFFIXES = {".md", ".markdown", ".txt", ".rst", ".text"}
+
+
+def _now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat()
 
 
 def chunk_text(text: str, max_chars: int = 1200, overlap: int = 150) -> list[str]:
@@ -53,8 +58,9 @@ def ingest_text(
     if not chunks:
         return 0
     vectors = embedder.embed(chunks)
+    now = _now_iso()
     rows = [
-        {"id": _row_id(source, i, c), "text": c, "source": source, "vector": v}
+        {"id": _row_id(source, i, c), "text": c, "source": source, "vector": v, "added_at": now}
         for i, (c, v) in enumerate(zip(chunks, vectors))
     ]
     return store.add(rows)
