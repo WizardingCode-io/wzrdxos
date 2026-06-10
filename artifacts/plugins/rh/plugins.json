@@ -1,0 +1,58 @@
+{
+  "department": "rh",
+  "plugins": [
+    {
+      "name": "wzrdx-kb",
+      "kind": "mcp",
+      "status": "required",
+      "source": "services/kb",
+      "install": "wzrdx setup",
+      "notes": "KB-first doctrine. Installed and registered by `wzrdx setup`."
+    },
+    {
+      "name": "company-profile",
+      "kind": "command",
+      "status": "planned",
+      "source": "wzrdx company",
+      "notes": "Company base context. Ships with the `wzrdx company` command."
+    },
+    {
+      "name": "human-resources",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/knowledge-work-plugins",
+      "install": "claude plugin install human-resources@knowledge-work-plugins",
+      "notes": "The anchor: /hr:onboarding, /hr:draft-offer, /hr:performance-review, /hr:comp-analysis, /hr:people-report."
+    },
+    {
+      "name": "data",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/knowledge-work-plugins",
+      "install": "claude plugin install data@knowledge-work-plugins",
+      "notes": "People analytics (turnover, headcount). Shared with ops and marketing."
+    },
+    {
+      "name": "claude-skills",
+      "kind": "skill-pack",
+      "status": "adopt",
+      "source": "https://github.com/alirezarezvani/claude-skills",
+      "install": "/plugin marketplace add alirezarezvani/claude-skills",
+      "notes": "MIT, 338 skills. Cherry-pick the C-level advisory (66 incl. CHRO), org design and compliance subsets. Vet before each adoption."
+    },
+    {
+      "name": "hr-skills",
+      "kind": "skill-pack",
+      "status": "optional",
+      "source": "https://github.com/tuanductran/hr-skills",
+      "notes": "MIT, dedicated HR/TA skills incl. technical recruiting per role. Small but active; vet and adopt selectively."
+    },
+    {
+      "name": "jobpilot",
+      "kind": "plugin",
+      "status": "rejected",
+      "source": "https://github.com/suxrobGM/jobpilot",
+      "notes": "Candidate-side job-application automation, not a recruiter tool. Does not fit CHRO."
+    }
+  ]
+}

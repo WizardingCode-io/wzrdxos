@@ -291,7 +291,7 @@ the external accountant; author a `fiscal-pt` skill once the KB has vetted conte
 
 ---
 
-## 5 — Recursos Humanos (CHRO) ✅ defined
+## 5 — Recursos Humanos (CHRO) ✅ defined · 🚀 implemented (phase 1)
 
 **Purpose:** people, culture and the founder's transition from doer to leader. Owns
 the full talent lifecycle. Immediate mission: **make the first autonomous hire work**
