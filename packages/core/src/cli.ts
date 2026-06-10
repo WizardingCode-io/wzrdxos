@@ -8,6 +8,7 @@ import { agentNewCommand } from "./commands/agentNew.js";
 import { setupCommand } from "./commands/setup.js";
 import { updateCommand } from "./commands/update.js";
 import { runtimesCommand, runtimesInstallCommand } from "./commands/runtimes.js";
+import { pluginsCommand } from "./commands/plugins.js";
 
 const program = new Command();
 
@@ -61,6 +62,12 @@ program
   .command("update")
   .description("keep the KB stack in sync (upgrade graphify, re-sync worker, refresh MCP)")
   .action(() => updateCommand());
+
+program
+  .command("plugins")
+  .description("list declared department plugins/MCPs and their adoption status")
+  .option("-d, --department <slug>", "filter by department")
+  .action((opts) => pluginsCommand({ department: opts.department }));
 
 const skill = program.command("skill").description("manage skills");
 skill

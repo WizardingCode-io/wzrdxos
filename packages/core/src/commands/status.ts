@@ -30,5 +30,11 @@ export function statusCommand(): void {
   }
   if (!reg.workflows.length) ui.item(ui.dim("none yet"));
 
+  ui.section(`Plugins (${ui.count(reg.plugins.length)})`);
+  for (const p of reg.plugins) {
+    ui.item(`${p.department}:${p.name}  ${ui.dim(`[${p.kind}, ${p.status}]`)}`);
+  }
+  if (!reg.plugins.length) ui.item(ui.dim("none yet"));
+
   console.log("");
 }
