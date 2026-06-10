@@ -1,0 +1,65 @@
+{
+  "department": "fin",
+  "plugins": [
+    {
+      "name": "wzrdx-kb",
+      "kind": "mcp",
+      "status": "required",
+      "source": "services/kb",
+      "install": "wzrdx setup",
+      "notes": "KB-first doctrine. Installed and registered by `wzrdx setup`."
+    },
+    {
+      "name": "company-profile",
+      "kind": "command",
+      "status": "planned",
+      "source": "wzrdx company",
+      "notes": "Company base context. Ships with the `wzrdx company` command."
+    },
+    {
+      "name": "small-business",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/knowledge-work-plugins",
+      "install": "claude plugin install small-business@knowledge-work-plugins",
+      "notes": "Best fit for current stage: payroll planning, cash forecast, month-end close, invoice chasing. Shared with ops (which uses the ops subset)."
+    },
+    {
+      "name": "finance",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/knowledge-work-plugins",
+      "install": "claude plugin install finance@knowledge-work-plugins",
+      "notes": "Close cycle: journal entries, reconciliation, statements, variance analysis. Adopt the relevant subset."
+    },
+    {
+      "name": "financial-analysis",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/financial-services-plugins",
+      "install": "claude plugin install financial-analysis@financial-services-plugins",
+      "notes": "DCF, comps, model/deck review — valuation and strategic analysis."
+    },
+    {
+      "name": "equity-research",
+      "kind": "plugin",
+      "status": "deferred",
+      "source": "anthropics/financial-services-plugins",
+      "notes": "Only relevant if wzrdx enters M&A/investing; revisit then."
+    },
+    {
+      "name": "investment-banking",
+      "kind": "plugin",
+      "status": "deferred",
+      "source": "anthropics/financial-services-plugins",
+      "notes": "Only relevant if wzrdx enters M&A/investing; revisit then."
+    },
+    {
+      "name": "private-equity",
+      "kind": "plugin",
+      "status": "deferred",
+      "source": "anthropics/financial-services-plugins",
+      "notes": "Only relevant if wzrdx enters M&A/investing; revisit then."
+    }
+  ]
+}

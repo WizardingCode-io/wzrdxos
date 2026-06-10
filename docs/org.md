@@ -224,7 +224,7 @@ skills only once vetted content exists.
 
 ---
 
-## 4 — Financeiro (CFO) ✅ defined
+## 4 — Financeiro (CFO) ✅ defined · 🚀 implemented (phase 1)
 
 **Purpose:** financial discipline and intelligence. Knows where every euro comes from
 and goes to, keeps the company solvent, and turns numbers into decisions.
