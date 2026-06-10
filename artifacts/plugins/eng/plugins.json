@@ -1,0 +1,72 @@
+{
+  "department": "eng",
+  "plugins": [
+    {
+      "name": "wzrdx-kb",
+      "kind": "mcp",
+      "status": "required",
+      "source": "services/kb",
+      "install": "wzrdx setup",
+      "notes": "KB-first doctrine. Installed and registered by `wzrdx setup`."
+    },
+    {
+      "name": "company-profile",
+      "kind": "command",
+      "status": "planned",
+      "source": "wzrdx company",
+      "notes": "Company base context. Ships with the `wzrdx company` command."
+    },
+    {
+      "name": "engineering",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/knowledge-work-plugins",
+      "install": "claude plugin install engineering@knowledge-work-plugins",
+      "notes": "Standups, ADR drafting, incident post-mortems, technical docs."
+    },
+    {
+      "name": "code-review",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/claude-code (plugins)",
+      "install": "claude plugin install code-review",
+      "notes": "Multi-agent PR review with confidence-based filtering."
+    },
+    {
+      "name": "security-guidance",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/claude-code (plugins)",
+      "install": "claude plugin install security-guidance",
+      "notes": "Pre-tool hook warning on unsafe code patterns (command injection, XSS, eval, pickle)."
+    },
+    {
+      "name": "context7",
+      "kind": "mcp",
+      "status": "adopt",
+      "source": "upstash/context7",
+      "notes": "Live version-specific library docs. Already in use."
+    },
+    {
+      "name": "superpowers",
+      "kind": "skill-pack",
+      "status": "adopt",
+      "source": "obra/superpowers-marketplace",
+      "notes": "TDD, debugging, planning discipline. Already installed."
+    },
+    {
+      "name": "github-mcp",
+      "kind": "mcp",
+      "status": "adopt",
+      "source": "github/github-mcp-server",
+      "notes": "Repo/PR operations (gh CLI covers most flows meanwhile)."
+    },
+    {
+      "name": "qodo-skills",
+      "kind": "skill-pack",
+      "status": "optional",
+      "source": "qodo-ai/qodo-skills",
+      "notes": "Repo-specific coding rules + PR resolver. Requires a Qodo platform account; adopt if/when one exists."
+    }
+  ]
+}

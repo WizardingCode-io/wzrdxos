@@ -73,7 +73,7 @@ to reach equilibrium before approval.
 
 ---
 
-## 2 — Operações (COO) ✅ defined
+## 2 — Operações (COO) ✅ defined · 🚀 implemented (phase 1)
 
 **Purpose:** the execution engine. Receives the CEO's go and orchestrates the product
 lifecycle flow; turns the founder's tacit knowledge into systems, processes, and
@@ -148,7 +148,7 @@ when vetted content exists.
 
 ---
 
-## 3 — Engenharia / Tecnologia (CTO) ✅ defined
+## 3 — Engenharia / Tecnologia (CTO) ✅ defined · 🚀 implemented (phase 1)
 
 **Purpose:** technical direction and execution quality. Owns every line of code, every
 architecture decision, and the engineering cost structure of running an agentic OS.
@@ -224,7 +224,7 @@ skills only once vetted content exists.
 
 ---
 
-## 4 — Financeiro (CFO) ✅ defined
+## 4 — Financeiro (CFO) ✅ defined · 🚀 implemented (phase 1)
 
 **Purpose:** financial discipline and intelligence. Knows where every euro comes from
 and goes to, keeps the company solvent, and turns numbers into decisions.
@@ -291,7 +291,7 @@ the external accountant; author a `fiscal-pt` skill once the KB has vetted conte
 
 ---
 
-## 5 — Recursos Humanos (CHRO) ✅ defined
+## 5 — Recursos Humanos (CHRO) ✅ defined · 🚀 implemented (phase 1)
 
 **Purpose:** people, culture and the founder's transition from doer to leader. Owns
 the full talent lifecycle. Immediate mission: **make the first autonomous hire work**
@@ -377,7 +377,7 @@ planning (post-D180 concern).
 
 ---
 
-## 6 — Comunicação & Marketing (CMO) ✅ defined
+## 6 — Comunicação & Marketing (CMO) ✅ defined · 🚀 implemented (phase 1)
 
 **Purpose:** the voice and the demand engine. Owns brand, positioning, content,
 campaigns and marketing performance. Includes **Brand & Design**.

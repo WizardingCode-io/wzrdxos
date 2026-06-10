@@ -1,0 +1,72 @@
+{
+  "department": "marketing",
+  "plugins": [
+    {
+      "name": "wzrdx-kb",
+      "kind": "mcp",
+      "status": "required",
+      "source": "services/kb",
+      "install": "wzrdx setup",
+      "notes": "KB-first doctrine. Installed and registered by `wzrdx setup`."
+    },
+    {
+      "name": "company-profile",
+      "kind": "command",
+      "status": "planned",
+      "source": "wzrdx company",
+      "notes": "Company base context. Ships with the `wzrdx company` command."
+    },
+    {
+      "name": "marketing",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/knowledge-work-plugins",
+      "install": "claude plugin install marketing@knowledge-work-plugins",
+      "notes": "The anchor: /draft-content, /campaign-plan, /brand-review (brand-voice enforcement), /competitive-brief, /performance-report, /seo-audit, /email-sequence."
+    },
+    {
+      "name": "data",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/knowledge-work-plugins",
+      "install": "claude plugin install data@knowledge-work-plugins",
+      "notes": "Campaign/funnel analytics. Shared with ops and rh."
+    },
+    {
+      "name": "marketing-skills-library",
+      "kind": "skill-pack",
+      "status": "adopt",
+      "source": "https://github.com/coreyhaines31/marketingskills",
+      "install": "npx skills add coreyhaines31/marketingskills",
+      "notes": "MIT, ~50 skills: CRO, copywriting, ads, programmatic-seo, marketing-psychology, pricing, launch."
+    },
+    {
+      "name": "geo-aeo-skills",
+      "kind": "skill-pack",
+      "status": "optional",
+      "source": "https://github.com/zubair-trabzada/geo-seo-claude",
+      "notes": "AI-search optimization; complements marketing:geo-content. Vet repo before install."
+    },
+    {
+      "name": "humanizer",
+      "kind": "skill-pack",
+      "status": "optional",
+      "source": "https://github.com/jpeggdev/humanize-writing",
+      "notes": "De-AI-ify output before publishing. Vet repo before install."
+    },
+    {
+      "name": "email-marketing-bible",
+      "kind": "skill-pack",
+      "status": "deferred",
+      "source": "https://github.com/CosmoBlk/email-marketing-bible",
+      "notes": "Lifecycle flows; adopt when the e-mail channel activates."
+    },
+    {
+      "name": "ads-health-audit",
+      "kind": "skill-pack",
+      "status": "deferred",
+      "source": "https://github.com/AgriciDaniel/claude-ads",
+      "notes": "250+ ad-account checks; adopt when paid ads run."
+    }
+  ]
+}
