@@ -27,10 +27,10 @@ functional department.
 **Purpose:** the strategic brain of the company. Everything depends on its analysis,
 research, knowledge, strategy, and coordination.
 
-**Heads (C-suite, top tier):** CEO · CTO · COO · CMO · CFO · CHRO · CRO. Each double-hats:
+**Heads (C-suite, top tier):** CEO · CTO · COO · CMO · CFO · CHRO · CRO · CKO. Each double-hats:
 - CTO → leads Engenharia · COO → leads Operações · CMO → leads Comunicação & Marketing ·
   CFO → leads Financeiro · CHRO → leads Recursos Humanos · CRO → leads Growth ·
-  CEO → overall.
+  CKO → leads Knowledge · CEO → overall.
 
 **Responsibilities:**
 - Vision and strategic direction.
@@ -539,3 +539,69 @@ the 5 commercial KPIs, funnel stages.
 needs a June refresh), zero commercial case studies, no HubSpot implementation
 guide, no PT-market B2B sales persona in the KB (Begossi covers delivery, not SaaS
 sales), no negotiation/pricing content localized for PT.
+
+---
+
+## 8 — Knowledge (CKO) ✅ defined
+
+**Purpose:** the memory and the learning loop. Owns the Knowledge Base (Graphify +
+LanceDB + Obsidian) and the daily-intelligence cycle that makes the whole OS smarter
+every day. Activates Constitution rules 4-6 operationally.
+
+**Head:** CKO (double-hats from CEO/Administração — joins the C-suite with this section).
+
+**Responsibilities:**
+- Own the KB stack and the Obsidian vault (`~/Documents/Personal`) — taxonomy, source
+  vetting, ingestion quality.
+- **Daily digest:** synthesize what entered the KB since the last watermark; every claim
+  cites `[source]`; group by source-prefix type (`digests/`, `memos/`, `enrichment/`,
+  raw paths); end with gap analysis against the Known gaps in §§1-8; route highlights
+  to dept heads.
+- **Enrichment cycle:** near-duplicate and contradiction review via `kb_enrich_report`
+  (gbrain-style "dream cycle"); classify pairs (exact-duplicate / contradiction / fine);
+  write and ingest the verdict memo; route contradictions to the owning department.
+- **Skill promotion:** recurring KB patterns → new skills via `wzrdx-core-skill-creator`
+  (rule-6 completion).
+- Source-prefix page-typing convention (`digests/`, `memos/`, `enrichment/`) for the
+  retrieval layer.
+- Keeper of the watermark/loop cadence — lazy trigger >24h, no daemons, per doctrine.
+
+**Does NOT:** set strategy (CEO), create content (CMO), build the KB engine itself
+(Engenharia owns `services/kb` code — CKO specifies).
+
+### CKO (head) — toolbox
+
+**Skills**
+- `deep-research` — source verification, citing multi-source research (high)
+- `schedule` — digest cadence when cloud-reachable (medium; see cloud caveat in plugins)
+- `pdf` / `docx` — source ingestion and enrichment reports (medium)
+- adapt (🔄): `kb`, `search-kb`, `learn-content`, `source-evaluate`, `knowledge-review`,
+  `moc-create`, `taxonomy-manage`, `zettelkasten-process`, `persona-build`
+- new (🆕):
+  - `daily-digest` — daily intelligence loop (phase 1, this section)
+  - `kb-enrich` — enrichment/dream-cycle pass (phase 1, this section)
+  - `skill-promotion` + `agent-evolution` (phase 2 — the rule-6 completion)
+
+**Plugins / MCPs**
+- `wzrdx-kb` (mcp, required — `wzrdx setup`) — the unified MCP: `kb_status`,
+  `kb_ingest`, `kb_search`, `kb_query`, `kb_ask`, `kb_digest`, `kb_enrich_report`.
+- `graphify` (mcp, required — `wzrdx setup`, installed via `uv tool install graphifyy`)
+  — primary knowledge graph; raw `graphify-mcp` not exposed separately.
+- `company-profile` (command, planned) — `wzrdx company` context.
+- `schedule` (plugin, planned) — note: the schedule skill runs cloud agents; the local
+  KB (`~/.wzrdx/kb/`) is not reachable from the cloud. Use lazy trigger or local cron
+  (`wzrdx-kb digest`) until the KB has a cloud-reachable endpoint.
+- `gbrain` (rejected) — "Concepts replicated natively (digest, dream-cycle enrichment,
+  citations + gap analysis, source-prefix typing); not installed to avoid a second
+  store/retrieval stack (Bun + Postgres). Kept as reference:
+  https://github.com/garrytan/gbrain (MIT)."
+
+**KB sources (vault `~/Documents/Personal`):**
+The vault itself (4,200+ notes — Topics/Frameworks/Personas/KB Areas),
+`docs/kb-design.md`, gbrain architecture notes.
+
+**Known gaps:**
+- Skill-promotion and agent-evolution loops are phase 2 (rule 6 only partially active).
+- Pre-existing duplicate chunks ingested before the idempotent upsert may need a
+  one-time cleanup (first `kb-enrich` run flags them).
+- Obsidian-fallback polish pending (see `docs/kb-design.md`).

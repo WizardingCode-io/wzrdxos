@@ -1,0 +1,41 @@
+{
+  "department": "knowledge",
+  "plugins": [
+    {
+      "name": "wzrdx-kb",
+      "kind": "mcp",
+      "status": "required",
+      "source": "services/kb",
+      "install": "wzrdx setup",
+      "notes": "KB-first doctrine. The unified MCP server (Graphify + LanceDB). Installed and registered by `wzrdx setup`. Exposes kb_status, kb_ingest, kb_search, kb_query, kb_ask, kb_digest, kb_enrich_report."
+    },
+    {
+      "name": "graphify",
+      "kind": "mcp",
+      "status": "required",
+      "source": "uv tool install graphifyy",
+      "install": "wzrdx setup",
+      "notes": "Primary knowledge graph (graphifylabs.ai). Installed by `wzrdx setup` via `uv tool install graphifyy`. The raw graphify-mcp is not exposed separately — wzrdx-kb wraps it."
+    },
+    {
+      "name": "company-profile",
+      "kind": "command",
+      "status": "planned",
+      "source": "wzrdx company",
+      "notes": "Company base context (name, market, customers, niche, objectives). Ships with the `wzrdx company` command. CKO uses the profile to scope gap analysis and routing."
+    },
+    {
+      "name": "schedule",
+      "kind": "plugin",
+      "status": "planned",
+      "notes": "Automates the daily-digest and weekly enrich cadence via cloud agents (schedule skill). Important caveat: the schedule skill runs cloud agents; the local KB (LanceDB/Graphify at ~/.wzrdx/kb/) is not reachable from the cloud. Use the schedule skill only when the KB is cloud-reachable (e.g. remote KB endpoint). Until then, use the lazy trigger (watermark >24h) or a local cron that invokes `wzrdx-kb digest` directly."
+    },
+    {
+      "name": "gbrain",
+      "kind": "plugin",
+      "status": "rejected",
+      "source": "https://github.com/garrytan/gbrain",
+      "notes": "Concepts replicated natively: digest (kb_digest + daily-digest skill), dream-cycle enrichment (kb_enrich_report + kb-enrich skill), citations + gap analysis (agent-side synthesis), source-prefix page typing. Not installed to avoid a second store/retrieval stack (Bun + Postgres). Kept as reference architecture (MIT). See: https://github.com/garrytan/gbrain"
+    }
+  ]
+}

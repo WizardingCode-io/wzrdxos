@@ -9,6 +9,7 @@ from __future__ import annotations
 import hashlib
 from pathlib import Path
 
+from .digest import now_iso as _now_iso
 from .embed import Embedder
 from .store import VectorStore
 
@@ -53,8 +54,9 @@ def ingest_text(
     if not chunks:
         return 0
     vectors = embedder.embed(chunks)
+    now = _now_iso()
     rows = [
-        {"id": _row_id(source, i, c), "text": c, "source": source, "vector": v}
+        {"id": _row_id(source, i, c), "text": c, "source": source, "vector": v, "added_at": now}
         for i, (c, v) in enumerate(zip(chunks, vectors))
     ]
     return store.add(rows)

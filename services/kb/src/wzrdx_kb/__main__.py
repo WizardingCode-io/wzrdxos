@@ -69,6 +69,26 @@ def _ask(question: str, k: int) -> int:
     return 0
 
 
+def _digest(since: str | None, advance: bool) -> int:
+    from .service import KB
+
+    res = KB().digest(since=since, advance=advance)
+    print(json.dumps(res, indent=2))
+    return 0
+
+
+def _enrich(threshold: float, max_pairs: int, cross_source_only: bool) -> int:
+    from .service import KB
+
+    res = KB().enrich_report(
+        threshold=threshold,
+        max_pairs=max_pairs,
+        cross_source_only=cross_source_only,
+    )
+    print(json.dumps(res, indent=2))
+    return 0
+
+
 def _serve() -> int:
     try:
         from .server import run
@@ -103,6 +123,27 @@ def main(argv: list[str] | None = None) -> int:
     p_ask.add_argument("question")
     p_ask.add_argument("-k", type=int, default=6)
 
+    p_digest = sub.add_parser("digest", help="list chunks ingested since last digest")
+    p_digest.add_argument("--since", default=None, help="ISO timestamp override")
+    p_digest.add_argument(
+        "--no-advance",
+        dest="advance",
+        action="store_false",
+        default=True,
+        help="do not advance the watermark",
+    )
+
+    p_enrich = sub.add_parser("enrich", help="near-duplicate analysis across KB")
+    p_enrich.add_argument("--threshold", type=float, default=0.95)
+    p_enrich.add_argument("--max-pairs", type=int, default=25)
+    p_enrich.add_argument(
+        "--include-same-source",
+        dest="cross_source_only",
+        action="store_false",
+        default=True,
+        help="include same-source pairs (useful for legacy duplicate cleanup)",
+    )
+
     args = parser.parse_args(argv)
 
     if args.command == "serve":
@@ -117,6 +158,10 @@ def main(argv: list[str] | None = None) -> int:
         return _query(args.question)
     if args.command == "ask":
         return _ask(args.question, args.k)
+    if args.command == "digest":
+        return _digest(args.since, args.advance)
+    if args.command == "enrich":
+        return _enrich(args.threshold, args.max_pairs, args.cross_source_only)
     return _info()
 
 

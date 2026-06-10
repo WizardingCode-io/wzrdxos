@@ -107,3 +107,73 @@ is present and repairs/reinstalls what is missing.
 - A project may have a local overlay at `<project>/.wzrdx/kb/`.
 - `kb_search` / `kb_query` query the global store, and the project overlay too when the
   caller is inside a project that has one; results are merged.
+
+## Daily intelligence loop
+
+The daily-intelligence loop closes the KB lifecycle: ingest → synthesize → document →
+enrich. It is the operational form of Constitution rules 4-6 and is owned by the CKO.
+
+### added_at column + idempotent migration
+
+Every chunk stored in LanceDB carries an `added_at` ISO timestamp (UTC). The migration
+is idempotent: rows inserted before the column existed receive the epoch sentinel
+(`1970-01-01T00:00:00+00:00` — `ISO_EPOCH` in `store.py`). Legacy rows are therefore
+always older than any real watermark and will appear in the first digest run; subsequent
+runs are clean.
+
+### Idempotent upsert (merge_insert)
+
+Ingestion uses LanceDB's `merge_insert` keyed on `id` = sha1(source:idx:text). Re-ingesting
+the same file is a no-op: the row is updated in place, `added_at` is preserved.
+Pre-existing duplicate chunks (ingested before upsert was introduced) are flagged by
+the first `kb-enrich` run (cosine ≈ 1.0, same source) and listed for one-time manual
+cleanup. The upsert prevents new duplicates from forming.
+
+### Watermark file
+
+`<kb_dir>/digest.json` holds:
+```json
+{ "last_run": "<ISO timestamp>", "chunks_at_run": <N> }
+```
+The watermark advances **only after the digest memo has been ingested successfully**.
+The `kb_digest(advance=false)` call retrieves chunks without moving the pointer;
+`kb_digest(advance=true)` is called only in the final step of `knowledge:daily-digest`.
+A no-op run (0 new chunks) never advances the watermark.
+
+### MCP tools + CLI
+
+| Tool | Purpose |
+|------|---------|
+| `kb_digest(since, cap, advance)` | List new chunks since watermark; optionally advance. |
+| `kb_enrich_report(threshold, max_pairs)` | Pairwise cosine over all vectors; return near-duplicate/contradiction pairs. |
+| `wzrdx-kb digest` | CLI equivalent of `kb_digest` (advance=true after memo). |
+| `wzrdx-kb enrich` | CLI equivalent of `kb_enrich_report`. |
+
+### Source-prefix page-typing convention
+
+Every memo ingested by the loop uses a source path that signals its type to the
+retrieval layer:
+- `digests/YYYY-MM-DD.md` — daily digest memos.
+- `memos/YYYY-MM-DD-<slug>.md` — decisions, meeting notes, strategic memos.
+- `enrichment/YYYY-MM-DD.md` — enrichment verdict memos.
+
+Raw sources (vault notes, ingested files, URLs) retain their natural paths. Queries
+can filter by prefix to distinguish loop-generated content from source material.
+
+### Skills drive the loop — no daemon
+
+The loop fires on a lazy trigger: the `knowledge:daily-digest` skill checks whether
+the watermark is older than 24h before running. There is no background daemon or
+watcher process (Constitution doctrine: no blocking hooks, no daemons).
+
+The `schedule` skill can automate the cadence when a cloud-reachable KB endpoint
+exists. Until then, the lazy trigger (user-initiated or local cron calling
+`wzrdx-kb digest`) is the recommended approach.
+
+### Inspired by gbrain (MIT)
+
+The digest/enrich/citation/source-prefix architecture is inspired by gbrain
+(https://github.com/garrytan/gbrain, MIT). Concepts are replicated natively using
+the existing Graphify + LanceDB stack. gbrain itself is not installed — it would
+introduce a second store/retrieval stack (Bun + Postgres) with no retrieval advantage
+given the wzrdx-kb MCP already covers the same surface.

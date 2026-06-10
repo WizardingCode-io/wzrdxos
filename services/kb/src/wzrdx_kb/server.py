@@ -44,6 +44,36 @@ def build_server():  # type: ignore[no-untyped-def]
         """GraphRAG: fuse dense vector recall (chunks) with Graphify graph traversal (graph)."""
         return kb.ask(question, k)
 
+    @server.tool()
+    def kb_digest(since: str | None = None, cap: int = 200, advance: bool = True) -> dict:
+        """List chunks ingested since the last digest (or `since`).
+
+        Returns raw new chunks + stats + watermark; the calling agent synthesizes the digest memo.
+        since: optional ISO timestamp override (default: last watermark or epoch).
+        advance: when True (default) and new chunks exist, advances the watermark.
+        """
+        return kb.digest(since=since, cap=cap, advance=advance)
+
+    @server.tool()
+    def kb_enrich_report(
+        threshold: float = 0.95,
+        max_pairs: int = 25,
+        cross_source_only: bool = True,
+    ) -> dict:
+        """Near-duplicate / potential-contradiction pairs for agent review.
+
+        Scans all KB vectors pairwise, returns pairs above the cosine threshold.
+        threshold: minimum cosine similarity (default 0.95).
+        max_pairs: maximum pairs to return (default 25).
+        cross_source_only: when True (default), only cross-source pairs are returned;
+            set False to include same-source pairs — legacy duplicate cleanup.
+        """
+        return kb.enrich_report(
+            threshold=threshold,
+            max_pairs=max_pairs,
+            cross_source_only=cross_source_only,
+        )
+
     return server
 
 
