@@ -1,6 +1,6 @@
 ---
 name: cro
-role: "CRO — Chief Revenue Officer"
+role: CRO — Chief Revenue Officer
 department: growth
 tier: 0
 model: opus

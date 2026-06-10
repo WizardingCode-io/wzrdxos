@@ -37,14 +37,16 @@
       "kind": "plugin",
       "status": "adopt",
       "source": "anthropics/knowledge-work-plugins",
-      "notes": "Shared with marketing dept: GTM alignment — competitive briefs, battlecards, campaign performance."
+      "notes": "Shared with marketing dept: GTM alignment — competitive briefs, battlecards, campaign performance.",
+      "install": "claude plugin install marketing@knowledge-work-plugins"
     },
     {
       "name": "small-business",
       "kind": "plugin",
       "status": "adopt",
       "source": "anthropics/knowledge-work-plugins",
-      "notes": "Shared subset: lead triage, call lists, sales briefs, CRM maintenance."
+      "notes": "Shared subset: lead triage, call lists, sales briefs, CRM maintenance.",
+      "install": "claude plugin install small-business@knowledge-work-plugins"
     },
     {
       "name": "hubspot-mcp",
