@@ -34,8 +34,9 @@ jobs:
       - name: sync and smoke test
         working-directory: services/kb
         run: |
-          uv sync
+          uv sync --group dev
           uv run wzrdx-kb info
+          uv run --group dev pytest -q
 
   commitlint:
     name: commitlint
