@@ -1,0 +1,44 @@
+{
+  "department": "ops",
+  "plugins": [
+    {
+      "name": "wzrdx-kb",
+      "kind": "mcp",
+      "status": "required",
+      "source": "services/kb",
+      "install": "wzrdx setup",
+      "notes": "KB-first doctrine. Installed and registered by `wzrdx setup`."
+    },
+    {
+      "name": "company-profile",
+      "kind": "command",
+      "status": "planned",
+      "source": "wzrdx company",
+      "notes": "Company base context. Ships with the `wzrdx company` command."
+    },
+    {
+      "name": "productivity",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/knowledge-work-plugins",
+      "install": "claude plugin install productivity@knowledge-work-plugins",
+      "notes": "The COO anchor: persistent tasks, workplace memory, dashboard, /start and /update."
+    },
+    {
+      "name": "data",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/knowledge-work-plugins",
+      "install": "claude plugin install data@knowledge-work-plugins",
+      "notes": "Analytics/KPI dashboards over operational data. Shared with marketing and rh."
+    },
+    {
+      "name": "small-business",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/knowledge-work-plugins",
+      "install": "claude plugin install small-business@knowledge-work-plugins",
+      "notes": "Shared with fin: ops uses /monday-brief, CRM hygiene, customer follow-ups; fin owns the money subset."
+    }
+  ]
+}
