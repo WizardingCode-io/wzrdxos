@@ -1,0 +1,80 @@
+{
+  "department": "growth",
+  "plugins": [
+    {
+      "name": "wzrdx-kb",
+      "kind": "mcp",
+      "status": "required",
+      "source": "services/kb",
+      "install": "wzrdx setup",
+      "notes": "KB-first doctrine. Installed and registered by `wzrdx setup`."
+    },
+    {
+      "name": "company-profile",
+      "kind": "command",
+      "status": "planned",
+      "source": "wzrdx company",
+      "notes": "Company base context. Ships with the `wzrdx company` command."
+    },
+    {
+      "name": "sales",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/knowledge-work-plugins",
+      "install": "claude plugin install sales@knowledge-work-plugins",
+      "notes": "The anchor: weighted forecast, /pipeline-review, /call-prep, account research, outreach drafting; CRM connectors (HubSpot/Salesforce)."
+    },
+    {
+      "name": "data",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/knowledge-work-plugins",
+      "install": "claude plugin install data@knowledge-work-plugins",
+      "notes": "RevOps analytics: pipeline exploration, forecast MAPE, coverage gaps. Shared with ops, rh and marketing."
+    },
+    {
+      "name": "marketing",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/knowledge-work-plugins",
+      "notes": "Shared with marketing dept: GTM alignment — competitive briefs, battlecards, campaign performance.",
+      "install": "claude plugin install marketing@knowledge-work-plugins"
+    },
+    {
+      "name": "small-business",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/knowledge-work-plugins",
+      "notes": "Shared subset: lead triage, call lists, sales briefs, CRM maintenance.",
+      "install": "claude plugin install small-business@knowledge-work-plugins"
+    },
+    {
+      "name": "hubspot-mcp",
+      "kind": "mcp",
+      "status": "planned",
+      "source": "HubSpot MCP connector",
+      "notes": "Connect when the CRM goes live; least-privilege API keys."
+    },
+    {
+      "name": "sales-skills-pack",
+      "kind": "skill-pack",
+      "status": "adopt",
+      "source": "https://github.com/sales-skills/sales",
+      "notes": "Prospecting, outbound, deals, proposals, enrichment, social listening, CRM. Vet repo before install (third-party packs execute code)."
+    },
+    {
+      "name": "salesably",
+      "kind": "skill-pack",
+      "status": "optional",
+      "source": "https://github.com/Salesably/salesably-marketplace",
+      "notes": "9 skills: deal qualification, prospect research, call prep, stakeholder engagement. Vet before install."
+    },
+    {
+      "name": "revops-suite",
+      "kind": "skill-pack",
+      "status": "optional",
+      "source": "mcpmarket.com (revenue-operations)",
+      "notes": "Forecast bias/MAPE, LTV:CAC, Rule of 40 audits. Vet before install."
+    }
+  ]
+}

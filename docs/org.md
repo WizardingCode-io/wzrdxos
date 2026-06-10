@@ -27,9 +27,10 @@ functional department.
 **Purpose:** the strategic brain of the company. Everything depends on its analysis,
 research, knowledge, strategy, and coordination.
 
-**Heads (C-suite, top tier):** CEO · CTO · COO · CMO · CFO · CHRO. Each double-hats:
+**Heads (C-suite, top tier):** CEO · CTO · COO · CMO · CFO · CHRO · CRO. Each double-hats:
 - CTO → leads Engenharia · COO → leads Operações · CMO → leads Comunicação & Marketing ·
-  CFO → leads Financeiro · CHRO → leads Recursos Humanos · CEO → overall.
+  CFO → leads Financeiro · CHRO → leads Recursos Humanos · CRO → leads Growth ·
+  CEO → overall.
 
 **Responsibilities:**
 - Vision and strategic direction.
@@ -453,3 +454,88 @@ Offer; Personas — Alex Hormozi (169 fontes), Sabri Suby, Russell Brunson, Neil
 calendar and content ops (zero), tested copy/headlines for wzrdx, marketing KPI
 dashboard (area at 25/100), and no Brand & Design specialist persona in the KB —
 author these as operational docs first, skills after.
+
+---
+
+## 7 — Growth (CRO) ✅ defined · 🚀 implemented (phase 1)
+
+**Purpose:** the revenue engine. Owns the commercial machine — pipeline, deals,
+outbound, partnerships — and the path from 25/100 (Diagnostico, Vendas) to the
+€1M 2026 target. Includes Vendas.
+
+**Head:** CRO (double-hats from CEO/Administração — added to the C-suite with this
+section).
+
+**Responsibilities:**
+- Full commercial machine: structured funnel (prospeção → qualificação →
+  apresentação → negociação → fecho), proposals, scripts, follow-up discipline.
+- CRM and pipeline: implement HubSpot Free (Diagnostico quick win, never executed),
+  pipeline at 3× monthly target, weighted forecast (best/likely/worst).
+- Outbound: cold outreach (Sabri Suby shotgun + sniper-Loom), Cold-First Microwave
+  (Hormozi), speed-to-lead (5-minute response — Neil Patel three-fix).
+- Commercial offers: Grand Slam Offer + value ladder + risk reversal — messaging
+  with CMO, final pricing with CFO + CEO.
+- Partnerships and referrals: Dream 100 (Brunson), parallel outreach / whales
+  (Martell).
+- Commercial KPIs (Diagnostico set): pipeline €, conversão lead→cliente ≥15%,
+  ticket médio, ciclo de vendas, win rate ≥40% — feed the COO/CEO dashboard.
+- Case studies: produce the first 3-5 real ones (none exist despite win rate ≥40%).
+
+**Does NOT:** brand/content/campaigns (CMO), pricing policy alone (CFO + CEO gate),
+delivery (Operações/Engenharia), people policy (CHRO).
+
+### CRO (head) — toolbox
+
+**Skills**
+- `schedule` — follow-up cadences, weekly pipeline review (high)
+- `xlsx` — quota/forecast models, pipeline, unit economics LTV:CAC / Rule of 40 (high)
+- `docx` — proposals, sales scripts (high)
+- `pptx` — pitch decks, revenue QBRs (medium-high)
+- `deep-research` — prospect/account research, ICP, competitive intel (medium-high)
+- adapt (🔄): `deal-qualify`, `discovery-call`, `objection-handle`, `spin-sell`,
+  `challenger-sell`, `pipeline-manage`, `proposal-write`, `cold-email`,
+  `offer-create`, `funnel-design`, `pricing-negotiate`, `growth-strategy`,
+  `growth-loop`, `plg-setup`, `forecast-revenue` (shared with fin)
+- new (🆕 — mined from the Obsidian KB; Sales Frameworks topic alone is 504 lines):
+  - `sales-machine` — Magic Lantern trust funnel (Godfather Offer → follow-up →
+    application → strategy session), application funnels, VSSL (Sabri Suby)
+  - `deal-pipeline` — HubSpot setup + the 5 commercial KPIs with baselines +
+    weighted forecast (closes the "CRM recommended, never implemented" gap)
+  - `cold-outreach-engine` — shotgun (volume) + sniper (personalized Loom),
+    Cold-First Microwave, speed-to-lead three-fix (phase 2)
+  - `dream-100-partnerships` — Dream 100 + parallel outreach/whales (phase 2)
+
+**Plugins / MCPs**
+- `wzrdx-kb` (KB-first, mandatory) · company profile (`wzrdx company`)
+- **sales** (Anthropic, knowledge-work-plugins) — the anchor: weighted forecast,
+  `/pipeline-review`, `/call-prep`, account research, outreach drafting; CRM
+  connectors (HubSpot/Salesforce)
+- **data** (Anthropic) — shared: RevOps analytics (pipeline exploration, forecast
+  MAPE, coverage gaps)
+- **marketing** (Anthropic) — shared with CMO: GTM alignment (competitive briefs,
+  battlecards, campaign performance)
+- **small-business** (Anthropic) — shared subset: lead triage, call lists, sales
+  briefs, CRM maintenance
+- **hubspot-mcp** — planned: connect when the CRM goes live, least-privilege keys
+- **Sales Skills Pack** (sales-skills/sales) — adopt with vetting: prospecting,
+  outbound, deals, proposals, enrichment, social listening
+- Optional (vet before install — third-party packs execute code): **Salesably**
+  (deal qualification, call prep, stakeholder engagement), **RevOps Suite**
+  (forecast bias/MAPE, LTV:CAC, Rule of 40 audits), claude-skills CRO advisory
+  subset (alirezarezvani)
+- Directories for ratings comparison: claudemarketplaces.com ·
+  awesome-claude-plugins (browse-only sources, cherry-pick)
+
+**KB sources (vault `~/Documents/Personal`):** Topics — Sales Frameworks (504
+lines), Sales Funnel Architecture, Lead Generation & Conversion, Goal Setting and
+Sales Math, Growth Hacking Aplicado; Frameworks — Magic Lantern, Revenue Growth
+Equation, Grand Slam Offer, Either-Or Close, QATQ, Speed-to-Lead Three-Fix,
+24-36 Month Buyer Maturation; Personas — Sabri Suby (775 lines), Russell Brunson
+(799 lines), Alex Hormozi, Dan Martell, Giovanni Begossi (persuasion delivery),
+Liam Ottley (AI-agency sales); WizardingCode/Diagnostico-2026-05 — Vendas 25/100,
+the 5 commercial KPIs, funnel stages.
+
+**Known gaps:** the Diagnostico 90-day roadmap was never executed (May snapshot —
+needs a June refresh), zero commercial case studies, no HubSpot implementation
+guide, no PT-market B2B sales persona in the KB (Begossi covers delivery, not SaaS
+sales), no negotiation/pricing content localized for PT.
