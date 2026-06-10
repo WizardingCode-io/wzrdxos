@@ -111,6 +111,26 @@ class TestNearDuplicates:
         cosines = [p["cosine"] for p in pairs]
         assert cosines == sorted(cosines, reverse=True)
 
+    def test_same_source_default_excluded(self):
+        """Two near-identical rows from the same source: default (cross_source_only=True) → 0 pairs."""
+        vec = [1.0, 0.0, 0.0, 0.0]
+        rows = [
+            self._make_row("a", "same.md", vec, text="almost identical text a"),
+            self._make_row("b", "same.md", vec, text="almost identical text b"),
+        ]
+        assert near_duplicates(rows, threshold=0.9) == []
+
+    def test_same_source_cross_source_only_false(self):
+        """Two near-identical rows from the same source: cross_source_only=False → 1 pair."""
+        vec = [1.0, 0.0, 0.0, 0.0]
+        rows = [
+            self._make_row("a", "same.md", vec, text="almost identical text a"),
+            self._make_row("b", "same.md", vec, text="almost identical text b"),
+        ]
+        pairs = near_duplicates(rows, threshold=0.9, cross_source_only=False)
+        assert len(pairs) == 1
+        assert pairs[0]["a_source"] == pairs[0]["b_source"] == "same.md"
+
 
 # ---------------------------------------------------------------------------
 # KB.digest flow (using tmp dirs via env var + manual seam)
@@ -230,6 +250,21 @@ class TestKBDigestFlow:
         # since is after ts_new, so no new chunks
         assert result["stats"]["new"] == 0
         assert result["since"] == future_wm
+
+    def test_digest_invalid_since_raises(self, tmp_path):
+        """digest(since='not-a-date') must raise ValueError."""
+        global_dir = tmp_path / "global_kb"
+        global_dir.mkdir()
+
+        from wzrdx_kb.config import KBScope
+        from wzrdx_kb.embed import Embedder
+
+        kb = KB.__new__(KB)
+        kb.embedder = object.__new__(Embedder)
+        kb.scope = KBScope(global_dir=global_dir, project_dir=None)
+
+        with pytest.raises(ValueError, match="ISO-8601"):
+            kb.digest(since="not-a-date", advance=False)
 
 
 # import at module level so the monkeypatched class reference works

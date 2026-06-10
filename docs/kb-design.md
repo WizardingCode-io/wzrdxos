@@ -123,7 +123,7 @@ runs are clean.
 
 ### Idempotent upsert (merge_insert)
 
-Ingestion uses LanceDB's `merge_insert` keyed on `(source, chunk_hash)`. Re-ingesting
+Ingestion uses LanceDB's `merge_insert` keyed on `id` = sha1(source:idx:text). Re-ingesting
 the same file is a no-op: the row is updated in place, `added_at` is preserved.
 Pre-existing duplicate chunks (ingested before upsert was introduced) are flagged by
 the first `kb-enrich` run (cosine ≈ 1.0, same source) and listed for one-time manual

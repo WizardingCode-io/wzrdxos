@@ -6,10 +6,16 @@ Phase A: watermark-based new-chunk tracking and near-duplicate detection.
 from __future__ import annotations
 
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 WATERMARK_FILE = "digest.json"
+
+
+def now_iso() -> str:
+    """Return the current UTC time as an ISO-8601 string."""
+    return datetime.now(timezone.utc).isoformat()
 
 
 # ---------------------------------------------------------------------------
@@ -47,18 +53,20 @@ def near_duplicates(
     rows: list[dict],
     threshold: float = 0.95,
     max_pairs: int = 25,
+    cross_source_only: bool = True,
 ) -> list[dict]:
-    """Pairwise cosine similarity over row vectors; return high-similarity cross-source pairs.
+    """Pairwise cosine similarity over row vectors; return high-similarity pairs.
 
     Args:
         rows: dicts with keys ``id``, ``source``, ``vector`` (list[float]), and optionally ``text``.
         threshold: minimum cosine similarity to report (default 0.95).
         max_pairs: cap on returned pairs.
+        cross_source_only: when True (default), same-source pairs are skipped.
+            Set False to include same-source pairs — useful for legacy duplicate cleanup.
 
     Returns:
         List of dicts [{a_id, a_source, b_id, b_source, a_text_head, b_text_head, cosine}]
         sorted descending by cosine, capped at max_pairs.
-        Only pairs from different sources are returned.
     """
     import numpy as np  # available via fastembed/pyarrow transitive dep
 
@@ -84,7 +92,7 @@ def near_duplicates(
     pairs: list[dict[str, Any]] = []
     for i in range(n):
         for j in range(i + 1, n):
-            if sources[i] == sources[j]:
+            if cross_source_only and sources[i] == sources[j]:
                 continue  # skip same-source pairs
             cos = float(sim[i, j])
             if cos >= threshold:

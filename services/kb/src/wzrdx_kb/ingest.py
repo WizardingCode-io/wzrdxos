@@ -7,17 +7,13 @@ vector side, which is fully offline and independent of the extraction backend.
 from __future__ import annotations
 
 import hashlib
-from datetime import datetime, timezone
 from pathlib import Path
 
+from .digest import now_iso as _now_iso
 from .embed import Embedder
 from .store import VectorStore
 
 TEXT_SUFFIXES = {".md", ".markdown", ".txt", ".rst", ".text"}
-
-
-def _now_iso() -> str:
-    return datetime.now(timezone.utc).isoformat()
 
 
 def chunk_text(text: str, max_chars: int = 1200, overlap: int = 150) -> list[str]:

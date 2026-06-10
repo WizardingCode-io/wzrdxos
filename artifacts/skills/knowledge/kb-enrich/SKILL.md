@@ -67,7 +67,10 @@ perspectives, same topic different depth, same framework different application):
 
 If any pairs have cosine ≈ 1.0 and `a_source == b_source`, this is likely the
 pre-upsert legacy duplicate population — chunks that existed in LanceDB before the
-idempotent upsert (merge_insert by source+hash) was introduced. Document:
+idempotent upsert (merge_insert keyed on id = sha1(source:idx:text)) was introduced.
+
+For this legacy cleanup, call `kb_enrich_report(cross_source_only=false)` to surface
+same-source pairs that the default run skips. Document:
 - The pair ids.
 - The source.
 - The recommendation: one-time manual cleanup via `lancedb` table delete by id,

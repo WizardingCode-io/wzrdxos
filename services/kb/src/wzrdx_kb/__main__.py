@@ -77,10 +77,14 @@ def _digest(since: str | None, advance: bool) -> int:
     return 0
 
 
-def _enrich(threshold: float, max_pairs: int) -> int:
+def _enrich(threshold: float, max_pairs: int, cross_source_only: bool) -> int:
     from .service import KB
 
-    res = KB().enrich_report(threshold=threshold, max_pairs=max_pairs)
+    res = KB().enrich_report(
+        threshold=threshold,
+        max_pairs=max_pairs,
+        cross_source_only=cross_source_only,
+    )
     print(json.dumps(res, indent=2))
     return 0
 
@@ -132,6 +136,13 @@ def main(argv: list[str] | None = None) -> int:
     p_enrich = sub.add_parser("enrich", help="near-duplicate analysis across KB")
     p_enrich.add_argument("--threshold", type=float, default=0.95)
     p_enrich.add_argument("--max-pairs", type=int, default=25)
+    p_enrich.add_argument(
+        "--include-same-source",
+        dest="cross_source_only",
+        action="store_false",
+        default=True,
+        help="include same-source pairs (useful for legacy duplicate cleanup)",
+    )
 
     args = parser.parse_args(argv)
 
@@ -150,7 +161,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "digest":
         return _digest(args.since, args.advance)
     if args.command == "enrich":
-        return _enrich(args.threshold, args.max_pairs)
+        return _enrich(args.threshold, args.max_pairs, args.cross_source_only)
     return _info()
 
 

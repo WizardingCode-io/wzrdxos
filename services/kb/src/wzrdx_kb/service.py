@@ -6,12 +6,12 @@ LanceDB vector layer, and the Graphify graph wrapper.
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import datetime
 from pathlib import Path
 
 from . import graph
 from .config import DEFAULT_EMBED_MODEL, load_env, resolve_scope
-from .digest import near_duplicates, read_watermark, write_watermark
+from .digest import near_duplicates, now_iso, read_watermark, write_watermark
 from .embed import Embedder
 from .ingest import ingest_path, ingest_text
 from .store import ISO_EPOCH, SearchHit, VectorStore
@@ -99,36 +99,52 @@ class KB:
     def digest(self, since: str | None = None, cap: int = 200, advance: bool = True) -> dict:
         """Return chunks ingested since the last digest (or since the given timestamp).
 
-        Resolves since = explicit arg > watermark > ISO_EPOCH. When advance=True and
-        new chunks exist, the watermark is updated. Merges global + project overlay.
+        Resolves since per-scope: explicit arg > that scope's watermark > ISO_EPOCH.
+        When advance=True and new chunks exist, both watermarks are updated.
+        Merges global + project overlay. The response ``since`` field reflects the
+        global scope's resolved since value.
+
+        Args:
+            since: optional ISO-8601 timestamp override. Raises ValueError if not
+                valid ISO-8601 (e.g. ``since="not-a-date"``).
+            cap: maximum number of chunks to return (default 200).
+            advance: when True (default) and new chunks exist, advances the watermarks.
 
         Returns:
             {since, new_chunks: [{id,source,text,added_at,scope}], stats: {new,total,sources}, watermark}
         """
+        # Fix 2: validate since to prevent filter injection
+        if since is not None:
+            try:
+                datetime.fromisoformat(since)
+            except ValueError:
+                raise ValueError("since must be ISO-8601")
+
         global_store = VectorStore(self.scope.global_dir, dim=1)
 
-        # resolve since
-        effective_since = since
-        if effective_since is None:
+        # Fix 3: per-scope watermark resolution
+        # global scope
+        global_since = since
+        if global_since is None:
             wm = read_watermark(self.scope.global_dir)
-            if wm:
-                effective_since = wm
-        if effective_since is None:
-            effective_since = ISO_EPOCH
+            global_since = wm if wm else ISO_EPOCH
 
-        now_iso = datetime.now(timezone.utc).isoformat()
+        current_time = now_iso()
 
         new_chunks: list[dict] = []
 
-        # global scope
-        for row in global_store.new_since(effective_since, cap=cap):
+        for row in global_store.new_since(global_since, cap=cap):
             row["scope"] = "global"
             new_chunks.append(row)
 
-        # project overlay
+        # project overlay — uses its own watermark when since is not explicitly given
         if self.scope.project_dir:
+            proj_since = since
+            if proj_since is None:
+                proj_wm = read_watermark(self.scope.project_dir)
+                proj_since = proj_wm if proj_wm else ISO_EPOCH
             proj_store = VectorStore(self.scope.project_dir, dim=1)
-            for row in proj_store.new_since(effective_since, cap=cap):
+            for row in proj_store.new_since(proj_since, cap=cap):
                 row["scope"] = "project"
                 new_chunks.append(row)
 
@@ -147,15 +163,15 @@ class KB:
             total += VectorStore(self.scope.project_dir, dim=1).count()
 
         if advance and new_chunks:
-            write_watermark(self.scope.global_dir, now_iso, total)
+            write_watermark(self.scope.global_dir, current_time, total)
             if self.scope.project_dir:
-                write_watermark(self.scope.project_dir, now_iso, total)
+                write_watermark(self.scope.project_dir, current_time, total)
 
         return {
-            "since": effective_since,
+            "since": global_since,
             "new_chunks": new_chunks,
             "stats": {"new": len(new_chunks), "total": total, "sources": sources},
-            "watermark": now_iso if (advance and new_chunks) else effective_since,
+            "watermark": current_time if (advance and new_chunks) else global_since,
         }
 
     def enrich_report(
@@ -163,11 +179,19 @@ class KB:
         threshold: float = 0.95,
         max_pairs: int = 25,
         max_rows: int = 2000,
+        cross_source_only: bool = True,
     ) -> dict:
         """Near-duplicate / potential-contradiction pairs for agent review.
 
         Gathers vectors from all scopes (global + project overlay), runs pairwise
-        cosine similarity, returns pairs above threshold from different sources.
+        cosine similarity, returns pairs above threshold.
+
+        Args:
+            threshold: minimum cosine similarity (default 0.95).
+            max_pairs: maximum pairs to return (default 25).
+            max_rows: maximum vectors to scan per scope (default 2000).
+            cross_source_only: when True (default), only cross-source pairs are returned.
+                Set False to include same-source pairs — useful for legacy duplicate cleanup.
 
         Returns:
             {pairs: [...], rows_scanned: int, scopes: [...], threshold: float}
@@ -188,7 +212,12 @@ class KB:
                 all_rows.extend(proj_rows)
                 scopes.append("project")
 
-        pairs = near_duplicates(all_rows, threshold=threshold, max_pairs=max_pairs)
+        pairs = near_duplicates(
+            all_rows,
+            threshold=threshold,
+            max_pairs=max_pairs,
+            cross_source_only=cross_source_only,
+        )
 
         return {
             "pairs": pairs,

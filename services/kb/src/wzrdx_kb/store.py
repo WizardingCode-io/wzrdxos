@@ -7,6 +7,7 @@ a single ``chunks`` table. Cross-platform, single-directory, no server.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 
 TABLE = "chunks"
@@ -90,8 +91,16 @@ class VectorStore:
     def new_since(self, since: str, cap: int = 200) -> list[dict]:
         """Rows with added_at > since (ISO string compare): oldest-first, capped.
 
+        Args:
+            since: ISO-8601 timestamp. Raises ValueError if not valid ISO-8601.
+            cap: maximum rows to return.
+
         Returns list of dicts with keys: id, text, source, added_at.
         """
+        try:
+            datetime.fromisoformat(since)
+        except ValueError:
+            raise ValueError("since must be ISO-8601")
         db = self._db()
         if TABLE not in db.table_names():
             return []
