@@ -457,7 +457,7 @@ author these as operational docs first, skills after.
 
 ---
 
-## 7 — Growth (CRO) ✅ defined
+## 7 — Growth (CRO) ✅ defined · 🚀 implemented (phase 1)
 
 **Purpose:** the revenue engine. Owns the commercial machine — pipeline, deals,
 outbound, partnerships — and the path from 25/100 (Diagnostico, Vendas) to the
