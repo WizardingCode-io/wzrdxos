@@ -9,6 +9,8 @@ import { setupCommand } from "./commands/setup.js";
 import { updateCommand } from "./commands/update.js";
 import { runtimesCommand, runtimesInstallCommand } from "./commands/runtimes.js";
 import { pluginsCommand } from "./commands/plugins.js";
+import { installClaudeArtifacts } from "./artifact-install.js";
+import { ui } from "./ui.js";
 
 const program = new Command();
 
@@ -68,6 +70,19 @@ program
   .description("list declared department plugins/MCPs and their adoption status")
   .option("-d, --department <slug>", "filter by department")
   .action((opts) => pluginsCommand({ department: opts.department }));
+
+const install = program
+  .command("install")
+  .description("deploy wzrdxOS artifacts into a runtime");
+install
+  .command("claude", { isDefault: true })
+  .description("deploy agents/skills/workflows into ~/.claude (wzrdx- prefixed)")
+  .action(() => {
+    const r = installClaudeArtifacts();
+    ui.title("wzrdxOS — install claude");
+    ui.ok(`${r.agents} agents · ${r.skills} skills · ${r.workflows} workflows → ~/.claude`);
+    console.log("");
+  });
 
 const skill = program.command("skill").description("manage skills");
 skill

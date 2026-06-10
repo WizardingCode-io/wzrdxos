@@ -14,6 +14,7 @@ import {
 import { detectedRuntimes } from "../runtimes.js";
 import { installRuntimes } from "../runtime-install.js";
 import { ui } from "../ui.js";
+import { installClaudeArtifacts } from "../artifact-install.js";
 
 interface SetupOptions {
   yes?: boolean;
@@ -126,6 +127,11 @@ export async function setupCommand(opts: SetupOptions = {}): Promise<void> {
       ui.item(ui.dim("no runtimes selected."));
     }
   }
+
+  // 8. deploy artifacts into Claude Code (native-first runtime)
+  ui.section("Artifacts");
+  const art = installClaudeArtifacts(root);
+  ui.ok(`deployed ${art.agents} agents · ${art.skills} skills · ${art.workflows} workflows → ~/.claude`);
 
   console.log("");
   ui.ok("setup complete. Run `wzrdx doctor` to verify, then restart your runtime(s) to load the MCP.");
