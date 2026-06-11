@@ -1,0 +1,41 @@
+{
+  "skill_name": "rh:founder-transition",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Não consigo largar nada — faço tudo eu. Sei que preciso de delegar mas quando alguém faz algo a 80% do meu nível já me irrita. O que é que isto diz sobre mim e como mudo?",
+      "expected_output": "A KB-first lookup for the Diagnostico founder-blocker evidence, a blocker identification naming Perfectionism (Blocker A) with three evidence sentences, the 80% reframe applied specifically to this blocker, the Leader vs Manager Insecurity Test scored, and a sequenced 90-day transition plan.",
+      "expectations": [
+        "The skill calls kb_search for the Diagnostico-2026-05 founder-blocker patterns (Estructura 28.4/100, perfectionism, control, indispensability) before starting the coaching — the diagnosis must be grounded in documented evidence, not a generic protocol.",
+        "Blocker A (Perfectionism) is identified as the primary blocker with three evidence sentences: 'reworks others output > 30% of the time', 'says it is faster to do it myself', and the 80% irritation response — all matched to the user's statement.",
+        "The 80% reframe is applied to Perfectionism specifically: 'The standard you are protecting is real. The question is not does this person meet my standard — the question is can I define that standard clearly enough that someone else can meet it without me in the loop?'",
+        "The Leader vs Manager Insecurity Test is run with all six statements rated; the score and sequencing implication are stated (Low/Moderate/High insecurity → systems / hybrid / intensive identity cadence).",
+        "The consequence of inaction is linked to the Diagnostico D1-D180 roadmap: if this is not resolved by D60, the first autonomous hire target of D90 cannot succeed — the cost is made concrete, not abstract."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I feel like the company can't function without me. I haven't taken a full week off in over 2 years. What type of problem is this and what do I do first?",
+      "expected_output": "Blocker C (Indispensability) identification with the five evidence signals checked, the 'being indispensable is a constraint not a compliment' reframe, the Leader vs Manager Insecurity Test, and the explicit handoff sequence routing to admin:buyback-audit first.",
+      "expectations": [
+        "Blocker C (Indispensability) is identified with the five signals checked: '≥5 consecutive days off in >12 months' is confirmed present (2+ years without), and the other signals (client calls to founder's mobile, team does not know answers, no decisions above €200 without founder) are surfaced as questions to diagnose.",
+        "The reframe for Indispensability is applied verbatim: 'Being indispensable today is not a compliment — it is a constraint. Every day you are the only person who can make a decision or answer a question, you are capping the company's growth at the ceiling of your own hours.'",
+        "The Leader vs Manager Insecurity Test is run — given the Indispensability pattern, the score is likely Moderate or High; the sequencing implication is applied (systems + identity work for Moderate; intensive identity cadence for High).",
+        "The explicit handoff sequence is stated: Week 1 — this skill (blocker + reframe + cadence). Week 2 — admin:buyback-audit. Week 3 — first rh:delegation-coach session. This sequence is not optional; it is the prescribed order.",
+        "The decision journal template is produced as the accountability artefact: 5 questions, weekly cadence, private unless shared with an advisor — and the 30-day and 60-day progress memo ingests are scheduled."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Tenho tentado delegar mas continuo a fazer check-ins a toda a hora e a puxar as tarefas de volta quando há pressão. Já tentei três vezes e não funciona. Preciso de ajuda.",
+      "expected_output": "A blocker identification that surfaces the pull-back behaviour as Blocker B (fear of losing control) compounded by deadline pressure, the identity reframe applied, a mentoring cadence calibrated to the test score, and explicit routing to rh:delegation-coach for the practical arm.",
+      "expectations": [
+        "The skill names the pull-back under deadline pressure as the defining Blocker B signal: 'cancels delegation under deadline pressure' is one of the five Blocker B evidence signals, and three confirmatory sentences are produced from the user's statement.",
+        "The consequence of unaddressed Blocker B is linked to the Diagnostico D1-D180 roadmap with a specific milestone at risk — not a generic 'delegation will continue to fail.'",
+        "The 80% reframe for Blocker B is applied: 'Control over outcomes is legitimate. Control over methods is micromanagement. The moment you tell someone how to do their job instead of what done looks like, you have taken back the delegation.'",
+        "The transition action for Blocker B is named explicitly: implement Standards-Not-Presence for all current delegations (from rh:delegation-coach); remove all unscheduled check-ins; schedule only the agreed cadence.",
+        "A mentoring cadence is proposed calibrated to the Leader vs Manager Insecurity Test score — weekly reflection + decision journal + one structured coaching conversation + monthly external advisor session for Moderate insecurity."
+      ]
+    }
+  ]
+}

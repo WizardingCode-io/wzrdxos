@@ -1,0 +1,22 @@
+[
+  { "query": "Quero aparecer quando alguém pergunta ao ChatGPT sobre agências de IA em Portugal.", "should_trigger": true },
+  { "query": "How do we optimise our content to be cited by Perplexity and ChatGPT?", "should_trigger": true },
+  { "query": "O nosso artigo não aparece nos resultados de IA — o que está errado?", "should_trigger": true },
+  { "query": "Precisamos de actualizar o llms.txt do nosso site — como funciona isso?", "should_trigger": true },
+  { "query": "Run a GEO audit on our blog post about process automation.", "should_trigger": true },
+  { "query": "Queremos medir o nosso AI share-of-voice — Citation-as-KPI — como fazemos isso?", "should_trigger": true },
+  { "query": "Our content ranks on page 2 but never appears in AI engine answers. How do we fix the AI ceiling?", "should_trigger": true },
+  { "query": "Precisamos de adicionar schema markup e uma FAQ section para melhorar a citação por IA.", "should_trigger": true },
+  { "query": "Como fazemos o quarterly freshness refresh do conteúdo para não perdermos posição nos motores de IA?", "should_trigger": true },
+  { "query": "Qual a diferença entre GEO e SEO tradicional?", "should_trigger": false },
+  { "query": "Escreve um artigo de blog sobre automação de IA para PMEs.", "should_trigger": false },
+  { "query": "Como estruturamos a nossa estratégia de redes sociais para LinkedIn?", "should_trigger": false },
+  { "query": "Quero criar um hook para o nosso próximo vídeo no Instagram.", "should_trigger": false },
+  { "query": "Qual o melhor keyword tool para Portugal?", "should_trigger": false },
+  { "query": "Explica-me o que é o AEO — Answer Engine Optimisation.", "should_trigger": false },
+  { "query": "Faz um calendário editorial para os próximos 3 meses.", "should_trigger": false },
+  { "query": "Queremos melhorar a velocidade de carregamento do nosso site.", "should_trigger": false },
+  { "query": "Que plataforma de CMS recomendas para o nosso site de conteúdo?", "should_trigger": false },
+  { "query": "Cria um email de newsletter para enviar aos nossos subscritores.", "should_trigger": false },
+  { "query": "Analisa os nossos concorrentes e diz-me quem lidera em SEO no mercado PT.", "should_trigger": false }
+]

@@ -1,0 +1,41 @@
+{
+  "skill_name": "rh:hiring-pipeline",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Queremos abrir uma vaga de Account Manager. São as nossas primeiras 5 contratações que falharam todas — como evitamos repetir o mesmo erro?",
+      "expected_output": "A KB-first lookup surfacing the Diagnostico D21 five-failed-hires postmortem, followed by an explicit postmortem check that maps each failure pattern to the new role, the Interview-to-Learn protocol (8+ practitioners), and a Role Reality Brief before any JD is written.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask targeting the Diagnostico-2026-05 D21 postmortem before taking any action — it does not proceed without surfacing the five failure patterns explicitly.",
+        "The postmortem check names each of the five prior failure patterns (attitude fit, onboarding gap, role clarity, founder readiness, or similar) and states explicitly how the Account Manager hire will avoid each one.",
+        "The response gates JD writing behind the Interview-to-Learn protocol: 8+ practitioner interviews must be run first, and the Role Reality Brief is named as the required output of that step before the JD can be produced.",
+        "The selection criteria rubric weights attitude and values criteria above skills criteria, explicitly referencing the postmortem pattern that shows attitude misfits failing every time.",
+        "The output closes with a kb_ingest call using the required title format 'Hiring — [Role] — [Company] — [YYYY-MM]' and including postmortem tags."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We found a strong candidate for a leadership role — great CV, strong skills. Can we fast-track the hiring process and skip the case study to move faster?",
+      "expected_output": "A firm refusal to skip the case study, citing the postmortem red flag; a structured reminder of the four-stage selection process and the First-Week Leadership Diagnostic requirement for leadership roles; and a Sams 5 Rules hire-slow application.",
+      "expectations": [
+        "The skill explicitly names the red flag from the SKILL.md: 'Skipping the case study — a candidate who cannot do the work in a low-stakes context will not do it in a high-stakes one.'",
+        "The skill applies Sams Rule 1 (hire slow) and states that urgency bias is the #1 cause of bad hires — the strong CV framing is recognised as the urgency trap.",
+        "The First-Week Leadership Diagnostic (Hormozi) is identified as a required step for this leadership role, with the five dimensions (initiative, judgment, cultural fit, communication, learning speed) named.",
+        "The skill references the postmortem: prior failures include at least one pattern of advancing candidates with strong skills but attitude or values misalignment.",
+        "The response redirects to a full Stage 3 case study (paid mini-project, ≤4h) with the debrief live session, and stages 1-4 are restated in order with their exit criteria."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Acabámos de contratar o primeiro colaborador — qual a oferta certa a fazer? Queremos definir salário, marcos de 30/60/90 dias e o período de experiência.",
+      "expected_output": "An offer package structured per Sams 5 Rules with PT market benchmark (deep-research triggered), written 30/60/90-day milestones, an explicit probation checkpoint plan, and a kb_ingest of the offer terms.",
+      "expectations": [
+        "The skill triggers deep-research for the PT market salary benchmark for the role before quoting any figure — it does not guess at compensation.",
+        "Sams 5 Rules are applied: the offer explicitly states 30-day and 60-day milestones written and agreed before signing, and the probation period is not framed as a formality.",
+        "The output includes the autonomy target — what the hire will be able to do independently at the end of onboarding — as a required offer component.",
+        "The offer structure includes compensation (base + variable if applicable), probation checkpoints with explicit actions if milestones are not met, and the values alignment statement.",
+        "A kb_ingest call documents the offer terms, the scored rubric results, and the key lesson from the hiring process, with the postmortem tag if any failure patterns were relevant."
+      ]
+    }
+  ]
+}

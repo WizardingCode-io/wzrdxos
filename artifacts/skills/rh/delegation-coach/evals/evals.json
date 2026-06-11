@@ -1,0 +1,41 @@
+{
+  "skill_name": "rh:delegation-coach",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Quero delegar a gestão dos relatórios semanais de clientes a um colaborador. Mas tenho receio que a qualidade caia. Como faço isto correctamente?",
+      "expected_output": "A Buyback Rate calculation qualifying the task for delegation, a No-How-To delegation brief (outcome + standard, method-free), a decision budget ladder, a Standards-Not-Presence cadence, and a delegation card — with the identity reframe applied to the quality-fear blocker.",
+      "expectations": [
+        "The skill calculates the Buyback Rate (target annual revenue ÷ 2,000 hours) and compares the replacement cost of the task to 25% of the Buyback Rate — the qualification verdict (qualified or exception) is stated explicitly.",
+        "The 92% Rule is applied: what percentage of the task can be delegated vs. retained as a review checkpoint — the output states the split explicitly and does not guess.",
+        "The No-How-To delegation brief is produced: an outcome statement ('the task is complete when [observable result] and [next step] can proceed without coming back to me') and a quality standard (2-3 measurable criteria) — without any method instructions.",
+        "The identity reframe is applied to the fear-of-quality-drop: 'If you cannot define the standard in writing, the problem is not the delegate — it is the standard.' The belief is named before the reframe is applied.",
+        "The delegation card is produced as a one-page artefact with all required sections: owner, Buyback Rate check, outcome, quality standard, decision budget ladder (€50/€200/€500/>€500), and Standards-Not-Presence cadence (week 1, day 30, day 90)."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I delegated an invoicing process two weeks ago but I keep checking in every day to see how it's going. My team member is getting frustrated. What am I doing wrong?",
+      "expected_output": "A diagnosis of the Blocker B (fear of losing control) pattern, the Standards-Not-Presence reframe applied to the daily check-in behaviour, and a revised cadence that observes output not process — with the delegation card's quality standard section as the reference.",
+      "expectations": [
+        "The skill names the anti-pattern explicitly: checking in on delegated tasks daily (unsolicited) is a Blocker B signal — fear of losing control — and is listed as a red flag in SKILL.md ('doing check-ins that observe process instead of output').",
+        "The Standards-Not-Presence principle is applied: the check-in must ask 'Did the output meet the standard?' not 'How did you do it?' — the three questions the founder should ask and the three questions they should NOT ask are listed.",
+        "A revised cadence is produced: end-of-week-1 pulse (standard met? blockers?), day-30 review, day-90 autonomy check — with the daily check-ins explicitly removed.",
+        "The decision budget ladder is reviewed: if the invoicing task generates decisions the delegate cannot make autonomously (e.g. a client dispute > €200), the ladder is recalibrated or stated explicitly — the delegate needs to know their boundaries to stop escalating.",
+        "A kb_ingest documents the delegation card update and the coaching notes from the identity reframe session."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Queremos delegar a gestão da nossa conta de LinkedIn ao novo colaborador. Mas não queremos que publique sem revisão — como estruturamos isto?",
+      "expected_output": "A delegation brief that distinguishes the delegated task (content research, drafting) from the retained review checkpoint, with an explicit outcome statement, quality standard, and a delegation card that names the review step as part of the standard — not as micromanagement.",
+      "expectations": [
+        "The skill applies the 92% Rule and identifies the retained 20-40% (founder review before publish) as a legitimate review checkpoint, not a failure of delegation — this is documented explicitly in the delegation card.",
+        "The outcome statement is drafted as: 'The LinkedIn post is ready for review by [day/time], meets the brand voice standard, and requires no more than 15 minutes of founder editing before publishing.'",
+        "The quality standard includes measurable criteria: e.g. post length, brand voice alignment (reference to verbal identity doc if available), inclusion of a hook from the hook-viral-system, no proofreading errors.",
+        "The decision budget ladder is calibrated to the LinkedIn context: the delegate can decide on post topics and timing; the founder gate applies only to posts making a public claim on behalf of the company or referencing a client.",
+        "The Standards-Not-Presence cadence for this task is weekly: review the draft output (the posts prepared for the week), not the daily process of how the delegate researches or writes."
+      ]
+    }
+  ]
+}

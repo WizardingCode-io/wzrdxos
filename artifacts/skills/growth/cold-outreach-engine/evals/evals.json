@@ -1,0 +1,41 @@
+{
+  "skill_name": "growth:cold-outreach-engine",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "O nosso pipeline está vazio e precisamos de gerar leads rapidamente. Nunca fizemos outbound estruturado. Por onde começamos?",
+      "expected_output": "A KB-first lookup for the Diagnostico Vendas 25/100 and pipeline state, the Cold-First Microwave principle applied (design cold motion first), ICP list-building with GDPR compliance notes, a shotgun lane email template and cadence, and a sniper lane Loom structure.",
+      "expectations": [
+        "The skill calls kb_search for the Diagnostico-2026-05 Vendas 25/100 and the current pipeline state before designing the outbound motion — the coverage gap is computed to size the required outreach volume.",
+        "The Cold-First Microwave principle is explicitly applied and stated: 'design the cold motion first, then warm it up — never defer outbound because inbound is coming. Outbound is the floor; inbound is the ceiling.'",
+        "The ICP definition is produced with all required attributes: industry/vertical, company size, role/title (pain feeler vs. contract signer), trigger event, geography (PT-first), and explicit exclusion criteria — without a qualified ICP, the list is spam.",
+        "The shotgun lane email template is produced following the Suby scaffold (5-7 sentences, specific trigger reason, specific result for their vertical, soft ask for a 15-minute call), the 4-touch cadence is specified, and the sender reputation setup checklist is included (domain alias, warm-up schedule, SPF/DKIM/DMARC).",
+        "The GDPR compliance floor is explicitly addressed: legitimate interest basis per contact, unsubscribe mechanism in every email, no purchased scraped lists — and a note that legal review for the specific setup is the founder's responsibility."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We've been running cold emails for 3 weeks. Open rate is 22%, reply rate is 0.6%, and we're booking almost no meetings. What's wrong?",
+      "expected_output": "A metrics diagnosis identifying the open rate as a subject line problem (< 30% threshold) and the reply rate as a copy or list quality problem (< 1% threshold), specific diagnostic actions, and at minimum 3 new subject lines and a revised email template.",
+      "expectations": [
+        "The metrics diagnostic is run against the stated targets: open rate 22% < 30% threshold = 'subject line problem' alert; reply rate 0.6% < 1% threshold = 'copy or list quality problem' alert — both are in alert territory and both are named.",
+        "The diagnostic prescription is applied: 'If any metric is in alert territory for two consecutive weeks, pause the lane and diagnose before continuing' — after 3 weeks in alert, the pause recommendation is made explicitly.",
+        "At least 3 new subject line variants are produced (using the hook-viral-system types for subject line generation, as referenced in SKILL.md §7), each ≤ 7 words with the hook in the first 3 words.",
+        "A revised email template is produced: shorter (5-7 sentences), one specific result for the ICP's vertical, the trigger reason for contacting this specific prospect, and a soft ask (not a sales pitch in the first email).",
+        "The common fixes for meeting-booked alert are checked: the booking link is confirmed as a direct calendar link (not 'let me know your availability'), the CTA is a single action, and the speed-to-lead three-fix is confirmed operational."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We want to reach 5 dream clients (whale accounts). Should we use the same cold email sequence as our regular outreach or do something different?",
+      "expected_output": "A clear distinction between the shotgun lane (volume, same sequence) and the sniper lane (personalised Loom, 5-minute research pass) for whale accounts; the Martell parallel outreach principle applied (5-10 whales simultaneously); and routing to dream-100-partnerships for the warm-up before any cold touch.",
+      "expectations": [
+        "The skill makes the clear distinction: whale accounts must use the sniper lane (personalised Loom + 5-minute research pass), not the shotgun lane — 'One sniper touch is worth 50 shotgun emails for the right account.'",
+        "The 5-minute research pass is specified for each whale: LinkedIn profile (recent posts, job change), company website (recent news), their own content (podcast/newsletter/webinar), and Google for quoted opinions — with the strict 5-minute cap ('any more and the ROI breaks down at volume').",
+        "The Loom structure is provided: Frame 0 screen share of their website/LinkedIn, 0-10s opening with specific observation, 10-40s case study with ICP profile + result + timeframe, 40-60s CTA with booking link — max 90 seconds.",
+        "The Martell parallel outreach principle is applied: run 5-10 whale relationships simultaneously so no single 'no' collapses the pipeline; the 5 whale accounts are explicitly confirmed as within the operational limit (5-10).",
+        "The skill routes unresponsive whales after 4 touches to the Dream 100 warm-up sequence (growth:dream-100-partnerships) — the sniper cadence is not the end; the warm-up sequence continues the relationship without cold-outreach framing."
+      ]
+    }
+  ]
+}

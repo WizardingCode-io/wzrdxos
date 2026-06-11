@@ -1,0 +1,41 @@
+{
+  "skill_name": "rh:comp-ladder",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Queremos definir os salários para a equipa antes da próxima contratação. Temos a sensação de que estamos a pagar abaixo do mercado — como confirmamos isso e o que fazemos a seguir?",
+      "expected_output": "A KB-first lookup pulling the Diagnostico Cultura 25/100 and 5-failed-hires data, a talent-debt diagnostic with the 6-signal table scored against the company's evidence, and a PT market benchmark triggered via deep-research per role — before any salary bands are produced.",
+      "expectations": [
+        "The skill calls kb_search for the Diagnostico-2026-05 Cultura 25/100 baseline and the five failed hires postmortem before starting the talent-debt audit — specifically checking whether any prior hiring failure had a salary or career-level dimension.",
+        "The talent-debt diagnostic table is produced with all six signals scored against available evidence; the interpretation threshold (0-1 / 2-3 / 4+ signals) is applied and the result is named explicitly.",
+        "deep-research is triggered for PT market salary benchmarks per role (P25 / P50 / P75), with the benchmark rule stated: target P50-P75 to attract top-third candidates.",
+        "The Talent Levels Ladder is adapted to the company's current roles (4-5 tiers only for roles needed in the next 24 months), with each tier's decision budget threshold (€50 / €200 / €500 / €2,000 Fix-It ladder) explicitly stated.",
+        "The output closes with a kb_ingest call using title 'Compensation Ladder — <Company> — <YYYY-MM>' and the required tags: remuneração, rh, talent-levels, comp-ladder, mercado-pt."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We want to add a results participation component for our senior team members. What structure makes sense and how do we know if it will actually retain them?",
+      "expected_output": "The three results participation options (revenue sharing, OKR bonus pool, phantom equity) compared against the company's revenue stage, with a stress-test showing at what revenue level participation becomes a meaningful retention amount (>10% of annual base).",
+      "expectations": [
+        "The skill calls kb_search for the company's current MRR/revenue target (Diagnostico €83K/month threshold) and team composition before recommending a participation structure.",
+        "All three options (A — revenue sharing, B — OKR bonus pool, C — phantom equity / profit participation) are presented with explicit guidance on which is appropriate at the current company stage.",
+        "The stress-test is run: at the current or projected revenue, what is the participation payout in euros? If it is below 10% of annual base salary, it is named as 'a promise, not a retention mechanism.'",
+        "The skill identifies which tiers (Tier 3+) are eligible for results participation, with the specific role mapping to tier numbers and the financial terms for each eligible role.",
+        "The comp framework memo is produced as the compiled artefact with the results participation section completed, and a kb_ingest call closes the session."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Os melhores candidatos que entrevistámos nas últimas contratações recusaram a oferta, citando o salário. Qual é o problema e como resolvemos antes de abrirmos a próxima vaga?",
+      "expected_output": "A talent-debt diagnosis concluding with a severity score, a PT market gap table showing current salary vs. P50/P75, and an immediate-action recommendation (salary adjustment needed, named role, amount, timeline) before opening the next role.",
+      "expectations": [
+        "The skill identifies the 'best candidates decline at offer stage citing compensation' signal from the talent-debt diagnostic as a confirmed signal — scoring it as present and noting it is the most direct evidence of talent debt.",
+        "The six-signal talent-debt table is completed; a score of 2+ signals triggers a 'compensation review needed before next hire' verdict; the verdict is stated unambiguously.",
+        "The PT market benchmark is triggered via deep-research for the specific role(s) where candidates declined, producing the P25/P50/P75 table with the gap to the company's current compensation level.",
+        "The 'Immediate action' section of the comp framework memo names a specific salary adjustment (role, amount, timeline) — not a generic recommendation to 'pay more market rate.'",
+        "The skill explicitly flags the red flag: 'we pay what we can afford is not a comp strategy, it is a talent-debt factory' — this framing is present in the output."
+      ]
+    }
+  ]
+}

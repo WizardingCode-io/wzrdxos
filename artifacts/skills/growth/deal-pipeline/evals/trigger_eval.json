@@ -1,0 +1,22 @@
+[
+  { "query": "Quero configurar o HubSpot para gerir o nosso pipeline de vendas — por onde começo?", "should_trigger": true },
+  { "query": "Precisamos de fazer a revisão semanal do pipeline antes da reunião de sexta.", "should_trigger": true },
+  { "query": "Qual é o nosso weighted forecast para este mês — best, likely e worst?", "should_trigger": true },
+  { "query": "O pipeline está abaixo de 2× o target — o que fazemos imediatamente?", "should_trigger": true },
+  { "query": "We need to set up the 5 commercial KPIs from the Diagnostico in our CRM.", "should_trigger": true },
+  { "query": "Quantos leads precisamos de gerar para fechar o gap de cobertura do pipeline?", "should_trigger": true },
+  { "query": "Temos um deal parado em negociação há 45 dias — o que fazemos com ele no pipeline?", "should_trigger": true },
+  { "query": "Run the pipeline coverage gap analysis and sourcing plan for this week.", "should_trigger": true },
+  { "query": "Como configuramos os stages do CRM com os exit criteria correctos?", "should_trigger": true },
+  { "query": "Fecha-me este deal — o cliente está a hesitar no preço.", "should_trigger": false },
+  { "query": "Como faço uma proposta comercial convincente para um prospect que pediu orçamento?", "should_trigger": false },
+  { "query": "Qual a melhor forma de estruturar a nossa estratégia de outbound para gerar mais leads?", "should_trigger": false },
+  { "query": "Quero criar uma sequência de emails frios para prospects no sector da saúde.", "should_trigger": false },
+  { "query": "O que é um CRM e para que serve?", "should_trigger": false },
+  { "query": "Como faço o follow-up com um cliente que pediu para pensar?", "should_trigger": false },
+  { "query": "Qual o melhor software de CRM para uma startup portuguesa?", "should_trigger": false },
+  { "query": "Preciso de preparar uma apresentação comercial para um potencial cliente grande.", "should_trigger": false },
+  { "query": "Como calculo o nosso customer acquisition cost?", "should_trigger": false },
+  { "query": "Quero criar um Dashboard financeiro para acompanhar as métricas mensais.", "should_trigger": false },
+  { "query": "Como estruturo o nosso programa de parcerias com referral partners?", "should_trigger": false }
+]

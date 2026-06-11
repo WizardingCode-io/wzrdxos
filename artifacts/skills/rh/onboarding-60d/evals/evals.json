@@ -1,0 +1,41 @@
+{
+  "skill_name": "rh:onboarding-60d",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "O nosso primeiro colaborador começa para a semana. Ainda não temos um plano de onboarding. Precisamos de um para os primeiros 60 dias — o que deve incluir?",
+      "expected_output": "A KB-first lookup for prior onboarding records and the five-failed-hires postmortem (including any onboarding-gap failures), a complete 60-day plan with phase headers (observe, pair, supervised, autonomous), a success definition with measurable outcomes, and the CHRO+COO coordination plan.",
+      "expectations": [
+        "The skill calls kb_search for prior onboarding plans and the Diagnostico D21 five-failed-hires postmortem specifically checking whether any failure was attributable to onboarding gaps — these are surfaced explicitly before the plan is produced.",
+        "The four-phase structure is produced in order and cannot be skipped: Phase 1 (Week 1 — Observe), Phase 2 (Week 2 — Do together), Phase 3 (Week 3 — Supervised execution), Phase 4 (Weeks 4-8 — Autonomous + weekly checkpoints) — with the rationale that each phase builds the foundation for the next.",
+        "The success definition is written before the plan as measurable outcomes: 'can execute [core process] without supervision', 'owns [metric/KPI] and reports it weekly', '90%+ quality bar on [case or scenario]' — not a vague 'settled in well.'",
+        "The CHRO and COO coordination is made explicit: CHRO owns people/culture side (attitude, coaching, feedback, values alignment); COO owns capacity/process side (task assignment, SOPs, KPI tracking); weekly checkpoint between them is mandatory.",
+        "The three-repetition rule is explained: a correction is not learned until the behaviour occurs correctly three consecutive times — and a correction log template is produced as a tracking artefact."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "The new hire is in week 3 of onboarding and keeps repeating the same mistake in client reports despite being corrected twice. What do we do?",
+      "expected_output": "Application of the interrupt-correct-repeat loop with the three-repetition rule explicitly invoked — the correction resets the counter, the behaviour is addressed immediately with one specific correction, and the repeat step is required before the session ends.",
+      "expectations": [
+        "The interrupt-correct-repeat loop is applied in the correct three-step order: Interrupt (stop the behaviour in the moment), Correct (state the standard, one correction only per session), Repeat (ask them to demonstrate the correct behaviour immediately).",
+        "The three-repetition rule is invoked explicitly: two correct occurrences does not mean learned — the behaviour is learned only when it occurs correctly three consecutive times without prompting; the counter has not closed yet.",
+        "The red flag is named: 'Every unchallenged deviation sets a new standard' — the twice-corrected pattern without a Repeat step means the loop was run incompletely, and the correction was advice, not coaching.",
+        "The skill distinguishes feedback format: 'The client brief missed the budget constraint from the brief — include it next time' (specific, behavioural) vs. 'you need to be more careful' (generic, not actionable) — the specific format is modelled.",
+        "The 30-day autonomy check is scheduled: if any dimension scores ≤ 2 at the Leadership Diagnostic mid-phase review, a coaching plan with explicit milestones and a 'resolve or exit' decision by week 8 must be produced."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Can we skip week 1 shadowing since our new hire has done this kind of work before? They want to start executing straight away.",
+      "expected_output": "A firm refusal to skip Phase 1 with the SKILL.md red flag cited, plus a modified Phase 1 that is compressed (2 days instead of 5) for an experienced hire — with the rationale that observe phase establishes cultural fit signals and tool/system familiarity, not just skill transfer.",
+      "expectations": [
+        "The skill names the red flag explicitly: 'Skipping phases (going straight to autonomous) — the observe → pair → supervised → autonomous sequence is not optional; each phase builds the foundation for the next.'",
+        "The skill acknowledges the experienced hire context and proposes a proportional adaptation: Phase 1 can be compressed to 2 days for an experienced practitioner, but it cannot be eliminated — Day 1 culture brief, tool access, and CHRO first impression diagnostic are always required.",
+        "The rationale for Phase 1 is stated: it is not primarily about skill transfer — it is about attitude, curiosity, and cultural fit signals that the CHRO observes and documents before giving any feedback. This observation window cannot be replaced by assumed competence.",
+        "The three-repetition rule still applies from Phase 2 regardless of prior experience — prior expertise does not guarantee that the behaviour meets this company's quality standard on the first occurrence.",
+        "The autonomy target and success definition are tightened for an experienced hire: D+30 instead of D+60 for full autonomy may be achievable, but it must still be declared against measurable criteria — not assumed."
+      ]
+    }
+  ]
+}
