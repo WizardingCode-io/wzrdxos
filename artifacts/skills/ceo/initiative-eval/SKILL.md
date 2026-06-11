@@ -25,9 +25,25 @@ adapt depth to the initiative's size.
    competitor intel in the KB (e.g. AIOX watch) says.
 6. **Memo.** One page: recommendation (pursue / drop / investigate), the three
    strongest arguments for and against, open questions with owners. Feed it into
-   `ceo:balanced-decision`. Ingest the memo into the KB.
+   `ceo:balanced-decision`. Ingest the memo into the KB via `kb_ingest`:
+
+```
+kb_ingest("<memo text>", source="memos/YYYY-MM-DD-initiative-eval-<slug>.md", target="global")
+```
 
 ## Output contract
 
 The memo always ends with: `Recommendation:` one of pursue / drop / investigate,
 plus the single most decision-relevant unknown.
+
+## Red flags
+
+- **Evaluating without KB-first.** Prior initiative evals and the company profile
+  are in the KB; duplicating analysis already documented is wasted effort.
+- **Recommendation without a SWOT.** Pursue / drop / investigate must rest on
+  evidence, not intuition. An unsupported recommendation is an opinion, not a memo.
+- **Skipping competition.** Initiatives fail at the market, not in the spreadsheet.
+  Missing the competitive landscape invalidates the viability step.
+- **Not ingesting the memo.** The evaluation is a knowledge event; feeding it to
+  `ceo:balanced-decision` without recording it means the decision record is
+  incomplete and cannot compound into future evaluations.
