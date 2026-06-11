@@ -601,7 +601,9 @@ The vault itself (4,200+ notes — Topics/Frameworks/Personas/KB Areas),
 `docs/kb-design.md`, gbrain architecture notes.
 
 **Known gaps:**
-- Skill-promotion and agent-evolution loops are phase 2 (rule 6 only partially active).
+- Skill-promotion and agent-evolution loops are now implemented as PR-gated process
+  skills (`knowledge:skill-promotion`, `knowledge:agent-evolution`) — rule 6 is active
+  in its v1, human-reviewed form.
 - Pre-existing duplicate chunks ingested before the idempotent upsert may need a
   one-time cleanup (first `kb-enrich` run flags them).
 - Obsidian-fallback polish pending (see `docs/kb-design.md`).
