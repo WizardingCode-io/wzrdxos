@@ -1,0 +1,41 @@
+{
+  "skill_name": "ops:roadmap-diagnose",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Onde estamos operacionalmente na WizardingCode? Preciso de um diagnóstico completo e um plano de 90 dias.",
+      "expected_output": "A 5-area scored diagnostic (Processos/Métricas/Equipa/Automação/Cultura) anchored on the Diagnostico-2026-05 baseline (28.4/100), a weighted maturity phase classification, the root constraint named, and a 3-phase 90-day roadmap (Documentar → Medir → Delegar) with milestones, owners, and success criteria.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask for the Diagnostico-2026-05 documents (6 docs, 25 KPIs, baselines, 90-day roadmap), the company profile, and prior diagnostics in the KB — the existing 28.4/100 baseline is used, not re-invented.",
+        "All 5 areas are scored 0-100 with at least one observable fact as evidence per score; the overall weighted maturity score is calculated (Processos ×30%, Métricas ×25%, Equipa ×25%, Automação ×10%, Cultura ×10%) and the maturity phase is named (Fase Sobrevivência / Organização / Escala / Optimização).",
+        "The root constraint is identified as a single named pattern with evidence — e.g. 'extreme centralisation: founder does everything; no delegation; no docs' — not a list of problems.",
+        "The 90-day roadmap follows the Documentar → Medir → Delegar structure with specific milestones per phase, each with an owner, target date, and success criterion.",
+        "The priority matrix (2×2 Impact × Effort) is produced with at least 3 named quick wins (high impact, low effort) with owners, and the diagnostic is ingested via kb_ingest."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "O que melhorar primeiro — processos ou métricas? A equipa está a fazer as coisas mas não sabemos se estamos a crescer.",
+      "expected_output": "A scoped diagnostic focusing on the Processos and Métricas areas, with the root constraint identified, a Phase 1 quick-win plan, and a clear sequencing recommendation (which to fix first and why).",
+      "expectations": [
+        "The skill calls kb_search for the Diagnostico-2026-05 data before diagnosing — the existing area scores are used to inform the sequencing recommendation.",
+        "The response applies the root constraint identification from Step 4 — surfacing the named pattern from the Diagnostico ('invisible metrics: decisions by gut; no weekly KPI review') as the primary constraint if metrics are unknown.",
+        "The sequencing recommendation follows the Documentar → Medir → Delegar logic: you cannot measure what is not documented; processes must be mapped before metrics can be set — Processos comes first.",
+        "At least 3 quick wins are named for the Processos phase (Phase 1, D1-D30): specific POPs to write, specific processes to map, with owners.",
+        "The diagnostic output is ingested via kb_ingest with the title format 'Diagnostico Operacional — WizardingCode — YYYY-MM'."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We just finished our Phase 1 (Documentar). We have 5 POPs written and the Friday KPI ritual running for 3 weeks. What comes next in our 90-day roadmap?",
+      "expected_output": "A Phase 2 (Medir) plan: 4 consecutive weeks of dashboard runs, the top 3 automation candidates identified (highest ROI, lowest complexity), and the first delegation test scoped.",
+      "expectations": [
+        "The skill calls kb_search for the prior diagnostic and the Phase 1 completion memo in the KB before advancing the roadmap — it picks up from the existing milestone, not from scratch.",
+        "Phase 2 milestones are concrete: 4 consecutive dashboard runs (KPI definitions tuned if needed), top 3 automation candidates scored using the F×T×E method with handoff to ops:automation-discovery, and one documented process delegated to a team member with a success criterion.",
+        "The skill explicitly checks that Phase 1 is complete before advancing: '5 POPs written + Friday ritual active for 3 weeks' satisfies the Phase 1 completion criteria — this gate is acknowledged.",
+        "The red flag 'jumping to Phase 3 (Delegar) before Phase 1 is complete' is implicitly enforced by the sequencing — the skill does not skip to Phase 3 even if the user asks.",
+        "Phase 2 milestones are ingested via kb_ingest to update the roadmap document, keeping the KB as the single source of truth."
+      ]
+    }
+  ]
+}

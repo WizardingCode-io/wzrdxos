@@ -1,0 +1,41 @@
+{
+  "skill_name": "ops:automation-discovery",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Quero perceber o que posso automatizar na WizardingCode. Gasto muito tempo a enviar actualizações de projecto por email, a criar facturas manualmente e a publicar conteúdo no LinkedIn. Por onde começo?",
+      "expected_output": "A workflow inventory of at least 20 flows across all departments, a scored backlog using the F×T×E composite scoring, tool selection per flow (Zapier/n8n/AI agent), ROI estimation per flow, and the backlog ordered by composite score.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask for KB Area 10 (Operações & Automação), the Diagnostico-2026-05 operational bottlenecks, and any prior automation backlog in the KB before building the inventory.",
+        "The workflow inventory reaches at least 20 flows across all department categories (lead intake, reporting, client communication, internal ops, content/marketing, finance admin, HR/people) — not just the 3 mentioned by the user.",
+        "Every workflow in the inventory is scored using the composite formula F×T×E (with each dimension explicitly rated 1-5 and the composite calculated) — not gut-feeling priority.",
+        "Tool selection (Zapier / n8n / AI agent) is applied per flow with the tier logic from Step 4: Zapier for simple 2-3 app trigger-action, n8n for multi-branch flows, AI agent only when reasoning is required.",
+        "The backlog is ordered by composite score descending, divided into priority tiers (≥60, 30-59, <30), with ROI estimated per flow (annual time saved, value saved, payback period) and a named owner and by-when per item."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We want to automate our weekly KPI report: every Friday at 17h, pull data from our spreadsheet, generate a summary, and send it to the CEO. Is this n8n or an AI agent?",
+      "expected_output": "A hybrid n8n + AI agent recommendation for this flow, with n8n handling the scheduling/data-pull orchestration and an AI agent (wzrdxOS skill) handling the synthesis/drafting step, plus an ROI estimate.",
+      "expectations": [
+        "The skill calls kb_search for any prior automation decisions and the Diagnostico-2026-05 data on the Friday 17h ritual before recommending.",
+        "The flow is scored using F×T×E: weekly (F=2), ~30 min manual (T=4), medium error risk (E=3) = composite 24 — placed in priority tier 2.",
+        "The recommendation correctly identifies this as a Tier 2/3 hybrid: n8n for the scheduling trigger, data pull, and routing orchestration; AI agent (wzrdxOS skill, specifically knowledge:daily-digest or ops:kpi-system) for the synthesis step — with the explicit rationale that AI agents are reserved for reasoning tasks.",
+        "The ROI is estimated: time saved per week × 52 × founder/team hourly rate, minus implementation cost, yielding a payback period.",
+        "The handoff to the n8n-flow or AI agent skill is named, and the output is ingested via kb_ingest."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Já temos o Zapier a fazer o intake de leads (Typeform → HubSpot). Queremos automatizar também a qualificação desses leads contra o nosso ICP. Devo usar Zapier para isso também?",
+      "expected_output": "A recommendation to escalate from Zapier to an AI agent (Tier 3) for lead qualification, with the rationale that qualification requires reasoning not achievable with simple trigger-action, and an integration design connecting the existing Zapier flow to the AI agent.",
+      "expectations": [
+        "The skill calls kb_search for the existing automation backlog and the Diagnostico data before evaluating the qualification step.",
+        "The skill applies the tier selection logic: Zapier (Tier 1) is correct for the Typeform→HubSpot trigger-action, but qualification against ICP requires reasoning — flagging this as an AI agent (Tier 3) task and explicitly stating 'do not use an AI agent for deterministic tasks' as the reverse principle.",
+        "The integration design connects the existing Zapier flow to the AI agent: Zapier webhook → AI agent (wzrdxOS growth skill or custom agent) → HubSpot update → CRO notification.",
+        "The ROI for the qualification automation is estimated independently, with the AI agent token cost factored into the payback calculation.",
+        "A handoff to eng:ai-agent-architecture is named for the agent design step, and the backlog item is ingested via kb_ingest."
+      ]
+    }
+  ]
+}

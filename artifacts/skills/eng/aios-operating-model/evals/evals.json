@@ -1,0 +1,41 @@
+{
+  "skill_name": "eng:aios-operating-model",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Quero estruturar o AI OS da WizardingCode do zero. Temos o Claude Code como runtime principal, a KB em Graphify+LanceDB+Obsidian, e precisamos de definir os agentes por departamento. Produz o blueprint completo.",
+      "expected_output": "A complete AIOS blueprint with all 5 layers (Foundation, Intelligence, Agents, Workflows, Interface) populated for WizardingCode, an agent roster provisioned via the /new-employee pattern, and a deployment sequence activating layers in order.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask for the 'AI Operating Systems' topic, 'Claude Managed Agents Architecture', existing agent manifests in artifacts/agents/, and the company profile before producing the blueprint.",
+        "All 5 Liam Ottley layers are explicitly populated with WizardingCode-specific content — not generic descriptions. Layer 1 names the Graphify+LanceDB+Obsidian KB stack; Layer 3 produces a named agent roster with tier, model, and tools per agent.",
+        "Every agent in the roster is provisioned using the /new-employee pattern with all 5 elements: role brief, tool list, memory store, reporting cadence, and escalation path.",
+        "The deployment sequence explicitly states Layer 1 before Layer 2 before Layer 3 before Layer 4 before Layer 5, with a rationale for the ordering.",
+        "The blueprint is ingested via kb_ingest and a copy is flagged for docs/aios-blueprint.md as the CTO-owned technical source of truth."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We're onboarding a new managed agent — a Growth agent that should qualify inbound leads and route them to the CRO. Walk me through the /new-employee provisioning and where this agent fits in the AIOS layers.",
+      "expected_output": "A /new-employee provisioning for the Growth agent with all 5 elements, placement in AIOS Layer 3 (Agents) with tier designation, a least-privilege tool list, and an agent.md file structure for artifacts/agents/growth-qualifier/.",
+      "expectations": [
+        "The skill calls kb_search for the AIOS blueprint, existing agent manifests, and the company profile before provisioning.",
+        "The /new-employee pattern is applied in full: role brief (what it does and does NOT do), tool list (minimum viable, every tool justified), memory store (KB scope), reporting cadence (KB ingest path), and escalation path to the CRO or CEO gate.",
+        "The agent is placed in the correct tier in the AIOS Layer 3 roster — specialist tier for a growth/sales function.",
+        "The skill explicitly flags that activating the agent before Layer 1 (KB operational) is a red flag and states the dependency.",
+        "An agent.md file path is proposed (artifacts/agents/growth-qualifier/agent.md) and a kb_ingest call closes the output with source prefix memos/."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Faz uma auditoria do nosso AI OS atual: temos o Claude Code a correr skills, mas não temos Layer 4 (Workflows) configurado e o Layer 5 (Interface) é só o CLI. O que está em falta e qual o próximo passo?",
+      "expected_output": "An AIOS audit identifying the Layer 4 and Layer 5 gaps, surfacing the known gaps list with owner and resolution path, and producing a deployment sequence to close the gaps without disrupting existing layers.",
+      "expectations": [
+        "The skill calls kb_search for prior AIOS blueprints and the current agent manifests in artifacts/agents/ before auditing — it does not re-design what is already decided.",
+        "Layer 4 (Workflows) gap is diagnosed specifically: no automated flows, no trigger types configured (on-demand / scheduled / event-driven), no workflow artifacts in artifacts/workflows/.",
+        "The known gaps list is produced with at least one named owner per gap and a resolution path, matching the output contract's 'Known gaps list' requirement.",
+        "The deployment sequence for closing the gaps respects the ordering rule (earlier layers stable before later ones) — Layer 4 after Layer 3 is confirmed stable.",
+        "The response concludes with a kb_ingest call and a note to update docs/aios-blueprint.md."
+      ]
+    }
+  ]
+}

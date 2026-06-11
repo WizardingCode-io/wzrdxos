@@ -1,0 +1,41 @@
+{
+  "skill_name": "fin:unit-economics-audit",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Estamos a ganhar dinheiro com os nossos serviços de implementação de AI agents? Cobramos €4.000 por projecto, o projecto leva em média 40h de trabalho a €50/h carregado, e temos 3 clientes novos por mês com um CAC de €600.",
+      "expected_output": "A fully-loaded per-stream P&L for the AI agent implementation service, the CAC/LTV/Payback Triangle diagnostic, the FilterBuy GP/CAC sanity check, vanity vs real margin comparison, and a Keep/Fix/Kill verdict with rationale.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask for prior unit-economics audits, the Diagnostico-2026-05 revenue breakdown, and the CAC/LTV/Payback Triangle framework (Sabri Suby), FilterBuy diagnostic, and Alex Hormozi LTV:CAC ≥ 3:1 threshold before computing.",
+        "The fully-loaded per-stream P&L is computed: revenue €4.000, COGS = 40h × €50 = €2.000, gross profit = €2.000, gross margin = 50% (at the services threshold boundary); CAC = €600, GP/CAC = €2.000/€600 = 3.3x (FilterBuy: recovering on first transaction); payback = €600/€2.000 = 0.3 months (project stream ≤ 3m → Green).",
+        "The Triangle diagnostic is applied per stream: LTV:CAC ratio computed from gross profit per client × retention years ÷ CAC — if retention data is unavailable, the skill requests it before computing LTV:CAC, rather than assuming.",
+        "The FilterBuy sanity check is applied explicitly: 'Gross profit on first transaction (€2.000) ≥ CAC (€600)?' → Yes → 'recovering — healthy' verdict stated.",
+        "The Keep/Fix/Kill verdict table is produced: this stream appears to be a 'Keep' based on the data provided, with the specific conditions for it to become a 'Fix' (e.g. if margin drops below 50% due to scope creep) — the audit is ingested via kb_ingest."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We have two revenue streams: a monthly retainer at €800/month with 85% retention, and one-off projects at €5.000 per project. Which stream is actually more profitable?",
+      "expected_output": "A side-by-side fully-loaded P&L for both streams, the Triangle diagnostic per stream, the vanity vs real margin comparison highlighting which stream appears profitable on vanity margin but may differ on fully-loaded margin, and a Keep/Fix/Kill verdict per stream.",
+      "expectations": [
+        "The skill calls kb_search for the company profile (both streams' cost structure) and any prior financial data in the KB before computing — it does not invent cost figures.",
+        "Both streams are computed with fully-loaded P&L: the retainer stream uses the LTV formula (avg monthly gross profit ÷ monthly churn rate = avg monthly gross profit ÷ (1-0.85)/month) to derive LTV; the project stream uses the CAC ÷ gross profit per transaction formula for payback.",
+        "The vanity vs real margin table is produced for both streams — if overhead allocation differs (e.g. retainer clients require more ongoing support overhead), the difference is flagged and quantified.",
+        "The LTV:CAC ≥ 3:1 threshold (Alex Hormozi) is applied per stream and the status (Green/Amber/Red) is stated with the actual ratio.",
+        "The verdict table names Keep/Fix/Kill per stream with rationale, and the audit is ingested via kb_ingest with the source prefix 'unit-economics' and tags: unit-economics, financeiro, margem, cac, ltv, wizardingcode."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "A nossa maior fonte de receita (consultoria enterprise, €150K/ano, 1 cliente) representa 60% das nossas receitas totais. Isso é um problema?",
+      "expected_output": "A concentration risk flag (60% > 50% threshold = Amber), a unit-economics audit of the enterprise consulting stream, the vanity vs real margin comparison, and a verdict that keeps the stream but flags the concentration as a structural risk requiring mitigation.",
+      "expectations": [
+        "The skill calls kb_search for the revenue concentration data in the Diagnostico-2026-05 and the CAC/LTV/Payback Triangle state before auditing.",
+        "The concentration risk is flagged from the Triangle diagnostic: 'Concentration: 60% of revenue in a single stream → Amber (threshold < 50%)' — this is not buried in a footnote; it is foregrounded as a structural problem.",
+        "The per-stream P&L for the enterprise consulting stream is computed fully-loaded, including the relationship management overhead (founder time to maintain a single enterprise client is typically high — this is surfaced as a cost allocation question).",
+        "The Keep/Fix/Kill verdict for the stream is 'Keep (revenue-critical) but Fix (concentration risk)' — the fix plan quantifies: what new stream volume (€ and clients) is needed to reduce concentration below 50%.",
+        "The audit is ingested via kb_ingest, and the concentration risk is cross-referenced to fin:pricing-redesign (the enterprise client may justify a price increase that reduces dependency on volume) and growth:deal-pipeline (pipeline diversification)."
+      ]
+    }
+  ]
+}

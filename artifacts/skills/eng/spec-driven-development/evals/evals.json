@@ -1,0 +1,41 @@
+{
+  "skill_name": "eng:spec-driven-development",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Vamos implementar o sistema de notificações para clientes — quando um projecto avança de fase, o cliente recebe um email automático. Podemos começar a codificar?",
+      "expected_output": "A hard stop on coding until a spec is authored and approved; a complete spec document with ID, acceptance criteria, contracts, edge cases, and technical constraints drafted; and a gate requiring explicit approval before implementation.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask to check for a prior spec or ADR for the notification system before producing any new content — it does not start writing the spec if one already exists.",
+        "The skill refuses to allow coding to start and explicitly applies the SDD gate: no code before approval. The refusal is firm, not conditional ('it's a small feature, maybe we can skip').",
+        "The spec document is produced in the required structured format with all required fields: ID (SPEC-ENG-NNN), Status (Draft), Scope, Acceptance criteria (testable, failing-test writable), Contracts and interfaces, Edge cases with expected behaviours, and Technical constraints.",
+        "Every acceptance criterion is verifiable by a test — any vague criterion ('the email should look professional') is rewritten to a testable form.",
+        "The approval gate is explicitly named: who must approve (CTO or CEO/COO if cross-department), and the spec status must change to 'Approved' before implementation proceeds."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "It's a quick 2-line config change — just flip the feature flag for the new dashboard. We don't need a spec for this, right?",
+      "expected_output": "A confirmation that even small changes require a (proportional, short) spec per the SDD process, with the KB-first lookup done, and a minimal spec produced for the config change.",
+      "expectations": [
+        "The skill does not exempt the change from the SDD gate despite the 'small change' framing — it explicitly names the red flag: 'It's a small change — we don't need a spec' is listed as a red flag in the SKILL.md.",
+        "The skill calls kb_search for prior decisions about this feature flag or dashboard configuration before authoring anything.",
+        "A minimal but complete spec is produced — short and proportional, but including the required sections: scope (what is and is not in scope), at least one testable acceptance criterion, and the approval gate.",
+        "The approval path is stated for the solo context: a self-review pass that explicitly checks testability of each criterion, documented in the spec.",
+        "A kb_ingest call closes the flow, ingesting the spec with the correct title format and tags."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We just shipped the billing integration. The spec we wrote before coding is now outdated — it doesn't reflect the two edge cases we discovered during implementation. What do we do now?",
+      "expected_output": "A Step 5 (Document) execution: spec updated to 'Implemented' status with merge date and PR ref, deviations recorded as ADR material, and the final spec ingested to the KB with full deviation notes.",
+      "expectations": [
+        "The skill calls kb_search for the original spec in the KB before updating it — it does not create a new document that orphans the original.",
+        "The spec status is updated to 'Implemented' with the required fields: merge date, PR/commit ref — these are not optional.",
+        "The two edge cases discovered during implementation are recorded as deviations from the original spec, with a note that they are future ADR material — the skill does not silently incorporate them as if they were always in scope.",
+        "If the edge cases represent a significant architectural pattern, an ADR is flagged to be authored in docs/ and indexed in the KB.",
+        "The final spec (with deviation notes) is ingested via kb_ingest with the title format 'SPEC — [Feature Name] — [Project] — v[N]' and the required tags: spec, sdd, department, component, project-slug."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "skill_name": "fin:metrics-dashboard",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Constrói o dashboard financeiro semanal da WizardingCode. MRR: €52K. Margem operacional: 24%. Runway: 4.5 meses. Pipeline: €140K. Novos clientes: 3. Churn MRR: 2.8%. Receita por fonte: 65% serviços, 35% formação.",
+      "expected_output": "A 7-Number CEO scorecard with RAG status per metric, a 5-Number executive strip, a variance analysis flagging the amber and red metrics, an alert block with actions for each breached threshold, and a weekly cadence configuration.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask for the Diagnostico-2026-05 KPI set (€83K/month threshold, €1M target), prior dashboard snapshots, and the CEO Scorecard frameworks before assembling the scorecard.",
+        "The 7-Number scorecard is assembled with correct RAG status: MRR €52K vs €83K threshold = Red; Margem 24% vs ≥30% = Amber; Runway 4.5 months vs ≥6 = Amber; Receita por fonte 65% concentration vs <50% = Amber; Pipeline €140K vs 3× monthly target = evaluate (3×€52K = €156K → Amber); Churn 2.8% vs <3% = Green.",
+        "The 5-Number executive strip is produced as a one-line CEO briefing with the 5 numbers from the scorecard.",
+        "The alert block covers all Amber and Red metrics (MRR, Margem, Runway, concentration, Pipeline) with a proposed action, named owner, and deadline within 2 weeks for Amber, immediate for Red.",
+        "The weekly cadence is set or confirmed at Friday 16h00 (before the COO's Friday 17h review), the snapshot is ingested via kb_ingest with title format 'Dashboard Financeiro — WizardingCode — YYYY-WNN'."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "What is the MRR we need to hit to be on track for €1M by end of 2026, and how does that translate to the CEO scorecard?",
+      "expected_output": "The €83K/month MRR threshold derived from the €1M target, the current gap from the KB-sourced MRR, the monthly growth rate required to close the gap by December 2026, and the MRR metric placed in the 7-Number scorecard with its alert threshold.",
+      "expectations": [
+        "The skill calls kb_search for the Diagnostico-2026-05 €83K/month threshold and target €1M @ 2026-12-31 before answering — it does not calculate this from scratch if it is already in the KB.",
+        "The €83K/month threshold is confirmed as the MRR level that corresponds to €1M ARR and placed as metric #1 in the 7-Number scorecard with the alert: < €83K = Red.",
+        "The current MRR gap is calculated: if current MRR is known from KB (e.g. from a prior snapshot), the gap and required monthly growth rate are quantified; if unknown, the skill flags this as the first data-gathering task.",
+        "The MRR metric is separated from non-recurring revenue per the SKILL.md red flag: 'reporting MRR without separating recurring from non-recurring revenue' is explicitly avoided.",
+        "The snapshot including the MRR metric and its calculation basis is ingested via kb_ingest."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "O nosso dashboard do mês passado mostrava MRR de €48K. Este mês é €52K. Que análise devo fazer e o que conta como uma mudança significativa?",
+      "expected_output": "A variance analysis for MRR (€52K vs €48K = +€4K / +8.3%), classification as > 10% threshold check (8.3% = below threshold but worth noting), root-cause prompt for the growth driver, and comparison against the €83K target trajectory.",
+      "expectations": [
+        "The skill calls kb_search for the prior month's snapshot and the Diagnostico baselines before producing the variance analysis — it builds the trend.",
+        "The variance is calculated: €52K - €48K = +€4K / +8.3% month-on-month — this is below the > 10% outlier threshold from the SKILL.md ('root cause for any metric moving > 10% in either direction') so it is noted but does not trigger a mandatory root-cause investigation.",
+        "The response cross-references the €83K target: €52K represents 62.6% of the monthly target — the gap trajectory is highlighted (€31K gap, and the MRR is still Red).",
+        "A root-cause prompt is applied for the +€4K: 'what drove the growth — new client, upsell, or price increase?' — this is not answered without data, but the question is structurally required.",
+        "The dashboard is ingested via kb_ingest with the period-on-period comparison included in the snapshot."
+      ]
+    }
+  ]
+}

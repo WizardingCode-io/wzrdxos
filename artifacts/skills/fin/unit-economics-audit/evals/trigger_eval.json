@@ -1,0 +1,22 @@
+[
+  { "query": "Estamos a ganhar dinheiro com o nosso serviço de implementação?", "should_trigger": true },
+  { "query": "Audit the unit economics for our AI agent retainer service.", "should_trigger": true },
+  { "query": "Qual é a margem real do nosso serviço de consultoria enterprise?", "should_trigger": true },
+  { "query": "We need a keep/fix/kill verdict on our three revenue streams.", "should_trigger": true },
+  { "query": "Calcula o CAC, LTV e payback para os nossos produtos.", "should_trigger": true },
+  { "query": "Is our LTV:CAC above 3:1 for the retainer stream?", "should_trigger": true },
+  { "query": "rentabilidade por serviço — mostra-me a margem real de cada um", "should_trigger": true },
+  { "query": "Run a profitability audit on the enterprise consulting stream.", "should_trigger": true },
+  { "query": "Faz o diagrama de cash flow do próximo trimestre.", "should_trigger": false },
+  { "query": "What is the difference between LTV and CLV?", "should_trigger": false },
+  { "query": "Build the weekly financial dashboard for the CEO.", "should_trigger": false },
+  { "query": "Diagnóstico dos 4 pilares do CFO para a WizardingCode.", "should_trigger": false },
+  { "query": "How do I calculate CAC?", "should_trigger": false },
+  { "query": "Devíamos aumentar os preços em Janeiro?", "should_trigger": false },
+  { "query": "What is our runway this month?", "should_trigger": false },
+  { "query": "Review this pricing proposal before I send it to the client.", "should_trigger": false },
+  { "query": "Explica-me o que é o CAC/LTV/Payback Triangle.", "should_trigger": false },
+  { "query": "Run the cash ritual and update our runway calculation.", "should_trigger": false },
+  { "query": "estamos a perder dinheiro com algum serviço? faz a análise", "should_trigger": true },
+  { "query": "nossa maior fonte de receita representa 60% do total — é um problema?", "should_trigger": true }
+]
