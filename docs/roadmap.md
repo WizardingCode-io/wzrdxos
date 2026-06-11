@@ -44,10 +44,11 @@ two biggest pain points (Knowledge Base and the Org / Teams roster).
   (`graphify update`/`extract`) and GraphRAG fusion (`kb_ask`). All design questions
   resolved in `docs/kb-design.md`. Remaining polish: Obsidian fallback, graphify global
   graph integration, async/watch ingestion.
-- **M3 — Org:** 🟢 in progress. Department set locked in `docs/org.md` (9 depts +
-  Quality transversal; C-suite double-hats). C-suite **defined and implemented
-  (phase 1)**: CEO pilot (PR #1) + COO/CTO/CFO/CHRO/CMO rollout (PR #2) — 7 agents,
-  14 skills, balanced-deliberation workflow, plugin manifests, Claude deploy.
-  Remaining: define Growth (incl. Vendas), Knowledge, Administrativo, Quality;
-  then phase-2 skills (KB-mined backlog per dept) and routing model.
+- **M3 — Org:** ✅ definitions complete (PRs #1-#5). 9 departments + Quality
+  transversal, C-suite of 9 (CEO·CTO·COO·CMO·CFO·CHRO·CRO·CKO·CQO), all
+  implemented (phase 1): 11 agents, 22 skills, 3 workflows
+  (balanced-deliberation, adversarial-review, judge-panel), 70 declared plugins,
+  daily-intelligence loop (kb_digest/kb_enrich, gbrain-inspired). Remaining for
+  M3 closure: phase-2 KB-mined skills backlog, routing model, skill-promotion +
+  agent-evolution loops (Constitution rule 6), `wzrdx company` command.
 - **Naming / brand:** wzrdxOS tagline and positioning before public launch.
