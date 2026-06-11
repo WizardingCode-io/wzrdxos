@@ -1,0 +1,22 @@
+[
+  { "query": "Should we hire our first salesperson? I'm torn.", "should_trigger": true },
+  { "query": "Devemos entrar no mercado espanhol nos próximos 6 meses?", "should_trigger": true },
+  { "query": "Go or no-go on raising our prices by 30%?", "should_trigger": true },
+  { "query": "Estou a considerar uma parceria estratégica com uma empresa de contabilidade — devo avançar?", "should_trigger": true },
+  { "query": "We need to decide whether to build our own CRM or use HubSpot — this is a significant budget call.", "should_trigger": true },
+  { "query": "Should we drop our lowest-margin service line to focus on AI automation?", "should_trigger": true },
+  { "query": "Preciso de uma decisão equilibrada sobre lançar um produto SaaS em 2026.", "should_trigger": true },
+  { "query": "Run the three-lens deliberation on whether to attend the Web Summit this year.", "should_trigger": true },
+  { "query": "Devemos avançar com a contratação do gestor de operações?", "should_trigger": true },
+  { "query": "Help me think through the pros and cons of signing a 2-year office lease.", "should_trigger": true },
+  { "query": "Which font should I use for the new logo?", "should_trigger": false },
+  { "query": "Qual é a diferença entre MRR e ARR?", "should_trigger": false },
+  { "query": "Write a LinkedIn post about AI automation trends.", "should_trigger": false },
+  { "query": "Should I reply to this client email today or tomorrow? It's a routine update.", "should_trigger": false },
+  { "query": "What tool should I use to schedule social media posts?", "should_trigger": false },
+  { "query": "Can you remind me to check the pipeline on Friday?", "should_trigger": false },
+  { "query": "Rewrite this proposal section so it's clearer.", "should_trigger": false },
+  { "query": "Devo aceitar esta reunião de 30 minutos amanhã às 10h?", "should_trigger": false },
+  { "query": "Summarise what I need to do today based on my task list.", "should_trigger": false },
+  { "query": "Should I use Notion or Obsidian for my personal notes?", "should_trigger": false }
+]

@@ -1,0 +1,41 @@
+{
+  "skill_name": "core:deliverable-review",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Posso enviar esta proposta comercial ao cliente? Vale €8.000 e é a primeira proposta deste tipo que fazemos.",
+      "expected_output": "A full checklist-driven review with a ship/fix-first/escalate verdict backed by evidence, plus judge-panel invocation given the deal value and first-of-type criteria.",
+      "expectations": [
+        "The skill calls kb_search for the commercial proposal type checklist from quality/checklists/ before running any review.",
+        "Because no checklist exists for a first-of-type proposal, the skill drafts the checklist inline and ingests it before proceeding.",
+        "The judge-panel workflow is invoked because the deal value is ≥ €5,000 AND this is the first deliverable of its type.",
+        "Every checklist dimension result cites specific evidence from the proposal content — no uncited verdict elements.",
+        "The final verdict is exactly one of ship / fix-first / escalate and names the owning head for the routing decision."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Review this client report before I send it. The data shows our AI automation cut their admin time by 40%.",
+      "expected_output": "A structured checklist review covering copy quality, numbers verification, brand voice, completeness, and client-fit, with a verdict and exact fixes if any dimension fails.",
+      "expectations": [
+        "The skill runs kb_search for a report-type checklist from quality/checklists/ before starting the review.",
+        "The 'Numbers verified' dimension is explicitly evaluated — the 40% claim must be checked against cited evidence.",
+        "Each checklist dimension is scored Pass/Fail/Partial with a specific observation, not a generic comment.",
+        "If any Major or Critical fail is found, the exact fix required is stated (specific text or section to change) — not a generic direction.",
+        "The verdict is ingested via kb_ingest with source 'reviews/YYYY-MM-DD-<slug>.md'."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Está pronta a campanha de rebranding para as redes sociais. Verifica antes de publicarmos.",
+      "expected_output": "A checklist review of the social media campaign covering copy, brand voice, and completeness dimensions, with a verdict routed to the CMO.",
+      "expectations": [
+        "The skill identifies the deliverable type as 'Campaign' and retrieves or drafts the campaign checklist.",
+        "The brand voice dimension is evaluated explicitly against the rebranding context (Rebranding-2026-06 as referenced in the marketing:rebranding-execution skill).",
+        "The verdict is routed to the CMO as the owning head — not to a generic 'team'.",
+        "Every verdict element cites a specific checklist dimension and the concrete observation from the campaign material.",
+        "A kb_ingest call stores the review with source 'reviews/YYYY-MM-DD-<slug>.md'."
+      ]
+    }
+  ]
+}

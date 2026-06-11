@@ -1,0 +1,41 @@
+{
+  "skill_name": "knowledge:kb-enrich",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Limpa a KB — quero verificar se há duplicados ou contradições antes de fazermos o digest.",
+      "expected_output": "A KB enrichment verdict memo classifying all high-similarity pairs above 0.95 as exact-duplicate / contradiction / fine, with cited sources for every pair, ingested under 'enrichment/YYYY-MM-DD.md'.",
+      "expectations": [
+        "The skill calls kb_enrich_report(threshold=0.95, max_pairs=25) first and records pairs, rows_scanned, scopes, and threshold from the response.",
+        "Every pair classification (exact-duplicate / contradiction / fine) is based on reading the full chunk text — not the 120-char preview alone.",
+        "Each contradiction record quotes both claims with their [source: <path>] citations and names the specific incompatibility.",
+        "The verdict memo is structured with the three sections: Exact duplicates, Contradictions, Fine — related but distinct.",
+        "The verdict memo is ingested via kb_ingest with source 'enrichment/YYYY-MM-DD.md' before any routing is done."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Run the KB enrichment pass — check for near-duplicates and contradictions in the knowledge base.",
+      "expected_output": "An enrichment verdict memo with each pair classified, contradictions routed to specific dept heads with named resolution instructions, and the memo ingested.",
+      "expectations": [
+        "If kb_enrich_report returns 0 pairs, the skill writes a brief no-pairs note and ingests it as 'enrichment/YYYY-MM-DD.md' — it does not skip the ingest step.",
+        "Each contradiction routing note names the specific dept head (e.g. CTO for a tech architecture conflict, CFO for a pricing conflict) — not 'someone should look at this'.",
+        "The skill never deletes any chunk automatically — the verdict recommends deletion for human review only.",
+        "For any pair with cosine ≈ 1.0 and same source, the first-run legacy duplicate protocol is triggered and the pair ids are documented for manual cleanup.",
+        "Contradictions are routed by delivering a specific routing note naming the dept head, the conflicting claims, and the two source paths."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Verificar duplicados na KB — parece que temos muitos chunks repetidos sobre a estratégia de preços.",
+      "expected_output": "A targeted enrichment pass surfacing pricing-related near-duplicates, classifying them as duplicates or fine pairs, and routing any pricing contradictions to the CFO/CRO.",
+      "expectations": [
+        "The skill calls kb_enrich_report and focuses its classification on chunks mentioning pricing strategy.",
+        "The 'fine — related but distinct' classification includes an explicit assessment of why the pricing chunks are intentionally distinct (e.g. different time periods, different product lines).",
+        "Any pricing contradiction is routed to the CFO and/or CRO by name with the conflicting claims quoted.",
+        "The cosine score is recorded for every pair in the verdict memo alongside the source paths.",
+        "The verdict memo is ingested with source 'enrichment/YYYY-MM-DD.md'."
+      ]
+    }
+  ]
+}

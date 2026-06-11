@@ -1,0 +1,41 @@
+{
+  "skill_name": "core:conductor",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Quero lançar um novo serviço de auditoria de IA para empresas portuguesas no próximo trimestre. O que preciso de fazer?",
+      "expected_output": "A structured decomposition of the initiative into routed tasks (CEO gate for strategy, COO for execution plan, Marketing for go-to-market, Growth for pipeline) with KB lookup first and a kb_ingest at the end.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask before any decomposition or routing is produced.",
+        "The response explicitly lists discrete tasks, each with a single named owner department from the routing table.",
+        "The CEO balanced-decision gate is identified and applied for the 'launch new service' decision before execution tasks are routed.",
+        "Each task is mapped to a row in the routing table by name — not by guesswork.",
+        "The output concludes with a kb_ingest call documenting the decomposition, routing decisions, and any gaps found."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We need to hire our first employee, set their salary, and communicate the new role to our existing clients. Where do I start?",
+      "expected_output": "A multi-department task decomposition routing the hiring to CHRO, compensation to CFO, and client communication to CMO, with the CEO gate applied to the hiring decision.",
+      "expectations": [
+        "The skill runs a KB-first lookup before decomposing the request.",
+        "The request is decomposed into at least three independent tasks (hiring pipeline, compensation, client communication) each mapped to a different department.",
+        "The hiring decision is identified as significant and routed through the CEO balanced-decision gate before execution.",
+        "The cross-department flow for 'first hire' (CHRO pipeline → COO 60-day plan → CHRO+COO execute) is explicitly named.",
+        "A kb_ingest call documents the routing decisions and any novel patterns found."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "por onde começo com o diagnostico da WizardingCode?",
+      "expected_output": "A KB-first lookup that surfaces prior Diagnostico-2026-05 context, followed by routing the diagnostic to the correct department (COO for ops:roadmap-diagnose) with clear reasoning.",
+      "expectations": [
+        "The skill calls kb_search with a query targeting the Diagnostico or diagnostic context before any response.",
+        "The routing decision names the COO and the ops:roadmap-diagnose skill explicitly.",
+        "The CEO gate check is performed — the diagnostic itself is classified as non-significant (fast, reversible, operational) and does not block on it.",
+        "The output names which prior KB context was found (or confirms nothing exists) about the Diagnostico-2026-05 baseline.",
+        "The conversation output includes KB findings, task decomposition, routing decision, and an ingest confirmation."
+      ]
+    }
+  ]
+}

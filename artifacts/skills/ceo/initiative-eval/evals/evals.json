@@ -1,0 +1,41 @@
+{
+  "skill_name": "ceo:initiative-eval",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Quero avaliar a ideia de criar um produto SaaS de diagnóstico de IA para PMEs portuguesas. Faz sentido?",
+      "expected_output": "A structured initiative evaluation memo with market sizing, viability sketch, evidence-based SWOT, competitive landscape, and a pursue/drop/investigate recommendation with the most decision-relevant unknown.",
+      "expectations": [
+        "The skill calls kb_search for the company profile, prior related initiatives, and relevant frameworks before any analysis.",
+        "The market section quantifies demand (who pays, how much, how often) rather than stating that a market exists.",
+        "The SWOT has a maximum of 4 bullets per quadrant, all evidence-based — no filler bullets.",
+        "The competition section names direct and indirect alternatives and states WizardingCode's differentiation.",
+        "The memo ends with exactly 'Recommendation: pursue / drop / investigate' plus the single most decision-relevant unknown."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We're considering a partnership with a Portuguese accounting firm to co-sell AI automation services to their clients. Should we pursue it?",
+      "expected_output": "An initiative evaluation memo for the accounting-firm partnership covering market, viability, SWOT, and competition, ready to feed into the CEO balanced-decision gate.",
+      "expectations": [
+        "The skill runs a KB-first lookup for prior partnership evaluations and the Dream 100 / growth context in the KB.",
+        "The viability section includes an effort/cost estimate and a unit-economics sketch (revenue per unit vs. fully-loaded cost for the partnership model).",
+        "The SWOT Threats quadrant explicitly addresses competitor partnerships or alternative channels the accounting firm could use instead.",
+        "The memo identifies the capability fit: which WizardingCode departments must execute this (Growth, COO) and whether the capacity exists.",
+        "The memo is ingested via kb_ingest with source 'memos/YYYY-MM-DD-initiative-eval-<slug>.md'."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Avalia a hipótese de lançar um programa de formação online em automação com IA, direcionado a gestores de PME.",
+      "expected_output": "An initiative evaluation memo for the AI training programme with market, viability (including competition from existing courses), SWOT, and a pursue/drop/investigate recommendation.",
+      "expectations": [
+        "The skill notes prior KB context about content/education initiatives at WizardingCode before analysing.",
+        "The market section addresses demand signals specifically for AI training targeted at Portuguese SME managers — not generic e-learning market data.",
+        "The competition section names at least one existing Portuguese or EU-based AI training competitor or programme.",
+        "Every SWOT bullet is evidence-based, citing either KB sources or explicit market observations.",
+        "The recommendation is exactly one of pursue / drop / investigate, followed by the single most decision-relevant unknown."
+      ]
+    }
+  ]
+}

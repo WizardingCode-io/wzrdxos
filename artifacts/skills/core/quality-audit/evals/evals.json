@@ -1,0 +1,41 @@
+{
+  "skill_name": "core:quality-audit",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "O processo de onboarding de clientes está a ser seguido pela equipa? Quero uma auditoria.",
+      "expected_output": "A quality audit report for the client onboarding process: POP retrieved (or audit halted if none exists), POP vs. practice table, NCR log with 5-Whys, PDCA corrective actions, and kb_ingest of the report.",
+      "expectations": [
+        "The skill calls kb_search for the onboarding POP before auditing — if none exists, it halts and requests the COO to document it first via ops:pop-builder.",
+        "The POP vs. practice table lists every POP step with Expected / Observed / Conforming columns populated from evidence.",
+        "Each non-conformity record includes a full 5-Whys root-cause analysis that reaches a systemic root cause (not stops at Why 1).",
+        "Every PDCA corrective action has a single named owner (a dept head) and a deadline consistent with severity (Minor ≤ 30d, Major ≤ 14d, Critical ≤ 48h).",
+        "The completed audit report is ingested via kb_ingest with source 'audits/YYYY-MM-DD-<process-slug>.md'."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Audit the sales proposal process — I want to know if we're actually following what we documented.",
+      "expected_output": "A quality audit of the sales proposal process with scope defined, conformity table, NCR log with evidence citations, corrective actions, and routing to the CRO.",
+      "expectations": [
+        "The skill scopes the audit explicitly before the POP vs. practice walk: process name, process owner (CRO), POP version, and any prior open NCRs.",
+        "Every finding in the non-conformity log cites a concrete artefact or observation — not assertions without evidence.",
+        "The audit report includes a 'Positive observations' section noting what the process does well.",
+        "The routing step names the CRO as process owner, summarises the verdict, and states the corrective actions requiring their sign-off.",
+        "The skill does not block ongoing work — work continues while corrections are planned."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Verifica se o processo de gestão de conteúdo do nosso blog está a ser seguido. Parece que as publicações não têm revisão antes de sair.",
+      "expected_output": "A quality audit of the content management process, identifying the missing review step as a non-conformity, with a 5-Whys analysis, PDCA action for the CMO, and report ingested.",
+      "expectations": [
+        "The skill calls kb_search for the content management POP — if absent, stops and requests COO to document it first.",
+        "The alleged missing review step is investigated with evidence (artefact, observation, or user report) before being logged as an NCR.",
+        "The NCR for the missing review step is classified with a severity (Minor/Major/Critical) and that classification is justified.",
+        "The corrective action is owned by the CMO (as the content process owner) with a realistic deadline.",
+        "The report is ingested with source 'audits/YYYY-MM-DD-content-management.md'."
+      ]
+    }
+  ]
+}

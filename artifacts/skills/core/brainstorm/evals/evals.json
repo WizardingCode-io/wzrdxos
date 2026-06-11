@@ -1,0 +1,38 @@
+{
+  "skill_name": "core:brainstorm",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Quero construir uma feature de relatórios automáticos para os clientes da WizardingCode.",
+      "expected_output": "A single, focused open question that surfaces the most important unknown about the request before any implementation is proposed.",
+      "expectations": [
+        "The skill asks exactly one question first — it does not batch multiple questions in the opening turn.",
+        "The question targets the single most important unknown (e.g. who the reports are for, what metric they need, what format) rather than trivia.",
+        "No implementation plan, code, or architecture is proposed before intent is confirmed.",
+        "The response reflects the user's own words back (feature: automated client reports for WizardingCode) before asking."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Let's design a referral programme for WizardingCode. I want clients to bring in other clients.",
+      "expected_output": "An intent-clarifying dialogue that narrows the solution space step by step before any design is produced.",
+      "expectations": [
+        "The skill does not immediately produce a referral programme design — it opens with a clarifying question.",
+        "Each question narrows the solution space (e.g. incentive type, current client profile, target segment) rather than broadening it.",
+        "After the user answers the first question, the next question follows logically from the answer — not a pre-baked list.",
+        "Before any design is sketched, the skill reflects the stated intent ('clients bring clients') back in its own words to confirm understanding."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Precisamos de melhorar o nosso onboarding. Os clientes demoram demasiado tempo a ver o primeiro resultado.",
+      "expected_output": "A focused question that isolates the most critical unknown (e.g. where in the onboarding the delay occurs) before suggesting any solution.",
+      "expectations": [
+        "The skill asks one question first — it does not immediately propose an onboarding redesign.",
+        "The question is specifically about the onboarding context (e.g. which step causes delay, what 'first result' means for the client) — not generic.",
+        "No solution or next step is proposed until the user's answer narrows the intent.",
+        "The response does not include a warning or justification for asking — it just asks the question naturally."
+      ]
+    }
+  ]
+}
