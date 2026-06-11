@@ -145,7 +145,7 @@ After each decision (approved or deferred):
 
 `kb_ingest` with:
 - Title: `Rebranding-2026-06 — D[N] — [Decision title] — [YYYY-MM-DD]`.
-- Tags: `rebranding`, `brand`, `marketing`, `wzardingcode`, `decision`, `D[N]`.
+- Tags: `rebranding`, `brand`, `marketing`, `wizardingcode`, `decision`, `D[N]`.
 - Include: the decision memo, the options table, the CEO gate result if applicable,
   and the rationale.
 
