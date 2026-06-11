@@ -14,6 +14,7 @@ describe("admin department", () => {
     const ids = reg.skills.map((s) => s.name);
     expect(ids).toContain("admin:buyback-audit");
     expect(ids).toContain("admin:calendar-defense");
+    expect(ids).toContain("admin:meeting-discipline");
     expect(reg.plugins.filter((p) => p.department === "admin").length).toBeGreaterThanOrEqual(4);
     expect(reg.departments).toContain("admin");
   });

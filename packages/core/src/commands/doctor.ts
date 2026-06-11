@@ -3,6 +3,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { claudePaths, findRepoRoot, wzrdxPaths } from "../paths.js";
 import { has, run } from "../installer.js";
+import { readCompany } from "../company.js";
 import { ui } from "../ui.js";
 
 function tryVersion(cmd: string, args: string[]): string | null {
@@ -82,6 +83,15 @@ export function doctorCommand(): void {
   kbCfg.mode
     ? ui.ok(`ingestion mode: ${String(kbCfg.mode)}`)
     : ui.warn(`ingestion mode not configured — ${fix}`);
+
+  // --- Company Profile -------------------------------------------------------
+  ui.section("Company Profile");
+  const companyProfile = readCompany(root);
+  if (companyProfile && companyProfile.name.trim().length > 0) {
+    ui.ok(`company profile set: ${companyProfile.name}`);
+  } else {
+    ui.warn("company profile not set — run `wzrdx company set`");
+  }
 
   console.log("");
   if (hardFail) {

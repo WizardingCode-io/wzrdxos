@@ -28,6 +28,12 @@ This runtime is augmented by **wzrdxOS**. A unified Knowledge Base is available 
 - \`kb_ingest(path)\` — add a file/folder to the KB.
 
 **KB-first:** before external research, consult the KB via \`kb_search\`/\`kb_ask\`.
+
+**Departments & heads:** ceo (strategy/decisions) · coo/ops (execution, PM/PO) · cto/eng
+(code/architecture) · cfo/fin (money) · chro/rh (people) · cmo/marketing (brand/content) ·
+cro/growth (revenue/deals) · cko/knowledge (KB/digests) · ea/admin (calendar/e-mail) ·
+cqo (quality, transversal). Route requests via the \`core:conductor\` flow; agents deploy
+as \`wzrdx-<name>\` subagents via \`wzrdx install claude\`.
 ${END}`;
 }
 

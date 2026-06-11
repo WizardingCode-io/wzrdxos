@@ -9,6 +9,7 @@ import { setupCommand } from "./commands/setup.js";
 import { updateCommand } from "./commands/update.js";
 import { runtimesCommand, runtimesInstallCommand } from "./commands/runtimes.js";
 import { pluginsCommand } from "./commands/plugins.js";
+import { companyShowCommand, companySetCommand } from "./commands/company.js";
 import { installClaudeArtifacts } from "./artifact-install.js";
 import { ui } from "./ui.js";
 
@@ -83,6 +84,21 @@ install
     ui.ok(`${r.agents} agents · ${r.skills} skills · ${r.workflows} workflows → ~/.claude`);
     console.log("");
   });
+
+const company = program.command("company").description("manage the company profile (name, market, customers, niche, objectives)");
+company
+  .command("show", { isDefault: true })
+  .description("show the current company profile")
+  .action(() => companyShowCommand());
+company
+  .command("set")
+  .description("set / update the company profile")
+  .option("--name <name>", "company name")
+  .option("--market <market>", "market / industry")
+  .option("--customers <customers>", "who pays (target customers)")
+  .option("--niche <niche>", "positioning / niche")
+  .option("--objective <objective...>", "add an objective (repeatable)")
+  .action((opts) => companySetCommand(opts));
 
 const skill = program.command("skill").description("manage skills");
 skill

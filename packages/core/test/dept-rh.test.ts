@@ -17,4 +17,28 @@ describe("rh department", () => {
     expect(reg.plugins.filter((p) => p.department === "rh").length).toBeGreaterThanOrEqual(5);
     expect(reg.departments).toContain("rh");
   });
+
+  it("loads phase-2 skill: rh:delegation-coach", () => {
+    const reg = loadRegistry(root);
+    const ids = reg.skills.map((s) => s.name);
+    expect(ids).toContain("rh:delegation-coach");
+  });
+
+  it("loads phase-2 skill: rh:culture-foundation", () => {
+    const reg = loadRegistry(root);
+    const ids = reg.skills.map((s) => s.name);
+    expect(ids).toContain("rh:culture-foundation");
+  });
+
+  it("loads phase-2 skill: rh:comp-ladder", () => {
+    const reg = loadRegistry(root);
+    const ids = reg.skills.map((s) => s.name);
+    expect(ids).toContain("rh:comp-ladder");
+  });
+
+  it("loads phase-2 skill: rh:founder-transition", () => {
+    const reg = loadRegistry(root);
+    const ids = reg.skills.map((s) => s.name);
+    expect(ids).toContain("rh:founder-transition");
+  });
 });

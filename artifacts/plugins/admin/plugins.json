@@ -12,9 +12,9 @@
     {
       "name": "company-profile",
       "kind": "command",
-      "status": "planned",
+      "status": "adopt",
       "source": "wzrdx company",
-      "notes": "Company base context (name, market, customers, niche, objectives). Ships with the `wzrdx company` command."
+      "notes": "Company base context. Set via `wzrdx company set`; profile at .wzrdx/company.json (+ company.md for KB ingestion)."
     },
     {
       "name": "productivity",

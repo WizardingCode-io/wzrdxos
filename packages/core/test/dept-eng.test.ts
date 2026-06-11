@@ -14,6 +14,10 @@ describe("eng department", () => {
     const ids = reg.skills.map((s) => s.name);
     expect(ids).toContain("eng:spec-driven-development");
     expect(ids).toContain("eng:tech-stack-eval");
+    expect(ids).toContain("eng:ai-agent-architecture");
+    expect(ids).toContain("eng:mcp-integrator");
+    expect(ids).toContain("eng:aios-operating-model");
+    expect(ids).toContain("eng:token-cost-optimization");
     const sdd = reg.skills.find((s) => s.name === "eng:spec-driven-development");
     expect(sdd?.type).toBe("process");
     expect(reg.plugins.filter((p) => p.department === "eng").length).toBeGreaterThanOrEqual(7);

@@ -1,13 +1,20 @@
 import { loadRegistry } from "../registry/loader.js";
 import { findRepoRoot } from "../paths.js";
+import { readCompany } from "../company.js";
 import { ui } from "../ui.js";
 
 export function statusCommand(): void {
   const root = findRepoRoot();
   const reg = loadRegistry(root);
+  const company = readCompany(root);
 
   ui.title("wzrdxOS — status");
   ui.item(ui.dim(root));
+  if (company) {
+    ui.item(`${company.name}  ${ui.dim("·")}  ${ui.dim(company.niche)}`);
+  } else {
+    ui.item(ui.dim("company profile not set — run `wzrdx company set`"));
+  }
 
   ui.section(`Departments (${ui.count(reg.departments.length)})`);
   ui.item(reg.departments.length ? reg.departments.join("  ·  ") : ui.dim("none yet"));
