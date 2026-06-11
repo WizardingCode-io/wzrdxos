@@ -14,6 +14,10 @@ describe("ops department", () => {
     const ids = reg.skills.map((s) => s.name);
     expect(ids).toContain("ops:roadmap-diagnose");
     expect(ids).toContain("ops:pop-builder");
+    expect(ids).toContain("ops:kpi-system");
+    expect(ids).toContain("ops:delegation-audit");
+    expect(ids).toContain("ops:automation-discovery");
+    expect(ids).toContain("ops:discovery-cadence");
     expect(reg.plugins.filter((p) => p.department === "ops").length).toBeGreaterThanOrEqual(5);
     expect(reg.departments).toContain("ops");
   });
