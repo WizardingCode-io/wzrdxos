@@ -51,13 +51,15 @@
       "name": "compliance-auditor",
       "kind": "skill-pack",
       "status": "optional",
-      "notes": "SOC 2 evidence collection. Vet repo before install — third-party packs execute code."
+      "notes": "SOC 2 evidence collection. Vet repo before install — third-party packs execute code.",
+      "source": "TBD — candidate repos to vet (VoltAgent/rohitg00 toolkits; mcpmarket.com skill-auditor)"
     },
     {
       "name": "skill-auditor",
       "kind": "skill-pack",
       "status": "optional",
-      "notes": "Quality scoring of our own wzrdxOS skills. Vet repo before install."
+      "notes": "Quality scoring of our own wzrdxOS skills. Vet repo before install.",
+      "source": "TBD — candidate repos to vet (VoltAgent/rohitg00 toolkits; mcpmarket.com skill-auditor)"
     },
     {
       "name": "claude-cowork-regulated-workloads",

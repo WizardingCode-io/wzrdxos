@@ -634,7 +634,8 @@ operational work.
 - **PT administrative deadlines:** tracker for certidões, licenças, registos —
   prepares and reminds, **never files** (interfaces: contabilista/advogado).
 
-**Does NOT:** accounting (CFO), legal drafting (external lawyer), priorities (CEO).
+**Does NOT:** accounting (CFO), legal drafting (external lawyer/advogado), set
+priorities (CEO deliberation gate).
 
 ### EA (head) — toolbox
 

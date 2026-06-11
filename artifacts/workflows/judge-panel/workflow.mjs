@@ -36,7 +36,7 @@ const SYNTH_SCHEMA = {
     score: { type: "number", minimum: 0, maximum: 10 },
     mustFix: { type: "array", items: { type: "string" } },
     rationale: { type: "string" },
-    dissent: { type: "string" },
+    dissent: { type: "string", minLength: 1 },
   },
   required: ["verdict", "score", "mustFix", "rationale", "dissent"],
 };
@@ -58,7 +58,7 @@ phase("Judge");
 const judges = await parallel(
   lenses.map((lens) => () =>
     agent(
-      `You are the ${lens} judge in the wzrdxOS judge-panel review.\n\nKB-first: consult the Knowledge Base (kb_search / kb_ask via ToolSearch) for quality standards relevant to this deliverable or decision before judging.\n\nJudge the following from the ${lens} lens exclusively. Score it 0-10, list strengths, list issues (with specific evidence), and give your verdict.\n\nSubject to judge:\n${subject}${context}`,
+      `You are the ${lens} judge in the wzrdxOS judge-panel review.\n\nKB-first: consult the Knowledge Base (kb_search / kb_ask) for quality standards relevant to this deliverable or decision before judging.\n\nJudge the following from the ${lens} lens exclusively. Score it 0-10, list strengths, list issues (with specific evidence), and give your verdict.\n\nSubject to judge:\n${subject}${context}`,
       { label: `judge:${lens}`, phase: "Judge", schema: JUDGE_SCHEMA },
     ).then((r) => ({ lens, ...r })),
   ),

@@ -64,7 +64,7 @@ phase("Lenses");
 const lenses = await parallel(
   LENSES.map((l) => () =>
     agent(
-      `${l.prompt}\n\nFirst consult the Knowledge Base (kb_search / kb_ask via ToolSearch) for relevant prior knowledge. Then deliberate.\n\nDecision under deliberation: ${decision}${context}`,
+      `${l.prompt}\n\nFirst consult the Knowledge Base (kb_search / kb_ask) for relevant prior knowledge. Then deliberate.\n\nDecision under deliberation: ${decision}${context}`,
       { label: `lens:${l.key}`, phase: "Lenses", schema: LENS_SCHEMA },
     ).then((r) => ({ lens: l.key, ...r })),
   ),
