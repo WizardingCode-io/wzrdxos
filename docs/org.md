@@ -608,7 +608,7 @@ The vault itself (4,200+ notes — Topics/Frameworks/Personas/KB Areas),
 
 ---
 
-## 9 — Administrativo (EA) ✅ defined
+## 9 — Administrativo (EA) ✅ defined · 🚀 implemented (phase 1)
 
 **Purpose:** the founder's executive-assistant layer — where the buyback of time
 materialises. Documents, agenda, e-mail, meetings, filing, and PT administrative
@@ -674,7 +674,7 @@ the vault — worth ingesting when available.
 
 ---
 
-## Quality (transversal — CQO) ✅ defined
+## Quality (transversal — CQO) ✅ defined · 🚀 implemented (phase 1)
 
 > Not a department (locked set: "+ Quality — transversal"). The CQO joins the
 > C-suite (9) and leads this layer across all departments.
