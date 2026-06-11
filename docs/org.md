@@ -27,10 +27,10 @@ functional department.
 **Purpose:** the strategic brain of the company. Everything depends on its analysis,
 research, knowledge, strategy, and coordination.
 
-**Heads (C-suite, top tier):** CEO · CTO · COO · CMO · CFO · CHRO · CRO · CKO. Each double-hats:
+**Heads (C-suite, top tier):** CEO · CTO · COO · CMO · CFO · CHRO · CRO · CKO · CQO. Each double-hats:
 - CTO → leads Engenharia · COO → leads Operações · CMO → leads Comunicação & Marketing ·
   CFO → leads Financeiro · CHRO → leads Recursos Humanos · CRO → leads Growth ·
-  CKO → leads Knowledge · CEO → overall.
+  CKO → leads Knowledge · CQO → leads Quality (transversal layer) · CEO → overall.
 
 **Responsibilities:**
 - Vision and strategic direction.
@@ -605,3 +605,149 @@ The vault itself (4,200+ notes — Topics/Frameworks/Personas/KB Areas),
 - Pre-existing duplicate chunks ingested before the idempotent upsert may need a
   one-time cleanup (first `kb-enrich` run flags them).
 - Obsidian-fallback polish pending (see `docs/kb-design.md`).
+
+---
+
+## 9 — Administrativo (EA) ✅ defined
+
+**Purpose:** the founder's executive-assistant layer — where the buyback of time
+materialises. Documents, agenda, e-mail, meetings, filing, and PT administrative
+deadlines. The operational instrument of the CHRO's founder-transition and the
+COO's delegation matrix.
+
+**Head:** `ea` — Executive Assistant, tier 1 (the first real tier-1 head; the
+C-suite stays at 9 with CQO). Default model sonnet — high-frequency, low-latency
+operational work.
+
+**Responsibilities:**
+- **Calendar defense:** Reverse Calendar Booking (meetings pushed to end-of-day),
+  First-Four-Hours rule (sacred morning), Mon/Fri shallow vs Tue-Thu deep batching,
+  "got-a-minute" containment (Mon/Fri only), Perfect Week + Preloaded Year.
+- **E-mail & correspondence:** triage, drafts, zero-inbox — with a charted path to
+  full AI delegation (Dan Martell: n8n + agent; he has not read e-mail in 3 years).
+- **Buyback discipline:** time & energy audit (2 weeks), Buyback Rate (delegate
+  anything < 25% of the hourly rate), 92% Rule (isolate the 8% only the founder
+  can do).
+- Meetings: agendas, minutes, disciplined follow-ups.
+- Documents & filing: templates (proposals with CRO, letters), naming conventions,
+  versioning.
+- **PT administrative deadlines:** tracker for certidões, licenças, registos —
+  prepares and reminds, **never files** (interfaces: contabilista/advogado).
+
+**Does NOT:** accounting (CFO), legal drafting (external lawyer), priorities (CEO).
+
+### EA (head) — toolbox
+
+**Skills**
+- `schedule` — the department's lever: rituals, reminders, recurring reports (very high)
+- `docx` — minutes, templates, letters (high)
+- `pdf` — filing, extraction (medium-high)
+- `xlsx` — deadline tracker (medium)
+- adapt (🔄): `gtd-setup`, `meeting-optimize`, `delegation-matrix` (shared COO/CHRO),
+  `proposal-write` (shared Growth), `sop-create` (shared Ops)
+- new (🆕 — mined from the Obsidian KB; executive-productivity coverage is ~90%):
+  - `buyback-audit` — time & energy audit + Buyback Rate + 92% Rule + delegation
+    plan (Dan Martell — Buy Back Your Time stack)
+  - `calendar-defense` — Reverse Booking, daily Leverage Question, First-Four-Hours,
+    cognitive batching (Hormozi + Suby)
+  - phase 2: `meeting-discipline` (minutes/follow-ups — thin KB coverage, needs
+    synthesis), `email-delegation` (when an n8n setup exists), `admin-pt-deadlines`
+    (zero KB — build case-by-case via deep-research)
+
+**Plugins / MCPs**
+- `wzrdx-kb` (KB-first, mandatory) · company profile (`wzrdx company`)
+- **Productivity** (Anthropic) — shared with Operações: tasks, memory, dashboard
+- Gmail MCP / Google Calendar MCP — planned: connect when real e-mail/agenda wiring
+  happens; least-privilege scopes
+
+**KB sources (vault `~/Documents/Personal`):** Topics — Productivity Systems,
+Discipline and Daily Routines, Focus and Prioritization; Personas — Dan Martell
+(Buy Back Your Time: Buyback Rate, 92% Rule, Perfect Week, Preloaded Year, AI
+e-mail delegation), Alex Hormozi (Reverse Calendar Booking, Leverage Question,
+First-Four-Hours), Sabri Suby (11 Micro Habits, pre-arrival sacred window,
+mode-switch threshold).
+
+**Known gaps:** document templates and minutes methodology nearly zero in the KB
+(author as operational docs first), PT administrative obligations zero (tracker fed
+case-by-case via deep-research), Dan Martell's "Replacement Ladder" not present in
+the vault — worth ingesting when available.
+
+---
+
+## Quality (transversal — CQO) ✅ defined
+
+> Not a department (locked set: "+ Quality — transversal"). The CQO joins the
+> C-suite (9) and leads this layer across all departments.
+
+**Purpose:** the quality of the company as a system — processes, client-facing
+deliverables, compliance and continuous improvement. **Not code quality** (that
+belongs to Engenharia/CTO: review gates, tests, adversarial-review).
+
+**Principle (Constitution):** quality **by construction, not blocking gates** — the
+explicit ArkaOS anti-pattern. Reviews produce evidence; the owning department head
+decides (CEO arbitrates disputes).
+
+**Head:** CQO — Chief Quality Officer (tier 0, transversal; agent lives in `core`,
+deliberately NOT creating a "quality" department slug).
+
+**Responsibilities:**
+- **Quality management system** (ISO 9001-light): quality standards per deliverable
+  type (commercial proposal, campaign, report, client deliverable) and per
+  department.
+- **Internal audits:** the POP says X — does practice do Y? Periodic process audits
+  against the COO's documentation; non-conformity reports with owner + deadline.
+- **Deliverable review:** nothing ships to a client without its type checklist
+  (copy, numbers, brand voice, completeness) — evidence-based, never bureaucratic.
+- **Non-conformities & complaints:** log → root cause → corrective action →
+  verification (PDCA).
+- **Quality KPIs** (Diagnostico CX anchor — area at 31/100): client NPS ≥ 8,
+  deliveries within SLA ≥ 90%, retention/repurchase ≥ 80%, rework rate.
+- **Monthly management review:** feeds the CEO scorecard and the KB (lessons
+  learned → CKO daily digest — the loop closes).
+
+**Does NOT:** code quality/tests (CTO), execute corrections (owning departments),
+block work with approval bureaucracy.
+
+### CQO (head) — toolbox
+
+**Skills**
+- `docx` / `xlsx` / `pptx` — quality manuals, CAPA, risk matrices, audit reports,
+  board decks (high)
+- `deep-research` — verified standards/regulatory benchmarking (ISO, GDPR, AI Act)
+  (medium-high)
+- `schedule` — recurring audits and reports (medium-high)
+- adapt (🔄): `quality-management` (ISO 9001), `lean-audit`, `voc-loop`,
+  `premortem` (shared CEO), `sop-process` (shared Ops), `risk-register`
+- new (🆕):
+  - `quality-audit` — internal audit of a process/department: POP vs practice,
+    non-conformities, corrective actions with owner and deadline
+  - `deliverable-review` — structured pre-ship review of a deliverable: checklist
+    by type + evidence-based verdict; may invoke the `judge-panel` workflow for
+    critical deliverables (generic multi-judge pattern, not code-specific)
+
+**Plugins / MCPs**
+- `wzrdx-kb` (KB-first, mandatory) · company profile (`wzrdx company`)
+- **legal** (Anthropic) — the compliance anchor: contract review, compliance
+  tracking, risk assessment, vendor checks; jurisdiction checklists (GDPR, NIS2,
+  AI Act, DORA, ISO 27001/20000/22301, SOC 2, PCI DSS)
+- **operations** (Anthropic) — process docs, vendor evaluation, change requests,
+  runbooks
+- **data** (Anthropic) — shared: quality analytics (defects, NCRs, rework, SPC)
+- **claude-skills** (alirezarezvani) — shared with rh: cherry-pick Compliance OS
+  (9 skills) + Regulatory & Quality Management (18 skills incl. ISO)
+- Optional (vet before install): Compliance Auditor Agent (SOC 2 evidence
+  collection), IaC Compliance Audit (→ cross-ref eng for the technical side),
+  Skill Auditor (quality scoring of our own skills)
+- ⚠️ **Regulated-workload caveat:** Claude Cowork is currently excluded from audit
+  logs / Compliance API / data exports — regulated quality/compliance workloads
+  must not run there until those events reach the Compliance API. Validate before
+  any formal compliance use.
+
+**KB sources:** WizardingCode/Diagnostico-2026-05 (CX 31/100, NPS/SLA/retention
+KPIs); arka quality-management heritage (ISO 9001 QMS, internal audit, management
+review). KB coverage of formal QMS content is thin — enrich via deep-research and
+document-first as audits run.
+
+**Known gaps:** no ISO 9001/QMS source content in the vault yet (deep-research +
+document-first will build it), complaint-handling history zero (no clients logged),
+quality standards per deliverable type to be authored as operational docs first.
