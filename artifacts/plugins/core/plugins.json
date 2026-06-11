@@ -1,0 +1,71 @@
+{
+  "department": "core",
+  "plugins": [
+    {
+      "name": "wzrdx-kb",
+      "kind": "mcp",
+      "status": "required",
+      "source": "services/kb",
+      "install": "wzrdx setup",
+      "notes": "KB-first doctrine. Installed and registered by `wzrdx setup`."
+    },
+    {
+      "name": "company-profile",
+      "kind": "command",
+      "status": "planned",
+      "source": "wzrdx company",
+      "notes": "Company base context (name, market, customers, niche, objectives). Ships with the `wzrdx company` command."
+    },
+    {
+      "name": "legal",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/knowledge-work-plugins",
+      "install": "claude plugin install legal@knowledge-work-plugins",
+      "notes": "Compliance anchor: contract review, compliance tracking, risk assessment, vendor checks. Jurisdiction checklists: GDPR/NIS2/AI Act/DORA/ISO 27001-20000-22301/SOC 2/PCI DSS."
+    },
+    {
+      "name": "operations",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/knowledge-work-plugins",
+      "install": "claude plugin install operations@knowledge-work-plugins",
+      "notes": "Process docs, vendor evaluation, change requests, runbooks. CQO uses this to read and cross-reference COO-authored POPs during audits."
+    },
+    {
+      "name": "data",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/knowledge-work-plugins",
+      "install": "claude plugin install data@knowledge-work-plugins",
+      "notes": "Quality analytics: defects, NCRs, rework rate, SPC. Shared with ops, rh and growth."
+    },
+    {
+      "name": "claude-skills",
+      "kind": "skill-pack",
+      "status": "adopt",
+      "source": "https://github.com/alirezarezvani/claude-skills",
+      "notes": "Shared with rh — cherry-pick Compliance OS (9 skills) + Regulatory & Quality Management (18 skills incl. ISO). Vet each skill individually before adoption; third-party packs execute code."
+    },
+    {
+      "name": "compliance-auditor",
+      "kind": "skill-pack",
+      "status": "optional",
+      "notes": "SOC 2 evidence collection. Vet repo before install — third-party packs execute code.",
+      "source": "TBD — candidate repos to vet (VoltAgent/rohitg00 toolkits; mcpmarket.com skill-auditor)"
+    },
+    {
+      "name": "skill-auditor",
+      "kind": "skill-pack",
+      "status": "optional",
+      "notes": "Quality scoring of our own wzrdxOS skills. Vet repo before install.",
+      "source": "TBD — candidate repos to vet (VoltAgent/rohitg00 toolkits; mcpmarket.com skill-auditor)"
+    },
+    {
+      "name": "claude-cowork-regulated-workloads",
+      "kind": "plugin",
+      "status": "rejected",
+      "notes": "⚠️ Cowork currently excluded from audit logs / Compliance API / data exports — regulated quality/compliance workloads must NOT run there until those events reach the Compliance API. Validate before any formal compliance use."
+    }
+  ]
+}

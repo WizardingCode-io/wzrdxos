@@ -1,0 +1,40 @@
+{
+  "department": "admin",
+  "plugins": [
+    {
+      "name": "wzrdx-kb",
+      "kind": "mcp",
+      "status": "required",
+      "source": "services/kb",
+      "install": "wzrdx setup",
+      "notes": "KB-first doctrine. Installed and registered by `wzrdx setup`."
+    },
+    {
+      "name": "company-profile",
+      "kind": "command",
+      "status": "planned",
+      "source": "wzrdx company",
+      "notes": "Company base context (name, market, customers, niche, objectives). Ships with the `wzrdx company` command."
+    },
+    {
+      "name": "productivity",
+      "kind": "plugin",
+      "status": "adopt",
+      "source": "anthropics/knowledge-work-plugins",
+      "install": "claude plugin install productivity@knowledge-work-plugins",
+      "notes": "Shared with Operações: persistent tasks, workplace memory, dashboard, /start, /update. The EA uses this for recurring reminders, meeting agendas, and the PT deadlines tracker."
+    },
+    {
+      "name": "gmail-mcp",
+      "kind": "mcp",
+      "status": "planned",
+      "notes": "Connect when real e-mail wiring is ready; least-privilege scopes (read + draft only; no send without explicit approval). Enables the AI e-mail delegation path (Dan Martell: n8n + agent)."
+    },
+    {
+      "name": "gcal-mcp",
+      "kind": "mcp",
+      "status": "planned",
+      "notes": "Connect when calendar wiring is ready; least-privilege scopes (read + create events; no delete without explicit approval). Enables Reverse Calendar Booking automation and Preloaded Year skeleton generation."
+    }
+  ]
+}
