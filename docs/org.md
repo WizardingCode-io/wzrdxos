@@ -653,9 +653,11 @@ priorities (CEO deliberation gate).
     plan (Dan Martell — Buy Back Your Time stack)
   - `calendar-defense` — Reverse Booking, daily Leverage Question, First-Four-Hours,
     cognitive batching (Hormozi + Suby)
-  - phase 2: `meeting-discipline` (minutes/follow-ups — thin KB coverage, needs
-    synthesis), `email-delegation` (when an n8n setup exists), `admin-pt-deadlines`
-    (zero KB — build case-by-case via deep-research)
+  - phase 2: `meeting-discipline` ✅ implemented (synthesised from calendar-defense
+    frameworks + EA practice; KB coverage thin — enriches on use), `email-delegation`
+    (gated: requires n8n setup — deferred until automation layer exists),
+    `admin-pt-deadlines` (gated: zero KB — build case-by-case via deep-research,
+    deferred until first PT deadline arises)
 
 **Plugins / MCPs**
 - `wzrdx-kb` (KB-first, mandatory) · company profile (`wzrdx company`)

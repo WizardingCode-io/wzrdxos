@@ -14,6 +14,8 @@ describe("growth department", () => {
     const ids = reg.skills.map((s) => s.name);
     expect(ids).toContain("growth:sales-machine");
     expect(ids).toContain("growth:deal-pipeline");
+    expect(ids).toContain("growth:cold-outreach-engine");
+    expect(ids).toContain("growth:dream-100-partnerships");
     expect(reg.plugins.filter((p) => p.department === "growth").length).toBeGreaterThanOrEqual(7);
     expect(reg.departments).toContain("growth");
   });
