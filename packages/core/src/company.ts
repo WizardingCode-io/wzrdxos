@@ -42,6 +42,11 @@ export function readCompany(root: string): CompanyProfile | null {
   }
 }
 
+/** Keep user text from breaking the markdown table (pipes / newlines). */
+function cell(value: string): string {
+  return value.replace(/\|/g, "\\|").replace(/\s*\n\s*/g, " ");
+}
+
 /** Render the company profile as a human-readable Markdown memo (KB-ingestable). */
 export function renderCompanyMd(profile: CompanyProfile): string {
   const objectives =
@@ -57,10 +62,10 @@ export function renderCompanyMd(profile: CompanyProfile): string {
 
 | Field | Value |
 |-------|-------|
-| **Name** | ${profile.name} |
-| **Market / Industry** | ${profile.market} |
-| **Customers** | ${profile.customers} |
-| **Niche / Positioning** | ${profile.niche} |
+| **Name** | ${cell(profile.name)} |
+| **Market / Industry** | ${cell(profile.market)} |
+| **Customers** | ${cell(profile.customers)} |
+| **Niche / Positioning** | ${cell(profile.niche)} |
 | **Last updated** | ${profile.updatedAt} |
 
 ## Objectives
