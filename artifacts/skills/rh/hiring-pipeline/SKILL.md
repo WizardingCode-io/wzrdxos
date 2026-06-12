@@ -1,9 +1,17 @@
 ---
-name: rh:hiring-pipeline
-description: Full hiring pipeline — KB-first postmortem of prior failures, role definition via Interview-to-Learn (8+ candidates), structured selection (screening, case study, final interview), First-Week Leadership Diagnostic for leadership roles, offer via Sams 5 Rules; KB ingest at close.
+name: 'rh:hiring-pipeline'
+description: >-
+  Full hiring pipeline — KB-first postmortem of prior failures, role definition
+  via Interview-to-Learn (8+ candidates), structured selection (screening, case
+  study, final interview), First-Week Leadership Diagnostic for leadership
+  roles, offer via Sams 5 Rules; KB ingest at close.
 type: capability
 department: rh
-when-to-use: Opening a role, starting a hiring process, screening candidates, or when the user says "vamos contratar", "abrir vaga", "procurar candidatos", "recrutar", "hiring" or similar.
+when-to-use: >-
+  Opening a role, running a structured hiring process, screening/interviewing
+  candidates, "vamos contratar", first-hire decisions. NOT for drafting
+  employment contracts (external lawyer prepares; EA tracks) and NOT for
+  recruitment-marketing content like LinkedIn posts (marketing dept).
 ---
 
 # Hiring Pipeline

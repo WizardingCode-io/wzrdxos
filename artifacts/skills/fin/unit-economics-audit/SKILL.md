@@ -1,9 +1,17 @@
 ---
-name: fin:unit-economics-audit
-description: "Audit profitability per revenue stream — fully-loaded P&L, gross-profit-to-CAC sanity check, LTV:CAC ≥ 3:1 and payback; produces a keep/fix/kill verdict per stream. Frameworks: David FilterBuy, Alex Hormozi, Sabri Suby (CAC/LTV/Payback Triangle)."
+name: 'fin:unit-economics-audit'
+description: >-
+  Audit profitability per revenue stream — fully-loaded per-stream P&L,
+  gross-profit-to-CAC sanity, LTV:CAC and payback — ending in a keep/fix/kill
+  verdict per stream. Also fires for revenue-concentration risk (one source
+  dominating revenue). Not for explaining frameworks like CAC/LTV.
 type: capability
 department: fin
-when-to-use: Auditing profitability per revenue stream, conducting a pricing review, evaluating whether the business is making money on a specific offer or client type, or when the user says "unit economics", "rentabilidade por serviço", "estamos a ganhar dinheiro com X", "margem real", "CAC", "LTV" or similar.
+when-to-use: >-
+  "Are we making money on X?", keep/fix/kill decisions on services or revenue
+  streams, "qual serviço é mais rentável", revenue concentration above ~50% in
+  one source, pricing reviews needing per-stream economics. NOT conceptual
+  questions ("o que é CAC/LTV") — answer those directly.
 ---
 
 # Unit Economics Audit

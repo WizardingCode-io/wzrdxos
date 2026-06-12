@@ -1,9 +1,17 @@
 ---
-name: eng:spec-driven-development
-description: Spec gate — enforce document-first before any code is written; locate or author the spec, gate on approval, then follow TDD, and ingest outcomes to the KB.
+name: 'eng:spec-driven-development'
+description: >-
+  The MANDATORY spec gate — fires BEFORE implementing, building or refactoring
+  ANY feature or change, however small ("it's just a config change" included).
+  Locates or authors the spec, gates on approval, then TDD. Not for explaining
+  what spec-driven development is.
 type: process
 department: eng
-when-to-use: Any feature, change, or refactor that is about to be implemented without an approved spec — "vamos implementar", "build X", "add this feature", "let's code", or whenever implementation starts before the spec is confirmed.
+when-to-use: >-
+  The moment implementation is about to start without an approved spec —
+  "implementa", "vamos construir", "add this feature", "refactor X", "let's
+  code", "começa a desenvolver", resuming work on an approved spec. NOT for
+  conceptual questions about SDD (answer those directly).
 ---
 
 # Spec-Driven Development (SDD)

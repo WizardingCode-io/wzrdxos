@@ -1,15 +1,18 @@
 ---
-name: marketing:geo-content
-description: Create and optimise content for AI-engine citation (GEO/AEO) and
-  traditional SEO — Three Qualities check (Definitive, Structured, Quotable),
-  Two-Boards doctrine (Google floor + AI-engine ceiling), Citation-as-KPI reporting,
-  and KB ingest of learnings.
+name: 'marketing:geo-content'
+description: >-
+  Create and optimise content for AI-engine citation (GEO/AEO) and traditional
+  SEO — Three Qualities check (Definitive, Structured, Quotable), Two-Boards
+  doctrine (Google floor + AI-engine ceiling), Citation-as-KPI reporting, and KB
+  ingest of learnings.
 type: capability
 department: marketing
-when-to-use: Creating or optimising content for AI-engine citation or SEO/GEO/AEO
-  work. Triggered by "GEO", "AEO", "aparecer no ChatGPT", "Perplexity", "AI search",
-  "citação", "llms.txt", "Citation-as-KPI", "content SEO", "seo-audit", or any
-  request to improve how wzrdx appears in AI-generated answers.
+when-to-use: >-
+  Creating or optimizing a SPECIFIC piece of content for AI-engine citation
+  (GEO/AEO), making existing pages citable, measuring AI share of voice, "como
+  aparecer no ChatGPT/Perplexity" for our content. NOT for explaining
+  GEO/AEO/SEO concepts and NOT for generic content/editorial-calendar work
+  without an AI-search angle (other marketing skills own those).
 ---
 
 # GEO/AEO Content

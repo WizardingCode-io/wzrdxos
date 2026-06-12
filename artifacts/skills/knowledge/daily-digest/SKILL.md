@@ -1,9 +1,15 @@
 ---
-name: knowledge:daily-digest
-description: Synthesize everything new in the KB since the last watermark into a cited memo, run gap analysis against org.md Known gaps, ingest the memo, and route highlights to dept heads.
+name: 'knowledge:daily-digest'
+description: >-
+  Synthesize everything new in the KB since the last watermark into a cited
+  memo, run gap analysis against org.md Known gaps, ingest the memo, and route
+  highlights to dept heads.
 type: process
 department: knowledge
-when-to-use: Daily digest run, "o que há de novo na KB", watermark older than 24h, start-of-day knowledge review, or when the user asks what was recently ingested into the knowledge base.
+when-to-use: >-
+  Daily or weekly digest of what entered the KB ("o que há de novo na KB",
+  "resumo do conhecimento novo desta semana"), watermark older than 24h,
+  start-of-day knowledge review, routing fresh learnings to department heads.
 ---
 
 # Daily Digest
