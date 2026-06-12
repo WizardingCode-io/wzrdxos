@@ -7,6 +7,31 @@ contract test enforce.
 
 ---
 
+### Trigger evals: ecological method (this machine)
+
+The vendored `run_eval.py` clones the skill under a hashed name and assumes a
+CLEAN environment. On a machine with the wzrdx skills deployed (plus ~300 other
+installed skills) the model correctly picks the REAL skill over the hashed
+clone, so the vendored runner reads 0 triggers forever (verified 2026-06-11;
+the probe query fired `wzrdx-ops-roadmap-diagnose`, never the clone).
+
+Use `scripts/trigger_eval.py` instead — it measures whether a query triggers
+the DEPLOYED skill (`wzrdx-<dept>-<name>`) in the real environment, which is
+the production condition; near-misses then measure true false-positives, and
+`fired_others` records which competing skill stole the query (routing signal).
+
+```
+python3 scripts/trigger_eval.py \
+  --eval-set artifacts/skills/<dept>/<name>/evals/trigger_eval.json \
+  --skill wzrdx-<dept>-<name> [--runs 2] [--model sonnet]
+```
+
+Ops notes (hard-won): the script fail-fasts if `claude` is not on PATH —
+background shells load a minimal profile, so export a PATH that includes
+`~/.local/bin` before batch runs. Results land outside git (`.wzrdx/eval-runs/`).
+The vendored runner remains the right tool for clean-room environments (CI
+sandbox, fresh machine).
+
 ## 1. Conventions
 
 ### 1.1 Canonical id
