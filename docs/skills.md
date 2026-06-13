@@ -216,7 +216,8 @@ Exemptions are documented inline in the test file with a rationale comment.
 
 46 skills across 10 departments. Eval status columns:
 
-- **Trigger eval** — `trigger_eval.json` exists and has been run.
+- **Trigger eval** — score = should-trigger·should-NOT (round-2, runs=2). Full
+  analysis in [`eval-baseline.md`](eval-baseline.md).
 - **Functional eval** — `evals/evals.json` exists with assertions and a passing benchmark.
 
 All skills are currently `—` (not yet evaluated). The M4 pilot set (§4) will be
@@ -227,7 +228,7 @@ the first 10 to flip to `✓`.
 | id | type | description | trigger eval | functional eval |
 |---|---|---|---|---|
 | `core:brainstorm` | process | Explore intent and requirements before any creative work or implementation. | — | — |
-| `core:conductor` | process | Universal entry point — decompose, route via the routing table, CEO gate, execute, and close the KB loop. | — | — |
+| `core:conductor` | process | Universal entry point — decompose, route via the routing table, CEO gate, execute, and close the KB loop. | 7/10·10/10 | — |
 | `core:deliverable-review` | process | Pre-ship structured review of a client-facing deliverable against type checklist and quality bar. | — | — |
 | `core:quality-audit` | process | Internal audit of a process or department — POP vs. practice gap analysis with finding severity scores. | — | — |
 | `skill-creator` | — | Vendored: create, improve, and benchmark skills using the eval framework. | — | — |
@@ -236,7 +237,7 @@ the first 10 to flip to `✓`.
 
 | id | type | description | trigger eval | functional eval |
 |---|---|---|---|---|
-| `ceo:balanced-decision` | process | CEO decision gate — deliberate any significant decision through optimist, conservative and risk-taker lenses to a go/no-go verdict. | — | — |
+| `ceo:balanced-decision` | process | CEO decision gate — deliberate any significant decision through optimist, conservative and risk-taker lenses to a go/no-go verdict. | 10/10·10/10 | — |
 | `ceo:initiative-eval` | capability | Evaluate a business initiative (market, viability, SWOT, competition) into a structured decision memo for the CEO gate. | — | — |
 
 ### eng
@@ -246,7 +247,7 @@ the first 10 to flip to `✓`.
 | `eng:ai-agent-architecture` | capability | Design multi-agent systems — choose the right orchestration pattern and produce a deployment blueprint. | — | — |
 | `eng:aios-operating-model` | capability | Structure an AI Operating System deployment using the Liam Ottley model — layer map, agent roster, and governance. | — | — |
 | `eng:mcp-integrator` | capability | Decide when and how to integrate a tool via MCP — connector selection, vetting, wiring, and KB documentation. | — | — |
-| `eng:spec-driven-development` | process | Spec gate — enforce document-first before any code is written; locate or author the spec, gate on approval, then TDD. | — | — |
+| `eng:spec-driven-development` | process | Spec gate — enforce document-first before any code is written; locate or author the spec, gate on approval, then TDD. | 5/10·9/10 | — |
 | `eng:tech-stack-eval` | capability | KB-first, requirements-anchored technology evaluation producing a scored comparison and ADR. | — | — |
 | `eng:token-cost-optimization` | capability | Minimise LLM token spend without sacrificing output quality — model selection, caching, prompt compression. | — | — |
 
@@ -258,14 +259,14 @@ the first 10 to flip to `✓`.
 | `fin:cfo-4-pilares` | capability | Diagnostic across the 4 CFO pillars (Planeamento · Contabilidade · Análise · Riscos) with a scored maturity map. | — | — |
 | `fin:metrics-dashboard` | capability | Build or update the weekly financial KPI dashboard and CEO scorecard feed — MRR, runway, burn, gross margin. | — | — |
 | `fin:pricing-redesign` | capability | Pricing review from the finance side — current pricing vs unit economics, value-anchored redesign. | — | — |
-| `fin:unit-economics-audit` | capability | Audit profitability per revenue stream — fully-loaded P&L, gross-profit-to-CAC ratio, and improvement roadmap. | — | — |
+| `fin:unit-economics-audit` | capability | Audit profitability per revenue stream — fully-loaded P&L, gross-profit-to-CAC ratio, and improvement roadmap. | 9/10·9/10 | — |
 
 ### growth
 
 | id | type | description | trigger eval | functional eval |
 |---|---|---|---|---|
 | `growth:cold-outreach-engine` | capability | Design and run the outbound engine — ICP list building, shotgun vs. sniper lanes, weekly review ritual. | — | — |
-| `growth:deal-pipeline` | capability | Set up or review the CRM and sales pipeline — HubSpot stage config, 5 commercial KPIs, weighted forecast, coverage-gap analysis. | — | — |
+| `growth:deal-pipeline` | capability | Set up or review the CRM and sales pipeline — HubSpot stage config, 5 commercial KPIs, weighted forecast, coverage-gap analysis. | 7/9·11/11 | — |
 | `growth:dream-100-partnerships` | capability | Build the Dream 100 list (Brunson) of dream partners, channels and whales with a relationship-farming calendar. | — | — |
 | `growth:sales-machine` | capability | Design and run the full sales process — Magic Lantern trust funnel, application call, close call. | — | — |
 
@@ -274,7 +275,7 @@ the first 10 to flip to `✓`.
 | id | type | description | trigger eval | functional eval |
 |---|---|---|---|---|
 | `knowledge:agent-evolution` | process | Evolve a wzrdxOS agent definition based on cited KB evidence — gather digest/enrichment evidence, draft agent.md diff, gate mandate changes through CEO, propose as PR. | — | — |
-| `knowledge:daily-digest` | process | Synthesise everything new in the KB since the last watermark into a cited memo, run gap analysis, ingest, and route highlights. | — | — |
+| `knowledge:daily-digest` | process | Synthesise everything new in the KB since the last watermark into a cited memo, run gap analysis, ingest, and route highlights. | 9/10·10/10 | — |
 | `knowledge:kb-enrich` | process | Near-duplicate and contradiction review over the KB vector store — classify each pair, write a verdict memo, ingest, and route contradictions. | — | — |
 | `knowledge:skill-promotion` | process | Promote a recurring KB pattern into a new wzrdxOS skill — collect ≥3 cited occurrences, check registry, draft via skill-creator, evaluate, propose as PR. | — | — |
 
@@ -282,7 +283,7 @@ the first 10 to flip to `✓`.
 
 | id | type | description | trigger eval | functional eval |
 |---|---|---|---|---|
-| `marketing:geo-content` | capability | Create and optimise content for AI-engine citation (GEO/AEO) and traditional SEO — structured data, authority signals, citation targeting. | — | — |
+| `marketing:geo-content` | capability | Create and optimise content for AI-engine citation (GEO/AEO) and traditional SEO — structured data, authority signals, citation targeting. | 9/9·8/11 | — |
 | `marketing:hook-viral-system` | capability | Generate a hook set using the 7 hook types and score a piece or campaign for virality potential. | — | — |
 | `marketing:offer-architecture` | capability | Build the messaging layer of a Grand Slam Offer — dream outcome, perceived likelihood, effort/time reduction, unique mechanism. | — | — |
 | `marketing:rebranding-execution` | capability | Drive the Rebranding-2026-06 roadmap — KB-first from the vault (9 docs, brand guide, domain decision, social migration). | — | — |
@@ -297,7 +298,7 @@ the first 10 to flip to `✓`.
 | `ops:discovery-cadence` | capability | Set up a Teresa Torres Continuous Discovery cadence — weekly customer touchpoints, OST map, and interview-to-KB pipeline. | — | — |
 | `ops:kpi-system` | capability | Build and run the 25-KPI system (5 per area: Gestão/Marketing/Vendas/Cultura/CX) with a weekly Friday dashboard ritual. | — | — |
 | `ops:pop-builder` | capability | Process inventory + Estratégico×Delegável classification + POP (Procedimento Operacional Padrão) production and KB archiving. | — | — |
-| `ops:roadmap-diagnose` | capability | 5-area operational diagnostic + custom 90-day roadmap (Documentar → Medir → Delegar) anchored on the WizardingCode 2026-05 baseline. | — | — |
+| `ops:roadmap-diagnose` | capability | 5-area operational diagnostic + custom 90-day roadmap (Documentar → Medir → Delegar) anchored on the WizardingCode 2026-05 baseline. | 10/10·10/10 | — |
 
 ### rh
 
@@ -307,7 +308,7 @@ the first 10 to flip to `✓`.
 | `rh:culture-foundation` | capability | Mission/vision/values workshop — draft M/V/V from founder interview + KB evidence, culture audit, and values embedding plan. | — | — |
 | `rh:delegation-coach` | capability | Coach the founder/leader through a delegation — pick the task (Buyback Rate), define success, hand off with a Delegation Card. | — | — |
 | `rh:founder-transition` | capability | Psychological-blockers protocol for the founder — name the blocker with evidence, reframe, and produce a transition micro-plan. | — | — |
-| `rh:hiring-pipeline` | capability | Full hiring pipeline — KB-first postmortem of prior failures, role definition via SBIs, structured interview + scorecard, onboarding handoff. | — | — |
+| `rh:hiring-pipeline` | capability | Full hiring pipeline — KB-first postmortem of prior failures, role definition via SBIs, structured interview + scorecard, onboarding handoff. | 9/9·7/11 | — |
 | `rh:onboarding-60d` | capability | 60-day structured onboarding — observe/do-together/supervise/delegate phases with weekly checkpoints and KB documentation. | — | — |
 
 ### admin
@@ -315,7 +316,7 @@ the first 10 to flip to `✓`.
 | id | type | description | trigger eval | functional eval |
 |---|---|---|---|---|
 | `admin:buyback-audit` | capability | Time and energy audit — classify every recurring task on the energy × $/h matrix and produce a buyback plan. | — | — |
-| `admin:calendar-defense` | capability | Audit the current calendar against the five defense rules and produce a Perfect Week template. | — | — |
+| `admin:calendar-defense` | capability | Audit the current calendar against the five defense rules and produce a Perfect Week template. | 10/10·9/10 | — |
 | `admin:meeting-discipline` | capability | Run meetings that respect the calendar-defense rules — agenda-or-decline, time-box, async-first. | — | — |
 
 ---
