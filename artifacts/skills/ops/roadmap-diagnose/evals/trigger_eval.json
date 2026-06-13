@@ -1,0 +1,22 @@
+[
+  { "query": "Onde estamos operacionalmente na WizardingCode?", "should_trigger": true },
+  { "query": "Faz o diagnóstico da empresa — precisamos de perceber o que melhorar primeiro.", "should_trigger": true },
+  { "query": "We need an operational health check — where are the biggest gaps?", "should_trigger": true },
+  { "query": "o que melhorar primeiro na WizardingCode?", "should_trigger": true },
+  { "query": "Run a full ops diagnostic and give me a 90-day plan.", "should_trigger": true },
+  { "query": "diagnóstico operacional completo, por favor", "should_trigger": true },
+  { "query": "Qual é a nossa maturidade operacional e qual o próximo passo?", "should_trigger": true },
+  { "query": "I need a roadmap to fix our operations over the next quarter.", "should_trigger": true },
+  { "query": "onde estamos e o que fazer nos próximos 90 dias?", "should_trigger": true },
+  { "query": "What are the top 3 operational bottlenecks we should fix this month?", "should_trigger": true },
+  { "query": "Quero contratar o nosso primeiro funcionário — como faço o anúncio?", "should_trigger": false },
+  { "query": "Build me a POP for the client onboarding process.", "should_trigger": false },
+  { "query": "Faz o diagnóstico financeiro da WizardingCode — pilares do CFO.", "should_trigger": false },
+  { "query": "Run the weekly KPI review for Friday.", "should_trigger": false },
+  { "query": "What is the Dokumentar → Medir → Delegar methodology?", "should_trigger": false },
+  { "query": "Calcular o Buyback Rate do fundador.", "should_trigger": false },
+  { "query": "Set up the 25-KPI system.", "should_trigger": false },
+  { "query": "Audit our automation backlog and score the ROI.", "should_trigger": false },
+  { "query": "What score did we get in the last diagnostic?", "should_trigger": false },
+  { "query": "Como configuro o ritual de sexta-feira?", "should_trigger": false }
+]

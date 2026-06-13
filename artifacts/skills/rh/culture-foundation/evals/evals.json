@@ -1,0 +1,41 @@
+{
+  "skill_name": "rh:culture-foundation",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Precisamos de definir a missão, visão e valores da WizardingCode. A cultura actual está a 25/100 segundo o diagnóstico — por onde começamos?",
+      "expected_output": "A KB-first lookup surfacing the Diagnostico 25/100 baseline and the five failed hires as cultural evidence, followed by the ten-question founder interview, Five Dysfunctions baseline table, and three M/V/V candidates — all grounded in interview evidence, not generic templates.",
+      "expectations": [
+        "The skill calls kb_search for the Diagnostico-2026-05 Cultura 25/100 score and the five failed hires postmortem, explicitly noting that the culture workshop must reckon with this evidence before writing anything.",
+        "The ten-question founder interview is run (or framed as the required next step if this is a planning session) — the M/V/V cannot be authored before the founder interview answers are obtained.",
+        "The Five Dysfunctions baseline table is produced with all five dysfunctions scored (1-5) against observable evidence from the Diagnostico and interview data; any dysfunction scoring ≤ 2 is named as a current cultural risk in the output.",
+        "Three candidate mission statements are drafted from interview themes, each following the required format: [Verb] + [Who we serve] + [What transformation we create] + [Why it matters beyond profit], ≤ 20 words, with a recommendation and rationale.",
+        "Values include at least one counter-example each (drawn from the Diagnostico or interview if possible), and the Collect People Doctrine verdict is given on all three criteria — the output is not just an aspirational M/V/V document."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We've drafted our values but they feel generic — 'integrity, excellence, teamwork'. How do we make them real and actually usable for hiring and exit decisions?",
+      "expected_output": "A values audit applying the 'would we make a hiring, promotion, or exit decision based on a violation?' test to each value, rewriting each generic value to a behaviourally specific form with examples and counter-examples.",
+      "expectations": [
+        "The skill applies the test explicitly to each generic value: 'Would we make a hiring, promotion, or exit decision based on a violation of this value?' — any value that fails this test is classified as decorative and rewritten or removed.",
+        "Each rewritten value follows the required structure: Name, Meaning (one sentence of observable practice), two 'we show this value when' examples, and one counter-example.",
+        "The Netflix principle is selectively applied: 'adequate performance gets generous severance' is named for any performance-standard value (e.g. 'excellence'), but with an explicit caveat that this must be adapted for a small PT team context.",
+        "The Collect People verdict is run on the revised set: does this culture attract the best person described in question 2 of the founder interview? Does it explicitly repel the wrong people? Would an exceptional person be proud to say they work here?",
+        "The adoption ritual is produced as the minimum viable version: weekly story rotation, hiring values question, exit naming ritual — not just a document but a practice schedule."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "As our first hire starts next month, do we need a culture document first or can we onboard without one?",
+      "expected_output": "A clear statement that culture artefacts must exist before the onboarding of any hire (SKILL.md red flag: hiring pipeline cannot produce criteria without culture baseline), followed by the minimum viable culture one-pager that can be produced in time.",
+      "expectations": [
+        "The skill explicitly names the dependency: the hiring pipeline red flag states that if culture artefacts are not documented, note that they must be produced before writing hiring criteria — this dependency is surfaced clearly.",
+        "The skill proposes the minimum viable culture artefact producible before the hire's start date: a culture one-pager with mission, vision, 3-5 values, and the Five Dysfunctions baseline — not a full workshop deliverable.",
+        "The internal NPS baseline plan is set for a solo/two-person team: skip the survey, record the founder's own score, use the first hire's D+90 score as the first data point.",
+        "The minimum viable adoption ritual is defined for a team of 2: the weekly story rotation (one moment per week where a value showed up or failed), the hiring values question, and the exit naming convention.",
+        "A kb_ingest call documents the culture one-pager with the required title 'Culture Foundation — <Company> — <YYYY-MM>' before the hire's start date."
+      ]
+    }
+  ]
+}

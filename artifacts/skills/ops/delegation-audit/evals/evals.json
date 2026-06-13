@@ -1,0 +1,41 @@
+{
+  "skill_name": "ops:delegation-audit",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Faz a auditoria de delegação da WizardingCode. Tenho um inventário de tarefas da última quinzena e as 5 contratações que falharam. Quero perceber o que delegar e qual deve ser o próximo hire.",
+      "expected_output": "A task inventory classified in the Estratégico×Delegável matrix, a postmortem of the 5 failed hires with the root-cause pattern named, a first-hire profile using the director-not-doer principle, and a delegation plan in three buckets (immediate/short-term/hire-dependent) with the 8% protected list.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask for the Diagnostico-2026-05 (5 failed hires D21 data, score Gestão 28.4/100, extreme centralisation), Dan Martell frameworks (Buyback Rate, 92% Rule, No-How-To Delegation), and any prior delegation plans in the KB before proceeding.",
+        "The Estratégico×Delegável matrix is applied to every task in the inventory — each task placed in one of four quadrants (Estratégico+Not Ready / Estratégico+Ready / Operacional+Not Ready / Operacional+Ready) with the correct action per quadrant.",
+        "The 5 failed hire postmortem identifies a cross-hire pattern (not just individual failures) and names it explicitly — e.g. 'hired doers not directors' or 'no delegation system meant hires became redundant'.",
+        "The first-hire profile uses the director-not-doer principle: the hire owns an entire function, not individual tasks, with must-haves, disqualifiers derived from the postmortem, and a D1-D180 onboarding plan.",
+        "The delegation plan has three timed buckets (immediate / D30-D60 / D61-D90), every action has a named owner and by-when date, the 8% protected list has ≤ 5 items, and handoffs to rh:hiring-pipeline and admin:buyback-audit are named where relevant."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I keep hiring people but they all end up leaving or becoming useless within 3 months. What am I doing wrong, and what should my next hire look like?",
+      "expected_output": "A postmortem analysis of failed hires against the 5 common failure modes from the Diagnostico, identification of the root-cause pattern, and a first-hire profile correcting the identified failure mode.",
+      "expectations": [
+        "The skill calls kb_search for the Diagnostico-2026-05 D21 data (5 failed hires analysis) and the Dan Martell 'director-not-doer' and 'no delegation system' patterns before diagnosing.",
+        "The 5 common failure modes from the SKILL.md are applied as a diagnostic framework: role mismatch, no onboarding, no delegation system, culture fit not assessed, wrong hire sequence — the response identifies which failure mode(s) are active.",
+        "The root-cause pattern is named as a single sentence — not a list of five separate problems — matching the SKILL.md instruction: 'the pattern is the lesson, not the individual failure.'",
+        "The first-hire profile produced addresses the identified failure mode explicitly in the disqualifiers section.",
+        "A handoff to rh:hiring-pipeline is named for the structured selection process, and the audit is ingested via kb_ingest."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "O que devo delegar esta semana? Não preciso de toda a análise — só quero as acções imediatas sem contratar ninguém.",
+      "expected_output": "The 'Immediate (this week — 0 hires needed)' bucket from the delegation plan: tasks from the 'Delegate immediately' quadrant that can be handed to existing tools, automation, or AI agents, each with an owner, SOP flag, and by-when.",
+      "expectations": [
+        "The skill calls kb_search for any prior delegation plan or time audit already in the KB (admin:buyback-audit output) — if found, it uses it as input rather than asking for a new task log.",
+        "The output focuses on the 'Immediate' bucket: only tasks in the Operacional+Ready quadrant (delegate immediately — no reason to keep) with an existing or immediately-creatable delegation target.",
+        "For each immediate delegation item, the target is specific: a named AI agent, automation (n8n/Zapier), or existing team member — not 'delegate to someone'.",
+        "Each item includes a SOP needed (yes/no) flag — if yes, a handoff to ops:pop-builder is named before delegation can happen.",
+        "The output is ingested via kb_ingest even for a partial run, so the partial plan is not lost."
+      ]
+    }
+  ]
+}

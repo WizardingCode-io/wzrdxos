@@ -1,9 +1,20 @@
 ---
-name: core:conductor
-description: Universal entry point for any wzrdxOS request — decompose the work, consult the KB, route each task to the right department via the routing table, apply the CEO gate for significant decisions, execute via dept agents/skills, send ship-grade outputs to deliverable-review, and document learnings back to the KB. Use this skill for any incoming request whose owner is not obvious, multi-domain requests, "quem trata disto?", "por onde começo?", start of any wzrdxOS flow, or when multiple departments may be involved.
+name: 'core:conductor'
+description: >-
+  Universal entry point for wzrdxOS — REQUIRED whenever a request spans MORE
+  THAN ONE department (e.g. hire someone + set salary + announce it; pricing +
+  campaign; strategy + execution in one ask) or the owner is unclear.
+  Decomposes, consults the KB, routes each part via the routing table, applies
+  the CEO gate, and documents learnings. Single-department requests go straight
+  to that department's skill instead.
 type: process
 department: core
-when-to-use: Any incoming request whose owner is not obvious; multi-domain requests; "quem trata disto"; "por onde começo"; start of any wzrdxOS flow; requests that span strategy + execution + quality at the same time.
+when-to-use: >-
+  Requests that mix two or more departments in one ask (people + money +
+  marketing, product + pricing, etc.); unclear owner; "quem trata disto"; "por
+  onde começo" when the answer involves several areas; coordinating a full
+  wzrdxOS flow end-to-end. NOT for single-department requests — route those
+  directly.
 ---
 
 # Conductor

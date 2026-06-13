@@ -51,4 +51,10 @@ two biggest pain points (Knowledge Base and the Org / Teams roster).
   (skill-promotion + agent-evolution, PR-gated) · `wzrdx company` profile.
   Deferred (gated, documented in org.md): admin email-delegation (needs n8n),
   admin-pt-deadlines + fiscal-pt (zero KB), deploy pruning, lint scope.
+- **M4 — Skills & evals:** ✅ infra + trigger baseline (PR #7). Taxonomy
+  (`docs/skills.md`) + registry contract test in CI; 45 `evals.json` (105 cases)
+  + 10 `trigger_eval.json`; ecological trigger runner (`scripts/trigger_eval.py`)
+  with measured 2-round baseline (`docs/eval-baseline.md`) — 8/10 skills >=9
+  should-trigger, 9/10 >=9 should-NOT. Deferred: functional with/without
+  benchmark (needs isolated env), SDD gate as PreToolUse hook (finding C1).
 - **Naming / brand:** wzrdxOS tagline and positioning before public launch.

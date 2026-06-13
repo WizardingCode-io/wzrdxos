@@ -1,0 +1,41 @@
+{
+  "skill_name": "knowledge:skill-promotion",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Devíamos ter uma skill para isto — todas as semanas o André faz o mesmo processo de qualificar leads manualmente. Já vi isso em pelo menos 4 digests.",
+      "expected_output": "A skill promotion run that collects ≥3 cited KB occurrences, checks the registry for existing coverage, drafts a SKILL.md, runs test prompts, and opens a PR — without auto-merging.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask to retrieve citations for the lead-qualification pattern — it does not accept the user's assertion without KB evidence.",
+        "All ≥3 cited occurrences each include a [source: <path>] citation from digests/, memos/, or enrichment/ — no two from the same source on the same day.",
+        "The registry duplicate check reads artifacts/skills/ and confirms no existing skill (e.g. growth:deal-qualify) already covers this pattern.",
+        "The drafted SKILL.md frontmatter includes name, description, type, department, and when-to-use fields.",
+        "A PR is proposed (not auto-applied) with evidence, registry check, skill draft, eval results, and placement rationale in the body."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "The daily digest has flagged three times that we manually create financial summaries for clients each month. Can we turn that into a skill?",
+      "expected_output": "A skill promotion workflow that validates the ≥3-occurrence bar from the KB, checks the registry, drafts a capability or process skill, evaluates it, and proposes a PR.",
+      "expectations": [
+        "The skill verifies the three occurrences cited by the user via kb_search before proceeding — it does not trust the user count without retrieval.",
+        "The registry duplicate check checks both name and description fields of existing fin/* and ops/* skills for semantic overlap with 'client financial summary'.",
+        "The drafted SKILL.md body includes KB-first step, procedural steps, and a Red flags section as required by the skill body contract.",
+        "Test prompts are run against the drafted skill and the results (trigger accuracy, output quality) are documented.",
+        "The promotion decision is ingested via kb_ingest with source 'memos/skill-promotion-<name>-YYYY-MM-DD.md' after the PR is opened."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "I only saw this pattern once in a digest — we keep writing the same client status update email. Should we make a skill?",
+      "expected_output": "The skill stops before drafting, documents the single-occurrence candidate in the KB for future monitoring, and explains the ≥3 threshold requirement.",
+      "expectations": [
+        "The skill calls kb_search to verify the occurrence count — it finds fewer than 3 independent occurrences.",
+        "Because the minimum bar is not met, the skill halts the promotion process and does NOT draft a SKILL.md.",
+        "The skill ingests a skill-candidate memo documenting the pattern and current evidence count with source 'memos/skill-candidate-<slug>.md'.",
+        "The response explains to the user that the ≥3 independent occurrence threshold must be met before promotion, and when to revisit.",
+        "No PR is opened for a below-threshold candidate."
+      ]
+    }
+  ]
+}

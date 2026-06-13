@@ -3,7 +3,7 @@ name: ops:roadmap-diagnose
 description: 5-area operational diagnostic + custom 90-day roadmap (Documentar → Medir → Delegar), anchored on the Diagnostico WizardingCode 2026-05 pattern.
 type: capability
 department: ops
-when-to-use: Diagnosing a business's operational maturity, starting an ops engagement, or when the user says "diagnóstico", "onde estamos", "o que melhorar primeiro" or similar.
+when-to-use: Diagnosing a business's operational maturity, starting an ops engagement, building a 90-day operational roadmap, or when the user says "diagnóstico", "diagnóstico operacional", "onde estamos", "o que melhorar primeiro", "audit the business", "operational assessment", "roadmap de 90 dias" or similar.
 ---
 
 # Ops Roadmap Diagnose

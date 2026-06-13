@@ -1,0 +1,41 @@
+{
+  "skill_name": "ops:pop-builder",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Precisamos de documentar o processo de intake de novos clientes da WizardingCode para poder delegá-lo. É o processo que mais tempo me consome — ~3h por cliente.",
+      "expected_output": "A process inventory classification (Estratégico×Delegável quadrant) for the client intake process, a complete POP document with trigger/inputs/outputs/SLA/tools/numbered steps/quality criteria/escalation, and a delegation handoff card.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask for the WizardingCode vault POP templates (specifically the lead intake and client onboarding D14 templates), the Dan Martell No-How-To Delegation framework, and any existing POPs in the KB before generating.",
+        "The Estratégico×Delegável classification is applied to the intake process first, producing the quadrant placement and the correct action — the intake process (rule-based, template-driven) should land in Operacional+Ready ('Delegate now').",
+        "The POP document is produced in the exact required structure: POP ID (POP-OPS-NNN), Owner (Role not name), Version 1.0, Created date, Trigger, Inputs, Outputs, SLA, Tools, numbered steps with action-first verbs, quality criteria (measurable not subjective), common errors, and escalation.",
+        "Each step uses action-first verbs ('Confirm', 'Send', 'Create', 'Record') — passive steps or vague steps ('ensure quality') are absent.",
+        "The delegation handoff card is produced with the three-repetition rule (Shadow × 1 → Pair × 2 → Supervised × 3 → Autonomous), the autonomous-by date, and a review cadence — and the POP is ingested via kb_ingest."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Documenta o processo de fecho mensal financeiro — reconciliação de contas, IVA, e relatório para o contabilista. Este processo é do fundador ou pode ser delegado?",
+      "expected_output": "A classification of the monthly financial close as Estratégico+Ready or Operacional+Ready (depending on whether sign-off is required), a complete POP document, and a delegation handoff card targeting a finance assistant or AI agent.",
+      "expectations": [
+        "The skill calls kb_search for the WizardingCode vault 'monthly close' POP template and any existing financial process documentation before generating.",
+        "The classification is applied: the monthly close involves statutory obligations (IVA, accountant liaison) which may require founder sign-off → Estratégico+Ready (delegate execution, founder reviews output) — this quadrant classification is explicitly stated with its action.",
+        "The POP includes the decision point for IVA submission: 'IF IVA discrepancy > €X → escalate to founder within 24h; ELSE → submit as normal' — the branching logic is explicit, not implicit.",
+        "Quality criteria include measurable compliance signals: reconciliation balanced to €0 variance, IVA submitted before statutory deadline, accountant report sent within SLA.",
+        "The handoff card identifies whether delegation target is a human finance assistant or an AI agent (AI agent is viable for reconciliation data entry; human for IVA statutory submission) — not a generic 'delegate to someone'."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Build me a POP for our weekly LinkedIn content publishing process. We post 3 pieces per week — one thought leadership article, one client case study snippet, and one poll or question.",
+      "expected_output": "A complete POP for the weekly LinkedIn publishing workflow with the Estratégico×Delegável classification, numbered steps for all three content types, quality criteria per content type, and a delegation handoff card.",
+      "expectations": [
+        "The skill calls kb_search for any prior content POPs or marketing process documentation in the KB, and the company profile for the content strategy context, before generating.",
+        "The process inventory step is run first: the weekly LinkedIn publishing workflow is classified on both axes (Strategic: the thought leadership article may require founder voice → Estratégico+Ready; the poll/question is Operacional+Ready).",
+        "The POP document covers all three content types with numbered steps that distinguish between them — it is not a generic 'post content' step.",
+        "Quality criteria per content type are measurable: thought leadership (≥ 500 words, ≥ 1 data point or case reference, reviewed by founder before publish), case study snippet (client approval received, results specific and quantified), poll (question is open and unbiased).",
+        "The POP is ingested via kb_ingest with the correct title format 'POP — LinkedIn Content Publishing — WizardingCode — v1.0' and tags: pop, sop, processo, marketing, wizardingcode."
+      ]
+    }
+  ]
+}

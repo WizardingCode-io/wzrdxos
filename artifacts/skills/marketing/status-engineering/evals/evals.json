@@ -1,0 +1,41 @@
+{
+  "skill_name": "marketing:status-engineering",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Os prospects comparam-nos sempre com concorrentes mais baratos e tentam negociar o preço. Como paramos de competir por preço e posicionamos a WizardingCode como premium?",
+      "expected_output": "A KB-first lookup of the Rebranding-2026-06 vault and existing positioning, an ICP status map (reference group, markers, anxiety, current product position), the three repositioning moves (identity reframe, belonging signal, exclusion mechanism), and a premium signal audit table.",
+      "expectations": [
+        "The skill calls kb_search for the Rebranding-2026-06 vault (positioning v2, brand architecture, verbal identity) and any existing positioning memos before starting — status repositioning must be coherent with locked brand direction.",
+        "The ICP status map is produced: reference group (who the ICP compares themselves to), status markers (signals they use to evaluate themselves and peers), status anxiety (what they fear losing or failing to attain), and the current product position (below radar / neutral / status-positive / status-negative).",
+        "All three repositioning moves are applied: identity reframe (from 'AI automation for SMEs' to '[aspirational tier of ICP] use [wzrdx] to [achieve status outcome]'), belonging signal (exclusive group the buyer joins or aspires to), and exclusion mechanism (one truthful, operationalisable exclusion: 'we work with maximum 5 clients per quarter' or 'application required').",
+        "The premium signal audit table is produced for at least 5 touchpoints (website, pricing presentation, proposal design, email language, onboarding experience) with current signal → premium signal and priority (H/M/L).",
+        "The red flag is applied: 'every price objection is evidence that the status repositioning has not yet worked; use it as diagnostic data, not a reason to discount' — discounting is explicitly ruled out as a response."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Queremos usar 'by referral only' e 'limited to 5 clients per quarter' para criar exclusividade. Mas actualmente não é assim que operamos. Podemos dizer isto na comunicação na mesma?",
+      "expected_output": "A firm block on claiming exclusion mechanisms that cannot be operationalised, a diagnosis that fake exclusivity destroys trust when prospects discover it, and an alternative exclusion mechanism that the company can truthfully implement immediately.",
+      "expectations": [
+        "The skill names the SKILL.md red flag explicitly: 'Using exclusion mechanisms the company cannot operationalise — a by referral only claim that is not enforced destroys trust faster than no claim at all.'",
+        "The diagnosis is clear: claiming 'by referral only' or '5 clients per quarter' when the company currently operates differently is a lie that prospects discover — and it is worse for trust than no exclusion claim.",
+        "An alternative exclusion mechanism is proposed that the company can implement truthfully and immediately: e.g. 'application required' with a real 3-question qualifier form, or 'we only work with companies at [specific revenue/stage threshold]' if the ICP fit is genuine.",
+        "The status engineering principle is preserved: exclusion must be real — the question is 'what limitation is already true or can be made true immediately?' — not 'what exclusion sounds impressive?'",
+        "The repositioning brief is produced with the operationalisable exclusion mechanism, and a note that significant repositioning changes (changing the ICP target or price tier) require CEO gate before publishing."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We've repositioned the offer as premium but our proposals still look like they were made in a basic template. How do we fix the premium signal gap?",
+      "expected_output": "A premium signal audit focused on the proposal touchpoint, the Van Cleef-style premium signal principles applied to proposal design, and a prioritised list of specific changes to upgrade the proposal to match the premium positioning — without committing budget to visual direction without CEO gate.",
+      "expectations": [
+        "The skill identifies the dissonance: 'A premium brand that sends budget-looking proposals creates dissonance that kills the close' — this is named from the SKILL.md red flags as the core problem.",
+        "The Van Cleef-style premium signal principles are applied to the proposal specifically: specificity over volume (one specific credible claim), confidence over hedging ('this will deliver [result]' not 'we aim to'), language (remove discount language, urgency faking, mass-market phrasing), visual quality (proposal design must match positioning).",
+        "A premium signal audit for the proposal is produced: current signal (basic template, generic language, price buried) → premium signal (branded design, confident language, price presented as investment with anchor, guarantee prominent) with specific, actionable changes.",
+        "The brand voice alignment check is run: the revised proposal language must match the Rebranding-2026-06 verbal identity (once locked) or the interim voice — any contradiction with the locked brand direction is flagged to CMO + CEO.",
+        "Any significant visual upgrade (that requires committing design budget or selecting a visual direction) is explicitly flagged as requiring the CEO balanced-decision gate — the skill does not approve design spend unilaterally."
+      ]
+    }
+  ]
+}

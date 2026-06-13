@@ -1,0 +1,41 @@
+{
+  "skill_name": "fin:cash-first-ops",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Quanto tempo de dinheiro temos na WizardingCode? Tenho €28K em conta, €12K em facturas a receber (vencimento nos próximos 30 dias), e os custos fixos mensais são €9K. Há também €6K em dívidas com mais de 60 dias.",
+      "expected_output": "A cash snapshot with net cash position, burn rate and runway calculation, AR aging table with the overdue warning ladder applied, a runway tier classification, and the weekly cash ritual setup.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask for the Diagnostico-2026-05 cash data (runway data, €83K/month threshold, target €1M @ 2026-12-31), the company profile, and any prior cash snapshots in the KB before producing the calculation.",
+        "The net cash position is calculated correctly: €28K cash + €12K confirmed receivables ≤30d − €9K committed payables ≤30d = €31K net; runway = €28K (cash only, confirmed) ÷ €9K net burn = 3.1 months — calculated using confirmed cash, not projected revenue.",
+        "The AR aging table includes the €6K overdue >60 days in the 61-90d bucket, triggers the 'Red — formal notice letter; escalate to CEO' action, and the percentage of AR at risk (€6K ÷ monthly revenue proxy) is computed and flagged if > 20%.",
+        "The runway tier is classified as Red (< 3 months: 3.1 months is at the boundary → Amber confirmed with Amber actions: weekly cash review mandatory, no new discretionary spend) — the tier boundary rule is applied precisely.",
+        "The weekly Monday cash ritual is designed with the exact 5-step structure from the SKILL.md, and the snapshot is ingested via kb_ingest with the correct source path 'memos/fin/cash-first-ops-wizardingcode-YYYY-MM-DD'."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Set up the weekly cash ritual for WizardingCode from scratch. We don't currently track cash at all.",
+      "expected_output": "A first cash snapshot structure, the Monday Morning Cash Ritual defined (owner, day/time, 5 steps, tooling choice), the dashboard feed to fin:metrics-dashboard configured, and the warning thresholds documented.",
+      "expectations": [
+        "The skill calls kb_search for any prior cash data in the KB and the Diagnostico-2026-05 before requesting baseline data — it surfaces what is already known before asking for gaps.",
+        "The ritual is defined with the exact 5-step Monday structure: log cash in → log cash out → update AR aging → recalculate runway → flag escalations — each step with a time estimate (total ≤ 20 minutes).",
+        "A tooling choice is made: for WizardingCode (small team), Google Sheets template is recommended as the preferred option per the SKILL.md guidance.",
+        "The 5 cash metrics to push to fin:metrics-dashboard are explicitly listed: cash on hand, net burn, runway (months), AR overdue > 30d (€ and %), runway tier.",
+        "The default-debt warning thresholds are documented with the aging bucket ladder (current / 31-60d / 61-90d / >90d) and actions per bucket, calibrated to WizardingCode's average invoice size."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Temos uma fatura de €15K em atraso há 75 dias de um cliente. O que fazemos?",
+      "expected_output": "Application of the default-debt warning ladder (61-90d bucket → Red → formal notice letter, escalate to CEO), a specific action sequence with owner and deadline, and a provision-for-loss calculation.",
+      "expectations": [
+        "The skill calls kb_search for the company's AR overdue thresholds and any prior cash snapshots that include this receivable before responding.",
+        "The €15K invoice is placed in the 61-90d aging bucket and the correct action is applied: 'Red — formal notice letter; escalate to CEO' — not 'follow up politely'.",
+        "The percentage of monthly revenue that this overdue invoice represents is calculated (€15K ÷ monthly revenue proxy from KB/company profile) — if > 20%, the Risco signal is invoked.",
+        "A provision-for-loss calculation is noted: the SKILL.md states >90d invoices should be provisioned; the 75-day invoice is approaching that threshold and the provision timeline is flagged.",
+        "The cash snapshot is updated with this invoice's status and ingested via kb_ingest, and if runway is impacted, the fin:cfo-4-pilares Risco flag is invoked."
+      ]
+    }
+  ]
+}

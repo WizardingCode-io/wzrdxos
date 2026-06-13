@@ -1,0 +1,41 @@
+{
+  "skill_name": "knowledge:agent-evolution",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "O agente CTO devia saber aplicar o framework de token-cost optimization — vi isso em 3 digests consecutivos mas o agente nunca o usa.",
+      "expected_output": "An agent evolution run that gathers cited digest evidence, reads the CTO agent.md and org.md section, drafts a focused working-style diff (not a mandate change), and proposes as a PR without auto-applying.",
+      "expectations": [
+        "The skill calls kb_search for the token-cost optimization pattern and retrieves citations from at least the three digests mentioned.",
+        "The skill reads artifacts/agents/cto/agent.md and the CTO section in docs/org.md to identify the current working style and mandate boundaries.",
+        "The draft diff is classified as within-mandate (working-style addition) — no CEO gate is triggered for a working-style-only change.",
+        "The diff is formatted as a git diff-style before/after block citing the specific KB source for each addition.",
+        "A PR is proposed (not auto-merged) with evidence, mandate check, and the before/after diff in the body."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I want to evolve the CFO agent to also handle legal contract review. It keeps coming up in our client projects.",
+      "expected_output": "The skill identifies this as a mandate-change (legal is outside CFO's mandate), triggers the CEO balanced-decision gate before any diff is drafted, and includes the gate verdict in the PR.",
+      "expectations": [
+        "The skill reads docs/org.md and the CFO agent.md and explicitly documents that legal contract review falls outside the CFO's current mandate.",
+        "Because this is a mandate change, the skill invokes wzrdx-ceo-balanced-decision before drafting any diff.",
+        "The CEO gate verdict (go/no-go/revise) is included in the PR body — no PR is opened without it.",
+        "The diff is not drafted until the CEO gate returns a go verdict.",
+        "The skill correctly refuses to auto-apply the evolution — a PR is the only valid output mechanism."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Quarterly agent review: the COO agent hasn't been updated in 90 days. Sharpen it based on recent KB learnings.",
+      "expected_output": "A KB-first evidence-gathering run for the COO agent, a diff grounded in KB content from the last 90 days, and a PR with cited sources — not a generic improvement.",
+      "expectations": [
+        "The skill calls kb_search targeting digests, memos, and enrichment entries from the last 90 days relevant to COO domain (ops, delegation, process).",
+        "Every addition in the draft diff cites a specific KB source with [source: <path>] — no additions without KB grounding.",
+        "If the KB evidence does not support any concrete improvement, the skill documents a 'no evolution needed' finding and ingests it rather than drafting an unsupported diff.",
+        "The PR body follows the required format: evidence, mandate check, diff, and redeploy note (wzrdx install claude).",
+        "After hypothetical merge, the skill's step 6 documents the evolution via kb_ingest with source 'memos/agent-evolution-<name>-YYYY-MM-DD.md'."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+[
+  { "query": "Estou sempre ocupado mas sem avançar — quero proteger o meu tempo de trabalho profundo.", "should_trigger": true },
+  { "query": "Design my Perfect Week template.", "should_trigger": true },
+  { "query": "Devo aceitar esta reunião de cliente na terça-feira de manhã?", "should_trigger": true },
+  { "query": "Audit my calendar — I have too many meetings this week.", "should_trigger": true },
+  { "query": "Quero criar um Preloaded Year para o próximo trimestre.", "should_trigger": true },
+  { "query": "Set up a recurring Friday 30-min calendar review block.", "should_trigger": true },
+  { "query": "My deep work keeps getting interrupted — help me restructure my week.", "should_trigger": true },
+  { "query": "Aplica as cinco regras de defesa do calendário à minha semana.", "should_trigger": true },
+  { "query": "I want Reverse Calendar Booking set up for my schedule.", "should_trigger": true },
+  { "query": "Verifica se a minha semana viola alguma regra do calendário.", "should_trigger": true },
+  { "query": "Prepara a ata da reunião de hoje.", "should_trigger": false },
+  { "query": "Quero delegar a gestão administrativa ao meu assistente.", "should_trigger": false },
+  { "query": "What tasks should I delegate this week?", "should_trigger": false },
+  { "query": "Write the agenda for tomorrow's team meeting.", "should_trigger": false },
+  { "query": "Faz o Buyback Audit e diz-me o que posso delegar.", "should_trigger": false },
+  { "query": "Should we hire a VA to handle my emails?", "should_trigger": false },
+  { "query": "Run the daily knowledge digest.", "should_trigger": false },
+  { "query": "Set up my OKRs for Q3.", "should_trigger": false },
+  { "query": "Como posso melhorar o meu processo de vendas?", "should_trigger": false },
+  { "query": "Help me plan my tasks for today.", "should_trigger": false }
+]

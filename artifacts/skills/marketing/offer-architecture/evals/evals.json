@@ -1,0 +1,41 @@
+{
+  "skill_name": "marketing:offer-architecture",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Queremos criar a mensagem de oferta para o nosso serviço de implementação de IA para PMEs — 30 dias, resultado garantido. Precisamos de uma landing page e de uma proposta comercial. Por onde começamos?",
+      "expected_output": "A KB-first lookup for existing offers and ICP data, a five-anchor offer context, the Grand Slam Offer four-lever analysis with specific claims and evidence, a value stack totalling ≥ 3× the investment, a guarantee type selection, and the 17-step Sabri Suby scaffold populated.",
+      "expectations": [
+        "The skill calls kb_search for existing offers, landing pages, ICP data, and any prior win/loss notes before authoring anything — the Rebranding-2026-06 verbal identity is surfaced if available.",
+        "The five offer anchors are established before any copy is written: product/service (what exactly is being sold, deliverable, timeline, outcome), ICP (specific vertical/role/company size/trigger event), single biggest pain, dream outcome (in client's words), and competing alternatives — missing anchors are requested before proceeding.",
+        "The Grand Slam Offer four-lever analysis is produced: Dream Outcome (specific, measurable, emotionally resonant — not 'AI automation' but 'your team completes onboarding in 3 days instead of 3 weeks'), Perceived Likelihood (specific credibility evidence — case studies, mechanism, or risk reversal), Time Delay (first win within the first week named), Effort and Sacrifice (specific burdens removed, 'done-with-you' framing).",
+        "The value stack table is produced with all components and perceived values, total ≥ 3× the actual investment — the fast-action incentive is real (not faked), and the investment figure is flagged for fin:pricing-redesign alignment before publishing.",
+        "The 17-step Sabri Suby scaffold is fully populated (no placeholder steps) and the NUEPH scorecard is produced: N/U/E/P/H each green or red with gap notes for any red."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "A nossa taxa de conversão em propostas está abaixo de 15% — os prospects dizem que o preço é alto mas não pedem desconto, só desaparecem. O que está errado na proposta?",
+      "expected_output": "A diagnosis that the missing element is a risk reversal (guarantee), not a price problem; a guarantee design appropriate to the offer; and the risk reversal positioned prominently in the proposal structure — with CFO + CEO gate flagged before committing.",
+      "expectations": [
+        "The skill names the SKILL.md red flag: 'Missing the risk reversal — without a guarantee, the prospect absorbs all the downside; conversão will stay below 15%.' The below-15% conversion rate is matched directly to this red flag.",
+        "The diagnosis distinguishes the real problem: the 'price is high' objection from prospects who then disappear without asking for a discount is a risk-perception problem, not a price objection — the prospect is not convinced the outcome justifies the risk, not that it is unaffordable.",
+        "A guarantee is designed from the four types (Results guarantee, Effort guarantee, Pilot/trial, Satisfaction guarantee) — the strongest one the company can credibly stand behind is recommended with an explicit rationale.",
+        "The guarantee is written in plain language (one sentence, no buried conditions) and its placement in the 17-step scaffold is specified: Step 11 (Risk reversal), prominent, impossible to miss.",
+        "The CFO + CEO gate is flagged before committing to a results guarantee — the company must be able to absorb the financial downside; this is not a CMO-only decision."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Criámos uma value stack para o nosso serviço mas o total só chega a 2× o preço de venda. O que fazemos para a tornar mais convincente?",
+      "expected_output": "A diagnosis that the value stack fails the 3× rule, specific guidance on which component types to add or reframe (real standalone value only — no phantom bonuses), and a revised stack totalling ≥ 3×.",
+      "expectations": [
+        "The skill names the SKILL.md red flag: 'A value stack where the total is less than 3× the investment — the offer must feel like undeniable value; if it does not, add components or reduce the price (CFO gate).'",
+        "The diagnosis identifies which value stack rule is being violated: either the components are not truly standalone-valuable (phantom bonuses inflated to make the math work) or real components exist but are not being unbundled and presented as standalone items.",
+        "Specific component types are recommended to add real standalone value: a training/workshop component, a template library, a quarterly review session, an async support package, access to a community or peer group — each must be something the ICP would pay for separately.",
+        "The revised stack is produced with all components listed, perceived standalone values assigned (not inflated), and total ≥ 3× the actual investment — with a note that the investment figure requires fin:pricing-redesign alignment before publishing.",
+        "The NUEPH scorecard is run on the offer: the 'U' (Único) and 'E' (Exclusivo) scores are checked — a low NUEPH score on Único means the value stack is commoditised even if it passes the 3× rule."
+      ]
+    }
+  ]
+}

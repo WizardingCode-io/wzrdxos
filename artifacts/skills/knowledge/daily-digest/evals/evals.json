@@ -1,0 +1,41 @@
+{
+  "skill_name": "knowledge:daily-digest",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "O que há de novo na KB? Faz o digest de hoje.",
+      "expected_output": "A dated KB digest memo in the standard structure (by source type, key insights, gap analysis, routing), with every claim cited, watermark advanced only after successful ingest, and highlights routed to the relevant dept heads.",
+      "expectations": [
+        "The skill calls kb_status first and records the chunk counts before calling kb_digest.",
+        "kb_digest is called with advance=false initially — the watermark is advanced only after kb_ingest confirms success.",
+        "Every claim in the 'Key insights' section cites [source: <source-path>] — no uncited claims.",
+        "The 'Gap analysis' section explicitly addresses each Known gap from docs/org.md §§1-8 as open, partially closed, or fully closed — not a generic summary.",
+        "The memo is ingested with source 'digests/YYYY-MM-DD.md' and the watermark is advanced with advance=true only after ingest confirms success."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Run the daily digest — I want to know what was ingested into the knowledge base in the last 24 hours.",
+      "expected_output": "A KB digest memo grouping new chunks by source-prefix type (digests/, memos/, enrichment/, raw sources) with cited insights and dept-head routing.",
+      "expectations": [
+        "Chunks are grouped by source-prefix type (digests/, memos/, enrichment/, everything else) in the memo body.",
+        "If stats.new is 0, the skill records a no-op note and does NOT advance the watermark.",
+        "For each key insight, the routing section names a specific dept head and explains why the insight is relevant to their department.",
+        "The digest memo follows the exact structure defined in the skill (By source type → Key insights → Gap analysis → Routing).",
+        "The skill does not run LLM synthesis in a worker — the agent itself writes the memo from the raw chunks returned by kb_digest."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Faz o digest mas a partir do dia 1 de Junho de 2026 — quero ver o que entrou desde essa data.",
+      "expected_output": "A KB digest starting from an explicit ISO timestamp override (2026-06-01), with the since timestamp passed to kb_digest and documented in the memo header.",
+      "expectations": [
+        "The skill passes the explicit ISO timestamp '2026-06-01' as the 'since' parameter to kb_digest, overriding the stored watermark.",
+        "The memo header documents 'Period: 2026-06-01 → <watermark>' explicitly.",
+        "Every chunk returned since that date is read and synthesized — no chunks are silently dropped.",
+        "The gap analysis still checks all Known gaps from org.md §§1-8 against the chunks in this window.",
+        "The watermark is advanced only after kb_ingest confirms success for the memo covering this window."
+      ]
+    }
+  ]
+}

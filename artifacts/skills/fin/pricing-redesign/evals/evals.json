@@ -1,0 +1,41 @@
+{
+  "skill_name": "fin:pricing-redesign",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Devíamos cobrar mais pelo nosso serviço de implementação de AI agents? Actualmente cobramos €3.500 por projecto. O custo de entrega é de €1.800 (mão-de-obra + ferramentas). O CAC é €400.",
+      "expected_output": "A baseline economics table for the implementation service, a price floor calculation, a premium signal scorecard, an annual price increase viability analysis, and a 4-option pricing table with a CFO recommendation — not a final decision.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask for prior unit-economics audits, the Diagnostico-2026-05 pricing position, the Premium Pricing and Status Engineering frameworks (Sabri Suby), and the CAC/LTV/Payback Triangle state before producing any analysis.",
+        "The baseline economics table is produced: price €3.500, COGS €1.800, gross margin = (€3.500-€1.800)/€3.500 = 48.6% (below the 50% services target → Amber), CAC €400, GP/CAC = €1.700/€400 = 4.25 (above 1 → Green), payback = CAC/gross profit per transaction = €400/€1.700 = 0.24 months (project stream ≤ 3m → Green).",
+        "The price floor is calculated: €1.800 ÷ (1 - 0.50) = €3.600 — the minimum price to hit the 50% gross margin target — revealing the current price (€3.500) is €100 below the floor.",
+        "The 4-signal premium scorecard is applied (scarcity/exclusivity, proof density, outcome specificity, anchoring) with a score 0-2 per signal — and the total (0-8) interpreted against the premium-pricing viability threshold (≥ 6 = defensible).",
+        "The 4-option pricing table (status quo / floor fix / premium / tiered) is produced with economics per option, and the CFO recommendation states which option is preferred with conditions — explicitly framing it as a proposal to the CEO+CRO gate, not a mandate."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We offer a monthly AI-retainer at €1,200/month that includes 'unlimited AI agent support'. We're not sure if we're losing money on heavy users. Help us model this.",
+      "expected_output": "An included-compute / fair-use model for the retainer, a cost exposure table mapping actual vs included usage, a recommendation of one of the three fair-use structures, and the breakeven usage level per structure.",
+      "expectations": [
+        "The skill calls kb_search for any prior unit-economics audit for the retainer stream and the pricing framework documents in the KB before modelling.",
+        "The fair-use modelling is applied per Step 6: the cost exposure table maps the usage metric (AI agent support hours or token budget), the included amount, actual average usage, and the overage cost per unit.",
+        "All three fair-use structures are evaluated: soft cap with upgrade prompt / hard cap with overage fee / fair-use policy — each with a breakeven usage level.",
+        "The recommendation names the structure that 'maximises gross margin per client without triggering perceived price-gouging' — with the breakeven usage level and the percentage of clients expected to be outliers.",
+        "The skill explicitly flags the red flag: 'an included-unlimited structure without cost modelling is a liability' — confirming this analysis was necessary; the memo is ingested via kb_ingest."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Queremos aumentar os preços em Janeiro. A nossa taxa de retenção é 85% e estamos a 90% de capacidade. Faz o plano.",
+      "expected_output": "An annual price increase viability analysis confirming the increase is viable (retention ≥ 70%, capacity constraint = scarcity signal), a proposed increase amount with revenue impact and retention breakeven, and the economics framing for the CEO+CRO gate.",
+      "expectations": [
+        "The skill calls kb_search for the current pricing and the CAC/LTV/Payback Triangle state before modelling the increase.",
+        "The annual price increase viability is confirmed against all three criteria from Step 5: retention ≥ 70% (85% = confirmed), offer positioned on outcomes not hours (to verify), capacity constraint present (90% capacity = scarcity signal confirmed).",
+        "The revenue impact is calculated: (new price × current client count) − current ARR = incremental revenue at 100% retention; the retention breakeven is stated ('at what churn rate does the increase become revenue-neutral').",
+        "The grandfathering vs no-grandfathering decision is presented as an economics question (grandfathering reduces short-term revenue impact but reduces urgency signal), not a marketing decision — consistent with the scope boundary.",
+        "The pricing memo is ingested via kb_ingest with the correct source path 'memos/fin/pricing-redesign-wizardingcode-YYYY-MM', and the decision gate statement explicitly names CEO + CRO as the approvers."
+      ]
+    }
+  ]
+}

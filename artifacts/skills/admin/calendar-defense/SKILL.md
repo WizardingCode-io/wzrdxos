@@ -1,9 +1,16 @@
 ---
-name: admin:calendar-defense
-description: Audit the current calendar against the five defense rules, produce the Perfect Week template and Preloaded Year skeleton, and schedule the recurring weekly calendar review.
+name: 'admin:calendar-defense'
+description: >-
+  Audit the current calendar against the five defense rules, produce the Perfect
+  Week template and Preloaded Year skeleton, and schedule the recurring weekly
+  calendar review.
 type: capability
 department: admin
-when-to-use: Calendar audit, "Perfect Week", "Preloaded Year", "devo aceitar esta reunião", "estou sempre ocupado mas sem avançar", protecting deep work, cognitive batching, or any request to redesign how the founder's week is structured.
+when-to-use: >-
+  Defending or restructuring the CALENDAR: reverse booking, protecting deep-work
+  mornings, meeting batching, Perfect Week / Preloaded Year, "a minha agenda
+  está um caos", calendar audit. NOT for generic to-do/task planning for the day
+  (task tools own that) — this skill is about the calendar architecture itself.
 ---
 
 # Calendar Defense

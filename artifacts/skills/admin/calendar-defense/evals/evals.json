@@ -1,0 +1,41 @@
+{
+  "skill_name": "admin:calendar-defense",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Estou sempre ocupado mas sem avançar. Quero um Perfect Week que me proteja o tempo de trabalho profundo.",
+      "expected_output": "A calendar audit against the five defense rules, a Perfect Week template following all five rules, a Preloaded Year skeleton for the next quarter, and a recurring Friday 30-min review block set up.",
+      "expectations": [
+        "The skill calls kb_search for the company profile, any prior Perfect Week template, and the Dan Martell/Alex Hormozi/Sabri Suby frameworks before auditing.",
+        "The skill requests the founder's current week calendar (screenshot, export, or verbal description) before auditing — it does not audit a hypothetical week.",
+        "The audit identifies every block that violates any of the five defense rules by name (Rule 1 through Rule 5).",
+        "The Perfect Week template is structured with Monday/Friday as shallow days and Tuesday/Wednesday/Thursday as deep days, with the First-Four-Hours block marked [PROTECTED].",
+        "The Preloaded Year skeleton blocks at minimum weekly, monthly, quarterly, and annual recurring commitments for the next quarter."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Audit my calendar for next week: Monday I have a team sync at 10am, Tuesday I have a client call at 10am, Wednesday is free, Thursday has a proposal review at 3pm, Friday I have admin the whole day.",
+      "expected_output": "A violation report against all five rules for the described week, with specific blocks named per violation and a corrected Perfect Week layout.",
+      "expectations": [
+        "The Tuesday client call at 10am is identified as violating Rule 2 (First-Four-Hours sacred) — a meeting lands in the deep-work block on a deep-work day.",
+        "Friday 'admin the whole day' is evaluated against Rule 3 (Friday is a shallow day — admin is correct for Friday, so this may pass Rule 3).",
+        "The Monday team sync at 10am is evaluated against Rule 2 — if it is within the first four hours, it is flagged as a violation.",
+        "Every violation is named with the specific rule number and the specific block that breaks it.",
+        "The corrected Perfect Week pushes violating meetings to Mon/Fri afternoon slots or after the First-Four-Hours block."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Devo aceitar esta reunião de cliente na terça-feira de manhã às 9h? Dura 1 hora.",
+      "expected_output": "A calendar-defense assessment of the proposed meeting slot against the five rules, with a clear accept/decline recommendation and an alternative slot if declined.",
+      "expectations": [
+        "The skill checks the meeting slot against Rule 2 (First-Four-Hours sacred — 9h on Tuesday is in the protected block) and explicitly identifies the violation.",
+        "The skill checks Rule 3 (Tuesday is a deep-work day — a client meeting is shallow work and should be on Mon/Fri).",
+        "The recommendation is either accept with explicit justification of the exception cost, or decline with a concrete alternative slot (e.g. Monday 14h or Friday 14h).",
+        "The 80% cap check (Rule 5) is mentioned if the founder's calendar context is known.",
+        "The skill does not accept 'the client insists' as sufficient justification without naming the cost of the exception."
+      ]
+    }
+  ]
+}

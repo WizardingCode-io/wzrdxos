@@ -1,0 +1,22 @@
+[
+  { "query": "O que há de novo na KB?", "should_trigger": true },
+  { "query": "Run the daily KB digest.", "should_trigger": true },
+  { "query": "Faz o digest de hoje — quero ver o que entrou na knowledge base.", "should_trigger": true },
+  { "query": "What was ingested into the knowledge base in the last 24 hours?", "should_trigger": true },
+  { "query": "Daily knowledge review — what's the latest?", "should_trigger": true },
+  { "query": "O watermark já tem mais de 24h — faz o digest.", "should_trigger": true },
+  { "query": "Start-of-day knowledge review for WizardingCode.", "should_trigger": true },
+  { "query": "Sintetiza o que entrou na KB desde ontem.", "should_trigger": true },
+  { "query": "Quero o resumo do conhecimento novo desta semana.", "should_trigger": true },
+  { "query": "Run a digest pass to check for recent memos and decisions.", "should_trigger": true },
+  { "query": "Quero limpar a KB — há muitos duplicados.", "should_trigger": false },
+  { "query": "Search the KB for anything about pricing strategy.", "should_trigger": false },
+  { "query": "Ingest this document into the knowledge base.", "should_trigger": false },
+  { "query": "Devíamos ter uma skill para isto — já vi este padrão várias vezes.", "should_trigger": false },
+  { "query": "What does the KB say about our ideal customer profile?", "should_trigger": false },
+  { "query": "Run an enrichment pass to find contradictions in the KB.", "should_trigger": false },
+  { "query": "Ask the KB what our current Buyback Rate is.", "should_trigger": false },
+  { "query": "Faz uma auditoria de qualidade ao processo de onboarding.", "should_trigger": false },
+  { "query": "Update the KB with the notes from today's meeting.", "should_trigger": false },
+  { "query": "Show me all the documents in the memos/ folder.", "should_trigger": false }
+]

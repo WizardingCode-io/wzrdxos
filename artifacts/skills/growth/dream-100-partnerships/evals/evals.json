@@ -1,0 +1,41 @@
+{
+  "skill_name": "growth:dream-100-partnerships",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Queremos construir uma estratégia de parcerias para a WizardingCode. Nunca fizemos isto de forma estruturada. Por onde começamos e como identificamos os parceiros certos?",
+      "expected_output": "A KB-first lookup for the Diagnostico Vendas 25/100 and any existing partnership lists, the Dream 100 master list structure across 3 categories (Partners, Channels, Whales), the first-10 selection with prioritisation rationale, and the value-first warm-up sequences.",
+      "expectations": [
+        "The skill calls kb_search for the Diagnostico-2026-05 Vendas 25/100, current pipeline state, and any existing partnership lists or Dream 100 drafts — it does not restart a Dream 100 already in motion but extends and updates it.",
+        "The Dream 100 master list is structured across all three categories: Category A (Partners — referral ecosystem, serving same ICP without competing), Category B (Channels — distribution amplifiers with concentrated ICP access), Category C (Whales — 10-20 dream direct accounts whose logo anchors the case study library) — with realistic PT-market examples for a WizardingCode/AI-agency context.",
+        "The first-10 selection is produced from the master list with the 5-criterion prioritisation (relationship strength, revenue/distribution impact, reciprocity fit, geographic fit, reachability) — warmest + highest ceiling + clear mutual win.",
+        "For each first-10 entry, 3-5 value-first touches are designed in the prescribed order of effort and impact: public amplification, useful introduction, resource gift, collaboration invitation, custom research/mini-audit, event connection — no ask before the relationship has real substance.",
+        "The 'ready for ask' judgment criterion is stated: they have acknowledged or responded to at least two touches AND the relationship feels genuinely mutual — and the warm-up tracker table is produced as the accountability artefact."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We've been doing value-first touches with 3 potential partners for 6 weeks. How do we know when to make the ask and what should the partnership offer look like?",
+      "expected_output": "Application of the 'ready for ask' judgment (2+ acknowledged touches, mutual feeling), the partnership offer structure (mutual-win, pilot proposal, single next step), and routing to CMO + CFO + CEO gate before sending any revenue-share commitment.",
+      "expectations": [
+        "The 'ready for ask' judgment is applied to the 6-week context: 6 weeks of touches without at least 2 acknowledged responses means the relationship is not yet ready — the specific warm-up tracker status for each of the 3 partners is reviewed.",
+        "The SKILL.md red flag is named: 'Asking too early — a partnership request after one value touch is not a Dream 100 relationship; it is cold outreach in disguise and will be treated as such.'",
+        "The partnership offer structure is produced for the ready partner(s): mutual-win framing, what the partner gets (specific benefits — revenue share, referral fee, co-branding, introductions), what wzrdx gets (honest statement), how it works step-by-step, and a 90-day pilot proposal with a defined success metric.",
+        "The partnership offer is routed to CMO for messaging review and CFO + CEO for any revenue-share or pricing commitment — the red flag is named: 'routing partnership offers with revenue-share commitments to only CMO — any pricing or revenue split requires CFO + CEO gate.'",
+        "The weekly operating rhythm is confirmed: advance at least one touch per first-10 entry per week; move entries from 'in progress' to 'ready for ask' when threshold is met; add new entries that appeared on radar."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Estamos a apostar tudo numa parceria com um grande integrador de software para nos dar acesso aos seus clientes. Se eles disseram não, ficamos sem pipeline. O que fazemos?",
+      "expected_output": "Application of the Martell parallel protocol — a single whale relationship as the company's primary growth bet is an explicit SKILL.md red flag — followed by an emergency parallel outreach plan for 5-10 whale candidates simultaneously.",
+      "expectations": [
+        "The skill names the SKILL.md red flag explicitly: 'Running a single whale relationship as the company's primary growth bet — Martell's parallel protocol exists for this reason; one whale ghosting you must not stall the growth engine.'",
+        "The Martell parallel protocol is applied as an emergency plan: identify 5-10 whale candidates from Category C immediately (not 1, not 20), assign each a dedicated warm-up sequence, run all simultaneously — momentum is self-reinforcing when multiple whales are in parallel.",
+        "The warm-up tracker is produced for the emergency first-5 whales with touch 1 scheduled this week — the immediacy is explicit, not a future planning exercise.",
+        "The current single-whale relationship is not abandoned — it continues as one of the 5-10 parallel tracks, but the concentrated dependency is eliminated by adding 4-9 more parallel tracks.",
+        "The revenue gap from the potential 'no' is computed against the pipeline coverage: if the pipeline drops below 2× the monthly target, this is a revenue emergency and an outbound action (cold-outreach-engine) must run in parallel with the Dream 100 warm-up."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "skill_name": "marketing:hook-viral-system",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Vamos lançar um Reel sobre os erros mais comuns de automação nas PMEs portuguesas. Preciso de um hook que pare o scroll — gera um set completo.",
+      "expected_output": "A KB-first lookup for prior hook tests and content performance, a content context definition (format: Reel, topic, ICP state, goal), exactly 7 hooks (one per type) with attention scores, and a STEPPS virality scorecard with improvement actions for levers below 3.",
+      "expectations": [
+        "The skill calls kb_search for prior hooks tested for similar topics and any content performance data before generating new hooks — it does not generate from scratch if tested variants already exist.",
+        "The content context is defined first: format (Reel/Instagram), ICP state (PT SME founders/managers scrolling), goal (stop scroll + awareness), platform norms (fast visual hooks + relatable pain for Instagram/Reels) — before any hook is written.",
+        "Exactly 7 hooks are produced, one per type and clearly labelled: Curiosity gap, Bold claim/contrarian, Pain agitation, Specific result (social proof), Story hook (open loop), Question (Socratic), Instruction/how-to — each with format fit and attention score (1-5).",
+        "The first-3-seconds discipline is applied to each Reel hook: Frame 0 must work muted (text overlay + visual), first spoken word must start mid-action or mid-sentence — no 'Hey guys' or 'Today I'm going to' openers.",
+        "The STEPPS virality scorecard is produced with all six levers scored (1-5): Social Currency, Triggers, Emotion, Public, Practical Value, Stories — total out of 30, interpretation (24-30 / 15-23 / <15), and one specific improvement action for each lever below 3."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Our email campaign had a 12% open rate last month — below our 40% target. The subject lines were generic. Generate better subject lines for our next campaign on AI onboarding for SMEs.",
+      "expected_output": "A content context with email as format, 7 subject line hooks (one per type), a first-3-seconds discipline application (first 3 words contain the hook, max 7 words), and an A/B test variant selection with the metric to track (open rate).",
+      "expectations": [
+        "The skill identifies the open rate alert (12% < 30% threshold = subject line problem) and applies the diagnostic from §7: 'Open rate alert → test 3 new subject lines.'",
+        "The content context is established: format (email subject line), ICP (PT SME owners/managers considering AI onboarding), goal (drive opens), platform norms (specificity and personalisation for email subjects, first 3 words carry the hook, max 7 words for mobile preview).",
+        "All 7 subject line hooks are produced (one per type), with the first-3-words rule applied to each — no 'Newsletter #47' or 'Update from [Company]' patterns.",
+        "The A/B test variant is selected: a curiosity version (open loop) is tested against a specificity version (concrete result) — these are identified as the two most different hook types for email open rate testing.",
+        "The success metric is stated: open rate target ≥ 40%; if below 30% after the test, diagnose copy vs. list quality; the specific date to evaluate performance is named."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Queremos criar um post de LinkedIn sobre a nossa metodologia de implementação de IA em 30 dias. O conteúdo é bom mas não está a ter engagement. O que está errado e como corrigimos?",
+      "expected_output": "A STEPPS virality audit identifying the specific levers scoring below 3, a hook audit identifying the opening line problem, and a revised first line with 3-5 hook variants to test — followed by a kb_ingest plan for when performance data is available.",
+      "expectations": [
+        "The skill runs the STEPPS scorecard on the described content: '30-day AI implementation methodology' likely scores low on Emotion (low arousal — process descriptions are not emotionally engaging), Triggers (no environmental cue repeated), and Social Currency (sharing a methodology does not make the sharer look dramatically ahead of the curve) — each gap is named explicitly.",
+        "The LinkedIn first-line discipline is applied: 'First line visible before see more is the only line that matters initially — it must state a bold claim, call out a specific pain, open a curiosity gap, or start a story with an unresolved situation. Sentence length ≤ 12 words.'",
+        "At least 3 hook variants for the LinkedIn first line are produced — from different types (e.g. Pain agitation, Bold claim, Story hook) — each ≤ 12 words and not starting with 'I' or the brand name.",
+        "The STEPPS improvement actions are specific: for Emotion — reframe the post around a client transformation story (before/after) instead of the methodology; for Social Currency — add a counterintuitive claim the audience would want to share to signal they are ahead of the curve.",
+        "A kb_ingest plan is provided: when the post goes live and engagement data is available, ingest the hook test result with title 'Hook Test — [Content topic] — LinkedIn — [YYYY-MM-DD]' and the STEPPS scorecard and winning hook selected."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+[
+  { "query": "por onde começo com o diagnóstico da WizardingCode?", "should_trigger": true },
+  { "query": "Quem trata de perceber como lançar o novo serviço de IA?", "should_trigger": true },
+  { "query": "I need to hire our first employee, set their salary, and communicate the new role to clients — where do I start?", "should_trigger": true },
+  { "query": "quem trata disto — precisamos de uma estratégia de pricing e também de uma campanha de marketing?", "should_trigger": true },
+  { "query": "We have a new initiative that spans engineering, finance, and growth. How do we coordinate?", "should_trigger": true },
+  { "query": "Não sei por onde começar — há demasiadas coisas para fazer este mês.", "should_trigger": true },
+  { "query": "Route this request: I want to redesign our onboarding, update pricing, and start hiring.", "should_trigger": true },
+  { "query": "What departments need to be involved in launching a new product line?", "should_trigger": true },
+  { "query": "Como é que o wzrdxOS organiza o trabalho quando há várias áreas envolvidas?", "should_trigger": true },
+  { "query": "I need to start the wzrdxOS flow for our Q3 planning.", "should_trigger": true },
+  { "query": "Quero otimizar o meu funil de vendas — como melhoro a taxa de conversão?", "should_trigger": false },
+  { "query": "Write a blog post about AI automation for SMEs.", "should_trigger": false },
+  { "query": "Calcula o nosso Buyback Rate com base num salário de €60.000 por ano.", "should_trigger": false },
+  { "query": "Run the daily KB digest for today.", "should_trigger": false },
+  { "query": "Review this proposal before I send it to the client.", "should_trigger": false },
+  { "query": "Audit the onboarding process against the POP.", "should_trigger": false },
+  { "query": "What is the Optimist lens saying about hiring our first salesperson?", "should_trigger": false },
+  { "query": "Set up a Perfect Week template for me.", "should_trigger": false },
+  { "query": "Faz o enriquecimento da KB — quero verificar duplicados.", "should_trigger": false },
+  { "query": "Generate a job description for a senior developer.", "should_trigger": false }
+]

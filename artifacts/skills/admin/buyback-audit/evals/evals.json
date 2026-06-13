@@ -1,0 +1,41 @@
+{
+  "skill_name": "admin:buyback-audit",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Estou a fazer demasiado — admin, reuniões, prospeção, entrega de projetos. Quero perceber o que devo delegar primeiro.",
+      "expected_output": "A full buyback audit with Buyback Rate computed, task classification table (all tasks with energy/market-rate/delegate flags), the 8% Only-Founder List, and a delegation plan with owner and handover step for each candidate.",
+      "expectations": [
+        "The skill calls kb_search for the company profile (annual revenue proxy), prior delegation plans, and the Dan Martell Buyback Rate/92% Rule/Replacement Ladder frameworks before building the task log.",
+        "The Buyback Rate is computed using the formula (annual revenue ÷ 2000 ÷ 4) and the threshold is stated in €/h.",
+        "The task classification table lists every recurring task with Time/week, Energy (−1/0/+1), Market rate (€/h), Below rate (Yes/No), and Delegate (Yes/No) columns.",
+        "The 8% Only-Founder List is produced explicitly and short — tasks where no substitute exists are challenged, not accepted at face value.",
+        "The delegation plan includes a single 'Next action' — the highest-impact delegation to start this week, with owner, deadline, and handover step."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Run a Buyback Audit for the WizardingCode founder. Here's a rough summary of my last two weeks: Monday I handled client emails (3h), Tuesday worked on proposals (4h), Wednesday did bookkeeping (2h), Thursday ran a team sync (1.5h), Friday did LinkedIn content (2h). This repeats weekly.",
+      "expected_output": "A buyback audit using the provided weekly task list, with each activity classified, the Buyback Rate threshold applied, and tasks below the rate flagged as delegation candidates.",
+      "expectations": [
+        "The skill uses the provided task list as the 2-week time log without requiring additional input for reconstruction.",
+        "Each task (client emails, proposals, bookkeeping, team sync, LinkedIn content) has an estimated market rate in €/h and an energy rating.",
+        "The Buyback Rate is computed from the KB-retrieved annual revenue proxy for WizardingCode.",
+        "Bookkeeping (a below-rate, typically energy-draining task) is flagged as an urgent delegation candidate.",
+        "The COO delegation-matrix is cross-referenced to avoid duplicate assignment of already-documented processes."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Quero libertar 10 horas por semana. Faz o Buyback Audit e diz-me o que delegar para chegar lá.",
+      "expected_output": "A buyback audit targeted at freeing 10h/week, identifying the delegation candidates that together account for ≥10h, with a prioritised plan and next action.",
+      "expectations": [
+        "The skill requests the founder's recurring task list before classifying — it does not invent tasks.",
+        "The delegation plan identifies the subset of delegation candidates that together equal or exceed 10 hours per week.",
+        "The 92% Rule is applied: the 8% Only-Founder List is documented and the remaining tasks are all classified as delegation candidates regardless of comfort.",
+        "Each delegation candidate has an agent-first vs. human-hire recommendation based on the task's judgment level and relationship intensity.",
+        "The audit memo is ingested via kb_ingest with source 'memos/buyback-audit-YYYY-MM-DD.md'."
+      ]
+    }
+  ]
+}

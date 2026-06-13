@@ -1,0 +1,41 @@
+{
+  "skill_name": "fin:cfo-4-pilares",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Faz o diagnóstico financeiro da WizardingCode. Não temos plano anual escrito, a contabilidade está 2 meses atrasada, não calculamos CAC/LTV, e não sabemos o nosso runway actual.",
+      "expected_output": "A 4-pillar diagnostic scorecard (Planeamento/Contabilidade/Análise/Risco) with a score 1-5 per pillar with evidence, the weakest pillar named, the consequence of inaction stated, and a 90-day rebalancing roadmap.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask for the '4 Pilares de Atividade do CFO' framework, the CEO Scorecard 7 Numbers (Dan Martell), the Diagnostico-2026-05 KPI baselines, and any prior CFO diagnostic memos in the KB before scoring.",
+        "Each pillar is scored 1-5 with at least two evidence data points: Planeamento (no annual plan, no rolling forecast → score 1-2); Contabilidade (2 months behind → score 1-2); Análise (no CAC/LTV/dashboard → score 1); Risco (runway unknown → score 1 with explicit note that 'absence of data is itself a risk signal').",
+        "The weakest pillar is named explicitly — with the stated consequence of leaving it unaddressed for 90 days ('no runway data means a cash crisis is invisible until it is fatal').",
+        "The 90-day rebalancing roadmap has three windows (Now D1-30 / Soon D31-60 / Later D61-90) with specific, named artefacts per action: e.g. 'rolling 12-month forecast model in Sheets — CFO — by 2026-07-15', not vague actions like 'improve tracking'.",
+        "Cross-references to adjacent skills are stated explicitly: Contabilidade ≤ 2 → no analysis before bookkeeping fixed; Risco runway unknown → route to fin:cash-first-ops immediately; Análise ≤ 2 → route to fin:unit-economics-audit; and the diagnostic is ingested via kb_ingest."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Nossa contabilidade está actualizada e temos o P&L mensal. Mas não temos dashboard nem análise de unit economics. Em que pilar estamos mais fracos?",
+      "expected_output": "A pillar scorecard where Contabilidade scores higher (bookkeeping current, P&L monthly) and Análise scores 1-2 (no CAC/LTV, no dashboard, no variance analysis), with Análise identified as the priority weak pillar and a targeted rebalancing path.",
+      "expectations": [
+        "The skill calls kb_search for the CFO framework and any prior financial data in the KB before scoring — it does not give the same score to all four pillars.",
+        "Contabilidade is scored ≥ 3 (bookkeeping current, P&L monthly reconciled) with the correct evidence; Análise is scored 1-2 (no unit economics, no dashboard, no pricing-on-data) — the scoring is uneven and evidence-grounded.",
+        "Análise is named as the weakest pillar with a specific consequence: 'decisions are made on intuition; margin compression is invisible until it becomes a crisis'.",
+        "The roadmap for Análise starts with the prerequisite: Contabilidade ≥ 3 is confirmed, so it is correct to move to Análise — the SKILL.md rule 'do not recommend Análise improvements before Contabilidade reaches ≥ 3' is applied.",
+        "Cross-references are explicit: route to fin:unit-economics-audit for per-stream P&L, then fin:metrics-dashboard for the CEO scorecard — in that sequence, not in parallel."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We have a formal risk register, runway of 8 months, and revenue diversified across 6 clients. Score our Risco pillar and tell me what to watch for.",
+      "expected_output": "A Risco pillar score of 4-5 (risk register exists, runway ≥ 6 months, concentration < 50% per client) with specific monitoring triggers and the next risk governance action.",
+      "expectations": [
+        "The skill calls kb_search for the company's financial risk register and any prior Risco assessments in the KB before scoring.",
+        "The Risco pillar is scored 4-5 based on the evidence: risk register exists (yes), runway ≥ 6 months (8 months = Green), revenue concentration < 50% in any single client (6 clients, likely < 50% each) — each evidence data point maps to a score increment.",
+        "Even with a high Risco score, the skill surfaces the specific monitoring triggers from the SKILL.md: runway < 6 months = Amber (watch the 8-month runway trend), any single client > 50% = Amber, AR overdue > 60d = Red.",
+        "The response explicitly states the SKILL.md rule about Risco: 'ignoring the Risco pillar because there is no formal risk register — absence of data is itself a risk signal' — but in this case confirms the register exists.",
+        "The diagnostic memo is ingested via kb_ingest with the correct source path and the next action is a specific risk governance ritual (e.g. quarterly risk register review, owner CFO, by next quarter end)."
+      ]
+    }
+  ]
+}

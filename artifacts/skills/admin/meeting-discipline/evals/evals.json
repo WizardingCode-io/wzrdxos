@@ -1,0 +1,41 @@
+{
+  "skill_name": "admin:meeting-discipline",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Preciso de preparar a agenda para uma reunião amanhã com o André para decidir o pricing do novo serviço. Dura 30 minutos.",
+      "expected_output": "A meeting agenda using the standard template (25/50-min default, not 30), with the gate check applied (decision meeting passes), pre-reads listed, agenda items with owner/time/type, and the template distributed 24h in advance.",
+      "expectations": [
+        "The skill applies the agenda-or-decline gate: this is a decision meeting (pricing decision) — it passes gate question 2.",
+        "The meeting slot is flagged if it falls during the First-Four-Hours block or on a deep-work day without justification.",
+        "The agenda template uses a 25-minute slot (not 30 — the 5-minute buffer rule), or explicitly justifies a 50-minute slot if complexity warrants it.",
+        "The agenda includes Objective (the single decision needed), at least one Pre-read, numbered agenda items with time/lead/type, and a 5-minute 'Decisions and next steps' slot at the end.",
+        "The agenda is flagged for distribution at least 24 hours before the meeting — the skill notes the 24h rule explicitly."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Got-a-minute? Can we jump on a quick call to chat about the marketing campaign? It'll be 10 minutes.",
+      "expected_output": "A got-a-minute containment response deferring the request to the next Mon/Fri got-a-minute slot, with an async alternative offered.",
+      "expectations": [
+        "The skill identifies this as a got-a-minute request (unscheduled, no agenda, 'quick call', undefined outcome).",
+        "The containment response offers the next available Mon/Fri got-a-minute slot — not a same-day or deep-day slot.",
+        "An async alternative is offered: voice note, 2-paragraph written summary, or Loom.",
+        "If today is a deep-work day (Tue/Wed/Thu), the response explicitly defers per calendar-defense Rule 4 — no exceptions unless a genuine emergency is stated.",
+        "The got-a-minute is logged in the follow-up tracker as a deferred topic."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Write the minutes for the meeting we just had: we decided to use HubSpot Free as our CRM, André will set it up by June 20th, and we parked the question of paid upgrades for next month's review.",
+      "expected_output": "Decision-focused minutes using the standard template, with decisions table (decision/owner/deadline), actions table (action/owner/deadline), and a parking-lot entry with routing.",
+      "expectations": [
+        "The minutes are written in the decision record format — not as a transcript or discussion summary.",
+        "The HubSpot decision is recorded as a declarative sentence ('We will use HubSpot Free as the CRM') with owner (André) and deadline (2026-06-20).",
+        "The parking-lot item (paid upgrades question) has a routing destination (named next meeting date or named person) — not left as an open item with no route.",
+        "The minutes are flagged for distribution within 1 hour of the meeting ending (or end of business day at latest).",
+        "Significant meeting decisions are queued for kb_ingest with the decisions and actions tables — not the discussion."
+      ]
+    }
+  ]
+}

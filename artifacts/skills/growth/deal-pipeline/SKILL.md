@@ -1,9 +1,17 @@
 ---
-name: growth:deal-pipeline
-description: Set up or review the CRM and sales pipeline — HubSpot Free stage configuration, the 5 commercial KPIs with baselines and targets, weighted forecast (best/likely/worst), coverage-gap analysis, and weekly pipeline-review ritual feeding the COO Friday review.
+name: 'growth:deal-pipeline'
+description: >-
+  Set up or review the CRM and sales pipeline — HubSpot Free stage
+  configuration, the 5 commercial KPIs with baselines and targets, weighted
+  forecast (best/likely/worst), coverage-gap analysis, and weekly
+  pipeline-review ritual feeding the COO Friday review.
 type: capability
 department: growth
-when-to-use: Setting up or reviewing the CRM, running the weekly pipeline review, building a sales forecast, analysing pipeline coverage gaps, or when the user says "pipeline", "CRM", "HubSpot", "forecast", "revisão de pipeline", "cobertura de pipeline" or similar.
+when-to-use: >-
+  CRM/pipeline setup or review, weighted sales forecast, the 5 commercial KPIs
+  (pipeline €, conversão, ticket, ciclo, win rate — Diagnostico set), weekly
+  pipeline review, "configura o HubSpot", coverage gaps. NOT for closing a
+  specific deal, proposals or follow-up tactics — that is growth:sales-machine.
 ---
 
 # Deal Pipeline

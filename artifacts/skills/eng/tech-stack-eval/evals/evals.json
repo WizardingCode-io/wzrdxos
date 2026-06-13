@@ -1,0 +1,41 @@
+{
+  "skill_name": "eng:tech-stack-eval",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Devemos usar Vue 3 / Nuxt 4 ou Next.js para o novo portal de clientes da WizardingCode? A equipa conhece Vue mas o mercado PT parece estar a mover-se para React.",
+      "expected_output": "A requirements-anchored evaluation matrix scoring Vue/Nuxt 4 vs Next.js across all relevant dimensions, with Context7 used to fetch current docs, a scored comparison, and an ADR draft with a clear recommendation.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask for prior ADRs covering Vue/Nuxt/Next.js decisions and the 'Vue 3.6 / Nuxt 4 / Laravel 13 2026 ecosystem notes' already in the KB before evaluating.",
+        "The skill uses Context7 (mcp__context7__resolve-library-id → mcp__context7__query-docs) to retrieve current, version-specific documentation for both frameworks — it does not rely on training-data knowledge for API details.",
+        "Functional and non-functional requirements are anchored before scoring — team skills, existing stack compatibility, and time-to-productive are enumerated, not assumed.",
+        "The evaluation matrix is produced with at least 5 dimensions scored (1-5) with weights, including functional fit, ecosystem health, vendor/lock-in risk, team skill match, and one dimension specific to this context (e.g. community size in Portugal).",
+        "The ADR draft follows the required format (ADR-NNN, Context, Decision, Options considered, Consequences) and a kb_ingest call stores it with tags: adr, tech-decision, vue, next-js, eng."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We're evaluating which LLM model to use for the lead-qualification agent: Claude Sonnet vs Claude Haiku vs GPT-4o. The agent runs 200 times per day, classifying leads against our ICP.",
+      "expected_output": "A token-economics-first evaluation with a cost matrix per model, a task-tier classification (Tier 1-2 for classification = Haiku first), a quality test recommendation, and an ADR draft with the cheapest model that meets quality bar.",
+      "expectations": [
+        "The skill calls kb_search for prior model-selection decisions and the 'Harness Pattern Token Optimization' and token-economics fragments in the KB before evaluating.",
+        "The task is classified as Tier 1 (routing and classification) per the model selection matrix — leading to Haiku as the first recommendation, not Sonnet or Opus.",
+        "The token economics sub-matrix is produced with cost/1M tokens, context window, and caching support for each model — sourced from Context7 or KB, not from memory.",
+        "Monthly cost is estimated: 200 runs/day × 30 days × (input + output tokens estimated) per model — the 'cheapest model that meets quality bar' rule is applied explicitly.",
+        "The ADR recommends a quality test before committing to the tier, and flags that any tier change increasing cost on a high-frequency task requires the CEO balanced-decision gate."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Precisamos de escolher uma base de dados para armazenar os vectores da KB. Estamos a comparar LanceDB (que já usamos), Pinecone e Qdrant. Mantemos o LanceDB ou migramos?",
+      "expected_output": "A KB-first evaluation that surfaces the existing LanceDB decision and context, a requirements-anchored matrix comparing LanceDB vs Pinecone vs Qdrant, and a recommendation to stay or migrate with a migration cost analysis if migration is proposed.",
+      "expectations": [
+        "The skill calls kb_search for the existing KB architecture decision (LanceDB is documented in the project memory as part of the Graphify+LanceDB+Obsidian stack) — the prior decision must inform the evaluation.",
+        "Requirements are anchored first: data residency (GDPR/Portuguese), team familiarity with LanceDB, integration with existing Obsidian vault and Graphify, and cost per query at current KB scale.",
+        "The evaluation matrix scores all three candidates on functional fit, vendor lock-in risk, security posture, and cost — not just raw performance benchmarks.",
+        "If migration is proposed, the exit cost and migration complexity are quantified — the lock-in/exit-cost row is not skipped.",
+        "The ADR is drafted and ingested via kb_ingest; the recommendation names 'stay' or 'migrate' with the specific condition that would change the recommendation."
+      ]
+    }
+  ]
+}

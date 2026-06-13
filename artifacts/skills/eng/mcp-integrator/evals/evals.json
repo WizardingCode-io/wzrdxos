@@ -1,0 +1,41 @@
+{
+  "skill_name": "eng:mcp-integrator",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Quero ligar o HubSpot ao Claude Code para que os nossos agentes possam ler e actualizar contactos sem eu ter de copiar dados manualmente. Devo usar MCP? Qual o connector certo?",
+      "expected_output": "A decision to use MCP (multi-agent reuse and persistent auth justify it), a vetted HubSpot MCP connector with a vetting scorecard, a least-privilege config with read + write scopes documented, and an integration plan with config steps.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask for the 'MCP USB Universal' framework, any existing MCP decisions in docs/ or memos/, and the company profile (existing connector inventory and runtimes) before evaluating.",
+        "The 'When to use MCP vs direct API call' decision framework is applied explicitly — multi-agent reuse and auth persistence are identified as the trigger conditions that justify MCP.",
+        "The connector vetting scorecard is produced with all 6 criteria (Source, License, Scope, Auth model, Maintenance, Alternatives) — each rated Pass/Flag/Reject.",
+        "The least-privilege config is produced: read-only scopes identified first, write scopes justified individually, API key placed in .env (never in config), and a rotation schedule noted.",
+        "The integration plan includes config steps (install → auth → register → smoke test → docs) and a workspace impact assessment (connector count before → after; any connector to retire to stay within 20-30)."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We're evaluating a community-built MCP server for Google Calendar from an unknown GitHub maintainer with no commit activity in the past 8 months. Should we adopt it?",
+      "expected_output": "A rejection of the connector based on the vetting scorecard (unknown maintainer, stale maintenance), with an alternative path recommended (official Google Workspace connector or direct API), and a documented exception process if override is required.",
+      "expectations": [
+        "The skill calls kb_search for existing MCP decisions and the 'MCP USB Universal' vetting rules before evaluating the candidate.",
+        "The vetting scorecard is applied and the connector scores a Reject on Source (unknown maintainer) and Maintenance (> 180 days stale) — the two automatic disqualifiers per the Constitution doctrine.",
+        "The skill explicitly states the Constitution doctrine: 'third-party connectors with unknown maintainers are rejected by default' — not softened to 'proceed with caution'.",
+        "An alternative path is proposed: an official or well-maintained alternative, or direct API call if the use case is single-skill with no reuse value.",
+        "The rejection rationale and alternative are ingested via kb_ingest so the decision is not revisited without a documented override."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Já temos 28 conectores MCP activos no workspace. Queremos adicionar um conector para o Notion para arquivo de memos. Faz sentido?",
+      "expected_output": "A workspace impact assessment showing 28 → 29 (approaching the 30-connector limit), a decision gated on whether an existing connector can be repurposed, and a retirement candidate recommendation if the new one is added.",
+      "expectations": [
+        "The skill calls kb_search for the current connector inventory and the 'MCP USB Universal' 20-30-connector workspace pattern before evaluating.",
+        "The 20-30-connector workspace pattern is applied explicitly: adding a 29th connector is flagged as approaching the upper limit, and adding a 30th would require retiring one.",
+        "The skill checks whether an existing connector (e.g. a files or storage connector) can be repurposed for Notion archiving before recommending a new install.",
+        "If a new connector is recommended, a specific retirement candidate is named from the existing 28 — not a generic 'review and retire a low-use one'.",
+        "The integration plan includes the smoke test step and an update to docs/runtimes.md, followed by a kb_ingest call."
+      ]
+    }
+  ]
+}

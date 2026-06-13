@@ -1,0 +1,41 @@
+{
+  "skill_name": "growth:sales-machine",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Um prospect pediu orçamento mas não respondeu há 10 dias. Qual o follow-up certo a fazer agora?",
+      "expected_output": "A KB-first lookup for prior deal notes and the sales frameworks, a diagnosis that 10 days of silence post-proposal is day-7 territory in the follow-up cadence, the correct touch (value touch — relevant insight for day 7), and an either-or close at day 14 if no response.",
+      "expectations": [
+        "The skill calls kb_search for prior deal notes on this prospect and the Sales Frameworks topic before prescribing any action — the SKILL.md red flag 'Skipping the KB-first step — prior deal notes and frameworks already exist; use them' is applied.",
+        "The follow-up cadence is applied: Day 1 (check receipt), Day 3 (any questions?), Day 7 (value touch — relevant insight), Day 14 (either-or close) — with the current 10-day position mapped to the day-7 value touch as the correct next action.",
+        "The value touch is produced: a specific insight or case study relevant to the prospect's vertical and the pain identified in discovery — not a generic 'just checking in' message.",
+        "The either-or close is drafted for day 14 if there is no response to the value touch: two options only, both moving forward — e.g. 'Would you prefer to start with the full programme, or a pilot scope to build confidence first?' — not open-ended options.",
+        "If no response after day 14, the 24-36 Month Buyer Maturation nurture sequence is applied — the deal is not deleted but moved to nurture in the CRM with the appropriate tag."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Estamos numa call de vendas e o cliente disse 'está caro, precisamos de pensar'. Como respondemos?",
+      "expected_output": "The QATQ objection handling framework applied to 'it's expensive, we need to think about it': Acknowledge, Ask the clarifying question (budget constraint or ROI uncertainty?), Answer the revealed concern with evidence, Confirm resolution.",
+      "expectations": [
+        "The QATQ framework is applied in the correct 4-step order: Acknowledge ('I hear you'), Ask a clarifying question that reveals the real concern ('Is that a budget constraint, or are you unsure about the ROI?'), Answer the revealed concern with specific evidence, Confirm resolution ('Does that address it, or is there still something holding you back?').",
+        "The two objection variants are handled distinctly: if it is a budget constraint → present the payback timeline or risk reversal; if it is ROI uncertainty → present a specific case study with outcome and timeline for a similar vertical — not a generic answer.",
+        "The red flag 'I need to think about it' → QATQ response is applied verbatim: 'Of course — what specifically would you need to see to feel confident moving forward?' — this surfaces the real objection.",
+        "The either-or close is prepared as the follow-up if the QATQ does not resolve it: two options, both forward-moving — the skill does not leave the call with an open-ended 'let me know what you decide.'",
+        "The risk reversal (guarantee) is referenced as the response to ROI uncertainty — and the SKILL.md red flag is applied: 'Missing the risk reversal — without a guarantee, the prospect absorbs all the downside; conversão will stay below 15%.'"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We want to build our full sales process from scratch — from the first inbound lead to the signed contract. What does the end-to-end flow look like?",
+      "expected_output": "A complete Magic Lantern trust funnel architecture (4 steps: Godfather Offer, value-first follow-up sequence, application step, strategy session), discovery and qualification framework, objection map, proposal structure with risk reversal, and follow-up cadence — with CRM actions at each step.",
+      "expectations": [
+        "The skill calls kb_search for the Sales Frameworks topic and any prior deal notes or scripts before authoring from scratch — only genuine gaps are authored new.",
+        "The Magic Lantern trust funnel is produced with all 4 steps: Godfather Offer (irresistible entry with risk reversal, CFO + CEO gate for pricing), value-first 4-touch follow-up sequence, application step (3-question qualifier replacing generic 'book a call'), strategy session (diagnostic framing, 45-60 min, pain → root cause → prescribe → offer → objections → close).",
+        "The discovery and qualification table is produced with all 6 dimensions (pain, impact, timeline, authority, budget, fit) and the qualification threshold: advance only prospects with clear pain, real timeline, decision authority, and budget signal.",
+        "The objection map is produced with the 3-5 most likely objections, each with a QATQ response and an either-or close variant — the map is specific to the WizardingCode ICP context (not generic sales objections).",
+        "CRM actions are specified at each funnel step: what to log, which stage to move to, what the next-contact trigger is — and the speed-to-lead three-fix is confirmed: inbound leads contacted within 5 minutes, pre-written reply templates for 4 reply types, direct booking link in every CTA."
+      ]
+    }
+  ]
+}

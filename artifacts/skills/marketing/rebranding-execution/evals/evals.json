@@ -1,0 +1,41 @@
+{
+  "skill_name": "marketing:rebranding-execution",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Precisamos de avançar com o rebranding — a decisão D1 do nome ainda está pendente. Quais os candidatos e qual o critério de escolha?",
+      "expected_output": "A KB-first lookup of the full Rebranding-2026-06 vault (9 docs), a vault state summary identifying D1 as the open decision, the 12 naming candidates surfaced from the vault and scored against Hormozi #1-At-What and Primal Branding, and a CEO balanced-decision gate package — not a unilateral recommendation.",
+      "expectations": [
+        "The skill calls kb_search specifically for the Rebranding-2026-06 vault before doing any analysis — it reads the naming analysis doc (12 candidates), the strategic recommendation, and the decision log to establish what is already decided vs. pending.",
+        "The vault state summary is produced first: which of D1-D7 are resolved, which are pending, what constraints are locked in — and a clear statement 'We are at step X. Decision D1 is open. The input needed is Y.'",
+        "The 12 naming candidates are evaluated against the Hormozi #1-At-What test (does the name telegraph the single thing wzrdx is definitively #1 at?) and the Primal Branding 7 assembly points — a scored comparison table is produced.",
+        "Memorability, domain availability, and PT/EN pronunciation and cultural connotations are checked for each shortlisted candidate — this is a required naming framework step.",
+        "The decision memo is produced for D1 with status 'PENDING CEO GATE' — the naming decision is explicitly identified as a CEO balanced-decision gate item; the skill does not close D1 without that gate."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "The visual direction for the rebrand needs to be decided this week. We have 4 creative territories — can we just pick the one the team likes most?",
+      "expected_output": "A firm application of the CEO balanced-decision gate — visual direction (D6) is explicitly listed as a gate item; the skill prepares the brief and the Status Engineering lens analysis, but routes the decision to the CEO rather than allowing a team preference to close it.",
+      "expectations": [
+        "The skill names the SKILL.md red flag: 'Choosing a visual direction without the CEO gate — visual identity commits budget and signals; it is not a CMO-only call.' The team-preference approach is explicitly blocked.",
+        "The vault is read first: the 4 visual territories from the Rebranding-2026-06 vault are summarised from the KB, not regenerated — the skill does not invent visual directions if they already exist.",
+        "The Status Engineering lens is applied to each of the 4 visual territories: which direction signals premium and authority in the PT/EU market for AI-first companies? — the analysis is produced as input for the CEO gate, not as a recommendation that bypasses it.",
+        "The CEO balanced-decision gate package is prepared: decision memo (D6), options table with Status Engineering scores, and the recommendation with rationale — status PENDING CEO GATE.",
+        "The skill explicitly states that D6 cannot be implemented until the CEO gate is resolved — and routes to the ceo:balanced-decision skill for deliberation through Optimist / Pessimist-conservative / Dynamic-risk-taker lenses."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Queremos avançar com o posicionamento D2/D3 — criar o one-liner da marca e validar a estratégia de posicionamento. O que precisamos de fazer?",
+      "expected_output": "A KB-first vault read for the Positioning v2 and prior decisions, a StoryBrand SB7 one-liner draft, a Status Engineering check (selling status not features), a NUEPH scorecard for the positioning, and a decision memo for D2/D3.",
+      "expectations": [
+        "The skill calls kb_search for the Rebranding-2026-06 Positioning v2 doc and any decisions already made on D2/D3 — if positioning work already exists, the skill updates it rather than restarting from scratch.",
+        "The StoryBrand SB7 one-liner is drafted following the required formula: '[Customer] who want [goal] work with wzrdx to [achieve result] without [friction]' — with the clarity test applied: can a 10-year-old understand what wzrdx does from this?",
+        "The Status Engineering check is applied: does the positioning sell status ('WizardingCode clients are the AI-forward companies in Portugal') or features? If it sells features, the specific reframe is produced.",
+        "The NUEPH scorecard is run: N (novo — does the messaging signal something new?), U (único — differentiated from next best alternative?), E (exclusivo — implies not everyone can access?), P (para quem — ICP stated precisely with 'this is for you if / not for you if'?), H (hostil — takes a position against the status quo?) — each scored green or red with gap notes.",
+        "A decision memo is produced for D2/D3 with status APPROVED (if no significant budget or ICP-targeting change) or PENDING CEO GATE (if the positioning changes the ICP tier or price range), per the gate criteria."
+      ]
+    }
+  ]
+}

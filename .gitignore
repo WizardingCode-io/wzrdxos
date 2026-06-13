@@ -34,3 +34,6 @@ data/
 
 # Generated, machine-specific MCP registration (absolute paths / secrets)
 .mcp.json
+
+# Skill eval workspaces (generated; gitignored per docs/skills.md §2)
+**/skills/**/*-workspace/

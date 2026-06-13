@@ -1,0 +1,22 @@
+[
+  { "query": "Quero abrir uma vaga de Account Manager — por onde começo?", "should_trigger": true },
+  { "query": "Vamos recrutar o nosso primeiro colaborador. Que processo seguimos?", "should_trigger": true },
+  { "query": "We need to hire a senior developer. How do we run the process?", "should_trigger": true },
+  { "query": "Como é que escrevemos a job description para o papel de operations manager?", "should_trigger": true },
+  { "query": "Quero fazer um postmortem das nossas 5 contratações falhadas antes de abrir nova vaga.", "should_trigger": true },
+  { "query": "Precisamos de avaliar candidatos para o cargo de gestor de marketing — qual o processo de selecção?", "should_trigger": true },
+  { "query": "How do we run the Interview-to-Learn protocol for our next hire?", "should_trigger": true },
+  { "query": "Candidate shortlisted — when do we send the offer and what should it include?", "should_trigger": true },
+  { "query": "Qual a melhor forma de verificar referências de candidatos em Portugal?", "should_trigger": true },
+  { "query": "Qual é o processo de recrutamento mais comum em Portugal actualmente?", "should_trigger": false },
+  { "query": "Como funciona o período de experiência segundo o Código do Trabalho português?", "should_trigger": false },
+  { "query": "Explica-me o que é o método Interview-to-Learn.", "should_trigger": false },
+  { "query": "Quero fazer onboarding do novo colaborador — qual o plano para os primeiros 60 dias?", "should_trigger": false },
+  { "query": "Qual o salário médio de um developer sénior em Lisboa?", "should_trigger": false },
+  { "query": "Precisamos de definir as bandas salariais para a nossa equipa.", "should_trigger": false },
+  { "query": "Como estruturo os valores da empresa para usar no processo de avaliação de desempenho?", "should_trigger": false },
+  { "query": "Faz um draft de contrato de trabalho para um colaborador a tempo inteiro.", "should_trigger": false },
+  { "query": "Qual o melhor software de ATS para pequenas empresas em Portugal?", "should_trigger": false },
+  { "query": "Help me write a LinkedIn post to attract candidates.", "should_trigger": false },
+  { "query": "O nosso colaborador não está a cumprir os marcos do período de experiência — o que fazemos?", "should_trigger": false }
+]

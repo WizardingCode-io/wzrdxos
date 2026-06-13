@@ -1,0 +1,41 @@
+{
+  "skill_name": "marketing:geo-content",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Queremos aparecer quando alguém pergunta ao ChatGPT ou Perplexity quem são as melhores agências de IA em Portugal. Como optimizamos o conteúdo para isso?",
+      "expected_output": "A KB-first lookup for existing content and prior Citation-as-KPI snapshots, a content audit against the Three Qualities (Definitive, Structured, Quotable), a Two-Boards scorecard (Google floor + AI ceiling), and a content draft or revision plan with llms.txt entry.",
+      "expectations": [
+        "The skill calls kb_search for existing content on AI agencies in Portugal and any prior Citation-as-KPI measurement before producing anything — if content already exists, it is audited rather than duplicated.",
+        "The Three Qualities check is applied to the proposed content: Definitive (does it give the most complete answer for this query in the PT/EU AI-first market?), Structured (H1 as the question, H2/H3 hierarchy, FAQ section, TL;DR), Quotable (specific statistics, named frameworks, concise definitions) — all three must score Y before the content is ready.",
+        "The Two-Boards scorecard is produced: Google floor (H1 keyword, first 100 words, meta, internal links) and AI ceiling (FAQ section, schema markup, llms.txt update, self-contained sections, freshness date) — both must be green before publishing.",
+        "The AI share-of-voice audit protocol is described: 10-20 queries in ChatGPT/Perplexity/Gemini/Claude/Copilot, wzrdx citations / total queries × 100 = baseline — and a baseline measurement is proposed for Quarter 0.",
+        "A kb_ingest call closes the session with title 'GEO Content — [Topic] — [YYYY-MM-DD]', tags geo/aeo/content/seo/marketing, and includes the Three Qualities scores and Two-Boards scores."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We have a blog post that ranks on page 2 of Google but never gets cited by AI engines. What's wrong with it and how do we fix it?",
+      "expected_output": "A content audit scoring the post on Three Qualities, identifying the specific gaps (typically: not Definitive enough, no FAQ section, no quotable units), a revision plan to fix each red score, and an llms.txt entry.",
+      "expectations": [
+        "The skill runs the Three Qualities check against the described post: likely gaps are Structured (no FAQ section, no TL;DR) and Quotable (no standalone claims, data points, or named frameworks) — the specific gaps are named, not generic advice.",
+        "The Two-Boards audit identifies the AI ceiling as the primary failing: schema markup missing, no self-contained section answers, no freshness date, no llms.txt entry — at least three specific AI ceiling gaps are named.",
+        "A concrete revision plan is produced: add TL;DR at top, restructure H2 sections as self-contained Q&A, add FAQ section with at least 5 verbatim questions + direct answers, add freshness date, add named data points or framework references.",
+        "The llms.txt update is included: the new or revised entry for the domain file listing this content as a canonical source for the target query.",
+        "The skill applies the brand voice guidance: clear, authoritative, no jargon, European Portuguese primary/English secondary — if the verbal identity from Rebranding-2026-06 is locked, it is applied; if not, interim voice is used and flagged."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "O nosso artigo sobre automação de processos foi publicado há 8 meses. Precisamos de o actualizar — o que verificamos e como garantimos que continua a ser citado pelos motores de IA?",
+      "expected_output": "A quarterly freshness refresh protocol applied to the article: KB-first lookup for the original content and new data since publication, specific update actions (statistics, FAQ entries, freshness date, llms.txt), and a Citation-as-KPI measurement to track the refresh impact.",
+      "expectations": [
+        "The skill calls kb_search for the existing article content and any new data, frameworks, or competitor moves since the last update — the refresh is not authored from scratch; it builds on what exists.",
+        "The quarterly freshness refresh checklist is applied: update statistics and dates, add new FAQ entries from real audience questions, update llms.txt if the content was significantly changed, update the 'Last updated' date.",
+        "The Citation-as-KPI measurement is proposed: run the specific query ('automação de processos Portugal' or equivalent) in ChatGPT, Perplexity, Gemini, Claude, and Copilot; record whether wzrdx is cited; compare to the baseline from the original publication.",
+        "The red flag is applied: 'Skipping the quarterly freshness refresh — stale content is penalised by AI engines on fast-moving topics (AI, technology, marketing best practices).' Eight months without a refresh on an AI topic is a confirmed issue.",
+        "A kb_ingest call updates the existing content record with the refresh date, updated Three Qualities scores, updated Two-Boards scores, and the updated Citation-as-KPI snapshot."
+      ]
+    }
+  ]
+}

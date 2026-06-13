@@ -1,0 +1,22 @@
+[
+  { "query": "Vamos implementar o sistema de notificações — podemos começar a codificar?", "should_trigger": true },
+  { "query": "Let's build the billing integration. I'll start with the API endpoint.", "should_trigger": true },
+  { "query": "Add this feature to the dashboard — it's just a config change.", "should_trigger": true },
+  { "query": "We need to refactor the auth module. Can we start?", "should_trigger": true },
+  { "query": "Quero implementar o onboarding de clientes no sistema — por onde começo?", "should_trigger": true },
+  { "query": "Build me a webhook handler for HubSpot events.", "should_trigger": true },
+  { "query": "vamos codificar o módulo de relatórios financeiros", "should_trigger": true },
+  { "query": "I need to add a new API endpoint for the mobile app. Let's write the code.", "should_trigger": true },
+  { "query": "Faz um commit desta feature — já está pronta.", "should_trigger": false },
+  { "query": "Explica-me o que é spec-driven development.", "should_trigger": false },
+  { "query": "What are the advantages of test-driven development?", "should_trigger": false },
+  { "query": "Review this pull request and give me feedback.", "should_trigger": false },
+  { "query": "Qual o melhor ORM para usar com Laravel?", "should_trigger": false },
+  { "query": "Run the unit tests and tell me which are failing.", "should_trigger": false },
+  { "query": "Como estruturo os agentes para o nosso sistema de qualificação de leads?", "should_trigger": false },
+  { "query": "What is the difference between a spec and a user story?", "should_trigger": false },
+  { "query": "Debug this error in the payment module.", "should_trigger": false },
+  { "query": "Actualiza a documentação do nosso API público.", "should_trigger": false },
+  { "query": "We already have an approved spec for the analytics dashboard. Should we start TDD?", "should_trigger": true },
+  { "query": "The spec is approved and the tests are written. Let's implement.", "should_trigger": true }
+]

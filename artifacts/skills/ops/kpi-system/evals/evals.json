@@ -1,0 +1,41 @@
+{
+  "skill_name": "ops:kpi-system",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Quero configurar o sistema de 25 KPIs para a WizardingCode. Qual é o ponto de partida e como configuro o ritual de sexta-feira?",
+      "expected_output": "The full 25-KPI table across 5 areas (Gestão/Marketing/Vendas/Cultura/CX) with baselines from the Diagnostico-2026-05, targets aligned to the €1M 2026 goal, alert thresholds, owners per KPI, and the Friday 17h ritual design.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask for the Diagnostico-2026-05 25 KPIs and baselines (area scores: Gestão 28.4, Marketing 25, Vendas 25, Cultura 25, CX 31), the company profile, and prior KPI review memos before building the system.",
+        "The 25-KPI table is produced with all 5 areas, all 5 KPIs per area, baselines from the Diagnostico where available (not invented), targets grounded in the Diagnostico baseline — not aspirational guesses — and alert thresholds distinct from targets.",
+        "Every KPI has a single named owner from the C-suite roster (CEO/COO/CMO/CRO/CHRO/CFO/CQO) — no unowned KPIs.",
+        "The Friday 17h00 ritual is designed with the exact 4-step structure from the SKILL.md: dashboard fill (5 min) → alert scan (5 min) → area review (15 min, rotating) → CEO scorecard update (5 min); participants and async review process named.",
+        "The system setup is ingested via kb_ingest with source 'memos/YYYY-MM-DD-kpi-system-setup.md'."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Faz a revisão de KPIs desta semana. MRR: €45K (target €83K). Pipeline: €120K. Novos clientes: 2. Taxa de retenção: 78%. Margem operacional: 22%.",
+      "expected_output": "A weekly KPI review with the 7-Number CEO scorecard populated from the provided data, RAG status per metric, variance analysis vs prior period, an alert block for all amber/red metrics, and one action per alert with owner and deadline.",
+      "expectations": [
+        "The skill calls kb_search for the prior week's KPI snapshot and the Diagnostico-2026-05 baselines before producing the review — it builds the trend, not a one-off snapshot.",
+        "The CEO 5-number scorecard is populated with the provided figures: MRR (€45K vs €83K threshold → Red), Pipeline (€120K vs 3× monthly target → evaluate), new clients, retention, operating margin — each with its RAG status.",
+        "At minimum, MRR (€45K vs €83K) is flagged Red and triggers immediate escalation to CEO; operating margin (22% vs ≥30% target, <20% = red) is flagged Amber.",
+        "Variance analysis is produced: week-on-week delta for each of the 7 Numbers, with a root-cause statement for any metric moving > 10%.",
+        "Every amber and red metric has a proposed action (owner, deadline, success criterion), and the weekly memo is ingested via kb_ingest with source 'memos/YYYY-MM-DD-kpi-review.md'."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "What are the 5 CEO numbers I should check every week and how do I know if the business is on track for the €1M 2026 target?",
+      "expected_output": "The Dan Martell 5-Number CEO scorecard (MRR, Pipeline, Novos clientes, Margem operacional, Runway) with the €83K/month threshold as the MRR milestone required to hit €1M, and a calculation of the monthly run-rate required to close the gap.",
+      "expectations": [
+        "The skill calls kb_search for the Diagnostico-2026-05 €1M target and the CEO Scorecard frameworks (Dan Martell 7 Numbers / 5-Number) from the KB before answering.",
+        "The 5-Number CEO scorecard is named explicitly as: MRR / Receita mensal, Pipeline (€), Novos clientes este mês, Margem operacional (%), Runway (meses) — matching the SKILL.md executive summary strip.",
+        "The €83K/month threshold is surfaced from the Diagnostico and identified as the MRR level that corresponds to €1M ARR — and the current gap to that threshold is quantified if current MRR data is available.",
+        "The response links the 5-Number to the alert thresholds: MRR < €83K = Red, Margem < 30% = Amber, Runway < 6 months = Amber, Pipeline < 2× monthly target = Amber.",
+        "The KPI system is established or confirmed via kb_ingest, closing the loop."
+      ]
+    }
+  ]
+}

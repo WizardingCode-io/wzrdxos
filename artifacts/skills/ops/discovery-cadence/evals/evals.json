@@ -1,0 +1,41 @@
+{
+  "skill_name": "ops:discovery-cadence",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Quero configurar a cadência de discovery contínuo para o produto principal da WizardingCode — a plataforma de AI agents para PMEs. Por onde começo e como construo a árvore de oportunidades?",
+      "expected_output": "A discovery cadence setup with the desired outcome defined, an OST skeleton with 3-5 starter opportunities labelled as hypotheses, an interview guide with story-elicitation questions, and a weekly ritual schedule.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask for the Teresa Torres Continuous Discovery Habits framework, Marty Cagan product principles, KB Area 09, and any prior discovery artifacts or customer interview notes in the KB before building anything.",
+        "The OST skeleton is produced with a business/customer outcome at the root (not a feature) — at least 3 opportunities in the format 'customer pain/need/desire stated from the customer's perspective', each labelled as 'unvalidated hypothesis'.",
+        "The interview guide includes the 4-phase structure (warm-up / story elicitation / opportunity mapping / wrap-up) with specific story-elicitation questions in the format 'Tell me about the last time you [did X]' — no hypothetical questions ('Would you use feature Y?').",
+        "The weekly ritual schedule names: frequency (at least 1 interview/week, no exceptions), duration, participants (PM/PO runs; observers silent), and the 4-step weekly ritual (interview → OST update → assumption test review → next week plan).",
+        "The cadence setup is ingested via kb_ingest with source 'memos/YYYY-MM-DD-discovery-cadence-setup.md'."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We interviewed a client yesterday and discovered a strong pain: they spend 3 hours per week manually copying data between our platform and their CRM. How do I update the OST and design an assumption test?",
+      "expected_output": "An OST update adding the new opportunity from the interview, an assumption test design for the most critical assumption in a proposed solution, with the structured assumption test format (assumption / test / signal / threshold / cost / deadline).",
+      "expectations": [
+        "The skill calls kb_search for the existing OST in the KB (memos/interviews/) and any prior discovery artifacts before updating — it builds on the existing tree, not a new one.",
+        "The new opportunity ('3 hours/week copying data between platform and CRM') is added to the OST under the correct parent opportunity, stated from the customer's perspective, and labelled as 'validated (1 interview — N=1)'.",
+        "The skill explicitly applies the OST rule: solutions are NOT added to the OST until the opportunity is validated through more interviews — the response proposes additional interview questions to validate the opportunity before jumping to solutions.",
+        "If a solution is proposed, its most critical assumption is identified ('we believe customers would use an automated sync if we built it') and a structured assumption test is designed using one of the 4 test types (fake door, concierge, prototype, spike/MVP).",
+        "The interview summary is ingested via kb_ingest with source 'memos/interviews/YYYY-MM-DD-<segment>.md'."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Passaram 6 semanas e ainda não fizemos nenhuma entrevista de cliente. O que fazer?",
+      "expected_output": "A diagnosis of the broken cadence (6 weeks = 6 missed interviews), immediate action to restart with a concrete interview scheduled this week, and a recruitment message template for the interview pipeline.",
+      "expectations": [
+        "The skill calls kb_search for the existing discovery cadence design and OST in the KB before diagnosing.",
+        "The response explicitly invokes the red flag from the SKILL.md: 'one skipped week becomes two; the cadence breaks — the whole point of continuous is that it never stops' — and names this as a cadence failure, not a minor delay.",
+        "A concrete recovery plan is produced: one interview must be scheduled within 7 days, with a specific participant sourced from (existing clients / churned clients / prospects who said no / power users / support tickets).",
+        "A recruitment message is drafted in the format 'I'd love 30 minutes to learn about your experience with X. No product demo — just questions.' — using the send-4-to-get-1 math.",
+        "The cadence restart plan includes the next 4 weeks of scheduled interviews (not just one) and a note to update the OST after each interview."
+      ]
+    }
+  ]
+}

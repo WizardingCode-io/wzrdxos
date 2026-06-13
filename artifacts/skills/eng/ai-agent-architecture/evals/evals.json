@@ -1,0 +1,41 @@
+{
+  "skill_name": "eng:ai-agent-architecture",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Quero construir um sistema multi-agente para a WizardingCode onde um agente orquestra a qualificação de leads, outro cria o email de outreach e um terceiro faz o follow-up. Como estruturo isto?",
+      "expected_output": "A structured architecture decision selecting hierarchical (orchestrator + specialists) as the primary pattern, with a context/memory layer design, an agent manifest listing the three agents with roles and tools, and an ADR draft ready for KB ingest.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask before any architecture work — specifically looking for prior ADRs, existing agent designs in docs/, and KB sources on Claude Managed Agents Architecture and the Liam Ottley 5-Layer AIOS.",
+        "The skill explicitly works through the 6 problem-scope dimensions (task type, concurrency, state, reliability, cost tier, runtime) before recommending a pattern.",
+        "The chosen orchestration pattern (hierarchical in this case) is named with rationale; at least one rejected pattern is documented with a reason for rejection.",
+        "An agent manifest is produced listing each agent with: role, tools, memory store (KB scope), and reporting cadence — matching the output contract.",
+        "The ADR or architecture memo is produced in the required structured format and a kb_ingest call is made with source prefix 'memos/YYYY-MM-DD-agent-architecture-<slug>.md'."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We need a 24/7 agent that monitors our KB daily, detects knowledge gaps, and injects enrichment suggestions into the digest. Should this be a managed agent? What pattern do I use and how do I configure its memory?",
+      "expected_output": "A recommendation to use the Claude Managed Agents pattern for the 24/7 workload, with the sequential or simple managed agent configuration, an explicit context/memory layer design (what is in-context vs KB vs structural), and the /new-employee provisioning steps.",
+      "expectations": [
+        "The skill calls kb_search for prior architecture decisions and the 'Claude Managed Agents Architecture' framework from the KB before responding.",
+        "The response explicitly applies the managed agent pattern from Step 5 — naming the system prompt owner, tool set (least-privilege), task reception mechanism (schedule via wzrdx schedule), and reporting cadence (KB ingest to memos/).",
+        "The context engineering map is produced — what the agent sees in-context vs what lives in the KB vs what is structural — addressing the three memory dimensions.",
+        "The /new-employee pattern elements are enumerated: role brief, tool list, memory store, reporting cadence, escalation path, and agent file location (artifacts/agents/<name>/agent.md).",
+        "The output concludes with a kb_ingest call and notes that the ADR should also be landed in docs/ as the technical source of truth."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Temos um processo de onboarding de cliente que envolve: recolher dados do cliente, criar conta no HubSpot, enviar email de boas-vindas, e agendar kick-off. Qual o padrão de agente certo? Swarm seria a melhor opção?",
+      "expected_output": "A recommendation of sequential (pipeline) pattern over swarm, with explicit rejection of swarm for this use case, a context engineering map, and an agent manifest for the pipeline steps.",
+      "expectations": [
+        "The skill calls kb_search for prior agent designs and the 'Agentic Development' topic before recommending a pattern.",
+        "The skill applies the pattern selection rule from Step 3 — recommending the simplest pattern (sequential) that satisfies the requirements — and explicitly rejects swarm with a documented reason (hard to control, cost, debugging).",
+        "The problem scope is clarified across the 6 dimensions before the pattern choice is made, not after.",
+        "The output explicitly names 'swarm is rarely the right first choice' and documents why sequential (strict dependencies, step N output is input to step N+1) fits this case.",
+        "A kb_ingest call closes the response, storing the architecture memo at the correct memos/ prefix."
+      ]
+    }
+  ]
+}

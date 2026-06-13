@@ -1,0 +1,41 @@
+{
+  "skill_name": "growth:deal-pipeline",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "O CRM nunca foi implementado — o diagnóstico recomendou o HubSpot Free mas nunca avançámos. Vendas está a 25/100. Por onde começamos a montar o pipeline?",
+      "expected_output": "A KB-first lookup for the Diagnostico Vendas 25/100 section and the 5 commercial KPIs, a complete HubSpot Free setup guide (6-stage configuration, required deal fields, automations), and the 5-KPI table with Diagnostico baselines and targets.",
+      "expectations": [
+        "The skill calls kb_search for the Diagnostico-2026-05 Vendas 25/100 section and the 5 commercial KPIs with their baselines before designing any CRM setup — the skill closes the known gap explicitly: 'CRM recommended in the Diagnostico, never implemented.'",
+        "The HubSpot Free stage configuration is produced in full: all 6 stages (Prospeção, Qualificação, Apresentação, Negociação, Fecho, Perdido) with exit criteria and required fields per stage — including the mandatory 'loss reason' field on Perdido.",
+        "The 5 commercial KPI table is produced with all five KPIs defined (Pipeline €, Conversão lead→cliente, Ticket médio, Ciclo de vendas, Win rate), the Diagnostico-derived baseline, target, and alert threshold for each.",
+        "The baseline caveat is applied: 'Do not report against targets until 30d of consistent CRM data is available — report as baseline not yet established rather than zero.'",
+        "The automation basics are specified: stage-change task triggers, stale-deal alert (>7 days no activity), and the speed-to-lead SLA alert (inbound lead older than 5 minutes without contact attempt)."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Quero fazer a revisão semanal do pipeline antes da reunião de sexta-feira com o COO. O que devo verificar e o que levo para a reunião?",
+      "expected_output": "A 30-minute weekly pipeline review agenda executed in order (pipeline health, 5-KPI snapshot, forecast update, coverage gap, commitments), the weighted forecast calculated (best/likely/worst scenarios), and a one-page pipeline review memo ready to send to the COO before 17h Friday.",
+      "expectations": [
+        "The weekly pipeline review agenda is followed in the prescribed order and timing: pipeline health (10 min), 5-KPI snapshot (5 min), forecast update (5 min), coverage gap (5 min), next week's commitments (5 min) — each section produces a specific output.",
+        "The weighted forecast is calculated using the four pipeline segments (Hot: stage 4-5, ×0.85; Warm: stage 2-3, ×0.40; Cold: stage 1-2, ×0.15; Stale: no activity >30d, ×0.05) and the three scenarios (Best, Likely, Worst) with the specific formulas applied.",
+        "The coverage gap analysis is produced: Monthly revenue target → Pipeline required (3×) → Current weighted pipeline → Gap in € — and if Likely < 2× monthly target, an immediate sourcing action is required (not optional).",
+        "The sourcing plan for any coverage gap names three specific actions: existing stale/cold deal reactivation candidates, outbound volume needed (back-calculated from conversão rate and ticket médio), and one specific referral ask or Dream 100 touch.",
+        "The one-page pipeline review memo is produced in the required format (deal list + 5 KPIs + forecast scenarios + gap analysis + commitments) and a kb_ingest closes the session with title 'Pipeline Review — <Company> — <YYYY-WNN>'."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We have a deal that's been in Negociação for 45 days with no activity. Should we keep it in the pipeline or move it?",
+      "expected_output": "Application of the stale-deal classification rule (no activity >30d = Stale, ×0.05 weight), a recommendation to move it to Stale or Perdido with the loss-reason field mandatory if Perdido, and a reactivation attempt protocol before archiving.",
+      "expectations": [
+        "The skill applies the stale-deal classification: no activity >30d or close date >90d = Stale segment, weighted at ×0.05 — this deal's weighted value in the forecast is 5% of nominal, which materially affects the Likely scenario.",
+        "The red flag is applied: 'Missing the loss-reason field on Perdido deals — loss reasons are the single richest sales-learning data; never skip them.' If moving to Perdido, the loss reason is mandatory and the field must be filled before closing.",
+        "A reactivation attempt protocol is proposed before archiving: one specific outreach (either-or close or value touch) within the next 5 working days — if no response, move to Perdido or the 24-36 Month Buyer Maturation nurture sequence.",
+        "The 5-KPI impact is noted: moving a stale deal to Perdido affects the Win rate KPI (closed-won / (closed-won + closed-lost) rolling 90d) and should be reflected in the next pipeline review memo.",
+        "The stage exit criteria for Negociação are restated: commercial terms being discussed, proposed value, discount if any — if none of these are documented in the deal record, the deal was never properly in Negociação and should be investigated."
+      ]
+    }
+  ]
+}

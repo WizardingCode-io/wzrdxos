@@ -1,0 +1,41 @@
+{
+  "skill_name": "ceo:balanced-decision",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Devemos contratar um gestor de vendas a tempo inteiro? Precisamos de crescer para €1M e eu não consigo fazer mais prospeção.",
+      "expected_output": "A full three-lens deliberation (Optimist / Pessimist-conservative / Risk-taker) on the hire decision, each lens scored 0-10, followed by an equilibrium go/no-go/revise verdict with conditions, and kb_ingest of the decision memo.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask for prior hiring decisions and company context before framing the decision.",
+        "The decision is framed in one sentence naming what is being decided, by when, and what 'go' commits the company to.",
+        "All three lenses (Optimist, Pessimist-conservative, Risk-taker) are produced with position, key arguments, risks/opportunities, and a 0-10 score each.",
+        "The equilibrium verdict is exactly one of go / no-go / revise — not a qualified maybe — with explicit conditions and dissent recorded.",
+        "The decision memo is ingested via kb_ingest documenting decision, lenses summary, verdict, and conditions."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Should we raise our prices by 30%? Our current pricing is not covering costs and the market seems to support it.",
+      "expected_output": "A three-lens CEO deliberation on the price increase with conservative risk enumeration, explicit dissent, and a verdict with specific conditions before routing to CRO/CFO.",
+      "expectations": [
+        "The skill does not skip the KB-first lookup — it queries for prior pricing decisions and financial context.",
+        "The Pessimist-conservative lens enumerates specific risks (e.g. churn rate, client reaction, competitive response) with evidence — not generic warnings.",
+        "Every conservative-lens risk is either accepted with a written rationale or converted into a condition on the verdict.",
+        "The verdict records explicit dissent between lenses — a verdict with no dissent recorded is rejected as incomplete.",
+        "On 'go', the memo is handed off to the COO (Operações) per the skill's step 5 instruction."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Estou a pensar entrar no mercado espanhol nos próximos 6 meses. Devo avançar?",
+      "expected_output": "A structured CEO deliberation covering market entry through three lenses, with a verdict and conditions tied to the €1M Portuguese baseline, memo ingested.",
+      "expectations": [
+        "The KB-first lookup retrieves the WizardingCode €1M target and Diagnostico-2026-05 baseline context before framing.",
+        "The decision frame states the commitment implied by 'go' on Spain entry (resources, timeline, opportunity cost on Portugal target).",
+        "The Pessimist-conservative lens explicitly addresses whether the Portugal market is saturated enough to justify expansion at this stage.",
+        "The verdict includes at least one condition tied to the Portugal baseline (e.g. 'only after MRR reaches X').",
+        "The decision memo is ingested with source 'memos/YYYY-MM-DD-<slug>.md'."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "skill_name": "eng:token-cost-optimization",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Os custos de LLM da WizardingCode estão a subir — gastámos €400 este mês em tokens. Precisamos de perceber onde estamos a desperdiçar e como reduzir para menos de €200 sem sacrificar qualidade.",
+      "expected_output": "A full workload inventory, model-tier analysis identifying mis-tiered tasks, a caching strategy for static system prompts, a fallback design, and a cost-optimization memo with a projected savings table showing a path to < €200/month.",
+      "expectations": [
+        "The skill calls kb_search and kb_ask for 'Harness Pattern Token Optimization', 'Tokens as Currency' fragments, and any prior cost analyses in the KB before producing any recommendations.",
+        "The workload inventory table is produced — every AI-powered task with frequency, estimated input/output tokens, current model, and monthly token volume estimate.",
+        "The model selection matrix (Tier 1-5) is applied per task: tasks currently using Opus or Sonnet for routing/classification work (Tier 1-2) are flagged as the primary source of avoidable cost.",
+        "The caching strategy identifies static system prompts as the first caching target and states the expected hit rate; any hit rate below 60% on a static block is flagged as a structural problem.",
+        "The cost-optimization memo is produced with the projected savings table (change → monthly token reduction → monthly cost reduction) and a monitoring plan (how to verify projections against actuals)."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We want to add a new daily report agent that summarises all KB activity and sends a memo to the CEO. It would run once per day. What model tier should it use and should we cache anything?",
+      "expected_output": "A Tier 3 (drafting and synthesis) classification for the report agent, Sonnet as the model recommendation, caching guidance for the static KB context blocks, a fallback strategy, and a per-call token budget.",
+      "expectations": [
+        "The skill calls kb_search for prior cost analyses and the company profile (active models, budget tier) before recommending.",
+        "The task is classified as Tier 3 (drafting and synthesis — producing a memo) per the model selection matrix, with Sonnet recommended as the workhorse tier; Haiku is evaluated and rejected with a rationale.",
+        "The caching strategy identifies the agent's static system prompt and shared KB snapshot as caching candidates; cache_control block configuration per the Claude Code runtime is specified.",
+        "A per-call token budget is stated for the agent (input + output estimate), with an alert threshold set at 2× the budget per the harness-pattern principles.",
+        "The fallback strategy is documented: Opus unavailable → Sonnet (already the primary); output degradation path for over-budget runs (key points only, no examples) with a user note."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "O nosso sistema de qualificação de leads chama o modelo 500 vezes por dia com o mesmo system prompt de 2000 tokens. Como optimizamos isto?",
+      "expected_output": "Identification of the static system prompt as the primary caching opportunity, a caching configuration recommendation, estimated monthly savings from the cache, and a harness-pattern improvement (lazy evaluation + short-circuit) applied.",
+      "expectations": [
+        "The skill calls kb_search for the 'Harness Pattern Token Optimization' framework and prior cost decisions before responding.",
+        "The 2000-token static system prompt at 500 calls/day is flagged as the highest-leverage caching opportunity — projected token savings are calculated: 500 × 2000 × 30 days = tokens saved per month.",
+        "The caching configuration is specified for the correct runtime (Claude Code: cache_control blocks in messages; API direct: cache_control: { type: 'ephemeral' } on the system turn).",
+        "Harness-pattern principles are applied: short-circuit on cache hit (if prior KB result answers the question, return without a model call) and batch small tasks where applicable.",
+        "The projected savings table is produced with a monitoring plan: cache hit rate tracked per agent, alert when hit rate falls below 60% on the static block."
+      ]
+    }
+  ]
+}
