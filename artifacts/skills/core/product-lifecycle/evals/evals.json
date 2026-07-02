@@ -1,0 +1,39 @@
+{
+  "skill_name": "core:product-lifecycle",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Quero lançar um serviço de auditoria de SEO para PMEs portuguesas — leva-me do zero até ao lançamento.",
+      "expected_output": "A new lifecycle: state file created at docs/lifecycle/auditoria-seo-pme.md, Phase 1 executed (KB lookup, initiative eval, balanced-deliberation go/no-go), verdict recorded, and a stop at the Phase 2 gate.",
+      "expectations": [
+        "The skill calls kb_search or kb_ask before any phase work.",
+        "A state file under docs/lifecycle/ is created with frontmatter (product, slug, phase, status, gates).",
+        "Phase 1 runs ceo:initiative-eval and the balanced-deliberation workflow before anything else.",
+        "The go/no-go verdict is recorded in gates.ceo and the log.",
+        "The skill stops at the next gate instead of executing later phases."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Em que ponto está o lançamento do produto X? Continua a partir de onde ficámos.",
+      "expected_output": "The state file docs/lifecycle/produto-x.md is read first, the current phase announced, and ONLY that phase executed/delegated, ending with an updated state file.",
+      "expectations": [
+        "The state file is read before any action.",
+        "The current phase is announced explicitly to the user.",
+        "Only the current phase is executed — no phase skipping.",
+        "The state file is updated (phase/gates/log) before the skill ends."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "O quality gate deu fix-first ao produto Y. E agora?",
+      "expected_output": "Return to Phase 3 (Build) with the must-fix list logged in the state file; the lifecycle does not advance to Launch until a new quality verdict of ship.",
+      "expectations": [
+        "gates.quality = fix-first is recorded in the state file.",
+        "The lifecycle moves back to Phase 3 — not forward to Phase 5.",
+        "The must-fix list is written to the state file log.",
+        "A kb_ingest documents the quality verdict and rework decision."
+      ]
+    }
+  ]
+}
