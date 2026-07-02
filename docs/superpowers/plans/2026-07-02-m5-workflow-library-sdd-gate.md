@@ -778,9 +778,9 @@ const prompt = typeof args === "string" ? args : (args?.prompt ?? "");
 if (!prompt) {
   return { error: "args.prompt is required", found: [], rounds: 0, wentDry: false };
 }
-const finders = Number(args?.finders) || 3;
-const dryRounds = Number(args?.dryRounds) || 2;
-const maxRounds = Number(args?.maxRounds) || 6;
+const finders = Math.max(1, Math.floor(Number(args?.finders) || 3));
+const dryRounds = Math.max(1, Math.floor(Number(args?.dryRounds) || 2));
+const maxRounds = Math.max(1, Math.floor(Number(args?.maxRounds) || 6));
 
 const key = (f) => `${f.title}::${f.location ?? ""}`.toLowerCase();
 const seen = new Set();
@@ -801,21 +801,22 @@ while (dry < dryRounds && round < maxRounds) {
     ),
   );
   // Dedup against ALL seen (not just confirmed) so rejected repeats never
-  // reset the dry counter.
-  const fresh = batches
-    .filter(Boolean)
-    .flatMap((b) => b.findings)
-    .filter((f) => !seen.has(key(f)));
+  // reset the dry counter. Check-and-add per item so same-round duplicates
+  // from different finders collapse too.
+  const fresh = [];
+  for (const f of batches.flatMap((b) => b?.findings ?? [])) {
+    const k = key(f);
+    if (seen.has(k)) continue;
+    seen.add(k);
+    fresh.push(f);
+  }
   if (fresh.length === 0) {
     dry += 1;
     log(`round ${round}: dry (${dry}/${dryRounds})`);
     continue;
   }
   dry = 0;
-  for (const f of fresh) {
-    seen.add(key(f));
-    found.push(f);
-  }
+  found.push(...fresh);
   log(`round ${round}: ${fresh.length} new findings (${found.length} total)`);
 }
 
