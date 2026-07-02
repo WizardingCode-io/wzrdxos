@@ -117,7 +117,11 @@ function mergeHookSettings(claude: ClaudePaths, hooks: HookDefinition[]): void {
       return; // non-object settings file: treat like unparseable
     }
   }
-  const events = (settings.hooks ??= {}) as Record<string, unknown[]>;
+  const rawHooks = settings.hooks ?? {};
+  if (typeof rawHooks !== "object" || Array.isArray(rawHooks)) {
+    return; // hooks key is not a plain object: never clobber what we don't understand
+  }
+  const events = (settings.hooks = rawHooks) as Record<string, unknown[]>;
   for (const key of Object.keys(events)) {
     if (Array.isArray(events[key])) {
       events[key] = events[key].filter((e) => !isWzrdxHookEntry(e));

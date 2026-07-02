@@ -100,4 +100,18 @@ describe("installClaudeArtifacts", () => {
       rmSync(home2, { recursive: true, force: true });
     }
   });
+
+  it("leaves settings.json untouched when its hooks key is not a plain object", () => {
+    const home2 = mkdtempSync(join(tmpdir(), "wzrdx-test-"));
+    try {
+      const settingsPath = join(home2, ".claude", "settings.json");
+      mkdirSync(join(home2, ".claude"), { recursive: true });
+      const original = '{"hooks": "oops"}';
+      writeFileSync(settingsPath, original);
+      expect(() => installClaudeArtifacts(root, home2)).not.toThrow();
+      expect(readFileSync(settingsPath, "utf8")).toBe(original);
+    } finally {
+      rmSync(home2, { recursive: true, force: true });
+    }
+  });
 });
