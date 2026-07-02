@@ -911,7 +911,7 @@ const sweeps = await parallel(
         "angles — other agents cover those. Report every item you find and " +
         "state explicitly what your angle could NOT cover.",
       { label: `sweep:${mode}`, phase: "Sweep", schema: ITEMS_SCHEMA },
-    ).then((r) => ({ mode, ...(r ?? { items: [], coverage: "agent failed" }) })),
+    ).then((r) => ({ mode, items: r?.items ?? [], coverage: r?.coverage ?? "agent failed" })),
   ),
 );
 
@@ -949,6 +949,9 @@ Expected: 2 of 3 tests PASS (`completeness-critic` still failing).
 git add artifacts/workflows/multi-modal-sweep
 git commit -m "feat(workflows): multi-modal-sweep quality pattern"
 ```
+
+> **Review amendments (shipped):** per-field result normalization; modes
+> sanitized to unique trimmed non-empty strings.
 
 ---
 

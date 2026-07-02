@@ -57,4 +57,12 @@ two biggest pain points (Knowledge Base and the Org / Teams roster).
   with measured 2-round baseline (`docs/eval-baseline.md`) — 8/10 skills >=9
   should-trigger, 9/10 >=9 should-NOT. Deferred: functional with/without
   benchmark (needs isolated env), SDD gate as PreToolUse hook (finding C1).
+- **M5 — Workflows:** ✅ implementation done, measurement pending. Quality-pattern
+  library completed (loop-until-dry, multi-modal-sweep, completeness-critic —
+  joining adversarial-review, judge-panel, balanced-deliberation);
+  `core:product-lifecycle` skill (document-first state in
+  `docs/lifecycle/<slug>.md`, six gated phases); hooks as a fourth artifact
+  type + `sdd-gate` non-blocking PreToolUse hook resolving finding C1
+  (spec: `docs/superpowers/specs/2026-07-02-m5-workflow-library-sdd-gate-design.md`;
+  measurement: `docs/eval-baseline.md` → M5 section).
 - **Naming / brand:** wzrdxOS tagline and positioning before public launch.

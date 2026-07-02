@@ -63,6 +63,29 @@ Workflows encode reusable quality patterns: fan-out + adversarial verification,
 judge panels, loop-until-dry, multi-modal sweep, completeness critic. See
 `artifacts/workflows/adversarial-review/` for the canonical example.
 
+## Hooks — `artifacts/hooks/<name>/hook.mjs` + `hook.json`
+
+A native runtime hook: a dependency-free Node script plus a JSON manifest.
+
+| Field | Required | Notes |
+| --- | --- | --- |
+| `name` | yes | Unique id (falls back to the directory name). |
+| `description` | yes | One-line summary. |
+| `event` | yes | `PreToolUse` \| `PostToolUse` \| `UserPromptSubmit` \| `SessionStart` \| `Stop`. |
+| `matcher` | no | Tool-name matcher, e.g. `Edit\|Write\|MultiEdit`. |
+
+**wzrdx hooks are ALWAYS non-blocking** — they inject context or reminders
+(`permissionDecision: "allow"` + `additionalContext`) and never `deny`/`ask`.
+They are fail-open: any internal error exits 0 silently. See the Flow policy
+below — this is the enforcement style that replaces ArkaOS's blocking gates.
+
+Deploy: script → `~/.claude/wzrdx/hooks/<name>.mjs`; the hook entry is merged
+into `~/.claude/settings.json` surgically and idempotently — wzrdx-managed
+entries are recognized by their command path (`.claude/wzrdx/hooks/`), user
+entries are never touched, and an unparseable settings file is left alone.
+This is the one documented, surgical exception to "user files are never
+touched": settings.json is the only place Claude Code reads hooks from.
+
 ## Plugins — `artifacts/plugins/<department>/plugins.json`
 
 A JSON manifest declaring the plugins/MCPs/skill-packs a department depends on.
@@ -95,4 +118,7 @@ them is future work.
 
 wzrdxOS never ships **blocking enforcement hooks**. The flow is opt-in: a workflow
 the user chooses, not a gate that stalls work. This is the explicit anti-pattern
-inherited from ArkaOS.
+inherited from ArkaOS. Hooks ARE allowed — but only non-blocking ones: they may
+inject context and reminders at the right moment (e.g. the `sdd-gate` spec-first
+nudge) and must always allow the action, fail-open, and rate-limit themselves
+(once per session).
