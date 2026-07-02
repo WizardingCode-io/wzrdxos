@@ -40,10 +40,12 @@ const goal = typeof args === "string" ? args : (args?.goal ?? "");
 if (!goal) {
   return { error: "args.goal is required", items: [], coverage: [] };
 }
-const modes =
-  Array.isArray(args?.modes) && args.modes.length > 0
-    ? args.modes
-    : ["by-structure", "by-content", "by-entity", "by-history"];
+const customModes = Array.isArray(args?.modes)
+  ? [...new Set(args.modes.filter((m) => typeof m === "string" && m.trim()))]
+  : [];
+const modes = customModes.length > 0
+  ? customModes
+  : ["by-structure", "by-content", "by-entity", "by-history"];
 
 // Barrier justified: the merge/dedup needs ALL sweep results together.
 const sweeps = await parallel(
