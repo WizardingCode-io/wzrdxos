@@ -41,7 +41,7 @@ if (!goal) {
   return { error: "args.goal is required", items: [], coverage: [] };
 }
 const customModes = Array.isArray(args?.modes)
-  ? [...new Set(args.modes.filter((m) => typeof m === "string" && m.trim()))]
+  ? [...new Set(args.modes.filter((m) => typeof m === "string" && m.trim()).map((m) => m.trim()))]
   : [];
 const modes = customModes.length > 0
   ? customModes
