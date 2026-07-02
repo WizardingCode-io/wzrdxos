@@ -60,7 +60,8 @@ function main() {
   const reminder =
     "wzrdx SDD gate (non-blocking reminder): no spec was modified in the last " +
     "7 days under docs/specs/ or docs/superpowers/specs/. Before implementing, " +
-    "consider invoking the eng:spec-driven-development skill to locate or " +
+    "consider invoking the eng:spec-driven-development skill (deployed in " +
+    "Claude Code as wzrdx-eng-spec-driven-development) to locate or " +
     "author an approved spec. The edit itself is allowed.";
   process.stdout.write(
     JSON.stringify({
