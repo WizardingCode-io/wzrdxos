@@ -14,7 +14,8 @@ when-to-use: >-
   lançamento de X?", resuming a lifecycle in progress, or any initiative that
   must cross CEO decision, operations, build, quality and launch. NOT for a
   task that lives inside a single department (route it directly) and NOT for
-  conceptual questions about lifecycles.
+  conceptual questions about lifecycles. For mixed multi-department requests
+  that are not a product/service lifecycle, use core:conductor.
 ---
 
 # Product Lifecycle
@@ -78,8 +79,11 @@ Both report into the state file log. When both are done → Phase 4.
 ### 4. Quality gate
 `core:deliverable-review` over every client-facing output; the
 `adversarial-review` workflow over the code; `judge-panel` for critical
-deliverables. Record `gates.quality`. **fix-first → back to Phase 3** with the
-must-fix list logged. ship → Phase 5.
+deliverables. Record `gates.quality`. `kb_ingest` the quality verdict and
+must-fix list (`source: lifecycle/<slug>-quality-<date>.md`).
+**fix-first → back to Phase 3** with the must-fix list logged.
+**escalate → status: paused**; route to CEO+CQO per `core:deliverable-review`
+— their decision returns the lifecycle to Phase 3 or kills it. ship → Phase 5.
 
 ### 5. Launch
 Run `completeness-critic` over the launch checklist first — gaps become

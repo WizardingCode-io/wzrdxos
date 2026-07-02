@@ -1277,6 +1277,11 @@ git add artifacts/skills/core/product-lifecycle
 git commit -m "feat(skills): core:product-lifecycle cross-department flow"
 ```
 
+**Review amendments (shipped in follow-up commit `fix(skills): ground product-lifecycle gates and conductor hand-off`):**
+1. Phase 4 now defines the `escalate` transition (**escalate → status: paused**; route to CEO+CQO per `core:deliverable-review` — decision returns to Phase 3 or kills), giving `status: paused` its trigger.
+2. Phase 4 now instructs `kb_ingest` of the quality verdict and must-fix list (`source: lifecycle/<slug>-quality-<date>.md`), grounding eval 3's kb_ingest expectation.
+3. C2 collision with `core:conductor` resolved: conductor SKILL.md hands product/service launch end-to-end off to `core:product-lifecycle`; product-lifecycle when-to-use points mixed non-lifecycle multi-department asks back to `core:conductor`.
+
 ---
 
 ### Task 9: Documentation (formats.md, roadmap.md)
