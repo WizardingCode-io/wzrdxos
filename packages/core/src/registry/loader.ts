@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import { wzrdxPaths, type WzrdxPaths } from "../paths.js";
 import type {
   AgentDefinition,
+  HookDefinition,
   PluginDefinition,
   Registry,
   SkillDefinition,
@@ -149,6 +150,42 @@ function loadPlugins(paths: WzrdxPaths): PluginDefinition[] {
   return out;
 }
 
+const HOOK_EVENTS = [
+  "PreToolUse",
+  "PostToolUse",
+  "UserPromptSubmit",
+  "SessionStart",
+  "Stop",
+] as const;
+
+/** Load hooks from artifacts/hooks/<name>/hook.json (+ hook.mjs script). */
+function loadHooks(paths: WzrdxPaths): HookDefinition[] {
+  const out: HookDefinition[] = [];
+  for (const name of dirs(paths.hooks)) {
+    const manifest = join(paths.hooks, name, "hook.json");
+    const script = join(paths.hooks, name, "hook.mjs");
+    if (!existsSync(manifest) || !existsSync(script)) continue;
+    let parsed: Record<string, unknown>;
+    try {
+      parsed = JSON.parse(readFileSync(manifest, "utf8"));
+    } catch {
+      continue; // malformed manifest: skip, doctor reports separately
+    }
+    const event = HOOK_EVENTS.includes(parsed.event as never)
+      ? (parsed.event as HookDefinition["event"])
+      : "PreToolUse";
+    out.push({
+      name: str(parsed.name, name),
+      description: str(parsed.description),
+      event,
+      matcher: str(parsed.matcher) || undefined,
+      script,
+      path: manifest,
+    });
+  }
+  return out;
+}
+
 /** Load the full registry from the artifacts directory. */
 export function loadRegistry(root?: string): Registry {
   const paths = wzrdxPaths(root);
@@ -156,6 +193,7 @@ export function loadRegistry(root?: string): Registry {
   const agents = loadAgents(paths);
   const workflows = loadWorkflows(paths);
   const plugins = loadPlugins(paths);
+  const hooks = loadHooks(paths);
   const departments = [
     ...new Set([
       ...skills.map((s) => s.department),
@@ -163,5 +201,5 @@ export function loadRegistry(root?: string): Registry {
       ...plugins.map((p) => p.department),
     ]),
   ].sort();
-  return { skills, agents, workflows, plugins, departments };
+  return { skills, agents, workflows, plugins, hooks, departments };
 }
