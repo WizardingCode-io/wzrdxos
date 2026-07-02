@@ -1,4 +1,4 @@
-# wzrdxOS skill eval baseline (M4)
+# wzrdxOS skill eval baseline
 
 Trigger-evaluation baseline for the 10 pilot skills, measured with the
 **ecological runner** (`scripts/trigger_eval.py`) against the *deployed* skills
@@ -81,7 +81,8 @@ re-measured with the ecological runner (same eval-set, runs=2):
 **Verdict: the ≥8/10 acceptance target was not met, and the number is not a
 hook regression — it exposes that this metric cannot measure the hook at all.**
 Two runs were needed: the first (repo-root cwd) was silently invalid because
-the hook's own design doc (`docs/superpowers/specs/…-sdd-gate-design.md`,
+the hook's own design doc
+(`docs/superpowers/specs/2026-07-02-m5-workflow-library-sdd-gate-design.md`,
 fresh) satisfied `hasRecentSpec()` and disarmed the reminder; the re-run from
 a clean cwd gave identical numbers, and the hook's per-session state markers
 show it fired in **0 of the 40 eval sessions** — on these conversational
@@ -93,11 +94,13 @@ hook fired, and the model's answer explicitly acknowledged the SDD reminder
 and the missing spec — but it acknowledged rather than invoked the skill.
 
 The drop from 5/10 to 0/10 (0/20 raw runs — beyond runs=2 variance of ±1-2)
-is environment drift, the known cost of ecological measurement: the installed
-population now includes stronger competitors that capture implementation
-queries first — `superpowers:brainstorming` ("MUST use before creating
-features"), `arka-spec` (another SDD gate), `superpowers:test-driven-development`
-and `arka-dev` all appear in `fired_others`. The one should-NOT failure is the
+is environment drift, the known cost of ecological measurement: competitor
+capture is the observed proximate mechanism — `superpowers:brainstorming`
+("MUST use before creating features"), `arka-spec` (another SDD gate),
+`superpowers:test-driven-development` and `arka-dev` all appear in M5's
+`fired_others` — though the M4 runner did not record `fired_others`, so these
+competitors being *new* is inferred rather than established, and model/CLI
+version drift over the intervening weeks is a second uncontrolled co-variable. The one should-NOT failure is the
 same C3 keyword-conceptual query ("Explica-me o que é spec-driven development",
 2/2). **Next structural step:** measure the hook with an edit-time functional
 eval — does the model locate/author a spec after the reminder (the M4-deferred
@@ -114,3 +117,12 @@ runs over both, launch-shaped queries crossing between them should be judged
 against that hand-off rule — a route to the *other* skill of the pair is
 correct behavior, not a false positive/negative (same class as the M4 C2
 finding on conductor vs department skills).
+
+Same class in the M5 SDD re-measurement: two of the ten should-trigger
+failures — "We already have an approved spec for the analytics dashboard.
+Should we start TDD?" and "The spec is approved and the tests are written.
+Let's implement." — presuppose an approved spec and were captured by TDD
+skills, arguably the *correct* routing per the SDD skill's own
+gate-on-approval-then-TDD description, penalised by the metric. Relax these
+two eval expectations in the next eval-set revision; drift accounts for the
+remainder.
