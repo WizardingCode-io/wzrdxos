@@ -14,9 +14,12 @@ import type { HookDefinition } from "./registry/types.js";
 
 /**
  * Deploy registry artifacts into Claude Code's native locations (~/.claude).
- * Everything is prefixed `wzrdx-` so user-owned files are never touched.
- * Idempotent: re-running overwrites only wzrdx-prefixed files. Known limitation:
- * renamed/removed artifacts leave stale deployed copies behind (no pruning yet).
+ * Everything is prefixed `wzrdx-` (hooks are directory-namespaced instead:
+ * scripts live under `~/.claude/wzrdx/hooks/`) so user-owned files are never
+ * touched; settings.json is merged surgically (wzrdx-managed entries only).
+ * Idempotent: re-running overwrites only wzrdx-owned files/entries. Known
+ * limitation: renamed/removed artifacts leave stale deployed copies behind
+ * (no pruning yet).
  */
 
 export interface ClaudeInstallReport {
@@ -129,6 +132,9 @@ function mergeHookSettings(claude: ClaudePaths, hooks: HookDefinition[]): void {
   }
   for (const h of hooks) {
     const existing = events[h.event];
+    if (existing != null && !Array.isArray(existing)) {
+      return; // event value is not an array: never clobber what we don't understand
+    }
     const list = Array.isArray(existing) ? existing : [];
     list.push({
       matcher: h.matcher ?? "",

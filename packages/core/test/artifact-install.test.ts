@@ -59,7 +59,7 @@ describe("installClaudeArtifacts", () => {
     const settingsPath = join(home, ".claude", "settings.json");
     const settings = JSON.parse(readFileSync(settingsPath, "utf8"));
     const entries = settings.hooks.PreToolUse.filter((e: { hooks: { command: string }[] }) =>
-      e.hooks.some((h) => h.command.includes("wzrdx/hooks")),
+      e.hooks.some((h) => h.command.includes(join("wzrdx", "hooks"))),
     );
     expect(entries).toHaveLength(1);
     expect(entries[0].matcher).toBe("Edit|Write|MultiEdit");
@@ -68,7 +68,7 @@ describe("installClaudeArtifacts", () => {
     installClaudeArtifacts(root, home);
     const again = JSON.parse(readFileSync(settingsPath, "utf8"));
     const dupes = again.hooks.PreToolUse.filter((e: { hooks: { command: string }[] }) =>
-      e.hooks.some((h) => h.command.includes("wzrdx/hooks")),
+      e.hooks.some((h) => h.command.includes(join("wzrdx", "hooks"))),
     );
     expect(dupes).toHaveLength(1);
   });
@@ -95,7 +95,7 @@ describe("installClaudeArtifacts", () => {
         (e: { hooks: { command: string }[] }) => e.hooks.map((h) => h.command),
       );
       expect(commands).toContain("my-user-hook.sh");
-      expect(commands.some((c: string) => c.includes("wzrdx/hooks"))).toBe(true);
+      expect(commands.some((c: string) => c.includes(join("wzrdx", "hooks")))).toBe(true);
     } finally {
       rmSync(home2, { recursive: true, force: true });
     }
@@ -110,6 +110,35 @@ describe("installClaudeArtifacts", () => {
       writeFileSync(settingsPath, original);
       expect(() => installClaudeArtifacts(root, home2)).not.toThrow();
       expect(readFileSync(settingsPath, "utf8")).toBe(original);
+    } finally {
+      rmSync(home2, { recursive: true, force: true });
+    }
+  });
+
+  it("leaves settings.json untouched when a hook event value is not an array", () => {
+    const home2 = mkdtempSync(join(tmpdir(), "wzrdx-test-"));
+    try {
+      const settingsPath = join(home2, ".claude", "settings.json");
+      mkdirSync(join(home2, ".claude"), { recursive: true });
+      const original = '{"hooks": {"PreToolUse": {"matcher": "Bash"}}}';
+      writeFileSync(settingsPath, original);
+      expect(() => installClaudeArtifacts(root, home2)).not.toThrow();
+      expect(readFileSync(settingsPath, "utf8")).toBe(original);
+    } finally {
+      rmSync(home2, { recursive: true, force: true });
+    }
+  });
+
+  it("leaves an unparseable settings.json untouched but still deploys hook scripts", () => {
+    const home2 = mkdtempSync(join(tmpdir(), "wzrdx-test-"));
+    try {
+      const settingsPath = join(home2, ".claude", "settings.json");
+      mkdirSync(join(home2, ".claude"), { recursive: true });
+      const original = "{not json";
+      writeFileSync(settingsPath, original);
+      expect(() => installClaudeArtifacts(root, home2)).not.toThrow();
+      expect(readFileSync(settingsPath, "utf8")).toBe(original);
+      expect(existsSync(join(home2, ".claude", "wzrdx", "hooks", "sdd-gate.mjs"))).toBe(true);
     } finally {
       rmSync(home2, { recursive: true, force: true });
     }
