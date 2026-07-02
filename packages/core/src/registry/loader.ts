@@ -171,6 +171,7 @@ function loadHooks(paths: WzrdxPaths): HookDefinition[] {
     } catch {
       continue; // malformed manifest: skip, doctor reports separately
     }
+    if (parsed === null || typeof parsed !== "object" || Array.isArray(parsed)) continue;
     const event = HOOK_EVENTS.includes(parsed.event as never)
       ? (parsed.event as HookDefinition["event"])
       : "PreToolUse";

@@ -81,7 +81,7 @@ install
   .action(() => {
     const r = installClaudeArtifacts();
     ui.title("wzrdxOS — install claude");
-    ui.ok(`${r.agents} agents · ${r.skills} skills · ${r.workflows} workflows → ~/.claude`);
+    ui.ok(`${r.agents} agents · ${r.skills} skills · ${r.workflows} workflows · ${r.hooks} hooks → ~/.claude`);
     console.log("");
   });
 

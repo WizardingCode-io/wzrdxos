@@ -1,9 +1,16 @@
-import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  writeFileSync,
+} from "node:fs";
 import { homedir } from "node:os";
 import { basename, dirname, join } from "node:path";
 import matter from "gray-matter";
-import { claudePaths, wzrdxPaths } from "./paths.js";
+import { claudePaths, wzrdxPaths, type ClaudePaths } from "./paths.js";
 import { loadRegistry } from "./registry/loader.js";
+import type { HookDefinition } from "./registry/types.js";
 
 /**
  * Deploy registry artifacts into Claude Code's native locations (~/.claude).
@@ -16,6 +23,7 @@ export interface ClaudeInstallReport {
   agents: number;
   skills: number;
   workflows: number;
+  hooks: number;
 }
 
 export function installClaudeArtifacts(
@@ -61,9 +69,74 @@ export function installClaudeArtifacts(
     copyFileSync(w.path, join(claude.workflows, `${w.name}.mjs`));
   }
 
+  // Hooks → ~/.claude/wzrdx/hooks/<name>.mjs + surgical settings.json merge.
+  mkdirSync(claude.wzrdxHooks, { recursive: true });
+  for (const h of reg.hooks) {
+    copyFileSync(h.script, join(claude.wzrdxHooks, `${h.name}.mjs`));
+  }
+  mergeHookSettings(claude, reg.hooks);
+
   return {
     agents: reg.agents.length,
     skills: reg.skills.length,
     workflows: reg.workflows.length,
+    hooks: reg.hooks.length,
   };
+}
+
+/** wzrdx-managed hook entries are recognized by their command path — no
+ * foreign keys are added to the user's settings schema. */
+function isWzrdxHookEntry(entry: unknown): boolean {
+  const hooks = (entry as { hooks?: { command?: unknown }[] })?.hooks;
+  return (
+    Array.isArray(hooks) &&
+    hooks.some(
+      (h) =>
+        typeof h?.command === "string" &&
+        h.command.includes(join(".claude", "wzrdx", "hooks")),
+    )
+  );
+}
+
+/**
+ * Merge wzrdx hook entries into ~/.claude/settings.json. Surgical and
+ * idempotent: strips previous wzrdx-managed entries (recognized by command
+ * path) from every event array, appends the current set, and never touches
+ * user-owned entries. If the existing file is unparseable, it is left alone
+ * (hooks are then simply not registered — doctor can report this later).
+ */
+function mergeHookSettings(claude: ClaudePaths, hooks: HookDefinition[]): void {
+  let settings: Record<string, unknown> = {};
+  if (existsSync(claude.settings)) {
+    try {
+      settings = JSON.parse(readFileSync(claude.settings, "utf8"));
+    } catch {
+      return; // never clobber an unparseable user file
+    }
+    if (settings === null || typeof settings !== "object" || Array.isArray(settings)) {
+      return; // non-object settings file: treat like unparseable
+    }
+  }
+  const events = (settings.hooks ??= {}) as Record<string, unknown[]>;
+  for (const key of Object.keys(events)) {
+    if (Array.isArray(events[key])) {
+      events[key] = events[key].filter((e) => !isWzrdxHookEntry(e));
+    }
+  }
+  for (const h of hooks) {
+    const existing = events[h.event];
+    const list = Array.isArray(existing) ? existing : [];
+    list.push({
+      matcher: h.matcher ?? "",
+      hooks: [
+        {
+          type: "command",
+          command: `node "${join(claude.wzrdxHooks, `${h.name}.mjs`)}"`,
+        },
+      ],
+    });
+    events[h.event] = list;
+  }
+  mkdirSync(dirname(claude.settings), { recursive: true });
+  writeFileSync(claude.settings, JSON.stringify(settings, null, 2) + "\n", "utf8");
 }

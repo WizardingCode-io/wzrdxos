@@ -132,7 +132,7 @@ export async function setupCommand(opts: SetupOptions = {}): Promise<void> {
   ui.section("Artifacts");
   try {
     const art = installClaudeArtifacts(root);
-    ui.ok(`deployed ${art.agents} agents · ${art.skills} skills · ${art.workflows} workflows → ~/.claude`);
+    ui.ok(`deployed ${art.agents} agents · ${art.skills} skills · ${art.workflows} workflows · ${art.hooks} hooks → ~/.claude`);
   } catch (err) {
     ui.fail(`artifact deploy failed: ${err instanceof Error ? err.message : String(err)} — run \`wzrdx install claude\` manually.`);
   }
