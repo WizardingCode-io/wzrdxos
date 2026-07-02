@@ -61,7 +61,7 @@ two biggest pain points (Knowledge Base and the Org / Teams roster).
   library completed (loop-until-dry, multi-modal-sweep, completeness-critic —
   joining adversarial-review, judge-panel, balanced-deliberation);
   `core:product-lifecycle` skill (document-first state in
-  `docs/lifecycle/<slug>.md`, six gated phases); hooks as a fourth artifact
+  `docs/lifecycle/<slug>.md`, six gated phases); hooks as a fifth artifact
   type + `sdd-gate` non-blocking PreToolUse hook resolving finding C1
   (spec: `docs/superpowers/specs/2026-07-02-m5-workflow-library-sdd-gate-design.md`;
   measurement: `docs/eval-baseline.md` → M5 section).

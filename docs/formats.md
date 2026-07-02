@@ -1,6 +1,6 @@
 # wzrdxOS artifact formats
 
-The registry (`@wzrdx/core`) loads four artifact types from `artifacts/`. This
+The registry (`@wzrdx/core`) loads five artifact types from `artifacts/`. This
 document is the contract. Keep it in sync with `packages/core/src/registry/`.
 
 ## Conventions
@@ -76,8 +76,9 @@ A native runtime hook: a dependency-free Node script plus a JSON manifest.
 
 **wzrdx hooks are ALWAYS non-blocking** — they inject context or reminders
 (`permissionDecision: "allow"` + `additionalContext`) and never `deny`/`ask`.
-They are fail-open: any internal error exits 0 silently. See the Flow policy
-below — this is the enforcement style that replaces ArkaOS's blocking gates.
+They are fail-open (any internal error exits 0 silently) and rate-limited
+(they fire at most once per session). See the Flow policy below — this is the
+enforcement style that replaces ArkaOS's blocking gates.
 
 Deploy: script → `~/.claude/wzrdx/hooks/<name>.mjs`; the hook entry is merged
 into `~/.claude/settings.json` surgically and idempotently — wzrdx-managed
@@ -108,7 +109,9 @@ The file shape is `{ "department": "<slug>", "plugins": [ … ] }`.
 Registry artifacts deploy into Claude Code's native locations, always prefixed
 `wzrdx-` (user files are never touched): agents → `~/.claude/agents/wzrdx-<name>.md`
 (subagent format), skills → `~/.claude/skills/wzrdx-<dept>-<dirname>/SKILL.md`
-(frontmatter `name` rewritten to the slug), workflows → `~/.claude/workflows/<name>.mjs`.
+(frontmatter `name` rewritten to the slug), workflows → `~/.claude/workflows/<name>.mjs`,
+hooks → `~/.claude/wzrdx/hooks/<name>.mjs` plus a surgical `settings.json` merge
+(the one documented exception to "user files are never touched" — see the Hooks section).
 `wzrdx setup` runs this as its final step. Known limitation: renamed/removed
 artifacts leave stale deployed copies (no pruning yet). Other runtimes receive the
 instructions-block + MCP wiring (see `docs/runtimes.md`); artifact deployment for

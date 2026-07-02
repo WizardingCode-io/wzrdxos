@@ -4,7 +4,7 @@
 
 **Goal:** Ship the M5 milestone — 3 new quality-pattern workflows, the `core:product-lifecycle` skill, and a non-blocking SDD PreToolUse hook (new `hooks` artifact type with registry + deploy support), per the approved spec `docs/superpowers/specs/2026-07-02-m5-workflow-library-sdd-gate-design.md`.
 
-**Architecture:** Hooks become a fourth artifact type (`artifacts/hooks/<name>/hook.json` + `hook.mjs`) loaded by the registry and deployed by `installClaudeArtifacts` — the script goes to `~/.claude/wzrdx/hooks/`, and a surgical, idempotent merge adds the hook entry to `~/.claude/settings.json` (wzrdx entries identified by command path, never touching user entries). The SDD gate is fail-open and never blocks. Workflows follow the `adversarial-review` conventions (pure-literal `meta`, JSON schemas, `args` parameterization). The lifecycle is a skill with document-first state, not a workflow script.
+**Architecture:** Hooks become a fifth artifact type (`artifacts/hooks/<name>/hook.json` + `hook.mjs`) loaded by the registry and deployed by `installClaudeArtifacts` — the script goes to `~/.claude/wzrdx/hooks/`, and a surgical, idempotent merge adds the hook entry to `~/.claude/settings.json` (wzrdx entries identified by command path, never touching user entries). The SDD gate is fail-open and never blocks. Workflows follow the `adversarial-review` conventions (pure-literal `meta`, JSON schemas, `args` parameterization). The lifecycle is a skill with document-first state, not a workflow script.
 
 **Tech Stack:** TypeScript (packages/core, vitest, tsup), plain Node ESM for the hook script (no deps), Workflow-tool `.mjs` scripts, Python (`scripts/trigger_eval.py`) for measurement.
 
@@ -1344,7 +1344,7 @@ In `docs/roadmap.md`, under "Open design sessions", add after the M4 entry:
   (loop-until-dry, multi-modal-sweep, completeness-critic — joining
   adversarial-review, judge-panel, balanced-deliberation);
   `core:product-lifecycle` skill (document-first state in
-  `docs/lifecycle/<slug>.md`, six gated phases); hooks as a fourth artifact
+  `docs/lifecycle/<slug>.md`, six gated phases); hooks as a fifth artifact
   type + `sdd-gate` non-blocking PreToolUse hook resolving finding C1
   (spec: `docs/superpowers/specs/2026-07-02-m5-workflow-library-sdd-gate-design.md`;
   measurement: `docs/eval-baseline.md` → M5 section).
@@ -1452,7 +1452,7 @@ Spec: docs/superpowers/specs/2026-07-02-m5-workflow-library-sdd-gate-design.md
 
 - 3 new quality-pattern workflows: loop-until-dry, multi-modal-sweep, completeness-critic
 - core:product-lifecycle skill — six gated phases, document-first state (docs/lifecycle/<slug>.md)
-- Hooks as a fourth artifact type (registry + deploy with surgical settings.json merge)
+- Hooks as a fifth artifact type (registry + deploy with surgical settings.json merge)
 - sdd-gate non-blocking PreToolUse hook — resolves eval-baseline finding C1 without violating the flow policy
 - Measurement: docs/eval-baseline.md → M5 section (SDD should-trigger with hook active)
 
