@@ -82,6 +82,10 @@ to a single row.
 - **First hire:** CHRO pipeline → COO 60-day plan → CHRO+COO execute.
 - **Deliverable ship:** owning dept → `core:deliverable-review` → owning head decides.
 
+Product/service launch end-to-end → route to `core:product-lifecycle` (it owns the
+gated lifecycle flow); the conductor handles mixed multi-department asks that are
+NOT a product lifecycle.
+
 ### 4. CEO balanced-decision gate
 
 Before routing execution tasks, check: does any task constitute a **significant

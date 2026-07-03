@@ -1,0 +1,22 @@
+[
+  { "query": "Quero lançar um novo serviço de auditoria de IA — leva-me da ideia até ao lançamento.", "should_trigger": true },
+  { "query": "Vamos tirar do papel aquela ideia do produto de relatórios automáticos.", "should_trigger": true },
+  { "query": "Em que fase está o lançamento do serviço de SEO? Continua de onde ficámos.", "should_trigger": true },
+  { "query": "I want to take this product idea from concept to a monitored launch.", "should_trigger": true },
+  { "query": "O quality gate deu fix-first ao produto novo — o que acontece agora no fluxo?", "should_trigger": true },
+  { "query": "Retoma o ciclo de vida do produto wzrdx-templates.", "should_trigger": true },
+  { "query": "We got a go from the CEO gate on the new offer — what's the next phase?", "should_trigger": true },
+  { "query": "Quero transformar este protótipo num produto lançado e monitorizado, com todos os gates.", "should_trigger": true },
+  { "query": "Start the product lifecycle for our new consulting retainer offering.", "should_trigger": true },
+  { "query": "Este lançamento envolve CEO, operações, engenharia, marketing e qualidade — orquestra o processo todo.", "should_trigger": true },
+  { "query": "O que é um product lifecycle e porque é que importa?", "should_trigger": false },
+  { "query": "Implementa a página de checkout do produto.", "should_trigger": false },
+  { "query": "Escreve o copy de lançamento para a campanha de email.", "should_trigger": false },
+  { "query": "Devemos avançar com a contratação do primeiro comercial?", "should_trigger": false },
+  { "query": "Review this proposal before I send it to the client.", "should_trigger": false },
+  { "query": "Faz o diagnóstico operacional da WizardingCode.", "should_trigger": false },
+  { "query": "What KPIs should a SaaS track after launch?", "should_trigger": false },
+  { "query": "Cria um POP para o processo de onboarding de clientes.", "should_trigger": false },
+  { "query": "Preciso de uma análise de unit economics do serviço atual.", "should_trigger": false },
+  { "query": "Explica-me as fases de desenvolvimento de software.", "should_trigger": false }
+]

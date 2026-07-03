@@ -74,12 +74,33 @@ export interface PluginDefinition {
   path: string;
 }
 
+/**
+ * A hook: a native runtime hook script (Claude Code settings.json hooks).
+ * wzrdx hooks are ALWAYS non-blocking — they inject context or reminders and
+ * never deny/ask (docs/formats.md → Flow policy).
+ */
+export interface HookDefinition {
+  /** Unique id, e.g. "sdd-gate". */
+  name: string;
+  /** One-line summary. */
+  description: string;
+  /** Hook event this script attaches to. */
+  event: "PreToolUse" | "PostToolUse" | "UserPromptSubmit" | "SessionStart" | "Stop";
+  /** Tool-name matcher (event-dependent), e.g. "Edit|Write|MultiEdit". */
+  matcher?: string;
+  /** Absolute path to the hook script (.mjs). */
+  script: string;
+  /** Absolute path to the hook.json manifest. */
+  path: string;
+}
+
 /** The fully loaded registry. */
 export interface Registry {
   skills: SkillDefinition[];
   agents: AgentDefinition[];
   workflows: WorkflowDefinition[];
   plugins: PluginDefinition[];
+  hooks: HookDefinition[];
   /** Distinct department slugs discovered across skills, agents and plugins. */
   departments: string[];
 }

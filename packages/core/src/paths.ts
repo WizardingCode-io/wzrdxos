@@ -29,6 +29,7 @@ export interface WzrdxPaths {
   agents: string;
   workflows: string;
   plugins: string;
+  hooks: string;
 }
 
 export function wzrdxPaths(root: string = findRepoRoot()): WzrdxPaths {
@@ -40,6 +41,7 @@ export function wzrdxPaths(root: string = findRepoRoot()): WzrdxPaths {
     agents: join(artifacts, "agents"),
     workflows: join(artifacts, "workflows"),
     plugins: join(artifacts, "plugins"),
+    hooks: join(artifacts, "hooks"),
   };
 }
 
@@ -49,6 +51,10 @@ export interface ClaudePaths {
   skills: string;
   agents: string;
   workflows: string;
+  /** wzrdx-owned hook scripts (never mixed with user files). */
+  wzrdxHooks: string;
+  /** Claude Code user settings file — merged surgically, wzrdx entries only. */
+  settings: string;
 }
 
 export function claudePaths(home: string = homedir()): ClaudePaths {
@@ -58,5 +64,7 @@ export function claudePaths(home: string = homedir()): ClaudePaths {
     skills: join(base, "skills"),
     agents: join(base, "agents"),
     workflows: join(base, "workflows"),
+    wzrdxHooks: join(base, "wzrdx", "hooks"),
+    settings: join(base, "settings.json"),
   };
 }

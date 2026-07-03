@@ -1,0 +1,6 @@
+{
+  "name": "sdd-gate",
+  "description": "Non-blocking SDD reminder — on Edit|Write|MultiEdit of code files without a recent spec, injects a spec-first nudge once per session. Never blocks (flow policy).",
+  "event": "PreToolUse",
+  "matcher": "Edit|Write|MultiEdit"
+}
