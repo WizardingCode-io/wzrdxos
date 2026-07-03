@@ -104,9 +104,9 @@ version drift over the intervening weeks is a second uncontrolled co-variable. T
 same C3 keyword-conceptual query ("Explica-me o que é spec-driven development",
 2/2). **Next structural step:** measure the hook with an edit-time functional
 eval — does the model locate/author a spec after the reminder (the M4-deferred
-with/without benchmark) — instead of query-time triggering; and have the
-reminder name the *deployed* skill string (`wzrdx-eng-spec-driven-development`)
-rather than the logical `eng:spec-driven-development`.
+with/without benchmark) — instead of query-time triggering. (The reminder now
+names both the logical `eng:spec-driven-development` and the deployed
+`wzrdx-eng-spec-driven-development` — shipped in this branch after the probe.)
 
 ### Pre-registered C2 note for the next full baseline run
 
